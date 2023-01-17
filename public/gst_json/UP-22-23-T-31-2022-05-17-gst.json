@@ -1,0 +1,79 @@
+{
+    "Version": "1.1",
+    "TranDtls": {
+        "TaxSch": "GST",
+        "SupTyp": "B2B",
+        "IgstOnIntra": "Y",
+        "RegRev": null,
+        "EcmGstin": null
+    },
+    "DocDtls": {
+        "Typ": "INV",
+        "No": "UP\/22-23\/T\/31",
+        "Dt": "17\/05\/2022"
+    },
+    "SellerDtls": {
+        "Gstin": "09AAICS9088H1ZM",
+        "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "Addr1": "Subharti Dental College Campus, Subharti Puram",
+        "Addr2": "Nh-58, Delhi- Haridwar By Pass Road",
+        "Loc": "Meerut",
+        "Pin": 250005,
+        "Stcd": null,
+        "Ph": "9212160084",
+        "Em": "info@synergyworld.co.in"
+    },
+    "BuyerDtls": {
+        "Gstin": "07AAECD6051B1Z4",
+        "LglNm": "Doctors Without Borders India Pvt.Ltd. (Defence Colony)",
+        "TrdNm": "Doctors Without Borders India Pvt.Ltd. (Defence Colony)",
+        "Pos": "7",
+        "Addr1": "P D-1, 5th Floor, N S I C Okhla Metro Station Building, Okhla",
+        "Addr2": null,
+        "Loc": "New Delhi",
+        "Pin": 0,
+        "Stcd": "7",
+        "Ph": "0",
+        "Em": "india-capitallog@oca.msf.org"
+    },
+    "ValDtls": {
+        "AssVal": 15000,
+        "IgstVal": 2700,
+        "CgstVal": 0,
+        "SgstVal": 0,
+        "CesVal": 0,
+        "StCesVal": 0,
+        "Discount": 0,
+        "OthChrg": 0,
+        "RndOffAmt": 0,
+        "TotInvVal": 17700
+    },
+    "ItemList": [
+        {
+            "SlNo": "1",
+            "PrdDesc": null,
+            "IsServc": "Y",
+            "HsnCd": "999432",
+            "Qty": "0",
+            "Unit": "OTH",
+            "UnitPrice": 0,
+            "TotAmt": 15000,
+            "Discount": "0",
+            "PreTaxVal": "0",
+            "AssAmt": 15000,
+            "GstRt": 18,
+            "IgstAmt": 2700,
+            "CgstAmt": 0,
+            "SgstAmt": 0,
+            "CesRt": 0,
+            "CesAmt": 0,
+            "CesNonAdvlAmt": 0,
+            "StateCesRt": 0,
+            "StateCesAmt": 0,
+            "StateCesNonAdvlAmt": 0,
+            "OthChrg": 0,
+            "TotItemVal": 17700
+        }
+    ]
+}

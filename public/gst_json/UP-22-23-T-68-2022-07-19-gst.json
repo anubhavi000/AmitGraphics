@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "UP\/22-23\/T\/68",
+            "Dt": "19\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "09AAICS9088H1ZM",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Subharti Dental College Campus, Subharti Puram",
+            "Addr2": "Nh-58, Delhi- Haridwar By Pass Road",
+            "Loc": "Meerut",
+            "Pin": 250005,
+            "Stcd": "9",
+            "Ph": "9212160084",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "07AABCI6557N1Z2",
+            "LglNm": "Instrumentation Laboratory India Pvt. Ltd. (Okhla -2)",
+            "TrdNm": "Instrumentation Laboratory India Pvt. Ltd. (Okhla -2)",
+            "Pos": "7",
+            "Addr1": "C-5, Okhla Industrial Area, Phase-1, Near Tata Steel",
+            "Addr2": null,
+            "Loc": "New Delhi",
+            "Pin": 110020,
+            "Stcd": "7",
+            "Ph": "8930943996",
+            "Em": "asinha@werfen.com"
+        },
+        "ValDtls": {
+            "AssVal": 3075,
+            "IgstVal": 553.5,
+            "CgstVal": 0,
+            "SgstVal": 0,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": -0.5,
+            "TotInvVal": 3629
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 3075,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 3075,
+                "GstRt": 18,
+                "IgstAmt": 553.5,
+                "CgstAmt": 0,
+                "SgstAmt": 0,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 3628.5
+            }
+        ]
+    }
+]

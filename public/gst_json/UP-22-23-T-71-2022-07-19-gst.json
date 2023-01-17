@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "UP\/22-23\/T\/71",
+            "Dt": "19\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "09AAICS9088H1ZM",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Subharti Dental College Campus, Subharti Puram",
+            "Addr2": "Nh-58, Delhi- Haridwar By Pass Road",
+            "Loc": "Meerut",
+            "Pin": 250005,
+            "Stcd": "9",
+            "Ph": "9212160084",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "09AAACP3334M1Z9",
+            "LglNm": "Pfizer Limited (Ghaziabad)",
+            "TrdNm": "Pfizer Limited (Ghaziabad)",
+            "Pos": "9",
+            "Addr1": "B-15\/1, Industrial Area, Meerut Road",
+            "Addr2": null,
+            "Loc": "Ghaziabad",
+            "Pin": 201003,
+            "Stcd": "9",
+            "Ph": null,
+            "Em": null
+        },
+        "ValDtls": {
+            "AssVal": 23310,
+            "IgstVal": 0,
+            "CgstVal": 2097.9,
+            "SgstVal": 2097.9,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": -0.8,
+            "TotInvVal": 27506
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 23310,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 23310,
+                "GstRt": 18,
+                "IgstAmt": 0,
+                "CgstAmt": 2097.9,
+                "SgstAmt": 2097.9,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 27505.8
+            }
+        ]
+    }
+]

@@ -1,0 +1,79 @@
+{
+    "Version": "1.1",
+    "TranDtls": {
+        "TaxSch": "GST",
+        "SupTyp": "B2B",
+        "IgstOnIntra": "N",
+        "RegRev": null,
+        "EcmGstin": null
+    },
+    "DocDtls": {
+        "Typ": "INV",
+        "No": "HR\/22-23\/T\/34",
+        "Dt": "23\/06\/2022"
+    },
+    "SellerDtls": {
+        "Gstin": "06AAICS9088H1ZS",
+        "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "Addr1": "Plot No 168, Sector - 27, 28",
+        "Addr2": "Huda Industrial Area",
+        "Loc": "Hisar",
+        "Pin": 125044,
+        "Stcd": null,
+        "Ph": "9212310081",
+        "Em": "info@synergyworld.co.in"
+    },
+    "BuyerDtls": {
+        "Gstin": "06AAHCB1083E1Z1",
+        "LglNm": "Blupin Trchnologies Pvt. Ltd. (Gurugram)",
+        "TrdNm": "Blupin Trchnologies Pvt. Ltd. (Gurugram)",
+        "Pos": "6",
+        "Addr1": "Plot No.115, 5th Floor, Sec.-44",
+        "Addr2": null,
+        "Loc": "Gurugram",
+        "Pin": 122003,
+        "Stcd": "6",
+        "Ph": "8527543999",
+        "Em": "rajeev.singh@mylofamily"
+    },
+    "ValDtls": {
+        "AssVal": 5000,
+        "IgstVal": 0,
+        "CgstVal": 450,
+        "SgstVal": 450,
+        "CesVal": 0,
+        "StCesVal": 0,
+        "Discount": 0,
+        "OthChrg": 0,
+        "RndOffAmt": 0,
+        "TotInvVal": 5900
+    },
+    "ItemList": [
+        {
+            "SlNo": "1",
+            "PrdDesc": null,
+            "IsServc": "Y",
+            "HsnCd": "999432",
+            "Qty": "0",
+            "Unit": "OTH",
+            "UnitPrice": 0,
+            "TotAmt": 5000,
+            "Discount": "0",
+            "PreTaxVal": "0",
+            "AssAmt": 5000,
+            "GstRt": 18,
+            "IgstAmt": 0,
+            "CgstAmt": 450,
+            "SgstAmt": 450,
+            "CesRt": 0,
+            "CesAmt": 0,
+            "CesNonAdvlAmt": 0,
+            "StateCesRt": 0,
+            "StateCesAmt": 0,
+            "StateCesNonAdvlAmt": 0,
+            "OthChrg": 0,
+            "TotItemVal": 5900
+        }
+    ]
+}

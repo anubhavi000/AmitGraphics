@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "UP\/22-23\/T\/70",
+            "Dt": "19\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "09AAICS9088H1ZM",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Subharti Dental College Campus, Subharti Puram",
+            "Addr2": "Nh-58, Delhi- Haridwar By Pass Road",
+            "Loc": "Meerut",
+            "Pin": 250005,
+            "Stcd": "9",
+            "Ph": "9212160084",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "06AAACQ1315K1ZP",
+            "LglNm": "Quest Retail Pvt. Ltd. (Gurugram)",
+            "TrdNm": "Quest Retail Pvt. Ltd. (Gurugram)",
+            "Pos": "6",
+            "Addr1": "C\/o A W L India Pvt. Ltd.Killa No.242\/18, 23\/1, Vill. Bhondsi, Sohna Road",
+            "Addr2": null,
+            "Loc": "Gurugram",
+            "Pin": 122102,
+            "Stcd": "6",
+            "Ph": "9810088634",
+            "Em": "kewal.joshi@questretail.in"
+        },
+        "ValDtls": {
+            "AssVal": 72000,
+            "IgstVal": 12960,
+            "CgstVal": 0,
+            "SgstVal": 0,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": 0,
+            "TotInvVal": 84960
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 72000,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 72000,
+                "GstRt": 18,
+                "IgstAmt": 12960,
+                "CgstAmt": 0,
+                "SgstAmt": 0,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 84960
+            }
+        ]
+    }
+]

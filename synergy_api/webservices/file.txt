@@ -1,0 +1,1 @@
+insertdata.php?id=1&name=A&age=10##|##insertdata.php?id=2&name=B&age=20;##|##insertdata.php?id=3&name=C&age=30;##|##insertdata.php?id=4&name=D&age=40;##|##insertdata.php?id=5&name=E&age=50;##|##err:123456789:this is my errors##|##insertdata.php?id=6&name=F&age=60;

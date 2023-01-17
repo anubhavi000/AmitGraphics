@@ -1,0 +1,10 @@
+
+=>From client to master right
+
+1. new connected clients => status column missing in excel
+2. Aggrement end export statewise => find and export buttons missing
+3. Aggrement end export plantwise =>status shows in excel but as 0's and 1's not as active/inactive
+4. Reset button not working in client index page.
+5. No export excel on pharma client/pharma debtor
+6. No data shown on vendors index
+7. No export excel in any of Admin rights views

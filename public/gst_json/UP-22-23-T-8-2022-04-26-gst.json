@@ -1,0 +1,79 @@
+{
+    "Version": "1.1",
+    "TranDtls": {
+        "TaxSch": "GST",
+        "SupTyp": "B2B",
+        "IgstOnIntra": "N",
+        "RegRev": null,
+        "EcmGstin": null
+    },
+    "DocDtls": {
+        "Typ": "INV",
+        "No": "UP\/22-23\/T\/8",
+        "Dt": "26\/04\/2022"
+    },
+    "SellerDtls": {
+        "Gstin": "09AAICS9088H1ZM",
+        "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "Addr1": "Khasara No 36,37,72",
+        "Addr2": "Village Mohammadpur",
+        "Loc": "Barabanki",
+        "Pin": 225001,
+        "Stcd": null,
+        "Ph": "9212310065",
+        "Em": "info@synergyworld.co.in"
+    },
+    "BuyerDtls": {
+        "Gstin": "09AAACH2736F1ZS",
+        "LglNm": "Sanofi India Ltd. (Lucknow)",
+        "TrdNm": "Sanofi India Ltd. (Lucknow)",
+        "Pos": "9",
+        "Addr1": "C-10, Phase-II, Transport Nagar, Kanpur Road,",
+        "Addr2": null,
+        "Loc": "Lucknow",
+        "Pin": 0,
+        "Stcd": "9",
+        "Ph": "0",
+        "Em": "cfa.lucknow@sanofi.com"
+    },
+    "ValDtls": {
+        "AssVal": 8910,
+        "IgstVal": 0,
+        "CgstVal": 801.9,
+        "SgstVal": 801.9,
+        "CesVal": 0,
+        "StCesVal": 0,
+        "Discount": 0,
+        "OthChrg": 0,
+        "RndOffAmt": 0,
+        "TotInvVal": 10514
+    },
+    "ItemList": [
+        {
+            "SlNo": "1",
+            "PrdDesc": null,
+            "IsServc": "Y",
+            "HsnCd": "999432",
+            "Qty": "0",
+            "Unit": "OTH",
+            "UnitPrice": 0,
+            "TotAmt": 8910,
+            "Discount": "0",
+            "PreTaxVal": "0",
+            "AssAmt": 8910,
+            "GstRt": 0,
+            "IgstAmt": 0,
+            "CgstAmt": 801.9,
+            "SgstAmt": 801.9,
+            "CesRt": 0,
+            "CesAmt": 0,
+            "CesNonAdvlAmt": 0,
+            "StateCesRt": 0,
+            "StateCesAmt": 0,
+            "StateCesNonAdvlAmt": 0,
+            "OthChrg": 0,
+            "TotItemVal": 10513.8
+        }
+    ]
+}

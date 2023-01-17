@@ -1,0 +1,79 @@
+{
+    "Version": "1.1",
+    "TranDtls": {
+        "TaxSch": "GST",
+        "SupTyp": "B2B",
+        "IgstOnIntra": "N",
+        "RegRev": null,
+        "EcmGstin": null
+    },
+    "DocDtls": {
+        "Typ": "INV",
+        "No": "UP\/22-23\/T\/10",
+        "Dt": "26\/04\/2022"
+    },
+    "SellerDtls": {
+        "Gstin": "09AAICS9088H1ZM",
+        "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "Addr1": "Khasara No 36,37,72",
+        "Addr2": "Village Mohammadpur",
+        "Loc": "Barabanki",
+        "Pin": 225001,
+        "Stcd": null,
+        "Ph": "9212310065",
+        "Em": "info@synergyworld.co.in"
+    },
+    "BuyerDtls": {
+        "Gstin": "27AACCU6468R1ZD",
+        "LglNm": "Udinec Pvt. Ltd. (U. P.)",
+        "TrdNm": "Udinec Pvt. Ltd. (U. P.)",
+        "Pos": "27",
+        "Addr1": "2203, 22nd Floor, Haware Infotech Park, Plot No.39\/3, Sec.-30 A, Opp. Inorbit Mall",
+        "Addr2": null,
+        "Loc": "Vashi",
+        "Pin": 0,
+        "Stcd": "27",
+        "Ph": "9967772135",
+        "Em": "info@unidec.com"
+    },
+    "ValDtls": {
+        "AssVal": 6880,
+        "IgstVal": 1238.4,
+        "CgstVal": 0,
+        "SgstVal": 0,
+        "CesVal": 0,
+        "StCesVal": 0,
+        "Discount": 0,
+        "OthChrg": 0,
+        "RndOffAmt": 0,
+        "TotInvVal": 8118
+    },
+    "ItemList": [
+        {
+            "SlNo": "1",
+            "PrdDesc": null,
+            "IsServc": "Y",
+            "HsnCd": "999432",
+            "Qty": "0",
+            "Unit": "OTH",
+            "UnitPrice": 0,
+            "TotAmt": 6880,
+            "Discount": "0",
+            "PreTaxVal": "0",
+            "AssAmt": 6880,
+            "GstRt": 0,
+            "IgstAmt": 1238.4,
+            "CgstAmt": 0,
+            "SgstAmt": 0,
+            "CesRt": 0,
+            "CesAmt": 0,
+            "CesNonAdvlAmt": 0,
+            "StateCesRt": 0,
+            "StateCesAmt": 0,
+            "StateCesNonAdvlAmt": 0,
+            "OthChrg": 0,
+            "TotItemVal": 8118.4
+        }
+    ]
+}

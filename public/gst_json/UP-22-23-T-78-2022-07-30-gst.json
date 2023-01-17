@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "UP\/22-23\/T\/78",
+            "Dt": "30\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "09AAICS9088H1ZM",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Subharti Dental College Campus, Subharti Puram",
+            "Addr2": "Nh-58, Delhi- Haridwar By Pass Road",
+            "Loc": "Meerut",
+            "Pin": 250005,
+            "Stcd": "9",
+            "Ph": "9212160084",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "09AABCB3477C1ZV",
+            "LglNm": "Biomed Pvt. Ltd. (Ghaziabad)",
+            "TrdNm": "Biomed Pvt. Ltd. (Ghaziabad)",
+            "Pos": "9",
+            "Addr1": "C-96, Bulandshahar Road, Industrial Area",
+            "Addr2": null,
+            "Loc": "Ghaziabad",
+            "Pin": 201009,
+            "Stcd": "9",
+            "Ph": "9891760411",
+            "Em": "hktomarbm@gmail.com"
+        },
+        "ValDtls": {
+            "AssVal": 2000,
+            "IgstVal": 0,
+            "CgstVal": 180,
+            "SgstVal": 180,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": 0,
+            "TotInvVal": 2360
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 2000,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 2000,
+                "GstRt": 18,
+                "IgstAmt": 0,
+                "CgstAmt": 180,
+                "SgstAmt": 180,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 2360
+            }
+        ]
+    }
+]

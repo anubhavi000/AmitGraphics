@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "HR\/22-23\/T\/56",
+            "Dt": "28\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "06AAICS9088H1ZS",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Plot No 168, Sector - 27, 28",
+            "Addr2": "Huda Industrial Area",
+            "Loc": "Hisar",
+            "Pin": 125044,
+            "Stcd": "6",
+            "Ph": "9212310081",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "27AACCU6468R1ZD",
+            "LglNm": "Udinec Pvt. Ltd. (Mumbai)",
+            "TrdNm": "Udinec Pvt. Ltd. (Mumbai)",
+            "Pos": "27",
+            "Addr1": "2203, 22nd Floor, Haware Infotech Park, Plot No.39\/3, Sec.-30 A, Opp. Inorbit Mall",
+            "Addr2": null,
+            "Loc": "Vashi",
+            "Pin": 400703,
+            "Stcd": "27",
+            "Ph": "9967772135",
+            "Em": "info@unidec.com"
+        },
+        "ValDtls": {
+            "AssVal": 8400,
+            "IgstVal": 1512,
+            "CgstVal": 0,
+            "SgstVal": 0,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": 0,
+            "TotInvVal": 9912
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 8400,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 8400,
+                "GstRt": 18,
+                "IgstAmt": 1512,
+                "CgstAmt": 0,
+                "SgstAmt": 0,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 9912
+            }
+        ]
+    }
+]

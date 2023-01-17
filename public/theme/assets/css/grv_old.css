@@ -1,0 +1,22 @@
+/* .pcoded-inner-navbar {
+    overflow: scroll !important;
+}
+
+nav.pcoded-navbar.is-hover .pcoded-inner-navbar {
+    overflow-y: inherit;
+}
+.pcoded-inner-navbar{
+    height: 100vh !important;
+} */
+
+
+.pcoded[theme-layout="vertical"] .pcoded-navbar[pcoded-navbar-position="fixed"]{
+    top:10vh;
+    height: 90vh;
+    overflow-y: auto;
+    background-color: #263544;
+}
+
+.pcoded[theme-layout="vertical"] .pcoded-navbar[pcoded-navbar-position="fixed"]::-webkit-scrollbar {
+    width: 0px;
+  }

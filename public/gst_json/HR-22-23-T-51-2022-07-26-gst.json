@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "HR\/22-23\/T\/51",
+            "Dt": "26\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "06AAICS9088H1ZS",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Plot No 168, Sector - 27, 28",
+            "Addr2": "Huda Industrial Area",
+            "Loc": "Hisar",
+            "Pin": 125044,
+            "Stcd": "6",
+            "Ph": "9212310081",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "06AAACL1069K1ZJ",
+            "LglNm": "LUPIN LIMITED (Panchkula)",
+            "TrdNm": "LUPIN LIMITED (Panchkula)",
+            "Pos": "6",
+            "Addr1": "Plot No. 293, Phase-I, Industrial Area",
+            "Addr2": null,
+            "Loc": "Panchkula",
+            "Pin": 134113,
+            "Stcd": "6",
+            "Ph": "8146826654",
+            "Em": "rajagopalannair@lupin.com"
+        },
+        "ValDtls": {
+            "AssVal": 90580,
+            "IgstVal": 0,
+            "CgstVal": 8152.2,
+            "SgstVal": 8152.2,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": -0.4,
+            "TotInvVal": 106884
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 90580,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 90580,
+                "GstRt": 18,
+                "IgstAmt": 0,
+                "CgstAmt": 8152.2,
+                "SgstAmt": 8152.2,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 106884.4
+            }
+        ]
+    }
+]

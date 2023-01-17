@@ -1,0 +1,79 @@
+{
+    "Version": "1.1",
+    "TranDtls": {
+        "TaxSch": "GST",
+        "SupTyp": "B2B",
+        "IgstOnIntra": "N",
+        "RegRev": null,
+        "EcmGstin": null
+    },
+    "DocDtls": {
+        "Typ": "INV",
+        "No": "HR\/22-23\/T\/2",
+        "Dt": "26\/04\/2022"
+    },
+    "SellerDtls": {
+        "Gstin": "06AAICS9088H1ZS",
+        "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "Addr1": "Plot No 168, Sector - 27, 28",
+        "Addr2": "Huda Industrial Area",
+        "Loc": "Hisar",
+        "Pin": 125044,
+        "Stcd": null,
+        "Ph": "9212310081",
+        "Em": "info@synergyworld.co.in"
+    },
+    "BuyerDtls": {
+        "Gstin": "33AAACB3202A1ZU",
+        "LglNm": "Bio-rad Laboratories (India) Pvt. Ltd. (Chennai)",
+        "TrdNm": "Bio-rad Laboratories (India) Pvt. Ltd. (Chennai)",
+        "Pos": "33",
+        "Addr1": "Door No.116, Devaneri Vill.Road, Sholavaram Vill.",
+        "Addr2": null,
+        "Loc": "Chennai",
+        "Pin": 0,
+        "Stcd": "33",
+        "Ph": "0",
+        "Em": ""
+    },
+    "ValDtls": {
+        "AssVal": 3727.5,
+        "IgstVal": 670.95,
+        "CgstVal": 0,
+        "SgstVal": 0,
+        "CesVal": 0,
+        "StCesVal": 0,
+        "Discount": 0,
+        "OthChrg": 0,
+        "RndOffAmt": -5,
+        "TotInvVal": 4398
+    },
+    "ItemList": [
+        {
+            "SlNo": "1",
+            "PrdDesc": null,
+            "IsServc": "Y",
+            "HsnCd": "999432",
+            "Qty": "0",
+            "Unit": "OTH",
+            "UnitPrice": 0,
+            "TotAmt": 3727.5,
+            "Discount": "0",
+            "PreTaxVal": "0",
+            "AssAmt": 3727.5,
+            "GstRt": 0,
+            "IgstAmt": 670.95,
+            "CgstAmt": 0,
+            "SgstAmt": 0,
+            "CesRt": 0,
+            "CesAmt": 0,
+            "CesNonAdvlAmt": 0,
+            "StateCesRt": 0,
+            "StateCesAmt": 0,
+            "StateCesNonAdvlAmt": 0,
+            "OthChrg": 0,
+            "TotItemVal": 4398.45
+        }
+    ]
+}

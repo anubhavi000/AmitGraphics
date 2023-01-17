@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "HR\/22-23\/T\/60",
+            "Dt": "28\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "06AAICS9088H1ZS",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Plot No 168, Sector - 27, 28",
+            "Addr2": "Huda Industrial Area",
+            "Loc": "Hisar",
+            "Pin": 125044,
+            "Stcd": "6",
+            "Ph": "9212310081",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "06AAVCS8021P1ZJ",
+            "LglNm": "Siemens Healthcare Pvt. Ltd. (kits)",
+            "TrdNm": "Siemens Healthcare Pvt. Ltd. (kits)",
+            "Pos": "6",
+            "Addr1": "Phase-I, Khasra Nos.44\/\/14\/2, 24&47\/\/4-7, Taj Nagar, Gurgaon Pataudi Road, Jamalpur",
+            "Addr2": null,
+            "Loc": "Gurgaon",
+            "Pin": 125305,
+            "Stcd": "6",
+            "Ph": null,
+            "Em": "shankar.rawat@siemens-healthineers.com"
+        },
+        "ValDtls": {
+            "AssVal": 45720,
+            "IgstVal": 0,
+            "CgstVal": 4114.8,
+            "SgstVal": 4114.8,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": -0.6,
+            "TotInvVal": 53950
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 45720,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 45720,
+                "GstRt": 18,
+                "IgstAmt": 0,
+                "CgstAmt": 4114.8,
+                "SgstAmt": 4114.8,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 53949.6
+            }
+        ]
+    }
+]

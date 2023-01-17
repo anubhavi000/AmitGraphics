@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "HR\/22-23\/T\/57",
+            "Dt": "28\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "06AAICS9088H1ZS",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Plot No 168, Sector - 27, 28",
+            "Addr2": "Huda Industrial Area",
+            "Loc": "Hisar",
+            "Pin": 125044,
+            "Stcd": "6",
+            "Ph": "9212310081",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "06AATCS3717L1ZS",
+            "LglNm": "Eris Healthcare Pvt. Ltd. (Karnal)",
+            "TrdNm": "Eris Healthcare Pvt. Ltd. (Karnal)",
+            "Pos": "6",
+            "Addr1": "Ist Floor, Shead No.-167-B, HSIIDC, I.E.",
+            "Addr2": null,
+            "Loc": "Karnal",
+            "Pin": 132001,
+            "Stcd": "6",
+            "Ph": "9081995923",
+            "Em": "manager.ambala@erislifesciences.com"
+        },
+        "ValDtls": {
+            "AssVal": 41782.5,
+            "IgstVal": 0,
+            "CgstVal": 3760.43,
+            "SgstVal": 3760.43,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": -0.36,
+            "TotInvVal": 49303
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 41782.5,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 41782.5,
+                "GstRt": 18,
+                "IgstAmt": 0,
+                "CgstAmt": 3760.43,
+                "SgstAmt": 3760.43,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 49303.36
+            }
+        ]
+    }
+]

@@ -1,0 +1,79 @@
+{
+    "Version": "1.1",
+    "TranDtls": {
+        "TaxSch": "GST",
+        "SupTyp": "B2B",
+        "IgstOnIntra": "Y",
+        "RegRev": null,
+        "EcmGstin": null
+    },
+    "DocDtls": {
+        "Typ": "INV",
+        "No": "HR\/22-23\/T\/22",
+        "Dt": "19\/05\/2022"
+    },
+    "SellerDtls": {
+        "Gstin": "06AAICS9088H1ZS",
+        "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+        "Addr1": "Plot No 168, Sector - 27, 28",
+        "Addr2": "Huda Industrial Area",
+        "Loc": "Hisar",
+        "Pin": 125044,
+        "Stcd": null,
+        "Ph": "9212310081",
+        "Em": "info@synergyworld.co.in"
+    },
+    "BuyerDtls": {
+        "Gstin": "03AABCE7067M1ZH",
+        "LglNm": "Eris Life Sciences Ltd. (Zirakpur)",
+        "TrdNm": "Eris Life Sciences Ltd. (Zirakpur)",
+        "Pos": "3",
+        "Addr1": "Ground & Ist Floor, Behind J.P.Hospital, Godown Area, Pabhat, Zirakpur, Tah.Dera Bassi (SAS Nagar)",
+        "Addr2": null,
+        "Loc": "Zirakpur",
+        "Pin": 0,
+        "Stcd": "3",
+        "Ph": "0",
+        "Em": ""
+    },
+    "ValDtls": {
+        "AssVal": 103005,
+        "IgstVal": 18540.9,
+        "CgstVal": 0,
+        "SgstVal": 0,
+        "CesVal": 0,
+        "StCesVal": 0,
+        "Discount": 0,
+        "OthChrg": 0,
+        "RndOffAmt": 0,
+        "TotInvVal": 121546
+    },
+    "ItemList": [
+        {
+            "SlNo": "1",
+            "PrdDesc": null,
+            "IsServc": "Y",
+            "HsnCd": "999432",
+            "Qty": "0",
+            "Unit": "OTH",
+            "UnitPrice": 0,
+            "TotAmt": 103005,
+            "Discount": "0",
+            "PreTaxVal": "0",
+            "AssAmt": 103005,
+            "GstRt": 18,
+            "IgstAmt": 18540.9,
+            "CgstAmt": 0,
+            "SgstAmt": 0,
+            "CesRt": 0,
+            "CesAmt": 0,
+            "CesNonAdvlAmt": 0,
+            "StateCesRt": 0,
+            "StateCesAmt": 0,
+            "StateCesNonAdvlAmt": 0,
+            "OthChrg": 0,
+            "TotItemVal": 121545.9
+        }
+    ]
+}

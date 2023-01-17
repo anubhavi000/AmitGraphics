@@ -1,0 +1,227 @@
+[10-Dec-2021 15:38:45 UTC] PHP Fatal error:  Cannot use [] for reading in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/RouteController.php on line 43
+[11-Dec-2021 03:50:05 UTC] PHP Fatal error:  Cannot use [] for reading in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/RouteController.php on line 71
+[11-Dec-2021 03:53:00 UTC] PHP Fatal error:  Cannot use [] for reading in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/RouteController.php on line 71
+[11-Dec-2021 16:34:21 UTC] PHP Fatal error:  Cannot use temporary expression in write context in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/HCFCollectionController.php on line 30
+[28-Dec-2021 13:05:14 UTC] PHP Fatal error:  Out of memory (allocated 488882176) (tried to allocate 325291800 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[28-Dec-2021 13:05:14 UTC] PHP Fatal error:  Out of memory (allocated 489394176) (tried to allocate 325816320 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[28-Dec-2021 13:05:43 UTC] PHP Fatal error:  Out of memory (allocated 488882176) (tried to allocate 325291800 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[28-Dec-2021 13:05:43 UTC] PHP Fatal error:  Out of memory (allocated 489394176) (tried to allocate 325816320 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[28-Dec-2021 13:06:30 UTC] PHP Fatal error:  Out of memory (allocated 488898560) (tried to allocate 325319816 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[28-Dec-2021 13:06:30 UTC] PHP Fatal error:  Out of memory (allocated 489422848) (tried to allocate 325844992 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[28-Dec-2021 13:06:31 UTC] PHP Fatal error:  Out of memory (allocated 488882176) (tried to allocate 325291800 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[28-Dec-2021 13:06:31 UTC] PHP Fatal error:  Out of memory (allocated 489394176) (tried to allocate 325816320 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[28-Dec-2021 13:06:50 UTC] PHP Fatal error:  Out of memory (allocated 488882176) (tried to allocate 325291800 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[28-Dec-2021 13:06:50 UTC] PHP Fatal error:  Out of memory (allocated 489394176) (tried to allocate 325816320 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[28-Dec-2021 13:07:04 UTC] PHP Fatal error:  Out of memory (allocated 488882176) (tried to allocate 325291800 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[28-Dec-2021 13:07:04 UTC] PHP Fatal error:  Out of memory (allocated 489394176) (tried to allocate 325816320 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[29-Dec-2021 05:53:51 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[29-Dec-2021 05:55:44 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[29-Dec-2021 05:59:25 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[29-Dec-2021 06:08:59 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[29-Dec-2021 06:09:53 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[29-Dec-2021 06:09:56 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[29-Dec-2021 06:15:26 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[07-Jan-2022 06:28:16 UTC] PHP Fatal error:  Out of memory (allocated 658513920) (tried to allocate 134217736 bytes) in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/ClientController.php on line 1341
+[07-Jan-2022 06:28:26 UTC] PHP Fatal error:  Out of memory (allocated 658513920) (tried to allocate 134217736 bytes) in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/ClientController.php on line 1341
+[07-Jan-2022 06:30:39 UTC] PHP Fatal error:  Out of memory (allocated 658513920) (tried to allocate 134217736 bytes) in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/ClientController.php on line 1341
+[22-Jan-2022 10:56:20 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\ClientPurchaseOrderController::delete() in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/ClientPurchaseOrderController.php on line 163
+[11-Feb-2022 11:59:34 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:00:30 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:01:15 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:03:35 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:04:37 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:06:25 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:08:54 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:12:36 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:15:32 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:16:27 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:25:14 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:26:15 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Feb-2022 12:26:42 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[15-Feb-2022 13:06:49 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 243
+[15-Feb-2022 13:06:49 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:06:49 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[15-Feb-2022 13:07:15 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 243
+[15-Feb-2022 13:07:15 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:07:15 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[15-Feb-2022 13:07:19 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 243
+[15-Feb-2022 13:07:19 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:07:19 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[15-Feb-2022 13:07:22 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 239
+[15-Feb-2022 13:07:22 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:07:22 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[15-Feb-2022 13:07:28 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 243
+[15-Feb-2022 13:07:28 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:07:28 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[15-Feb-2022 13:09:50 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 232
+[15-Feb-2022 13:09:50 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:09:50 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[15-Feb-2022 13:10:07 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 232
+[15-Feb-2022 13:10:07 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[15-Feb-2022 13:10:07 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 05:17:20 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/ManualTaskController.php on line 4
+[26-Feb-2022 05:17:57 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home4/pagesite/synergy-test.msell.in/app/Http/Controllers/ManualTaskController.php on line 3
+[26-Feb-2022 07:27:48 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 07:27:48 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:27:48 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:28:29 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 07:28:29 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:28:29 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:29:08 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 07:29:08 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:29:08 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:29:09 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 07:29:09 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:29:09 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:33:32 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 07:33:32 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:33:32 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:33:53 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 07:33:53 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:33:53 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:33:55 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 07:33:55 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:33:55 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 07:44:53 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 07:44:53 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 07:44:53 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 08:03:26 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 08:03:26 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 08:03:26 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 08:11:42 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 08:11:42 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 08:11:42 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:43:20 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:43:20 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:43:20 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:43:36 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:43:36 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:43:36 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:43:57 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 10:43:57 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:43:57 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:43:58 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:43:58 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:43:58 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:44:25 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 10:44:25 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:44:25 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:44:27 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:44:27 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:44:27 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:46:24 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:46:24 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:46:24 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:47:53 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 10:47:53 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:47:53 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:47:55 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:47:55 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:47:55 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:49:43 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 10:49:43 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:49:43 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:50:18 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 10:50:18 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:50:18 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:50:20 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:50:20 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:50:20 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:50:49 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:50:49 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:50:49 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 10:51:07 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 10:51:07 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 10:51:07 UTC] PHP Fatal error:  Out of memory (allocated 603979776) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 11:01:17 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:01:17 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:01:17 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:10:24 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:10:24 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:10:24 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:10:35 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:10:35 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:10:35 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:11:15 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:11:15 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:11:15 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:11:24 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:11:24 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:11:24 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:12:19 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:12:19 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:12:19 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:28:14 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:28:14 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:28:14 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 11:28:52 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[26-Feb-2022 11:28:52 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:28:52 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[26-Feb-2022 11:28:54 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 11:28:54 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 11:28:54 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 12:09:26 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 12:09:26 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 12:09:26 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[26-Feb-2022 12:45:00 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[26-Feb-2022 12:45:00 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[26-Feb-2022 12:45:00 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[27-Feb-2022 03:51:36 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[27-Feb-2022 03:51:36 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[27-Feb-2022 03:51:36 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[27-Feb-2022 07:21:11 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[27-Feb-2022 07:21:12 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[27-Feb-2022 07:21:12 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[28-Feb-2022 11:02:33 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[28-Feb-2022 11:02:33 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[28-Feb-2022 11:02:33 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[28-Feb-2022 11:04:01 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[28-Feb-2022 11:04:01 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[28-Feb-2022 11:04:01 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[28-Feb-2022 11:16:30 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[28-Feb-2022 11:16:30 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[28-Feb-2022 11:16:30 UTC] PHP Fatal error:  Out of memory (allocated 601882624) (tried to allocate 434110464 bytes) in Unknown on line 0
+[28-Feb-2022 16:10:26 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[28-Feb-2022 16:10:27 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[28-Feb-2022 16:10:27 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[28-Feb-2022 16:10:39 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 233
+[28-Feb-2022 16:10:39 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[28-Feb-2022 16:10:39 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434110464 bytes) in Unknown on line 0
+[28-Feb-2022 16:10:42 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434126848 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[28-Feb-2022 16:10:42 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434634752 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[28-Feb-2022 16:10:42 UTC] PHP Fatal error:  Out of memory (allocated 599785472) (tried to allocate 434114560 bytes) in Unknown on line 0
+[01-Mar-2022 03:41:07 UTC] PHP Fatal error:  Out of memory (allocated 517029888) (tried to allocate 466693992 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[01-Mar-2022 03:41:07 UTC] PHP Fatal error:  Out of memory (allocated 519647232) (tried to allocate 467218432 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[01-Mar-2022 03:41:19 UTC] PHP Fatal error:  Out of memory (allocated 517046272) (tried to allocate 466704840 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[01-Mar-2022 03:41:19 UTC] PHP Fatal error:  Out of memory (allocated 519655424) (tried to allocate 467226624 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[01-Mar-2022 03:41:21 UTC] PHP Fatal error:  Out of memory (allocated 517029888) (tried to allocate 466693992 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 94
+[01-Mar-2022 03:41:21 UTC] PHP Fatal error:  Out of memory (allocated 519647232) (tried to allocate 467218432 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[01-Mar-2022 06:38:48 UTC] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 534790144 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[01-Mar-2022 06:38:48 UTC] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 535298048 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[01-Mar-2022 06:38:48 UTC] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 534773760 bytes) in Unknown on line 0
+[01-Mar-2022 06:41:14 UTC] PHP Fatal error:  Out of memory (allocated 471859200) (tried to allocate 400572416 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[01-Mar-2022 06:41:14 UTC] PHP Fatal error:  Out of memory (allocated 471859200) (tried to allocate 401080320 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[01-Mar-2022 06:41:14 UTC] PHP Fatal error:  Out of memory (allocated 471859200) (tried to allocate 400556032 bytes) in Unknown on line 0
+[01-Mar-2022 06:42:16 UTC] PHP Fatal error:  Out of memory (allocated 549453824) (tried to allocate 467681280 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[01-Mar-2022 06:42:16 UTC] PHP Fatal error:  Out of memory (allocated 549453824) (tried to allocate 468189184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[01-Mar-2022 06:42:16 UTC] PHP Fatal error:  Out of memory (allocated 549453824) (tried to allocate 467664896 bytes) in Unknown on line 0
+[01-Mar-2022 06:45:12 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 467681280 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[01-Mar-2022 06:45:12 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 468189184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[01-Mar-2022 06:45:12 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 467664896 bytes) in Unknown on line 0
+[01-Mar-2022 14:54:54 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 467681280 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 234
+[01-Mar-2022 14:54:54 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 468189184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[01-Mar-2022 14:54:54 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 467664896 bytes) in Unknown on line 0
+[02-Mar-2022 03:45:37 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 467681280 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[02-Mar-2022 03:45:37 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 468189184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[02-Mar-2022 03:45:38 UTC] PHP Fatal error:  Out of memory (allocated 557842432) (tried to allocate 467664896 bytes) in Unknown on line 0
+[02-Mar-2022 03:48:00 UTC] PHP Fatal error:  Out of memory (allocated 553648128) (tried to allocate 467681280 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 229
+[02-Mar-2022 03:48:00 UTC] PHP Fatal error:  Out of memory (allocated 553648128) (tried to allocate 468189184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[02-Mar-2022 03:48:00 UTC] PHP Fatal error:  Out of memory (allocated 553648128) (tried to allocate 467664896 bytes) in Unknown on line 0
+[02-Mar-2022 03:48:03 UTC] PHP Fatal error:  Out of memory (allocated 553648128) (tried to allocate 467681280 bytes) in /home4/pagesite/synergy-test.msell.in/storage/framework/views/27c485b9f850ba162e655c1f3b1cf143921b9da8.php on line 234
+[02-Mar-2022 03:48:03 UTC] PHP Fatal error:  Out of memory (allocated 553648128) (tried to allocate 468189184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 381
+[02-Mar-2022 03:48:03 UTC] PHP Fatal error:  Out of memory (allocated 553648128) (tried to allocate 467664896 bytes) in Unknown on line 0
+[02-Mar-2022 03:48:27 UTC] PHP Fatal error:  Out of memory (allocated 652488704) (tried to allocate 284323048 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php on line 63
+[02-Mar-2022 03:48:27 UTC] PHP Fatal error:  Out of memory (allocated 652996608) (tried to allocate 284844032 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[02-Mar-2022 03:48:43 UTC] PHP Fatal error:  Out of memory (allocated 652496896) (tried to allocate 284326184 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php on line 63
+[02-Mar-2022 03:48:43 UTC] PHP Fatal error:  Out of memory (allocated 653004800) (tried to allocate 284848128 bytes) in /home4/pagesite/synergy-test.msell.in/vendor/symfony/http-foundation/Response.php on line 1250
+[03-Mar-2022 03:41:15 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0

@@ -1,0 +1,81 @@
+[
+    {
+        "Version": "1.1",
+        "TranDtls": {
+            "TaxSch": "GST",
+            "SupTyp": "B2B",
+            "IgstOnIntra": "N",
+            "RegRev": null,
+            "EcmGstin": null
+        },
+        "DocDtls": {
+            "Typ": "INV",
+            "No": "UP\/22-23\/T\/76",
+            "Dt": "30\/07\/2022"
+        },
+        "SellerDtls": {
+            "Gstin": "09AAICS9088H1ZM",
+            "LglNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "TrdNm": "SYNERGY WASTE MANAGEMENT PRIVATE LIMITED",
+            "Addr1": "Subharti Dental College Campus, Subharti Puram",
+            "Addr2": "Nh-58, Delhi- Haridwar By Pass Road",
+            "Loc": "Meerut",
+            "Pin": 250005,
+            "Stcd": "9",
+            "Ph": "9212160084",
+            "Em": "info@synergyworld.co.in"
+        },
+        "BuyerDtls": {
+            "Gstin": "07AAACM2764J1ZE",
+            "LglNm": "Medley Pharmaceuticals Ltd. (Radhey Puri)",
+            "TrdNm": "Medley Pharmaceuticals Ltd. (Radhey Puri)",
+            "Pos": "7",
+            "Addr1": "Plot No.-88\/1, Radhey Puri Ext.-II, Street No.-1, New Delhi",
+            "Addr2": null,
+            "Loc": "New Delhi",
+            "Pin": 110051,
+            "Stcd": "7",
+            "Ph": null,
+            "Em": null
+        },
+        "ValDtls": {
+            "AssVal": 21840,
+            "IgstVal": 3931.2,
+            "CgstVal": 0,
+            "SgstVal": 0,
+            "CesVal": 0,
+            "StCesVal": 0,
+            "Discount": 0,
+            "OthChrg": 0,
+            "RndOffAmt": -0.2,
+            "TotInvVal": 25771
+        },
+        "ItemList": [
+            {
+                "SlNo": "1",
+                "PrdDesc": null,
+                "IsServc": "Y",
+                "HsnCd": "999432",
+                "Qty": 0,
+                "Unit": "OTH",
+                "UnitPrice": 0,
+                "TotAmt": 21840,
+                "Discount": 0,
+                "PreTaxVal": 0,
+                "AssAmt": 21840,
+                "GstRt": 18,
+                "IgstAmt": 3931.2,
+                "CgstAmt": 0,
+                "SgstAmt": 0,
+                "CesRt": 0,
+                "CesAmt": 0,
+                "CesNonAdvlAmt": 0,
+                "StateCesRt": 0,
+                "StateCesAmt": 0,
+                "StateCesNonAdvlAmt": 0,
+                "OthChrg": 0,
+                "TotItemVal": 25771.2
+            }
+        ]
+    }
+]

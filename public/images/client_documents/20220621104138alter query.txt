@@ -1,0 +1,26 @@
+ALTER TABLE `plant` ADD `credit_taxable_series` VARCHAR(250) NULL AFTER `sign_image`, ADD `credit_nontaxable_series` VARCHAR(250) NULL AFTER `credit_taxable_series`, ADD `debit_taxable_series` VARCHAR(250) NULL AFTER `credit_nontaxable_series`, ADD `debit_nontaxable_series` VARCHAR(250) NULL AFTER `debit_taxable_series`; 
+
+
+
+INSERT INTO `bill_series` (`id`, `company_id`, `series`, `voucher`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`, `tax_status`) VALUES ('13', '2', 'Bh/22-23/CN/T/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1'), ('14', '2', 'Bh/22-23/CN/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1'), ('15', '2', 'Bh/22-23/DN/T/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1'), ('16', '2', 'Bh/22-23/DN/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1'), ('17', '2', 'DL/22-23/DN/T/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1'), ('18', '2', 'DL/22-23/DN/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 
+
+UPDATE `plant` SET `credit_taxable_series` = '13' WHERE `plant`.`id` = 4;
+UPDATE `plant` SET `credit_nontaxable_series` = '14' WHERE `plant`.`id` = 4;
+UPDATE `plant` SET `debit_taxable_series` = '15' WHERE `plant`.`id` = 4;
+UPDATE `plant` SET `debit_nontaxable_series` = '16' WHERE `plant`.`id` = 4;
+UPDATE `plant` SET `credit_nontaxable_series` = '19' WHERE `plant`.`id` = 6;
+UPDATE `plant` SET `credit_taxable_series` = '19' WHERE `plant`.`id` = 6;
+UPDATE `plant` SET `credit_nontaxable_series` = '20' WHERE `plant`.`id` = 6;
+UPDATE `plant` SET `debit_taxable_series` = '17' WHERE `plant`.`id` = 6;
+Expand Requery Edit Database : synergy_latest Queried time : 12:36:17
+UPDATE `plant` SET `debit_nontaxable_series` = '18' WHERE `plant`.`id` = 6;
+
+ALTER TABLE `client_type` ADD `code` VARCHAR(100) NULL AFTER `created_at`; 
+
+
+
+
+
+
+
+08:52:10.000000', '33', '1'), ('19', '2', 'DL/22-23/CN/T', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1'), ('20', '2', 'DL/22-23/CN/', '0', '1', '2022-06-18 08:52:10.000000', '33', '2022-06-18 08:52:10.000000', '33', '1');
