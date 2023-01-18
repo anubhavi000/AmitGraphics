@@ -54,13 +54,13 @@
 
     <div class="col-md-3 mb-3 px-3">
         <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Contact Number</label>
-        <input value="{{$edit->num}}" type="text" name="name" id="department_Name" class="form-control" placeholder="Contact Number" >
+        <input value="{{$edit->phone}}" type="text" name="name" id="department_Name" class="form-control" placeholder="Contact Number" >
       </div>
 
    
     <div class="col-md-6 mb-3 px-3">
         <label for="description" style="margin-bottom: 0px;">Description</label>
-        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->description}}</textarea>
+        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->descr}}</textarea>
     </div>
   
    <div class="col-md-12" style="text-align: right;">

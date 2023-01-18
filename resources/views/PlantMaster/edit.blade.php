@@ -49,13 +49,13 @@
    
     <div class="col-md-6 mb-3 px-3">
         <label for="description" style="margin-bottom: 0px;">Description</label>
-        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->description}}</textarea>
+        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->descr}}</textarea>
     </div>
   
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 
-  <button class="blob-btn" id="cancelbtn"  action="action"
+  <button class="blob-btn" id="cancelbtn"  action="action"``
     type="button"><i class="fas fa-times pr-2"></i>
     Cancel
     <span class="blob-btn__inner">

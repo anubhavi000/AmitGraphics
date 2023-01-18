@@ -134,7 +134,7 @@
 
                                             <th data-field="2" data-sortable="true">Supervisor Email</th>
 
-                                            <th data-field="date" data-sortable="true">Contact Number</th>
+                                            <th data-field="3" data-sortable="true">Contact Number</th>
 
                                             <th data-field="note" data-sortable="true">Description</th>
 
