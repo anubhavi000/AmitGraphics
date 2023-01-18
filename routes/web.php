@@ -122,11 +122,26 @@ Route::get('whatsapp_bill' , 'BillingController@whatsapp_bill');
 Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
 
+//added by krishnan
+    //Item
+    Route::resource('ItemMast', 'ItemController');
+    Route::post('ItemMast_delete', 'ItemController@destroy');
 
+    //Plant
+    Route::resource('PlantMast', 'PlantController');
 
+    //Transport
 
+    Route::resource('TransporterMast', 'TransporterController');
 
+    //Vehicle
 
+    Route::resource('VehicleMast', 'VehicleController');
+    Route::post('VehicleMast_delete', 'VehicleController@destroy');
+
+    //Vendor
+
+    Route::resource('VendorMast', 'VendorController');
 
 
 

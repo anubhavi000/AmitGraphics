@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PlantMast;
+use App\Models\VendorMast;
 use Illuminate\Support\Facades\Auth;
-
-class PlantController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,9 @@ class PlantController extends Controller
      */
     public function index()
     {
-        $record = PlantMast::where('status', 1)->get();
-        return view('PlantMaster.index', [
+        $record = VendorMast::where('status', 1)->get();
+        // dd($record);
+        return view('VendorMaster.index', [
             'data' => $record,
         ]);
     }
@@ -28,7 +28,7 @@ class PlantController extends Controller
      */
     public function create()
     {
-        return view('PlantMaster.create');
+        return view('VendorMaster.create');
     }
 
     /**
@@ -39,17 +39,26 @@ class PlantController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->name)) {
-            PlantMast::insert([
-                'name' => $request->name,
-                'status' => 1,
+        if (!empty($request->code)) {
+            VendorMast::insert([
+                'v_code' => $request->code,
+                'v_name' => $request->name,
+                'gst_no' => $request->gst,
+                'address' => $request->addr,
+                'city' => $request->city,
+                'state' => $request->state,
+                'pin' => $request->pin,
+                'phone' => $request->phone,
+                'email' => $request->email,
                 'descr' => !empty($request->description) ? $request->description : null,
                 'created_at' => date('Y-m-d h:i:s'),
                 'created_by' => Auth::user()->id,
+                'status' => 1,
             ]);
         }
-        return redirect('PlantMast');
+        return redirect('VendorMast');
     }
+
     /**
      * Display the specified resource.
      *
@@ -58,7 +67,7 @@ class PlantController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -67,12 +76,12 @@ class PlantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+        public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
         // dd($request, $id, $encrypt_id);
-        $edit = PlantMast::where('status', 1)->where('id',$encrypt_id)->first();
-        return view('PlantMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+        $edit = VendorMast::where('status', 1)->where('id',$encrypt_id)->first();
+        return view('VendorMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
     }
 
     /**
@@ -85,16 +94,24 @@ class PlantController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        PlantMast::where('id', $decrypt)
+        VendorMast::where('id', $decrypt)
             ->update([
-                'name' => $request->name,
+                'v_code' => $request->code,
+                'v_name' => $request->name,
+                'gst_no' => $request->gst,
+                'address' => $request->addr,
+                'city' => $request->city,
+                'state' => $request->state,
+                'pin' => $request->pin,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'descr' => $request->description,
                 'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
                 'updated_at' => date('Y-m-d h:i:s'),
                 'updated_by' => Auth::user()->id,
             ]);
 
-        return redirect('PlantMast');
+        return redirect('VendorMast');
     }
 
     /**
@@ -103,8 +120,13 @@ class PlantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        // $del = VendorMast::find($ecrypt);
+        // $del->delete([
+        //     'del' => $del,
+        // ]);
+        // return redirect('VendorMast');
+        // dd(1);
     }
 }
