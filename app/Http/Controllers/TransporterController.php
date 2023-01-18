@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PlantMast;
+use App\Models\TransporterMast;
 use Illuminate\Support\Facades\Auth;
-
-class PlantController extends Controller
+class TransporterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,9 @@ class PlantController extends Controller
      */
     public function index()
     {
-        $record = PlantMast::where('status', 1)->get();
-        return view('PlantMaster.index', [
+        $record = TransporterMast::where('status', 1)->get();
+        // dd($record);
+        return view('TransporterMaster.index', [
             'data' => $record,
         ]);
     }
@@ -28,7 +28,7 @@ class PlantController extends Controller
      */
     public function create()
     {
-        return view('PlantMaster.create');
+        return view('TransporterMaster.create');
     }
 
     /**
@@ -40,16 +40,18 @@ class PlantController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->name)) {
-            PlantMast::insert([
+            TransporterMast::insert([
                 'name' => $request->name,
-                'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
+                'email' => !empty($request->email) ? $request->email : null,
+                'contact_no' => $request->contact_no,
                 'created_at' => date('Y-m-d h:i:s'),
                 'created_by' => Auth::user()->id,
+                'status' => 1,
             ]);
         }
-        return redirect('PlantMast');
+        return redirect('TransporterMast');
     }
+
     /**
      * Display the specified resource.
      *
@@ -58,7 +60,7 @@ class PlantController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -67,12 +69,12 @@ class PlantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+        public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
         // dd($request, $id, $encrypt_id);
-        $edit = PlantMast::where('status', 1)->where('id',$encrypt_id)->first();
-        return view('PlantMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+        $edit = TransporterMast::where('status', 1)->where('id',$encrypt_id)->first();
+        return view('TransporterMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
     }
 
     /**
@@ -85,16 +87,17 @@ class PlantController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        PlantMast::where('id', $decrypt)
+        TransporterMast::where('id', $decrypt)
             ->update([
                 'name' => $request->name,
+                'email' => !empty($request->email) ? $request->email : null,
+                'contact_no' => $request->contact_no,
                 'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
                 'updated_at' => date('Y-m-d h:i:s'),
                 'updated_by' => Auth::user()->id,
             ]);
 
-        return redirect('PlantMast');
+        return redirect('TransporterMast');
     }
 
     /**
@@ -103,8 +106,13 @@ class PlantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        // $del = TransporterMast::find($ecrypt);
+        // $del->delete([
+        //     'del' => $del,
+        // ]);
+        // return redirect('TransporterMast');
+        // dd(1);
     }
 }
