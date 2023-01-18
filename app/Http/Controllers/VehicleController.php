@@ -80,14 +80,16 @@ class VehicleController extends Controller
         public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
+
         // dd($request, $id, $encrypt_id);
         $edit = VehicleMast::where('status', 1)->where('id',$encrypt_id)->first();
         $transporter=TransporterMast::where('status', 1)->pluck('name', 'id')-> toArray();
         // dd($transporter);
-        return view('VehicleMaster.create', [
+        return view('VehicleMaster.edit', [
             'trans' => $transporter,
+            'edit' => $edit,
         ]);
-        return view('VehicleMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+        
     }
 
     /**

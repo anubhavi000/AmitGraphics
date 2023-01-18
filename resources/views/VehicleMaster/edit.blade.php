@@ -1,5 +1,7 @@
 @extends('layouts.panel')
-
+@php
+$encrypt_id = encrypt($edit->id);    
+@endphp
 @section('content')
 <div class="pcoded-content">
             <!-- [ breadcrumb ] start -->
@@ -43,22 +45,21 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vehicle No. </label>
-        <input type="text" name="number" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
+        <label for="item_Name" class="yash_star">Vehicle No. </label>
+        <input value="{{$edit->vehicle_no}}" type="text" name="number" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Vehicle Type </label>
-        <input type="text" name="type" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Type Here" required>
+        <input value="{{$edit->type}}" type="text" name="type" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Type Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Vehicle Code </label>
-      <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
+      <input value="{{$edit->v_code}}" type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
     </div>
 
     <label for="">Transporter</label>
-      <br>
       <select class="select2" name="transporter" id="">
-        <option value="" selected>Transporter Name</option>
+        <option value="{{$edit->trans}}" selected>Transporter Name</option>
         @foreach ($trans as $key => $value)
           <option value="{{$key}}">{{$value}}</option>
         @endforeach
@@ -69,13 +70,13 @@
 
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
-      <input type="text" name="wt" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
+      <input value="{{$edit->pass_wt}}" type="text" name="wt" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
   </div>
    
 
     <div class="col-md-6 mb-3 px-3">
         <label for="description">Description</label>
-        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
+        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->descr}}</textarea>
     </div>
 
    <div class="col-md-12" style="text-align: right;">

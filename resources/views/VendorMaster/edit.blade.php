@@ -44,47 +44,47 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>Vendor Code </label>
-        <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
+        <input value="{{$edit->v_code}}" type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
     </div>
 
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>Vendor Name </label>
-        <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
+        <input value="{{$edit->v_name}}" type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">GST No. </label>
-        <input type="text" name="gst" id="item_Name" class="form-control client_margin" placeholder="Enter GST Number Here" required>
+        <input value="{{$edit->gst_no}}" type="text" name="gst" id="item_Name" class="form-control client_margin" placeholder="Enter GST Number Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Address</label>
-      <input type="text" name="addr" id="" class="form-control client_margin" placeholder="Enter Address Here" required>
+      <input value="{{$edit->address}}" type="text" name="addr" id="" class="form-control client_margin" placeholder="Enter Address Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">City </label>
-      <input type="text" name="city" id="item_Name" class="form-control client_margin" placeholder="Enter City Here" required>
+      <input value="{{$edit->city}}" type="text" name="city" id="item_Name" class="form-control client_margin" placeholder="Enter City Here" required>
     </div>
 
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>State </label>
-        <input type="text" name="state" id="item_Name" class="form-control client_margin" placeholder="Enter State Here" required>
+        <input value="{{$edit->state}}" type="text" name="state" id="item_Name" class="form-control client_margin" placeholder="Enter State Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>Pin </label>
-        <input type="text" name="pin" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
+        <input value="{{$edit->pin}}" type="text" name="pin" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>Phone </label>
-        <input type="text" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
+        <input value="{{$edit->phone}}" type="text" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>Email </label>
-        <input type="text" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" required>
+        <input value="{{$edit->email}}" type="text" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" required>
     </div>
    
 
     <div class="col-md-6 mb-3 px-3">
         <label for="description">Description</label>
-        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
+        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->email}}</textarea>
     </div>
 
    <div class="col-md-12" style="text-align: right;">
