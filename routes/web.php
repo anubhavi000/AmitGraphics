@@ -143,6 +143,10 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
     Route::resource('VendorMast', 'VendorController');
 
+    //Supervisor
+
+    Route::resource('SupervisorMast', 'SupervisorController');
+
 
 
 

@@ -87,15 +87,15 @@
                     <div class="col-lg-4">
                         <div class="page-header-title">
                             <i class="fas fa-users"></i>
-                            <h5>Vehicles</h5>
-                            <p class="heading_Bottom"> Complete list of Vehicle</p>
+                            <h5>Supervisors</h5>
+                            <p class="heading_Bottom"> Complete list of Supervisors</p>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="page-header-breadcrumb">
                             <div class="buttons" style="text-align:right;margin:4px;">
 
-                                <a href="{{ route('VehicleMast.create') }}"><button type="button"
+                                <a href="{{ route('SupervisorMast.create') }}"><button type="button"
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button></a>
                             </div>
                         </div>
@@ -130,44 +130,35 @@
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-field="date23" data-sortable="true">Serial No</th>
 
-                                            <th data-field="date" data-sortable="true">Vehicle No</th>
+                                            <th data-field="date" data-sortable="true">Supervisor Name</th>
 
-                                            <th data-field="type" data-sortable="true">Vehicle Type</th>
+                                            <th data-field="2" data-sortable="true">Supervisor Email</th>
 
-                                            <th data-field="code" data-sortable="true">Vehicle Code</th>
-
-                                            <th data-field="pass" data-sortable="true">Vehicle Pass</th>
+                                            <th data-field="date" data-sortable="true">Contact Number</th>
 
                                             <th data-field="note" data-sortable="true">Description</th>
 
-                                            <th data-field="link" data-sortable="true">Transporter ID</th>
-
                                             <th data-field="note13" data-sortable="true">Action</th>
-                                            
                                         </tr>
                                     </thead>
                                   
                                     <tbody>
                                         @foreach ($data as $key => $value)
                                             <?php
-                                                $encrypt_id = enCrypt($value->id);
+                                            $encrypt_id = enCrypt($value->id);
                                             
                                             ?>
                                             <tr>
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ $value->vehicle_no }}</td>
+                                                <td>{{ $value->name }}</td>
 
-                                                <td>{{ $value->type }}</td>
+                                                <td>{{ $value->email }}</td>
 
-                                                <td>{{ $value->v_code }}</td>
-
-                                                <td>{{ $value->pass_wt }}</td>
+                                                <td>{{ $value->phone }}</td>
 
                                                 <td>{{ $value->descr }}</td>
-
-                                                <td>{{ $value->id }}</td>
 
                                                <td>
                                                 <span class="dropdown open">
@@ -178,7 +169,7 @@
                                                     </button>
                                                     <span aria-labelledby="btnGroup"
                                                         class="dropdown-menu mt-1 dropdown-menu-right">
-                                                        <form action="{{ route('VehicleMast.edit', $encrypt_id) }}"
+                                                        <form action="{{ route('SupervisorMast.edit', $encrypt_id) }}"
                                                             method="GET" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
                                                             @csrf
@@ -187,20 +178,21 @@
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
                                                                 Edit</button>
                                                         </form>
-                                                        <form action="{{url('VehicleMast_delete')}}" method="POST" class="blockuie dropdown-item"
+{{-- {{route('SupervisorMast.destroy')}} --}}
+                                                        <form action="{{url('SupervisorMast_delete')}}" method="POST" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
                                                     
                                                             @csrf
                                                             
                                                             <input type="text" id="route_id{{$value->id}}" name="route" hidden
-                                                                value="{{ 'Item Delete' }}">
+                                                                value="{{ 'Supervisor Delete' }}">
                                                             <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
                                                                 value="{{ $value->id}}">
                                                             <button style="background:none;border: none;"
                                                                 type="button" onclick="confirMationAlert({{$value->id}})"><i
                                                                     class="fas fa-trash"
                                                                      ></i>Delete</button>
-                                                        </form> 
+                                                        </form>
 
                                                        
 
@@ -211,7 +203,7 @@
                                             </tr>
                                         @endforeach
 
-                                    </tbody> 
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\VehicleMast;
+use App\Models\SupervisorMast;
 use Illuminate\Support\Facades\Auth;
-use App\Models\TransporterMast;
-class VehicleController extends Controller
+class SupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,8 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $record = VehicleMast::where('status', 1)->get();
-        // dd($record);
-        return view('VehicleMaster.index', [
+        $record = SupervisorMast::where('status', 1)->get();
+        return view('SupervisorMaster.index', [
             'data' => $record,
         ]);
     }
@@ -29,12 +27,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        $transporter=TransporterMast::where('status', 1)->pluck('name', 'id')-> toArray();
-        // dd($transporter);
-        return view('VehicleMaster.create', [
-            'trans' => $transporter,
-        ]);
-        
+        return view('SupervisorMaster.create');
     }
 
     /**
@@ -45,19 +38,18 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->number)) {
-            VehicleMast::insert([
-                'vehicle_no' => $request->number,
+        if (!empty($request->name)) {
+            SupervisorMast::insert([
+                'name' => $request->name,
+                'email' => !empty($request->email) ? $request->email : null,
+                'phone' => !empty($request->num) ? $request->num : null,
+                'status' => 1,
                 'descr' => !empty($request->description) ? $request->description : null,
-                'type' => $request->type,
-                'v_code' => $request->code,
-                'pass_wt' => $request->wt,
                 'created_at' => date('Y-m-d h:i:s'),
                 'created_by' => Auth::user()->id,
-                'status' => 1,
             ]);
         }
-        return redirect('VehicleMast');
+        return redirect('SupervisorMast');
     }
 
     /**
@@ -81,13 +73,8 @@ class VehicleController extends Controller
     {
         $encrypt_id = deCrypt($id);
         // dd($request, $id, $encrypt_id);
-        $edit = VehicleMast::where('status', 1)->where('id',$encrypt_id)->first();
-        $transporter=TransporterMast::where('status', 1)->pluck('name', 'id')-> toArray();
-        // dd($transporter);
-        return view('VehicleMaster.create', [
-            'trans' => $transporter,
-        ]);
-        return view('VehicleMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+        $edit = SupervisorMast::where('status', 1)->where('id',$encrypt_id)->first();
+        return view('SupervisorMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
     }
 
     /**
@@ -100,20 +87,18 @@ class VehicleController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        VehicleMast::where('id', $decrypt)
+        SupervisorMast::where('id', $decrypt)
             ->update([
-                'vehicle_no' => $request->number,
-                'descr' => !empty($request->email) ? $request->description : null,
-                'type' => $request->type,
-                'v_code' => $request->code,
-                'pass_wt' => $request->wt,
-                'descr' => $request->description,
+                'name' => $request->name,
+                'email' => !empty($request->email) ? $request->email : null,
+                'phone' => !empty($request->num) ? $request->num : null,
                 'status' => 1,
+                'descr' => !empty($request->description) ? $request->description : null,
                 'updated_at' => date('Y-m-d h:i:s'),
                 'updated_by' => Auth::user()->id,
             ]);
 
-        return redirect('VehicleMast');
+        return redirect('SupervisorMast');
     }
 
     /**
@@ -124,11 +109,11 @@ class VehicleController extends Controller
      */
     public function destroy(Request $request)
     {
-        // $del = VehicleMast::find($ecrypt);
+        // $del = SupervisorMast::find($ecrypt);
         // $del->delete([
         //     'del' => $del,
         // ]);
-        // return redirect('VehicleMast');
+        // return redirect('SupervisorMast');
         // dd(1);
     }
 }
