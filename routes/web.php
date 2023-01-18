@@ -125,27 +125,22 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 //added by krishnan
     //Item
     Route::resource('ItemMast', 'ItemController');
-    Route::post('ItemMast_delete', 'ItemController@destroy');
-
+    Route::delete('Item_delete/{id}', 'ItemController@delete');
     //Plant
     Route::resource('PlantMast', 'PlantController');
-
+    Route::delete('Plant_delete/{id}' , 'PlantController@delete');
     //Transport
-
     Route::resource('TransporterMast', 'TransporterController');
-
+    Route::delete('Transporter_delete/{id}'  , 'TransporterController@delete');
     //Vehicle
-
     Route::resource('VehicleMast', 'VehicleController');
     Route::post('VehicleMast_delete', 'VehicleController@destroy');
-
     //Vendor
-
     Route::resource('VendorMast', 'VendorController');
-
+    Route::delete('Vendor_delete/{id}' , 'VendorController@delete');
     //Supervisor
-
     Route::resource('SupervisorMast', 'SupervisorController');
+    Route::delete('Supervisor_delete/{id}' , 'SupervisorController@delete');
 
 
 

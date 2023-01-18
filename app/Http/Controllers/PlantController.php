@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PlantMast;
+use DB;
 use Illuminate\Support\Facades\Auth;
 
 class PlantController extends Controller
@@ -13,9 +14,17 @@ class PlantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->url = 'PlantMast';
+        $this->view_folder = 'PlantMaster';
+        $this->url = 'PlantMast';
+    }
+
     public function index()
     {
-        $record = PlantMast::where('status', 1)->get();
+        $record = PlantMast::where('status', 1)
+                           ->get();
+
         return view('PlantMaster.index', [
             'data' => $record,
         ]);
@@ -40,15 +49,23 @@ class PlantController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->name)) {
-            PlantMast::insert([
-                'name' => $request->name,
-                'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
-                'created_at' => date('Y-m-d h:i:s'),
-                'created_by' => Auth::user()->id,
-            ]);
+            $insert = PlantMast::insert([
+                                'name' => $request->name,
+                                'status' => 1,
+                                'descr' => !empty($request->description) ? $request->description : null,
+                                'created_at' => date('Y-m-d h:i:s'),
+                                'created_by' => Auth::user()->id,
+                            ]);
+            if($insert){
+                return redirect('PlantMast')->with('success' , 'Inserted SuccessFully');
+            }
+            else{
+                return redirect()->back();
+            }
         }
-        return redirect('PlantMast');
+        else{
+        return redirect()->back();
+        }
     }
     /**
      * Display the specified resource.
@@ -70,8 +87,11 @@ class PlantController extends Controller
     public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
-        // dd($request, $id, $encrypt_id);
+
         $edit = PlantMast::where('status', 1)->where('id',$encrypt_id)->first();
+        if(empty($edit)){
+            return redirect()->back();  
+        }
         return view('PlantMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
     }
 
@@ -85,16 +105,20 @@ class PlantController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        PlantMast::where('id', $decrypt)
-            ->update([
-                'name' => $request->name,
-                'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
-                'updated_at' => date('Y-m-d h:i:s'),
-                'updated_by' => Auth::user()->id,
-            ]);
-
-        return redirect('PlantMast');
+        $update = PlantMast::where('id', $decrypt)
+                            ->update([
+                                'name' => $request->name,
+                                'status' => 1,
+                                'descr' => !empty($request->description) ? $request->description : null,
+                                'updated_at' => date('Y-m-d h:i:s'),
+                                'updated_by' => Auth::user()->id,
+                            ]);
+        if($update){
+        return redirect('PlantMast')->with('success' ,  'Updated SuccessFully');            
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -103,8 +127,19 @@ class PlantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $now_id = deCrypt($id);
+        DB::begintransaction();
+        $delete = PlantMast::where('id' , $now_id)        
+                           ->delete();
+        if($delete){
+            DB::commit();
+            return redirect()->back()->with('success' , 'Deleted SuccessFully');
+        }
+        else{
+            Db::rollback();
+            return redirect()->back();
+        }
     }
 }

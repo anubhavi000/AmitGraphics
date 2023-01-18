@@ -139,6 +139,7 @@
                                     </thead>
                                   
                                      <tbody>
+                                        @if(!empty($data))
                                         @foreach ($data as $key => $value)
                                             <?php
                                             $encrypt_id = enCrypt($value->id);
@@ -148,9 +149,9 @@
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ $value->name }}</td>
+                                                <td>{{ !empty($value->name) ? $value->name : '' }}</td>
 
-                                                <td>{{ $value->descr }}</td>
+                                                <td>{{ !empty($value->descr) ? $value->descr : '' }}</td>
 
                                                <td>
                                                 <span class="dropdown open">
@@ -170,21 +171,18 @@
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
                                                                 Edit</button>
                                                         </form>
-{{-- {{route('ItemMast.destroy')}} --}}
-                                                        <form action="{{url('ItemMast_delete')}}" method="POST" class="blockuie dropdown-item"
-                                                            style="margin-bottom:-10px">
-                                                    
-                                                            @csrf
-                                                            
-                                                            <input type="text" id="route_id{{$value->id}}" name="route" hidden
-                                                                value="{{ 'Item Delete' }}">
-                                                            <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
-                                                                value="{{ $value->id}}">
-                                                            <button style="background:none;border: none;"
-                                                                type="button" onclick="confirMationAlert({{$value->id}})"><i
-                                                                    class="fas fa-trash"
-                                                                     ></i>Delete</button>
-                                                        </form>
+                                                        <form action="" method="GET" class="blockuie dropdown-item"
+                                                                style="margin-bottom:-10px">
+                                                                @csrf
+                                                                <input type="text" id="route_id{{$value->id}}" name="route" hidden
+                                                                    value="{{ 'Plant_delete' }}">
+                                                                <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
+                                                                    value="{{ $encrypt_id }}">
+                                                                <button style="background:none;border: none;"
+                                                                    type="button" onclick="confirMationAlert({{$value->id}})"><i
+                                                                        class="fas fa-trash"
+                                                                         ></i> delete</button>
+                                                            </form>
 
                                                        
 
@@ -194,7 +192,7 @@
 
                                             </tr>
                                         @endforeach
-
+                                        @endif
                                     </tbody> 
                                 </table>
                             </div>
