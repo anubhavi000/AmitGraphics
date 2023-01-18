@@ -9,8 +9,8 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Add Vehicles</h5>
-                                <p class="heading_Bottom">Create New Vehicle</p>
+                                <h5>Add Supervisors</h5>
+                                <p class="heading_Bottom">Create New Supervisor</p>
                             </div>
                         </div>
                   </div>
@@ -34,7 +34,7 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('VehicleMast.store')}}" method="POST">
+<form action="{{route('SupervisorMast.store')}}" method="POST">
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
@@ -49,41 +49,26 @@
       <hr class="border-dark bold"> --}}
 
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
-   
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vehicle No. </label>
-        <input type="text" name="number" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star">Vehicle Type </label>
-        <input type="text" name="type" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Type Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-      <label for="item_Name" class="yash_star">Vehicle Code </label>
-      <input type="text" name="code" id="" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
-    </div>
-
-    <div >
-      
-      <label for="">Transporter</label>
-      <br>
-      <select class="select2" name="transporter" id="">
-        <option value="" selected>Transporter Name</option>
-        @foreach ($trans as $key => $value)
-          <option value="{{$key}}">{{$value}}</option>
-        @endforeach
-       
-      </select>
-    </div>
-
-    
-
-    <div class="col-md-3 mb-3 px-3">
-      <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
-      <input type="text" name="wt" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
+   <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star">Supervisor Name </label>
+     <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Supervisor Name Here" required>
+   </div>
+   <div class="col-md-3 mb-3 px-3">
+    <label for="item_Name" class="yash_star">Supervisor Email </label>
+    <input type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" >
   </div>
-   
-
+  <div class="col-md-3 mb-3 px-3">
+    <label for="item_Name" class="yash_star">Contact Number </label>
+    <input type="text" name="num" id="item_Name" class="form-control client_margin" placeholder="Enter Contact Number Here" >
+  </div>
+   {{-- <div class="col-md-3 mb-3 px-3">
+   <label for="enabled" class="yash_star"style="margin-bottom: 0px;">Enabled </label>
+   <select class="form-control client_margin fstdropdown-select" id="enabled" name="enabled" required>
+      <option value="enabled">Select</option>
+      <option value="1">Yes</option>
+    <option value="0">No</option>
+  </select>
+   </div> --}}
     <div class="col-md-6 mb-3 px-3">
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
@@ -92,11 +77,7 @@
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 
-  @php
-   $defaulturl= "VehicleMast";   
-  @endphp
-
- <button class="blob-btn"  id="cancelbtn"   
+ <button class="blob-btn" id="cancelbtn"  action="action"
     type="button"><i class="fas fa-times pr-2"></i>
     Cancel
     <span class="blob-btn__inner">
@@ -140,4 +121,3 @@
 
 
 @endsection
-    

@@ -54,6 +54,19 @@
       <label for="item_Name" class="yash_star">Vehicle Code </label>
       <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
     </div>
+
+    <label for="">Transporter</label>
+      <br>
+      <select class="select2" name="transporter" id="">
+        <option value="" selected>Transporter Name</option>
+        @foreach ($trans as $key => $value)
+          <option value="{{$key}}">{{$value}}</option>
+        @endforeach
+       
+      </select>
+    </div>
+
+
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
       <input type="text" name="wt" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
