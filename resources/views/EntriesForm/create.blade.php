@@ -60,7 +60,16 @@
     <div class="col-md-4 mb-3 px-3">
         <label for="description">Date And  Time</label>
         <input type="text"   readonly="true" placeholder ="{{date('d-m-Y h:i:A')}}"  class="form-control client_margin">
-    </div>  
+    </div>
+    <div class="col-md-4 mb-3 px-3">
+        <label for="description">Entry Rate</label>
+        <input type="text"   name="entry_rate" placeholder ="Enter Entry Rate"  class="form-control client_margin">
+    </div>
+    <div class="col-md-4 mb-3 px-3">
+        <label for="description">Entry Weight ( In Kgs )</label>
+        <input type="text" name="entry_weight"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
+    </div>
+        
     <div class="col-md-3">
       <label class="form-label">Transporter Name</label>
       <select name = "transporter" onchange="get_transporter(this.value)" class="chosen-select">
@@ -154,6 +163,7 @@
       var sliplenth = slip.length;
       if(sliplenth = 0 || slip == ''){
         alert('Filling Slip Number Is Neccessary');
+        return;
       } 
       else{
         $.ajaxSetup({

@@ -16,6 +16,8 @@ class EntryMast extends Model
     					'slip_no',
     					'series',
     					'datetime', 
+                        'entry_rate',
+                        'entry_weight',
     					'created_at',
     					'created_by',
     					'updated_by'

@@ -95,7 +95,7 @@
                         <div class="page-header-breadcrumb">
                             <div class="buttons" style="text-align:right;margin:4px;">
 
-                                <a href="{{ url('Designation/create') }}"><button type="button"
+                                <a href="{{ url('EntryForm/create') }}"><button type="button"
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button></a>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
                                             <input style="margin-top:23px" type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
-                                            <input style="margin-top:23px" type="submit" name="export_to_pdf" value="Export To PDF" class="btn btn-info">
+  <!--                                           <input style="margin-top:23px" type="submit" name="export_to_pdf" value="Export To PDF" class="btn btn-info"> -->
                                         </div>
 
                                     </div>

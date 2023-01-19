@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\EntryMast;
 use App\Models\TransporterMast;
+use App\Models\PlantMast;
+use App\Models\ItemMast;
 
 class EntriesController extends Controller
 {
@@ -20,12 +22,11 @@ class EntriesController extends Controller
     }
     public function index(Request $request)
     {
-        // dd($request);
-        if(empty($request->name)){
+        if(empty($request->slip_no)){
             return view($this->module_folder.'/index');                       
         }   
         else{
-            $slip_no = $request->name;
+            $slip_no = $request->slip_no;
             $entries   = EntryMast::where('slip_no' , 'LIKE' , $slip_no.'%')
                                 ->orderBy('slip_no' , 'desc')
                                 ->get();
@@ -72,17 +73,25 @@ class EntriesController extends Controller
             return redirect()->back()->with('success' , 'Could Not Created');
         }
     }
-
     public function action(Request $request  , $id){
         $now_id = decrypt($id);
         $entry =  EntryMast::where('slip_no' , $now_id)
                            ->first();
+        $plants  = PlantMast::where('status' , 1)
+                            ->pluck('name' , 'id')
+                            ->toArray();
+        $items = ItemMast::where('status' , 1)
+                         ->pluck('name' , 'id')
+                         ->toArray();
+
         if(empty($entry)){
             return redirect()->back();
         }
         else{
             return view($this->module_folder.'.action' , [
-                'entry' => $entry
+                'entry' => $entry,
+                'plants'=> $plants,
+                'items' => $items
             ]);
         }        
     }
@@ -149,16 +158,16 @@ class EntriesController extends Controller
     }
     public function check_if_duplicate(Request $request){
         if(empty($request->slip_no)){
-            return false;
+            return reponse()->json(false);
         }
         else{
             $entry = EntryMast::where('slip_no' , $request->slip_no)
                               ->first();
             if(empty($entry)){
-                return true;
+                return response()->json(true);
             }
             else{
-                return false;
+                return response()->json(false);
             }
         }
     }

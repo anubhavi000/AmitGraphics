@@ -1,5 +1,4 @@
 @extends('layouts.panel')
-
 @section('content')
 <div class="pcoded-content">
             <!-- [ breadcrumb ] start -->
@@ -10,7 +9,7 @@
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
                                 <h5>Slip</h5>
-                                <p class="heading_Bottom">Edit Name</p>
+                                <p class="heading_Bottom">Action Slip</p>
                             </div>
                         </div>
                   </div>
@@ -36,7 +35,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Slip</b></h2>
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b></b>{{$entry->slip_no}}</h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -46,13 +45,44 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Item Name</label>
-     <input value="" type="text" name="name" id="department_Name" class="form-control" placeholder="Name" required>
+      <input style="height: 2vh;width: 2vh;" type="checkbox" name="is_acess_weight">
+      <label>Acess Weight</label>
    </div>
    
-    <div class="col-md-6 mb-3 px-3">
-        <label for="description" style="margin-bottom: 0px;">Description</label>
-        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
+    <div class="col-md-3 mb-3 px-3">
+      <select class="chosen-select">
+        @if(!empty($plants))
+          @foreach($plants as $key => $value)
+            <option value="{{$key}}">{{$value}}</option>
+          @endforeach
+        @endif
+      </select>
+    </div>
+    <div class="col-md-12">
+      <div id="hide_2" class="table-responsive">
+
+          <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
+              
+            
+              <tbody>
+                @php
+                  $count = 0;
+                @endphp
+                  @foreach ($items as $key => $value)
+                    @if($count == 0)
+                      <tr> 
+                    @endif
+                        <td><input type ="checkbox" value="{{$key}}" name="item[]">{{$value}}</td>
+                    @if($count == 3)
+                      <?php $count = 0; ?>
+                      </tr>
+                    @else
+                      <?php $count += 1; ?>
+                    @endif
+                  @endforeach
+              </tbody>
+          </table>
+      </div>
     </div>
   
    <div class="col-md-12" style="text-align: right;">
