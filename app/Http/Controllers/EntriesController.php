@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EntryMast;
+use App\Models\TransporterMast;
 
 class EntriesController extends Controller
 {
@@ -17,10 +18,21 @@ class EntriesController extends Controller
         $this->module_folder  = 'EntriesForm';
         $this->db_table = 'entry_mast';
     }
-    public function index()
+    public function index(Request $request)
     {
-        
-        return view($this->module_folder.'/index');           
+        // dd($request);
+        if(empty($request->name)){
+            return view($this->module_folder.'/index');                       
+        }   
+        else{
+            $slip_no = $request->name;
+            $entries   = EntryMast::where('slip_no' , 'LIKE' , $slip_no.'%')
+                                ->orderBy('slip_no' , 'desc')
+                                ->get();
+            return view($this->module_folder.'.index' , [
+                'entries' => $entries
+            ]);            
+        }
     }
 
     /**
@@ -30,7 +42,12 @@ class EntriesController extends Controller
      */
     public function create()
     {
-        return view($this->module_folder.'/create');   
+        $transporters = TransporterMast::where('status' , 1)
+                                       ->pluck('name' , 'id')
+                                       ->toArray();
+        return view($this->module_folder.'/create' , [
+            'transporters' => $transporters
+        ]);   
     }
 
     /**
@@ -52,12 +69,19 @@ class EntriesController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function action(Request $request  , $id){
+        $now_id = decrypt($id);
+        $entry =  EntryMast::where('slip_no' , $now_id)
+                           ->first();
+        if(empty($entry)){
+            return redirect()->back();
+        }
+        else{
+            return view($this->module_folder.'.action' , [
+                'entry' => $entry
+            ]);
+        }        
+    }
     public function show($id)
     {
         //
@@ -71,7 +95,17 @@ class EntriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $now_id = decrypt($id);
+        $entry =  EntryMast::where('slip_no' , $now_id)
+                           ->first();
+        if(empty($entry)){
+            return redirect()->back();
+        }
+        else{
+            return view($this->module_folder.'.edit' , [
+                'entry' => $entry
+            ]);
+        }
     }
 
     /**
@@ -95,5 +129,8 @@ class EntriesController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function return_tranporter(Request $request){
+        dd($request);
     }
 }

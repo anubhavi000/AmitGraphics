@@ -143,7 +143,12 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::delete('Supervisor_delete/{id}' , 'SupervisorController@delete');
 
 
-
+    // Routes added By ved
+    Route::resource('EntryForm'  , 'EntriesController');
+    Route::delete('EntryForm_delete'  , 'EntriesController@delete');
+    Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
+    Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
+    //ends
 
     // always add routes on above this line 
 
