@@ -130,7 +130,9 @@ class SupervisorController extends Controller
         DB::begintransaction();
 
         $delete = SupervisorMast::where('id' , $now_id)
-                                  ->delete();
+                        ->update([
+                            'status' => 0,
+                        ]);
 
         if($delete){
             DB::commit();

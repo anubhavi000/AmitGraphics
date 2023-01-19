@@ -139,7 +139,9 @@ class ItemController extends Controller
         DB::begintransaction();
 
         $delete = ItemMast::where('id' , $now_id)
-                          ->delete();
+                          ->update([
+                            'status' => 0,
+                          ]);
         if($delete){
             DB::commit();
          return redirect('ItemMast')->with('success' , 'Deleted SuccessFully');            
