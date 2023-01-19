@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Shared;
 
 class XMLWriter extends \XMLWriter
 {
-    /** @var bool */
     public static $debugEnabled = false;
 
     /** Temporary storage method */
@@ -34,10 +33,10 @@ class XMLWriter extends \XMLWriter
             if ($temporaryStorageFolder === null) {
                 $temporaryStorageFolder = File::sysGetTempDir();
             }
-            $this->tempFileName = (string) @tempnam($temporaryStorageFolder, 'xml');
+            $this->tempFileName = @tempnam($temporaryStorageFolder, 'xml');
 
             // Open storage
-            if (empty($this->tempFileName) || $this->openUri($this->tempFileName) === false) {
+            if ($this->openUri($this->tempFileName) === false) {
                 // Fallback to memory...
                 $this->openMemory();
             }
@@ -74,7 +73,7 @@ class XMLWriter extends \XMLWriter
         }
         $this->flush();
 
-        return file_get_contents($this->tempFileName) ?: '';
+        return file_get_contents($this->tempFileName);
     }
 
     /**

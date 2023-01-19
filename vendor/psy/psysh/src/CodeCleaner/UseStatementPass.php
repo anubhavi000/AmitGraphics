@@ -44,8 +44,6 @@ class UseStatementPass extends CodeCleanerPass
      * work like you'd expect.
      *
      * @param Node $node
-     *
-     * @return int|Node|null Replacement node (or special return value)
      */
     public function enterNode(Node $node)
     {
@@ -65,8 +63,6 @@ class UseStatementPass extends CodeCleanerPass
      * remembered aliases to the code.
      *
      * @param Node $node
-     *
-     * @return int|Node|Node[]|null Replacement node (or special return value)
      */
     public function leaveNode(Node $node)
     {

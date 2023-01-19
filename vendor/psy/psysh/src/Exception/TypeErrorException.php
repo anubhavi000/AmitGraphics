@@ -21,17 +21,14 @@ class TypeErrorException extends \Exception implements Exception
     /**
      * Constructor!
      *
-     * @deprecated psySH no longer wraps TypeErrors
-     *
-     * @param string          $message  (default: "")
-     * @param int             $code     (default: 0)
-     * @param \Throwable|null $previous (default: null)
+     * @param string $message (default: "")
+     * @param int    $code    (default: 0)
      */
-    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0)
     {
         $this->rawMessage = $message;
         $message = \preg_replace('/, called in .*?: eval\\(\\)\'d code/', '', $message);
-        parent::__construct(\sprintf('TypeError: %s', $message), $code, $previous);
+        parent::__construct(\sprintf('TypeError: %s', $message), $code);
     }
 
     /**
@@ -47,14 +44,12 @@ class TypeErrorException extends \Exception implements Exception
     /**
      * Create a TypeErrorException from a TypeError.
      *
-     * @deprecated psySH no longer wraps TypeErrors
-     *
      * @param \TypeError $e
      *
      * @return self
      */
     public static function fromTypeError(\TypeError $e): self
     {
-        return new self($e->getMessage(), $e->getCode(), $e);
+        return new self($e->getMessage(), $e->getCode());
     }
 }

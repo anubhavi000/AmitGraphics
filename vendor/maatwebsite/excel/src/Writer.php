@@ -171,7 +171,6 @@ class Writer
 
         if ($temporaryFile instanceof RemoteTemporaryFile) {
             $temporaryFile->updateRemote();
-            $temporaryFile->deleteLocalCopy();
         }
 
         $this->clearListeners();

@@ -41,8 +41,6 @@ class LabelContextPass extends CodeCleanerPass
 
     /**
      * @param array $nodes
-     *
-     * @return Node[]|null Array of nodes
      */
     public function beforeTraverse(array $nodes)
     {
@@ -51,9 +49,6 @@ class LabelContextPass extends CodeCleanerPass
         $this->labelGotos = [];
     }
 
-    /**
-     * @return int|Node|null Replacement node (or special return value)
-     */
     public function enterNode(Node $node)
     {
         if ($node instanceof FunctionLike) {
@@ -76,8 +71,6 @@ class LabelContextPass extends CodeCleanerPass
 
     /**
      * @param \PhpParser\Node $node
-     *
-     * @return int|Node|Node[]|null Replacement node (or special return value)
      */
     public function leaveNode(Node $node)
     {
@@ -86,9 +79,6 @@ class LabelContextPass extends CodeCleanerPass
         }
     }
 
-    /**
-     * @return Node[]|null Array of nodes
-     */
     public function afterTraverse(array $nodes)
     {
         foreach ($this->labelGotos as $name => $line) {

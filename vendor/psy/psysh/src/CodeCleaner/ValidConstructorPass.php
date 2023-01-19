@@ -35,9 +35,6 @@ class ValidConstructorPass extends CodeCleanerPass
 {
     private $namespace;
 
-    /**
-     * @return Node[]|null Array of nodes
-     */
     public function beforeTraverse(array $nodes)
     {
         $this->namespace = [];
@@ -50,8 +47,6 @@ class ValidConstructorPass extends CodeCleanerPass
      * @throws FatalErrorException the constructor function has a return type
      *
      * @param Node $node
-     *
-     * @return int|Node|null Replacement node (or special return value)
      */
     public function enterNode(Node $node)
     {
