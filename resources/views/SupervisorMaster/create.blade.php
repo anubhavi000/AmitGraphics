@@ -9,8 +9,8 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Add Vendors</h5>
-                                <p class="heading_Bottom">Create New Vendor</p>
+                                <h5>Add Supervisors</h5>
+                                <p class="heading_Bottom">Create New Supervisor</p>
                             </div>
                         </div>
                   </div>
@@ -34,7 +34,7 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('VendorMast.store')}}" method="POST">
+<form action="{{route('SupervisorMast.store')}}" method="POST">
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
@@ -49,47 +49,26 @@
       <hr class="border-dark bold"> --}}
 
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
-   
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star">Vendor Code </label>
-        <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
-    </div>
-
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star">Vendor Name </label>
-        <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star">GST No. </label>
-        <input type="text" name="gst" id="item_Name" class="form-control client_margin" placeholder="Enter GST Number Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-      <label for="item_Name" class="yash_star">Address</label>
-      <input type="text" name="addr" id="" class="form-control client_margin" placeholder="Enter Address Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-      <label for="item_Name" class="yash_star">City </label>
-      <input type="text" name="city" id="item_Name" class="form-control client_margin" placeholder="Enter City Here" required>
-    </div>
-
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" >State </label>
-        <input type="text" name="state" id="item_Name" class="form-control client_margin" placeholder="Enter State Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" >Pin </label>
-        <input type="text" name="pin" pattern="[0-9]{6}" maxlength="6" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" >Phone </label>
-        <input type="text" pattern="[0-9]{10}" maxlength="10" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" >Email </label>
-        <input type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" required>
-    </div>
-   
-
+   <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star">Supervisor Name </label>
+     <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Supervisor Name Here" required>
+   </div>
+   <div class="col-md-3 mb-3 px-3">
+    <label for="item_Name" class="yash_star">Supervisor Email </label>
+    <input type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" >
+  </div>
+  <div class="col-md-3 mb-3 px-3">
+    <label for="item_Name" class="yash_star">Contact Number </label>
+    <input type="text" name="num" id="item_Name" pattern="[0-9]{10}" maxlength="10" class="form-control client_margin" placeholder="Enter Contact Number Here" >
+  </div>
+   {{-- <div class="col-md-3 mb-3 px-3">
+   <label for="enabled" class="yash_star"style="margin-bottom: 0px;">Enabled </label>
+   <select class="form-control client_margin fstdropdown-select" id="enabled" name="enabled" required>
+      <option value="enabled">Select</option>
+      <option value="1">Yes</option>
+    <option value="0">No</option>
+  </select>
+   </div> --}}
     <div class="col-md-6 mb-3 px-3">
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
@@ -98,11 +77,7 @@
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 
-  @php
-   $defaulturl= "VendorMast";   
-  @endphp
-
- <button class="blob-btn"  id="cancelbtn"   
+ <button class="blob-btn" id="cancelbtn"  action="action"
     type="button"><i class="fas fa-times pr-2"></i>
     Cancel
     <span class="blob-btn__inner">
@@ -146,4 +121,3 @@
 
 
 @endsection
-    

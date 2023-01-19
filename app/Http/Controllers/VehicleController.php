@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\VehicleMast;
 use Illuminate\Support\Facades\Auth;
+use App\Models\TransporterMast;
+use DB;
 class VehicleController extends Controller
 {
     /**
@@ -14,8 +16,11 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $record = VehicleMast::where('status', 1)->get();
-        // dd($record);
+        $record = VehicleMast::leftjoin('transporter_mast' , 'transporter_mast.id' , '=' , 'vehicle_mast.transporter')
+                             ->select('vehicle_mast.*' , 'transporter_mast.name as transporter')
+                             ->orderBy('vehicle_mast.id' , 'desc')
+                             ->where('vehicle_mast.status', 1)
+                             ->get();
         return view('VehicleMaster.index', [
             'data' => $record,
         ]);
@@ -28,7 +33,12 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('VehicleMaster.create');
+        $transporter=TransporterMast::where('status', 1)->pluck('name', 'id')-> toArray();
+
+        return view('VehicleMaster.create', [
+            'trans' => $transporter,
+        ]);
+        
     }
 
     /**
@@ -40,18 +50,27 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->number)) {
-            VehicleMast::insert([
-                'vehicle_no' => $request->number,
-                'descr' => !empty($request->description) ? $request->description : null,
-                'type' => $request->type,
-                'v_code' => $request->code,
-                'pass_wt' => $request->wt,
-                'created_at' => date('Y-m-d h:i:s'),
-                'created_by' => Auth::user()->id,
-                'status' => 1,
-            ]);
+            $insert = VehicleMast::insert([
+                                'vehicle_no' => $request->number,
+                                'descr'      => !empty($request->description) ? $request->description : null,
+                                'type'       => $request->type,
+                                'v_code'     => $request->code,
+                                'pass_wt'    => $request->wt,
+                                'created_at' => date('Y-m-d h:i:s'),
+                                'created_by' => Auth::user()->id,
+                                'status'     => 1,
+                                'transporter'=> $request->transporter
+                            ]);
+            if($insert){
+                return redirect('VehicleMast')->with('success' , 'Added SuccessFully');
+            }
+            else{
+                return redirect()->back();
+            }
         }
-        return redirect('VehicleMast');
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -74,9 +93,22 @@ class VehicleController extends Controller
         public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
-        // dd($request, $id, $encrypt_id);
-        $edit = VehicleMast::where('status', 1)->where('id',$encrypt_id)->first();
-        return view('VehicleMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+
+        $edit = VehicleMast::where('status', 1)
+                            ->where('id',$encrypt_id)
+                            ->first();
+        if(empty($edit)){
+            return redirect()->back();
+        }
+        $transporter=TransporterMast::where('status', 1)
+                                    ->pluck('name', 'id')
+                                    -> toArray();
+
+        return view('VehicleMaster.edit', [
+            'trans' => $transporter,
+            'edit' => $edit,
+        ]);
+        
     }
 
     /**
@@ -89,20 +121,25 @@ class VehicleController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        VehicleMast::where('id', $decrypt)
-            ->update([
-                'vehicle_no' => $request->number,
-                'descr' => !empty($request->email) ? $request->description : null,
-                'type' => $request->type,
-                'v_code' => $request->code,
-                'pass_wt' => $request->wt,
-                'descr' => $request->description,
-                'status' => 1,
-                'updated_at' => date('Y-m-d h:i:s'),
-                'updated_by' => Auth::user()->id,
-            ]);
-
-        return redirect('VehicleMast');
+        $update = VehicleMast::where('id', $decrypt)
+                            ->update([
+                                'vehicle_no' => $request->number,
+                                'descr'      => !empty($request->email) ? $request->description : null,
+                                'type'       => $request->type,
+                                'v_code'     => $request->code,
+                                'pass_wt'    => $request->wt,
+                                'descr'      => $request->description,
+                                'status'     => 1,
+                                'transporter'=>$request->transporter,
+                                'updated_at' => date('Y-m-d h:i:s'),
+                                'updated_by' => Auth::user()->id,
+                            ]);
+        if($update){
+            return redirect('VehicleMast')->with('success' , 'Updated SuccessFully');
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -111,13 +148,22 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function delete(Request $request , $id)
     {
-        // $del = VehicleMast::find($ecrypt);
-        // $del->delete([
-        //     'del' => $del,
-        // ]);
-        // return redirect('VehicleMast');
-        // dd(1);
+        $now_id = deCrypt($id);
+        DB::begintransaction();
+
+        $delete = VehicleMast::where('id' , $now_id)
+                ->update([
+                    'status' => 0,
+                    ]);
+        if($delete){
+            DB::commit();
+            return redirect()->back()->with('success' , 'Deleted SuccessFully');
+        }
+        else{
+            DB::rollback();
+            return redirect()->back();
+        }
     }
 }

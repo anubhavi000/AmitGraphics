@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TransporterMast;
+use App\Models\SupervisorMast;
 use Illuminate\Support\Facades\Auth;
 use DB;
-class TransporterController extends Controller
+class SupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,10 @@ class TransporterController extends Controller
      */
     public function index()
     {
-        $record = TransporterMast::where('status', 1)
-                                 ->orderBy('id' , 'desc')
-                                 ->get();
-        // dd($record);
-        return view('TransporterMaster.index', [
+        $record = SupervisorMast::where('status', 1)
+                                ->orderBy('id' , 'desc')
+                                ->get();
+        return view('SupervisorMaster.index', [
             'data' => $record,
         ]);
     }
@@ -31,7 +30,7 @@ class TransporterController extends Controller
      */
     public function create()
     {
-        return view('TransporterMaster.create');
+        return view('SupervisorMaster.create');
     }
 
     /**
@@ -43,24 +42,23 @@ class TransporterController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->name)) {
-            $insert = TransporterMast::insert([
-                            'name'      => $request->name,
-                            'email'     => !empty($request->email) ? $request->email : null,
-                            'contact_no'=> $request->contact_no,
-                            'created_at'=> date('Y-m-d h:i:s'),
-                            'created_by'=> Auth::user()->id,
-                            'status'    => 1,
+            $insert = SupervisorMast::insert([
+                            'name' => $request->name,
+                            'email' => !empty($request->email) ? $request->email : null,
+                            'phone' => !empty($request->num) ? $request->num : null,
+                            'status' => 1,
+                            'descr' => !empty($request->description) ? $request->description : null,
+                            'created_at' => date('Y-m-d h:i:s'),
+                            'created_by' => Auth::user()->id,
                         ]);
             if($insert){
-                return redirect('TransporterMast')->with('success' , 'Added SuccessFully');
+                return redirect('SupervisorMast')->with('success' , 'Added SuccessFully');
             }
             else{
                 return redirect()->back();
             }
         }
-        else{
-            return redirect()->back();
-        }
+        return redirect('SupervisorMast');
     }
 
     /**
@@ -83,13 +81,13 @@ class TransporterController extends Controller
         public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
-        
-        $edit = TransporterMast::where('status', 1)->where('id',$encrypt_id)->first();
 
+        $edit = SupervisorMast::where('status', 1)->where('id',$encrypt_id)->first();
         if(empty($edit)){
             return redirect()->back();
         }
-        return view('TransporterMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+        
+        return view('SupervisorMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
     }
 
     /**
@@ -102,17 +100,18 @@ class TransporterController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        $update = TransporterMast::where('id', $decrypt)
+        $update = SupervisorMast::where('id', $decrypt)
                                 ->update([
                                     'name' => $request->name,
                                     'email' => !empty($request->email) ? $request->email : null,
-                                    'contact_no' => $request->contact_no,
+                                    'phone' => !empty($request->num) ? $request->num : null,
                                     'status' => 1,
+                                    'descr' => !empty($request->description) ? $request->description : null,
                                     'updated_at' => date('Y-m-d h:i:s'),
                                     'updated_by' => Auth::user()->id,
                                 ]);
         if($update){
-            return redirect('TransporterMast')->with('success' , 'Updated SuccessFully');
+            return redirect('SupervisorMast')->with('success' , 'Updated SuccessFully');
         }
         else{
             return redirect()->back();
@@ -127,18 +126,20 @@ class TransporterController extends Controller
      */
     public function delete(Request $request , $id)
     {
-      $now_id =  deCrypt($id);
+        $now_id = deCrypt($id);
+        DB::begintransaction();
 
-      DB::begintransaction();
-
-        $delete = TransporterMast::where('id' , $now_id)
-                                 ->update([
+        $delete = SupervisorMast::where('id' , $now_id)
+                        ->update([
                             'status' => 0,
-                          ]);
+                        ]);
+
+        if($delete){
             DB::commit();
             return redirect()->back()->with('success' , 'Deleted SuccessFully');
         }
         else{
+            DB::rollback();
             return redirect()->back();
         }
     }

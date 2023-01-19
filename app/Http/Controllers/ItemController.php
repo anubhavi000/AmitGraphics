@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ItemMast;
+use DB;
 use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
@@ -12,9 +13,17 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->view_folder = 'ItemMaster';
+        $this->table =  'item_mast';
+        $this->url = 'ItemMast';
+    }
     public function index()
     {
-        $record = ItemMast::where('status', 1)->get();
+        $record = ItemMast::where('status', 1)
+                          ->orderBy('id' , 'desc')
+                          ->get();
+        
         return view('ItemMaster.index', [
             'data' => $record,
         ]);
@@ -27,7 +36,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('ItemMaster.create');
+        return view('ItemMaster.create' , [
+            'url'  => $this->url            
+        ]);
     }
 
     /**
@@ -39,15 +50,21 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->name)) {
-            ItemMast::insert([
-                'name' => $request->name,
-                'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
-                'created_at' => date('Y-m-d h:i:s'),
-                'created_by' => Auth::user()->id,
-            ]);
+
+            $insert = ItemMast::insert([
+                                'name'       => $request->name,
+                                'status'     => 1,
+                                'descr'      => !empty($request->description) ? $request->description : null,
+                                'created_at' => date('Y-m-d h:i:s'),
+                                'created_by' => Auth::user()->id,
+                        ]);
+            if($insert){
+                return redirect('ItemMast')->with('success' , 'Added SuccessFully');
+            }
+            else{
+                return redirect('ItemMast');
+            }
         }
-        return redirect('ItemMast');
     }
 
     /**
@@ -70,9 +87,16 @@ class ItemController extends Controller
         public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
-        // dd($request, $id, $encrypt_id);
-        $edit = ItemMast::where('status', 1)->where('id',$encrypt_id)->first();
-        return view('ItemMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
+
+        $edit = ItemMast::where('status', 1)
+                        ->where('id',$encrypt_id)
+                        ->first();
+        if(!empty($edit)){
+            return view('ItemMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);            
+        }
+        else{
+            return redirect()->back();
+        }    
     }
 
     /**
@@ -85,16 +109,21 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        ItemMast::where('id', $decrypt)
-            ->update([
-                'name' => $request->name,
-                'status' => 1,
-                'descr' => !empty($request->description) ? $request->description : null,
-                'updated_at' => date('Y-m-d h:i:s'),
-                'updated_by' => Auth::user()->id,
-            ]);
 
-        return redirect('ItemMast');
+        $update  = ItemMast::where('id', $decrypt)
+                ->update([
+                    'name'       => $request->name,
+                    'status'     => 1,
+                    'descr'      => !empty($request->description) ? $request->description : null,
+                    'updated_at' => date('Y-m-d h:i:s'),
+                    'updated_by' => Auth::user()->id,
+                ]);
+        if($update){
+            return redirect('ItemMast')->with('success' , 'Updated SuccessFully');
+        }       
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -103,13 +132,23 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function delete(Request $request , $id)
     {
-        // $del = ItemMast::find($ecrypt);
-        // $del->delete([
-        //     'del' => $del,
-        // ]);
-        // return redirect('ItemMast');
-        // dd(1);
+        $now_id  =  deCrypt($id);
+
+        DB::begintransaction();
+
+        $delete = ItemMast::where('id' , $now_id)
+                          ->update([
+                            'status' => 0,
+                          ]);
+        if($delete){
+            DB::commit();
+         return redirect('ItemMast')->with('success' , 'Deleted SuccessFully');            
+        }
+        else{
+            DB::rollback();
+            return redirect()->back();
+        }        
     }
 }

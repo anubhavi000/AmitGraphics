@@ -59,7 +59,7 @@
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Transporter Contact No. </label>
-        <input type="text" name="contact_no" id="item_Name" class="form-control client_margin" placeholder="Enter Transporter Contact Number Here" required>
+        <input type="text" name="contact_no"  pattern="[0-9]{10}" maxlength="10" id="item_Name" class="form-control client_margin" placeholder="Enter Transporter Contact Number Here" required>
     </div>
    
 

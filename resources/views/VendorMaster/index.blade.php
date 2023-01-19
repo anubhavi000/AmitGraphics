@@ -151,6 +151,7 @@
                                     </thead>
                                   
                                     <tbody>
+                                        @if(!empty($data))
                                         @foreach ($data as $key => $value)
                                             <?php
                                                 $encrypt_id = enCrypt($value->id);
@@ -160,25 +161,25 @@
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ $value->v_code }}</td>
+                                                <td>{{ !empty($value->v_code) ? $value->v_code : '' }}</td>
 
-                                                <td>{{ $value->v_name }}</td>
+                                                <td>{{ !empty($value->v_name) ? $value->v_name : '' }}</td>
 
-                                                <td>{{ $value->gst_no }}</td>
+                                                <td>{{ !empty($value->gst_no) ? $value->gst_no : '' }}</td>
 
-                                                <td>{{ $value->address }}</td>
+                                                <td>{{ !empty($value->address) ? $value->address : '' }}</td>
 
-                                                <td>{{ $value->city }}</td>
+                                                <td>{{ !empty($value->city) ? $value->city : '' }}</td>
 
-                                                <td>{{ $value->state }}</td>
+                                                <td>{{ !empty($value->state) ? $value->state : '' }}</td>
 
-                                                <td>{{ $value->pin }}</td>
+                                                <td>{{ !empty($value->pin) ? $value->pin : '' }}</td>
 
-                                                <td>{{ $value->phone }}</td>
+                                                <td>{{ !empty($value->phone) ? $value->phone : '' }}</td>
 
-                                                <td>{{ $value->email }}</td>
+                                                <td>{{ !empty($value->email) ? $value->email : '' }}</td>
 
-                                                <td>{{ $value->descr }}</td>
+                                                <td>{{ !empty($value->descr) ? $value->descr : '' }}</td>
 
                                                <td>
                                                 <span class="dropdown open">
@@ -198,20 +199,18 @@
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
                                                                 Edit</button>
                                                         </form>
-                                                        <form action="{{url('VendorMast_delete')}}" method="POST" class="blockuie dropdown-item"
-                                                            style="margin-bottom:-10px">
-                                                    
-                                                            @csrf
-                                                            
-                                                            <input type="text" id="route_id{{$value->id}}" name="route" hidden
-                                                                value="{{ 'Item Delete' }}">
-                                                            <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
-                                                                value="{{ $value->id}}">
-                                                            <button style="background:none;border: none;"
-                                                                type="button" onclick="confirMationAlert({{$value->id}})"><i
-                                                                    class="fas fa-trash"
-                                                                     ></i>Delete</button>
-                                                        </form> 
+                                                        <form action="" method="GET" class="blockuie dropdown-item"
+                                                                style="margin-bottom:-10px">
+                                                                @csrf
+                                                                <input type="text" id="route_id{{$value->id}}" name="route" hidden
+                                                                    value="{{ 'Vendor_delete' }}">
+                                                                <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
+                                                                    value="{{ $encrypt_id }}">
+                                                                <button style="background:none;border: none;"
+                                                                    type="button" onclick="confirMationAlert({{$value->id}})"><i
+                                                                        class="fas fa-trash"
+                                                                         ></i> delete</button>
+                                                            </form> 
 
                                                        
 
@@ -221,7 +220,7 @@
 
                                             </tr>
                                         @endforeach
-
+                                        @endif
                                     </tbody> 
                                 </table>
                             </div>

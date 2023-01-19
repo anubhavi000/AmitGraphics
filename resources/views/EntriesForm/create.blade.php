@@ -34,7 +34,7 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('EntryForm.store')}}" method="POST">
+<form id="storeform" action="{{route('EntryForm.store')}}" method="POST">
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
@@ -49,13 +49,39 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star">Designation Name </label>
-     <input type="text" name="name" id="department_Name" class="form-control client_margin" placeholder="Enter Designation Here" required>
+     <label for="department_Name" class="yash_star"> Slip No. </label>
+     <input type="text" name="slip_no" id="slip_no" class="form-control client_margin" placeholder="Enter Slip Here" required>
    </div>
 
-    <div class="col-md-6 mb-3 px-3">
-        <label for="description">Description</label>
-        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
+    <div class="col-md-4 mb-3 px-3">
+        <label for="description">Series</label>
+        <input type="text" name="series" id="series" placeholder="Enter Series" required class="form-control client_margin">
+    </div>
+    <div class="col-md-4 mb-3 px-3">
+        <label for="description">Date And  Time</label>
+        <input type="text"   readonly="true" placeholder ="{{date('d-m-Y h:i:A')}}"  class="form-control client_margin">
+    </div>
+    <div class="col-md-4 mb-3 px-3">
+        <label for="description">Entry Rate</label>
+        <input type="text"   name="entry_rate" placeholder ="Enter Entry Rate"  class="form-control client_margin">
+    </div>
+    <div class="col-md-4 mb-3 px-3">
+        <label for="description">Entry Weight ( In Kgs )</label>
+        <input type="text" name="entry_weight"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
+    </div>
+        
+    <div class="col-md-3">
+      <label class="form-label">Transporter Name</label>
+      <select name = "transporter" onchange="get_transporter(this.value)" class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($transporters))
+            @foreach($transporters as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
+    </div>  
+    <div id="infodiv" class="col-md-3">
     </div>
   
    <div class="col-md-12" style="text-align: right;">
@@ -73,7 +99,7 @@
       </span>
     </span>
   </button>  
-  <button  id="submitbtn" type="submit" class="blob-btn1"><i class="fas fa-check pr-2"></i>
+  <button  onclick="validateinputs()" type="button" class="blob-btn1"><i class="fas fa-check pr-2"></i>
     Save Changes
     <span class="blob-btn__inner1">
       <span class="blob-btn__blobs1">
@@ -105,3 +131,62 @@
 
 
 @endsection
+<script type="text/javascript">
+  function get_transporter(val){
+
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{route("return_tranporter")}}',
+          dataType: 'json',
+          data: {'transporter': val},
+          success: function (data) 
+          {
+            if(data){
+              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+               html += data.name;
+               html += "<br> Contact: ";
+               html += data.contact_no;
+               html += "</span>";
+               $("#infodiv").html(html);
+            }
+          }
+      });    
+  }
+  function validateinputs(){
+      var slip    = $("#slip_no").val();
+      var sliplenth = slip.length;
+      if(sliplenth = 0 || slip == ''){
+        alert('Filling Slip Number Is Neccessary');
+        return;
+      } 
+      else{
+        $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+        $.ajax({
+            type: "POST",
+            url:  '{{url("check_duplicacy")}}',
+            dataType: 'json',
+            data: {'slip_no': slip},
+            success: function (data) 
+            {
+              if(data){
+                  $("#storeform").submit();
+              }
+              else{
+                  alert('Slip no. Already Exist');
+              }
+            }
+        });        
+      }
+  }
+</script>

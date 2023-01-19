@@ -125,26 +125,31 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 //added by krishnan
     //Item
     Route::resource('ItemMast', 'ItemController');
-    Route::post('ItemMast_delete', 'ItemController@destroy');
-
+    Route::delete('Item_delete/{id}', 'ItemController@delete');
     //Plant
     Route::resource('PlantMast', 'PlantController');
-
+    Route::delete('Plant_delete/{id}' , 'PlantController@delete');
     //Transport
-
     Route::resource('TransporterMast', 'TransporterController');
-
+    Route::delete('Transporter_delete/{id}'  , 'TransporterController@delete');
     //Vehicle
-
     Route::resource('VehicleMast', 'VehicleController');
-    Route::post('VehicleMast_delete', 'VehicleController@destroy');
-
+    Route::delete('VehicleMast_delete/{id}', 'VehicleController@delete');
     //Vendor
-
     Route::resource('VendorMast', 'VendorController');
+    Route::delete('Vendor_delete/{id}' , 'VendorController@delete');
+    //Supervisor
+    Route::resource('SupervisorMast', 'SupervisorController');
+    Route::delete('Supervisor_delete/{id}' , 'SupervisorController@delete');
 
 
-
+    // Routes added By ved
+    Route::resource('EntryForm'  , 'EntriesController');
+    Route::delete('EntryForm_delete'  , 'EntriesController@delete');
+    Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
+    Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
+    Route::post('check_duplicacy' , 'EntriesController@check_if_duplicate');
+    //ends
 
     // always add routes on above this line 
 

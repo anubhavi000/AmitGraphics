@@ -96,7 +96,7 @@
                             <div class="buttons" style="text-align:right;margin:4px;">
 
                                 <a href="{{ route('ItemMast.create') }}"><button type="button"
-                                        class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button></a>
+                                        class="btn btn-success btn_new"><i style="margin-right: 5px;" class="fas fa-plus"></i>Add New</button></a>
                             </div>
                         </div>
                     </div>
@@ -108,9 +108,6 @@
                         <div class="col-md-12 mt-3 mb-3">
 
                             <div class="container-fluid mt-3">
-                            
-
-
                             </div>
                             <hr class="border-dark bold">
                             <div id="hide_2" class="table-responsive">
@@ -128,7 +125,7 @@
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
-                                            <th data-field="date23" data-sortable="true">Serial No</th>
+                                            <th data-field="date23" width="10" data-sortable="true">S.No</th>
 
                                             <th data-field="date" data-sortable="true">Item Name</th>
 
@@ -139,18 +136,18 @@
                                     </thead>
                                   
                                     <tbody>
+                                    @if(!empty($data))
                                         @foreach ($data as $key => $value)
                                             <?php
                                             $encrypt_id = enCrypt($value->id);
-                                            
                                             ?>
                                             <tr>
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ $value->name }}</td>
+                                                <td>{{ !empty($value->name) ? $value->name: '' }}</td>
 
-                                                <td>{{ $value->descr }}</td>
+                                                <td>{{ !empty($value->descr) ? $value->descr : '' }}</td>
 
                                                <td>
                                                 <span class="dropdown open">
@@ -165,36 +162,29 @@
                                                             method="GET" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
                                                             @csrf
-
                                                             <button style="background:none;border: none;"
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
                                                                 Edit</button>
                                                         </form>
-{{-- {{route('ItemMast.destroy')}} --}}
-                                                        <form action="{{url('ItemMast_delete')}}" method="POST" class="blockuie dropdown-item"
-                                                            style="margin-bottom:-10px">
-                                                    
-                                                            @csrf
-                                                            
-                                                            <input type="text" id="route_id{{$value->id}}" name="route" hidden
-                                                                value="{{ 'Item Delete' }}">
-                                                            <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
-                                                                value="{{ $value->id}}">
-                                                            <button style="background:none;border: none;"
-                                                                type="button" onclick="confirMationAlert({{$value->id}})"><i
-                                                                    class="fas fa-trash"
-                                                                     ></i>Delete</button>
-                                                        </form>
-
-                                                       
-
+                                                        <form action="" method="GET" class="blockuie dropdown-item"
+                                                                style="margin-bottom:-10px">
+                                                                @csrf
+                                                                <input type="text" id="route_id{{$value->id}}" name="route" hidden
+                                                                    value="{{ 'Item_delete' }}">
+                                                                <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
+                                                                    value="{{ $encrypt_id }}">
+                                                                <button style="background:none;border: none;"
+                                                                    type="button" onclick="confirMationAlert({{$value->id}})"><i
+                                                                        class="fas fa-trash"
+                                                                         ></i> delete</button>
+                                                            </form>
                                                     </span>
                                                 </span>
                                                </td>
 
                                             </tr>
                                         @endforeach
-
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

@@ -9,7 +9,7 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Edit Transporter</h5>
+                                <h5>Edit Supervisor</h5>
                                 <p class="heading_Bottom">Edit Name</p>
                             </div>
                         </div>
@@ -27,13 +27,13 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('TransporterMast.update' , $encrypt_id )}}" method="POST">
+<form action="{{route('SupervisorMast.update' , $encrypt_id )}}" method="POST">
     @csrf
     @method('patch')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Transporter</b></h2>
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Supervisor</b></h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -43,25 +43,26 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Transporter Name</label>
+     <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Supervisor Name</label>
      <input value="{{$edit->name}}" type="text" name="name" id="department_Name" class="form-control" placeholder="Name" required>
    </div>
 
    <div class="col-md-3 mb-3 px-3">
-    <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Transporter Email</label>
+    <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Supervisor Email</label>
     <input value="{{$edit->email}}" type="email" name="email" id="department_Name" class="form-control" placeholder="Email" >
-  </div>
-
-  <div class="col-md-3 mb-3 px-3">
-    <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Transporter Contact Number</label>
-    <input pattern="[0-9]{10}" maxlength="10" value="{{$edit->contact_no}}"  type="text" name="contact_no" id="department_Name" class="form-control" placeholder="Contact Number" required>
-  </div>
-   
-    {{-- <div class="col-md-6 mb-3 px-3">
-        <label for="description" style="margin-bottom: 0px;">Description</label>
-        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->description}}</textarea>
     </div>
-   --}}
+
+    <div class="col-md-3 mb-3 px-3">
+        <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Contact Number</label>
+        <input value="{{$edit->phone}}" type="text" name="num" pattern="[0-9]{10}" maxlength="10" id="department_Name" class="form-control" placeholder="Contact Number" >
+      </div>
+
+   
+    <div class="col-md-6 mb-3 px-3">
+        <label for="description" style="margin-bottom: 0px;">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->descr}}</textarea>
+    </div>
+  
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 

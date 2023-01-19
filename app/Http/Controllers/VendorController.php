@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\VendorMast;
 use Illuminate\Support\Facades\Auth;
+use DB;
 class VendorController extends Controller
 {
     /**
@@ -12,10 +13,17 @@ class VendorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->view_folder = 'VendorMaster';
+        $this->route = 'VendorMast';
+        $this->table = 'vedor_mast';
+    }
     public function index()
     {
-        $record = VendorMast::where('status', 1)->get();
-        // dd($record);
+        $record = VendorMast::where('status', 1)
+                            ->orderBy('id'  , 'desc')
+                            ->get();
+
         return view('VendorMaster.index', [
             'data' => $record,
         ]);
@@ -40,23 +48,31 @@ class VendorController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->code)) {
-            VendorMast::insert([
-                'v_code' => $request->code,
-                'v_name' => $request->name,
-                'gst_no' => $request->gst,
-                'address' => $request->addr,
-                'city' => $request->city,
-                'state' => $request->state,
-                'pin' => $request->pin,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'descr' => !empty($request->description) ? $request->description : null,
-                'created_at' => date('Y-m-d h:i:s'),
-                'created_by' => Auth::user()->id,
-                'status' => 1,
-            ]);
+            $insert = VendorMast::insert([
+                            'v_code'     => $request->code,
+                            'v_name'     => $request->name,
+                            'gst_no'     => $request->gst,
+                            'address'    => $request->addr,
+                            'city'       => $request->city,
+                            'state'      => $request->state,
+                            'pin'        => $request->pin,
+                            'phone'      => $request->phone,
+                            'email'      => $request->email,
+                            'descr'      => !empty($request->description) ? $request->description : null,
+                            'created_at' => date('Y-m-d h:i:s'),
+                            'created_by' => Auth::user()->id,
+                            'status'     => 1,
+                        ]);
+            if($insert){
+                return redirect('VendorMast')->with('success' , 'Added SuccessFully');
+            }
+            else{
+                return redirect()->back();
+            }
         }
-        return redirect('VendorMast');
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -79,8 +95,11 @@ class VendorController extends Controller
         public function edit(Request $request, $id)
     {
         $encrypt_id = deCrypt($id);
-        // dd($request, $id, $encrypt_id);
+
         $edit = VendorMast::where('status', 1)->where('id',$encrypt_id)->first();
+        if(empty($edit)){
+            return redirect()->back();
+        }
         return view('VendorMaster.edit',['encrypt_id' => $id,'edit'=>$edit]);
     }
 
@@ -94,24 +113,28 @@ class VendorController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = decrypt($id);
-        VendorMast::where('id', $decrypt)
-            ->update([
-                'v_code' => $request->code,
-                'v_name' => $request->name,
-                'gst_no' => $request->gst,
-                'address' => $request->addr,
-                'city' => $request->city,
-                'state' => $request->state,
-                'pin' => $request->pin,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'descr' => $request->description,
-                'status' => 1,
-                'updated_at' => date('Y-m-d h:i:s'),
-                'updated_by' => Auth::user()->id,
-            ]);
-
-        return redirect('VendorMast');
+        $update = VendorMast::where('id', $decrypt)
+                            ->update([
+                                'v_code' => $request->code,
+                                'v_name' => $request->name,
+                                'gst_no' => $request->gst,
+                                'address' => $request->addr,
+                                'city' => $request->city,
+                                'state' => $request->state,
+                                'pin' => $request->pin,
+                                'phone' => $request->phone,
+                                'email' => $request->email,
+                                'descr' => $request->description,
+                                'status' => 1,
+                                'updated_at' => date('Y-m-d h:i:s'),
+                                'updated_by' => Auth::user()->id,
+                            ]);
+        if($update){
+            return redirect('VendorMast')->with('success' , 'Updated SuccessFully');
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -120,13 +143,21 @@ class VendorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function delete(Request $request , $id)
     {
-        // $del = VendorMast::find($ecrypt);
-        // $del->delete([
-        //     'del' => $del,
-        // ]);
-        // return redirect('VendorMast');
-        // dd(1);
+        $now_id = deCrypt($id);
+        DB::begintransaction();
+        $delete = VendorMast::where('id' , $now_id)
+                    ->update([
+                        'status' => 0,
+                    ]);
+        if($delete){
+            DB::commit();
+            return redirect('VendorMast')->with('success' , 'Deleted SuccessFully');            
+        }
+        else{
+            DB::rollback();
+            return redirect()->back();
+        }
     }
 }
