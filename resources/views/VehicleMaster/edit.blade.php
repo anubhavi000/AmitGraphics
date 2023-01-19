@@ -56,12 +56,16 @@ $encrypt_id = encrypt($edit->id);
       <label for="item_Name" class="yash_star">Vehicle Code </label>
       <input value="{{$edit->v_code}}" type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
     </div>
-
+    <div class="col-md-3 mb-3">
     <label for="">Transporter</label>
-      <select class="select2" name="transporter" id="">
-        <option value="{{$edit->trans}}" selected>Transporter Name</option>
+      <select class="chosen-select" name="transporter" id="">
+        <option value="">Select</option>
         @foreach ($trans as $key => $value)
-          <option value="{{$key}}">{{$value}}</option>
+          @if($key == $edit->transporter)
+            <option selected="true" value="{{$key}}">{{$value}}</option>
+          @else
+            <option value="{{$key}}">{{$value}}</option>
+          @endif
         @endforeach
        
       </select>

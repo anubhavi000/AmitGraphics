@@ -15,7 +15,9 @@ class TransporterController extends Controller
      */
     public function index()
     {
-        $record = TransporterMast::where('status', 1)->get();
+        $record = TransporterMast::where('status', 1)
+                                 ->orderBy('id' , 'desc')
+                                 ->get();
         // dd($record);
         return view('TransporterMaster.index', [
             'data' => $record,

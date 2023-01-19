@@ -9,8 +9,8 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Add Entry</h5>
-                                <p class="heading_Bottom">Create New Entry</p>
+                                <h5>Slip</h5>
+                                <p class="heading_Bottom">Edit Name</p>
                             </div>
                         </div>
                   </div>
@@ -24,22 +24,19 @@
                     </ul>
                 </div>
                 </div>
-<!-- <div class="container">
- <div class="row">
-  <div class="col-md-6">
-    <h3>Add Designation</h3>
-    <p class="heading_Bottom"><i class="far fa-building mr-2"></i> Create New Designation</p>
-    </div> -->
-</div>
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('EntryForm.store')}}" method="POST">
+  @php
+    $encrypted_id = encrypt($entry->slip_no);
+  @endphp
+<form action="{{route('EntryForm.update' , $encrypted_id)}}" method="POST">
     @csrf
+    @method('patch')
 <div class="container-fluid">
-    <div class="row first_row_margin">
+    <div class="row">
         <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Entry Information</b></h2>
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Slip</b></h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -49,34 +46,19 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star"> Slip No. </label>
-     <input type="text" name="slip_no" id="department_Name" class="form-control client_margin" placeholder="Enter Slip Here" required>
+     <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Item Name</label>
+     <input value="" type="text" name="name" id="department_Name" class="form-control" placeholder="Name" required>
    </div>
-
-    <div class="col-md-4 mb-3 px-3">
-        <label for="description">Series</label>
-        <input type="text" name="series" placeholder="Enter Series" required class="form-control client_margin">
+   
+    <div class="col-md-6 mb-3 px-3">
+        <label for="description" style="margin-bottom: 0px;">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
     </div>
-    <div class="col-md-4 mb-3 px-3">
-        <label for="description">Date And  Time</label>
-        <input type="text" name="date_and_time" placeholder="Enter Series" readonly="true" value="{{date('d-m-Y h:i:A')}}" class="form-control client_margin">
-    </div>  
-    <div class="col-md-3">
-      <label class="form-label">Transporter Name</label>
-      <select onchange="get_transporter(this.value)" class="chosen-select">
-          <option value="">Select</option>
-          @if(!empty($transporters))
-            @foreach($transporters as $key => $value)
-              <option value="{{$key}}">{{$value}}</option>
-            @endforeach
-          @endif
-      </select>
-    </div>  
   
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 
- <button class="blob-btn" id="cancelbtn"  action="action"
+  <button class="blob-btn" id="cancelbtn"  action="action"
     type="button"><i class="fas fa-times pr-2"></i>
     Cancel
     <span class="blob-btn__inner">
@@ -104,7 +86,7 @@
 </div>
 </form>
 </div>
- <svg xmlns="" version="1.1">
+<svg xmlns="" version="1.1">
   <defs>
     <filter id="goo">
       <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
@@ -112,7 +94,7 @@
       <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
     </filter>
   </defs>
-</svg> 
+</svg>
 <!-- Close Row -->
 </div>
 <!-- Close Container -->
@@ -120,24 +102,3 @@
 
 
 @endsection
-<script type="text/javascript">
-  function get_transporter(val){
-
-      $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-              });
-
-      $.ajax({
-          type: "POST",
-          url:  '{{route("return_tranporter")}}',
-          dataType: 'json',
-          data: {'transporter': val},
-          success: function (data) 
-          {
-            alert(223);
-          }
-      });    
-  }
-</script>

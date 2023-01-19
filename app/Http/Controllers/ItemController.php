@@ -21,6 +21,7 @@ class ItemController extends Controller
     public function index()
     {
         $record = ItemMast::where('status', 1)
+                          ->orderBy('id' , 'desc')
                           ->get();
         
         return view('ItemMaster.index', [

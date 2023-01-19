@@ -134,7 +134,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::delete('Transporter_delete/{id}'  , 'TransporterController@delete');
     //Vehicle
     Route::resource('VehicleMast', 'VehicleController');
-    Route::post('VehicleMast_delete', 'VehicleController@destroy');
+    Route::delete('VehicleMast_delete/{id}', 'VehicleController@delete');
     //Vendor
     Route::resource('VendorMast', 'VendorController');
     Route::delete('Vendor_delete/{id}' , 'VendorController@delete');
@@ -143,7 +143,12 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::delete('Supervisor_delete/{id}' , 'SupervisorController@delete');
 
 
-
+    // Routes added By ved
+    Route::resource('EntryForm'  , 'EntriesController');
+    Route::delete('EntryForm_delete'  , 'EntriesController@delete');
+    Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
+    Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
+    //ends
 
     // always add routes on above this line 
 

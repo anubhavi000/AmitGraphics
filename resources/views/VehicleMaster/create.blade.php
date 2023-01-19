@@ -63,16 +63,15 @@
       <input type="text" name="code" id="" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
     </div>
 
-    <div >
+    <div class="col-md-3 mb-3">
       
       <label for="">Transporter</label>
       <br>
-      <select class="select2" name="transporter" id="">
-        <option value="" selected>Transporter Name</option>
+      <select class="chosen-select col-md-3" name="transporter" id="">
+        <option value="">Select</option>
         @foreach ($trans as $key => $value)
           <option value="{{$key}}">{{$value}}</option>
         @endforeach
-       
       </select>
     </div>
 

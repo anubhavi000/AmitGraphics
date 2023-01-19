@@ -15,7 +15,9 @@ class SupervisorController extends Controller
      */
     public function index()
     {
-        $record = SupervisorMast::where('status', 1)->get();
+        $record = SupervisorMast::where('status', 1)
+                                ->orderBy('id' , 'desc')
+                                ->get();
         return view('SupervisorMaster.index', [
             'data' => $record,
         ]);
