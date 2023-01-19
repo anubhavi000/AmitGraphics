@@ -34,7 +34,7 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('EntryForm.store')}}" method="POST">
+<form id="storeform" action="{{route('EntryForm.store')}}" method="POST">
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
@@ -50,20 +50,20 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
      <label for="department_Name" class="yash_star"> Slip No. </label>
-     <input type="text" name="slip_no" id="department_Name" class="form-control client_margin" placeholder="Enter Slip Here" required>
+     <input type="text" name="slip_no" id="slip_no" class="form-control client_margin" placeholder="Enter Slip Here" required>
    </div>
 
     <div class="col-md-4 mb-3 px-3">
         <label for="description">Series</label>
-        <input type="text" name="series" placeholder="Enter Series" required class="form-control client_margin">
+        <input type="text" name="series" id="series" placeholder="Enter Series" required class="form-control client_margin">
     </div>
     <div class="col-md-4 mb-3 px-3">
         <label for="description">Date And  Time</label>
-        <input type="text" name="date_and_time" placeholder="Enter Series" readonly="true" value="{{date('d-m-Y h:i:A')}}" class="form-control client_margin">
+        <input type="text"   readonly="true" placeholder ="{{date('d-m-Y h:i:A')}}"  class="form-control client_margin">
     </div>  
     <div class="col-md-3">
       <label class="form-label">Transporter Name</label>
-      <select onchange="get_transporter(this.value)" class="chosen-select">
+      <select name = "transporter" onchange="get_transporter(this.value)" class="chosen-select">
           <option value="">Select</option>
           @if(!empty($transporters))
             @foreach($transporters as $key => $value)
@@ -72,6 +72,8 @@
           @endif
       </select>
     </div>  
+    <div id="infodiv" class="col-md-3">
+    </div>
   
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
@@ -88,7 +90,7 @@
       </span>
     </span>
   </button>  
-  <button  id="submitbtn" type="submit" class="blob-btn1"><i class="fas fa-check pr-2"></i>
+  <button  onclick="validateinputs()" type="button" class="blob-btn1"><i class="fas fa-check pr-2"></i>
     Save Changes
     <span class="blob-btn__inner1">
       <span class="blob-btn__blobs1">
@@ -136,8 +138,45 @@
           data: {'transporter': val},
           success: function (data) 
           {
-            alert(223);
+            if(data){
+              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+               html += data.name;
+               html += "<br> Contact: ";
+               html += data.contact_no;
+               html += "</span>";
+               $("#infodiv").html(html);
+            }
           }
       });    
+  }
+  function validateinputs(){
+      var slip    = $("#slip_no").val();
+      var sliplenth = slip.length;
+      if(sliplenth = 0 || slip == ''){
+        alert('Filling Slip Number Is Neccessary');
+      } 
+      else{
+        $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+        $.ajax({
+            type: "POST",
+            url:  '{{url("check_duplicacy")}}',
+            dataType: 'json',
+            data: {'slip_no': slip},
+            success: function (data) 
+            {
+              if(data){
+                  $("#storeform").submit();
+              }
+              else{
+                  alert('Slip no. Already Exist');
+              }
+            }
+        });        
+      }
   }
 </script>

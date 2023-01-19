@@ -58,14 +58,18 @@ class EntriesController extends Controller
      */
     public function store(Request $request)
     {
-        if(!empty($request->name)){
-            ItemMast::insert([
-                'name'          =>  $request->name,
-                'status'        =>  1,
-                'description'   => !empty($request->description) ? $request->description : null,
-                'created_at'    => date('Y-m-d h:i:s'),
-                'created_by'    => Auth::user()->id 
-            ]);               
+        if(!empty($request->slip_no) && !empty($request->series)){
+            $store = EntryMast::store_slip($request->except('_token'));
+
+            if($store){
+                return redirect('EntryForm')->with('success' , 'Slip Created SuccessFully');
+            }
+            else{
+                return redirect()->back()->with( 'success' , 'Could Not Create');
+            }
+        }
+        else{
+            return redirect()->back()->with('success' , 'Could Not Created');
         }
     }
 
@@ -131,6 +135,31 @@ class EntriesController extends Controller
         //
     }
     public function return_tranporter(Request $request){
-        dd($request);
+        if(empty($request->transporter)){
+            return false;
+        }
+        $transporter = TransporterMast::where('id' , (int)$request->transporter)
+                                       ->first();
+        if(empty($transporter)){
+            return false;
+        }
+        else{
+            return response()->json($transporter);
+        }
+    }
+    public function check_if_duplicate(Request $request){
+        if(empty($request->slip_no)){
+            return false;
+        }
+        else{
+            $entry = EntryMast::where('slip_no' , $request->slip_no)
+                              ->first();
+            if(empty($entry)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 }
