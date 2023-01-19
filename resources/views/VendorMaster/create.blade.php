@@ -51,12 +51,12 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vendor Code </label>
+        <label for="item_Name" class="yash_star">Vendor Code </label>
         <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
     </div>
 
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vendor Name </label>
+        <label for="item_Name" class="yash_star">Vendor Name </label>
         <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">

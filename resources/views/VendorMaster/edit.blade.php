@@ -43,12 +43,12 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vendor Code </label>
+        <label for="item_Name" class="yash_star">Vendor Code </label>
         <input value="{{$edit->v_code}}" type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
     </div>
 
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vendor Name </label>
+        <label for="item_Name" class="yash_star">Vendor Name </label>
         <input value="{{$edit->v_name}}" type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
@@ -65,20 +65,20 @@
     </div>
 
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>State </label>
+        <label for="item_Name" class="yash_star">State </label>
         <input value="{{$edit->state}}" type="text" name="state" id="item_Name" class="form-control client_margin" placeholder="Enter State Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Pin </label>
+        <label for="item_Name" class="yash_star">Pin </label>
         <input value="{{$edit->pin}}" type="text" name="pin" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Phone </label>
+        <label for="item_Name" class="yash_star">Phone </label>
         <input value="{{$edit->phone}}" type="text" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Email </label>
-        <input value="{{$edit->email}}" type="text" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" required>
+        <label for="item_Name" class="yash_star" >Email </label>
+        <input value="{{$edit->email}}" type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" required>
     </div>
    
 
