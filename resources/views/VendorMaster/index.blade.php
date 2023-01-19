@@ -161,25 +161,25 @@
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ $value->v_code }}</td>
+                                                <td>{{ !empty($value->v_code) ? $value->v_code : '' }}</td>
 
-                                                <td>{{ $value->v_name }}</td>
+                                                <td>{{ !empty($value->v_name) ? $value->v_name : '' }}</td>
 
-                                                <td>{{ $value->gst_no }}</td>
+                                                <td>{{ !empty($value->gst_no) ? $value->gst_no : '' }}</td>
 
-                                                <td>{{ $value->address }}</td>
+                                                <td>{{ !empty($value->address) ? $value->address : '' }}</td>
 
-                                                <td>{{ $value->city }}</td>
+                                                <td>{{ !empty($value->city) ? $value->city : '' }}</td>
 
-                                                <td>{{ $value->state }}</td>
+                                                <td>{{ !empty($value->state) ? $value->state : '' }}</td>
 
-                                                <td>{{ $value->pin }}</td>
+                                                <td>{{ !empty($value->pin) ? $value->pin : '' }}</td>
 
-                                                <td>{{ $value->phone }}</td>
+                                                <td>{{ !empty($value->phone) ? $value->phone : '' }}</td>
 
-                                                <td>{{ $value->email }}</td>
+                                                <td>{{ !empty($value->email) ? $value->email : '' }}</td>
 
-                                                <td>{{ $value->descr }}</td>
+                                                <td>{{ !empty($value->descr) ? $value->descr : '' }}</td>
 
                                                <td>
                                                 <span class="dropdown open">

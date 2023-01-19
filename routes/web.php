@@ -134,7 +134,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::delete('Transporter_delete/{id}'  , 'TransporterController@delete');
     //Vehicle
     Route::resource('VehicleMast', 'VehicleController');
-    Route::post('VehicleMast_delete', 'VehicleController@destroy');
+    Route::delete('VehicleMast_delete/{id}', 'VehicleController@delete');
     //Vendor
     Route::resource('VendorMast', 'VendorController');
     Route::delete('Vendor_delete/{id}' , 'VendorController@delete');

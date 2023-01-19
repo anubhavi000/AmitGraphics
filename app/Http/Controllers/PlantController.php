@@ -23,6 +23,7 @@ class PlantController extends Controller
     public function index()
     {
         $record = PlantMast::where('status', 1)
+                           ->orderBy('id'  , 'desc')
                            ->get();
 
         return view('PlantMaster.index', [
