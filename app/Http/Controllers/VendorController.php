@@ -148,7 +148,9 @@ class VendorController extends Controller
         $now_id = deCrypt($id);
         DB::begintransaction();
         $delete = VendorMast::where('id' , $now_id)
-                            ->delete();
+                    ->update([
+                        'status' => 0,
+                    ]);
         if($delete){
             DB::commit();
             return redirect('VendorMast')->with('success' , 'Deleted SuccessFully');            

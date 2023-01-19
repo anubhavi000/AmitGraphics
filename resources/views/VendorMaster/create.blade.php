@@ -51,12 +51,12 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vendor Code </label>
+        <label for="item_Name" class="yash_star">Vendor Code </label>
         <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
     </div>
 
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vendor Name </label>
+        <label for="item_Name" class="yash_star">Vendor Name </label>
         <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
@@ -78,11 +78,11 @@
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Pin </label>
-        <input type="text" name="pin" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
+        <input type="text" name="pin" pattern="[0-9]{6}" maxlength="6" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Phone </label>
-        <input type="text" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
+        <input type="text" pattern="[0-9]{10}" maxlength="10" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Email </label>

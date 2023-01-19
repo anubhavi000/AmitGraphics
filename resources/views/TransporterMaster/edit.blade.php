@@ -54,7 +54,7 @@
 
   <div class="col-md-3 mb-3 px-3">
     <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Transporter Contact Number</label>
-    <input value="{{$edit->contact_no}}" type="number" name="contact_no" id="department_Name" class="form-control" placeholder="Contact Number" required>
+    <input pattern="[0-9]{10}" maxlength="10" value="{{$edit->contact_no}}"  type="text" name="contact_no" id="department_Name" class="form-control" placeholder="Contact Number" required>
   </div>
    
     {{-- <div class="col-md-6 mb-3 px-3">

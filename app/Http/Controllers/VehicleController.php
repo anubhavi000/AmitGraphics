@@ -154,7 +154,9 @@ class VehicleController extends Controller
         DB::begintransaction();
 
         $delete = VehicleMast::where('id' , $now_id)
-                             ->delete();
+                ->update([
+                    'status' => 0,
+                    ]);
         if($delete){
             DB::commit();
             return redirect()->back()->with('success' , 'Deleted SuccessFully');

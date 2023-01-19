@@ -132,8 +132,9 @@ class TransporterController extends Controller
       DB::begintransaction();
 
         $delete = TransporterMast::where('id' , $now_id)
-                                 ->delete();
-        if($delete){
+                                 ->update([
+                            'status' => 0,
+                          ]);
             DB::commit();
             return redirect()->back()->with('success' , 'Deleted SuccessFully');
         }

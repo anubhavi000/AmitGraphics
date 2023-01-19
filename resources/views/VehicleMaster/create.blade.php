@@ -51,7 +51,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star" type='email'>Vehicle No. </label>
+        <label for="item_Name" class="yash_star">Vehicle No. </label>
         <input type="text" name="number" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">

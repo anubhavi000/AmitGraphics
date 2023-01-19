@@ -59,7 +59,7 @@
   </div>
   <div class="col-md-3 mb-3 px-3">
     <label for="item_Name" class="yash_star">Contact Number </label>
-    <input type="text" name="num" id="item_Name" class="form-control client_margin" placeholder="Enter Contact Number Here" >
+    <input type="text" name="num" id="item_Name" pattern="[0-9]{10}" maxlength="10" class="form-control client_margin" placeholder="Enter Contact Number Here" >
   </div>
    {{-- <div class="col-md-3 mb-3 px-3">
    <label for="enabled" class="yash_star"style="margin-bottom: 0px;">Enabled </label>
