@@ -70,11 +70,11 @@
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Pin </label>
-        <input value="{{$edit->pin}}" type="text" name="pin" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
+        <input value="{{$edit->pin}}" pattern="[0-9]{6}" maxlength="6" type="text" name="pin" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Phone </label>
-        <input value="{{$edit->phone}}" type="text" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
+        <input value="{{$edit->phone}}" pattern="[0-9]{10}" maxlength="10" type="text" name="phone" id="item_Name" class="form-control client_margin" placeholder="Enter Phone No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Email </label>

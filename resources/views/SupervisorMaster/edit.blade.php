@@ -54,7 +54,7 @@
 
     <div class="col-md-3 mb-3 px-3">
         <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Contact Number</label>
-        <input value="{{$edit->phone}}" type="text" name="num" id="department_Name" class="form-control" placeholder="Contact Number" >
+        <input value="{{$edit->phone}}" type="text" name="num" pattern="[0-9]{10}" maxlength="10" id="department_Name" class="form-control" placeholder="Contact Number" >
       </div>
 
    
