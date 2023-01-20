@@ -11,7 +11,7 @@ nav.pcoded-navbar.is-hover .pcoded-inner-navbar {
 } */
 
 .highlight {
-  background-color: #adeec9;
+  background-color: red;
   /* color: white; */
   -webkit-text-stroke-width: thin;
 
@@ -22,24 +22,24 @@ nav.pcoded-navbar.is-hover .pcoded-inner-navbar {
     top:7vh;
     height: 93vh;
     overflow-y: auto;
-    background-color: rgb(78,129,164);
+    background-color: crimson;
 }
 
 .pcoded[theme-layout="vertical"] .pcoded-navbar[pcoded-navbar-position="fixed"]::-webkit-scrollbar {
     width: 0px;
   }
   .bttn{
-  background-color: steelblue;
+  background-color: red;
 }
 .bttn1{
-  background-color: cadetblue;
+  background-color: red;
 }
 .bttn:hover{
-  background-color: steelblue;
+  background-color: red;
   opacity: 0.8;
 }
 .bttn1:hover{
-  background-color: cadetblue;
+  background-color: red;
   opacity: 0.8;
 }
 .an_receipt{
@@ -111,7 +111,7 @@ padding-bottom: 20px;
   color: black;
 }
 .btn_an1{
-  border: 2px solid #1db59c;
+  border: 2px solid red;
   background-color: none;
   font-weight: 900;
 font-size: 20px;
@@ -123,7 +123,7 @@ font-weight: 900;
 font-size: 20px;
 }
 .btn_an1:hover{
-  background-color: #1db59c;
+  background-color: red;
   color: white;
 }
 .btn_an2:hover{
@@ -255,7 +255,7 @@ color: white;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: #1db59c;
+  color: red;
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
@@ -273,7 +273,7 @@ color: white;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid #1db59c;
+  border: 2px solid red;
   border-radius: 30px;
 }
 .blob-btn1:after {
@@ -319,7 +319,7 @@ color: white;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: #1db59c;
+  background: red;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -570,7 +570,7 @@ padding: 6px 6px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: steelblue;
+    color: red;
     font-size: 14px;
     font-weight: bold;
     background-color: transparent;
@@ -588,7 +588,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid steelblue;;
+  border: 2px solid red;;
   border-radius: 30px;
 }
 .blob-btn4:after {
@@ -634,7 +634,7 @@ padding: 6px 6px;
   top: 2px;
   width: 33%;
   height: 100%;
-  background: steelblue;
+  background: red;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -675,7 +675,7 @@ padding: 6px 6px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: steelblue;
+    color: red;
     font-size: 14px;
     font-weight: bold;
     background-color: transparent;
@@ -693,7 +693,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid steelblue;;
+  border: 2px solid red;;
   border-radius: 30px;
 }
 .blob-btn40:after {
@@ -739,7 +739,7 @@ padding: 6px 6px;
   top: 2px;
   width: 33%;
   height: 100%;
-  background: steelblue;
+  background: red;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -780,7 +780,7 @@ padding: 6px 6px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: steelblue;
+    color: red;
     font-size: 14px;
     font-weight: bold;
     background-color: transparent;
@@ -798,7 +798,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid steelblue;;
+  border: 2px solid red;;
   border-radius: 30px;
 }
 .blob-btn44:after {
@@ -844,7 +844,7 @@ padding: 6px 6px;
   top: 2px;
   width: 33%;
   height: 100%;
-  background: steelblue;
+  background: red;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -904,7 +904,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid #1db59c;
+  border: 2px solid red;
   border-radius: 30px;
 }
 .blob-btn42:after {
@@ -919,7 +919,7 @@ padding: 6px 6px;
   border-radius: 30px;
 }
 .blob-btn42:hover {
-  color: #1db59c;
+  color: red;
   border-radius: 30px;
 }
 .blob-btn42:hover:after {
@@ -991,7 +991,7 @@ border-radius: 18px;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: steelblue;
+  color: red;
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
@@ -1009,7 +1009,7 @@ border-radius: 18px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid steelblue !important;
+  border: 2px solid red !important;
  border-radius: 30px;
 }
 .blob-btn41:after {
@@ -1055,7 +1055,7 @@ border-radius: 18px;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: steelblue;
+  background: red;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -1096,7 +1096,7 @@ border-radius: 18px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: cadetblue;
+    color: red;
     font-size: 13px;
     font-weight: bold;
     background-color: transparent;
@@ -1114,7 +1114,7 @@ border-radius: 18px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid cadetblue !important;
+  border: 2px solid red !important;
  border-radius: 30px;
 }
 .blob-btn5:after {
@@ -1162,7 +1162,7 @@ border-radius: 18px;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: cadetblue;
+  background: red;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -1242,7 +1242,7 @@ label{
 height: 23px;
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-  background: rgb(79,129,164);
+  background: crimson;
   color: #fff;
 }
 
@@ -1300,28 +1300,28 @@ height: 23px;
   background: #ffc107 !important;
 }
 .submitbtn:hover{
-  background: #1db59c !important;
+  background: #e11d48 !important;
 }
 .smgeneratebtn:hover{
-  background: steelblue !important;
+  background: red !important;
 }
 .generatebtn:hover{
-  background: steelblue !important;
+  background: red !important;
 }
 .blob-btn5.btn_shw.client_data_btn:hover {
-    background: cadetblue;
+    background: red;
 }
 .client_data_btn:hover{
-    background: cadetblue;
+    background: red;
 }
 .plant_wise_btn:hover{
-  background: steelblue !important;
+  background: red !important;
 }
 .minus_btn:hover{
   background: red !important;
 }
 .downloadbtn:hover{
-    background: steelblue !important;
+    background: red !important;
 }
 .ledgerbtn:hover{
     background: white !important;
@@ -1362,10 +1362,10 @@ span.select2-selection.select2-selection--single{
 }
 
 .select2-dropdown.select2-dropdown--below:hover {
-    border-color: #66afe9;
+    border-color: crimson;
     overflow-x: hidden;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 8, 0, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255,0,0,.6);
     transition: border-color ease-in-out .1s,box-shadow ease-in-out .1s,-webkit-box-shadow ease-in-out .1s;
 }
 
