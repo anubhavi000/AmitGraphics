@@ -188,7 +188,7 @@
                 });
                 $.ajax({
                     type: "get",
-                    url: app_url + 'get_module_prev_access',
+                    url:  '{{url('get_module_prev_access')}}',
                     dataType: 'json',
                     data: {
                         'designation_id': designation_id
@@ -298,7 +298,7 @@
                     });
                     $.ajax({
                         type: "get",
-                        url: app_url + 'get_child_modules',
+                        url: '{{url('get_child_modules')}}',
                         dataType: 'json',
                         data: {
                             'parent_module_id': parent_module_id
