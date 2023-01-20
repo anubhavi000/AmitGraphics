@@ -9,10 +9,13 @@ config/database.php
 /m-accounting
 .env
 vendor
+/venodor_old
+vendor_old
 /vendor
 composer.json
 composer.lock
 .php.ini
+./vendor_old
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
