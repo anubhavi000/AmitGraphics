@@ -171,4 +171,7 @@ class EntriesController extends Controller
             }
         }
     }
+    public function SlipGeneration(Request $request){
+        dd($request);
+    }
 }

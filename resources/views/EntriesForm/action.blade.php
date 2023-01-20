@@ -29,9 +29,9 @@
   @php
     $encrypted_id = encrypt($entry->slip_no);
   @endphp
-<form action="{{route('EntryForm.update' , $encrypted_id)}}" method="POST">
+<form action="{{route('SlipGeneration' , $encrypted_id)}}" method="POST">
     @csrf
-    @method('patch')
+    @method('post')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
@@ -58,12 +58,16 @@
         @endif
       </select>
     </div>
+    <div class="col-md-12 mb-2">
+      <div class="col-md-3">
+        <label class="form-label">Sort Items By Name</label>
+        <input onkeyup="sort_items(this.value)" type="text" id="sortinput" class="form-control">
+      </div>
+    </div>
     <div class="col-md-12">
       <div id="hide_2" class="table-responsive">
 
           <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
-              
-            
               <tbody>
                 @php
                   $count = 0;
@@ -72,8 +76,8 @@
                     @if($count == 0)
                       <tr> 
                     @endif
-                        <td><input type ="checkbox" value="{{$key}}" name="item[]">{{$value}}</td>
-                    @if($count == 3)
+                        <td style="border: none !important;"><input type ="checkbox" value="{{$key}}" name="item[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                    @if($count == 2)
                       <?php $count = 0; ?>
                       </tr>
                     @else

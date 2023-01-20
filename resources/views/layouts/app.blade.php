@@ -22,12 +22,12 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #4c82a8;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:crimson;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                     <a href="/" class="grv_imp">
-                            <img class="img-fluid" src="{{ asset('images/logo-light.png') }}" style="margin-top: -24px;">
+                            <!-- <img class="img-fluid" src="{{ asset('images/logo-light.png') }}" style="margin-top: -24px;"> -->
                             <img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="Theme-Logo" style="width: 35%;">
                         </a>
                 </a>

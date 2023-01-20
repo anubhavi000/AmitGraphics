@@ -149,6 +149,9 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
     Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
     Route::post('check_duplicacy' , 'EntriesController@check_if_duplicate');
+    Route::post('SlipGeneration/{id}' , 'EntriesController@SlipGeneration')->name('SlipGeneration');
+    Route::resource('Module', "ModuleController");
+    Route::resource('DesignationModule', "DesignationModuleController");    
     //ends
 
     // always add routes on above this line 

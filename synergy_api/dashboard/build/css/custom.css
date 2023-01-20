@@ -2173,16 +2173,16 @@ a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {
   border: 1px solid #169F85; }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background: #169F85; }
+  background: crimson; }
 
 .btn-dark {
   color: #E9EDEF;
-  background-color: #4B5F71;
+  background-color: crimson;
   border-color: #364B5F; }
 
 .btn-dark:hover, .btn-dark:focus, .btn-dark:active, .btn-dark.active, .open .dropdown-toggle.btn-dark {
   color: #FFFFFF;
-  background-color: #394D5F;
+  background-color: crimson;
   border-color: #394D5F; }
 
 .btn-round {

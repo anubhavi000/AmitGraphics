@@ -89,7 +89,7 @@
             width: 100%;
             height: 100%;
             display: none;
-            background: rgba(0, 0, 0, 0.6);
+            background: crimson;
         }
 
         .cv-spinner {
@@ -111,7 +111,6 @@
         .grv__margin {
             margin-top: 50px !important;
         }
-
         .switch {
             position: relative;
             display: inline-block;
@@ -280,7 +279,7 @@
         }
 
         .body1 {
-            background: #247fbc;
+            background: crimson;
             width: 100vw;
             height: 100vh;
         }
@@ -339,7 +338,7 @@
             width: 100%;
             height: 100%;
             display: none;
-            background: rgba(0, 0, 0, 0.6);
+            background: crimson;
         }
 
         .cv-spinner {
@@ -529,16 +528,16 @@ $layout_status = Auth::user()->layout_status;
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo" style="padding-top: 25px;">
-                        <a href="/" class="grv_imp">
+                        <a href="##" class="grv_imp">
                             <img class="img-fluid" src="{{ asset('images/logo-light.png') }}"
-                                style="margin-top: -24px;width: 56px;">
-                            <img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="Theme-Logo"
-                                style="width: 70%;">
+                                style="margin-top: -24px;width: 130px;height: 50px;margin-left: 20px;">
+<!--                             <img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="Theme-Logo"
+                                style="width: 70%;"> -->
                             <!-- <h2 style="margin-top: -39px;font-size: 26px;margin-right: -252px;font-weight: bold;">GROUP</h2> -->
                             <!-- <img class="img-fluid" src="{{ asset('images/logo_group.png') }}"alt="Theme-Logo" style="width: 84%;margin-top: -22px;"> -->
                             <!-- <img class=img-fluid" src="{{ asset('images/erp.png') }}" style="width:31px;margin-left:-7px;">  -->
                         </a>
-                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                        <a  class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu icon-toggle-right"></i>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -665,6 +664,7 @@ $layout_status = Auth::user()->layout_status;
                                         <li>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 style="display: none;">{{ csrf_field() }}</form>
+                                                @method('POST')
                                             <a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                 <i class="feather icon-log-out"></i> Logout
