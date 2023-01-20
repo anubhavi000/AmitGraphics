@@ -1407,13 +1407,13 @@ textarea {
 }
 
 a {
-    color: #337ab7;
+    color: red;
     text-decoration: none
 }
 
 a:focus,
 a:hover {
-    color: #23527c;
+    color: red;
     text-decoration: underline
 }
 
@@ -1699,30 +1699,30 @@ mark {
 }
 
 .text-primary {
-    color: #337ab7
+    color: red
 }
 
 a.text-primary:focus,
 a.text-primary:hover {
-    color: #286090
+    color: red
 }
 
 .text-success {
-    color: #3c763d
+    color: crimson
 }
 
 a.text-success:focus,
 a.text-success:hover {
-    color: #2b542c
+    color: crimson
 }
 
 .text-info {
-    color: #31708f
+    color: red
 }
 
 a.text-info:focus,
 a.text-info:hover {
-    color: #245269
+    color: red
 }
 
 .text-warning {
@@ -1745,30 +1745,30 @@ a.text-danger:hover {
 
 .bg-primary {
     color: #fff;
-    background-color: #337ab7
+    background-color: red
 }
 
 a.bg-primary:focus,
 a.bg-primary:hover {
-    background-color: #286090
+    background-color: red
 }
 
 .bg-success {
-    background-color: #dff0d8
+    background-color: crimson
 }
 
 a.bg-success:focus,
 a.bg-success:hover {
-    background-color: #c1e2b3
+    background-color: crimson
 }
 
 .bg-info {
-    background-color: #d9edf7
+    background-color: crimson
 }
 
 a.bg-info:focus,
 a.bg-info:hover {
-    background-color: #afd9ee
+    background-color: crimson;
 }
 
 .bg-warning {
@@ -3089,7 +3089,7 @@ table th[class*=col-] {
 .table>thead>tr.success>th,
 .table>thead>tr>td.success,
 .table>thead>tr>th.success {
-    background-color: #dff0d8
+    background-color: crimson
 }
 
 .table-hover>tbody>tr.success:hover>td,
@@ -3097,7 +3097,7 @@ table th[class*=col-] {
 .table-hover>tbody>tr:hover>.success,
 .table-hover>tbody>tr>td.success:hover,
 .table-hover>tbody>tr>th.success:hover {
-    background-color: #d0e9c6
+    background-color: crimson
 }
 
 .table>tbody>tr.info>td,
@@ -3112,7 +3112,7 @@ table th[class*=col-] {
 .table>thead>tr.info>th,
 .table>thead>tr>td.info,
 .table>thead>tr>th.info {
-    background-color: #d9edf7
+    background-color: crimson
 }
 
 .table-hover>tbody>tr.info:hover>td,
@@ -3120,7 +3120,7 @@ table th[class*=col-] {
 .table-hover>tbody>tr:hover>.info,
 .table-hover>tbody>tr>td.info:hover,
 .table-hover>tbody>tr>th.info:hover {
-    background-color: #c4e3f3
+    background-color: crimson
 }
 
 .table>tbody>tr.warning>td,
@@ -3344,7 +3344,7 @@ output {
 .has-success.checkbox-inline label,
 .has-success.radio label,
 .has-success.radio-inline label {
-    color: #3c763d
+    color: crimson
 }
 
 .form-control::-ms-expand {
@@ -3616,21 +3616,21 @@ textarea.input-lg {
 }
 
 .has-success .form-control {
-    border-color: #3c763d;
+    border-color: crimson;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
 }
 
 .has-success .form-control:focus {
-    border-color: #2b542c;
+    border-color: crimson;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168
 }
 
 .has-success .input-group-addon {
-    color: #3c763d;
-    border-color: #3c763d;
-    background-color: #dff0d8
+    color: crimson;
+    border-color: crimson;
+    background-color: crimson
 }
 
 .has-warning .checkbox,
@@ -3927,15 +3927,15 @@ fieldset[disabled] .btn-default:hover {
 
 .btn-primary {
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4
+    background-color: red;
+    border-color: red
 }
 
 .btn-primary.focus,
 .btn-primary:focus {
     color: #fff;
-    background-color: #286090;
-    border-color: #122b40
+    background-color: red;
+    border-color: red
 }
 
 .btn-primary.active,
@@ -3943,8 +3943,8 @@ fieldset[disabled] .btn-default:hover {
 .btn-primary:hover,
 .open>.dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: #286090;
-    border-color: #204d74
+    background-color: red;
+    border-color: red
 }
 
 .btn-primary.active.focus,
@@ -3957,8 +3957,8 @@ fieldset[disabled] .btn-default:hover {
 .open>.dropdown-toggle.btn-primary:focus,
 .open>.dropdown-toggle.btn-primary:hover {
     color: #fff;
-    background-color: #204d74;
-    border-color: #122b40
+    background-color: red;
+    border-color: red
 }
 
 .btn-primary.disabled.focus,
@@ -3970,26 +3970,26 @@ fieldset[disabled] .btn-default:hover {
 fieldset[disabled] .btn-primary.focus,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:hover {
-    background-color: #337ab7;
-    border-color: #2e6da4
+    background-color: red;
+    border-color: red
 }
 
 .btn-primary .badge {
-    color: #337ab7;
+    color: red;
     background-color: #fff
 }
 
 .btn-success {
     color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c
+    background-color: crimson;
+    border-color: crimson
 }
 
 .btn-success.focus,
 .btn-success:focus {
     color: #fff;
-    background-color: #449d44;
-    border-color: #255625
+    background-color: crimson;
+    border-color: crimson
 }
 
 .btn-success.active,
@@ -3997,8 +3997,8 @@ fieldset[disabled] .btn-primary:hover {
 .btn-success:hover,
 .open>.dropdown-toggle.btn-success {
     color: #fff;
-    background-color: #449d44;
-    border-color: #398439
+    background-color: crimson;
+    border-color: crimson
 }
 
 .btn-success.active.focus,
@@ -4011,8 +4011,8 @@ fieldset[disabled] .btn-primary:hover {
 .open>.dropdown-toggle.btn-success:focus,
 .open>.dropdown-toggle.btn-success:hover {
     color: #fff;
-    background-color: #398439;
-    border-color: #255625
+    background-color: crimson;
+    border-color: crimson;
 }
 
 .btn-success.active,
@@ -4030,26 +4030,26 @@ fieldset[disabled] .btn-primary:hover {
 fieldset[disabled] .btn-success.focus,
 fieldset[disabled] .btn-success:focus,
 fieldset[disabled] .btn-success:hover {
-    background-color: #5cb85c;
-    border-color: #4cae4c
+    background-color: crimson;
+    border-color: crimson
 }
 
 .btn-success .badge {
-    color: #5cb85c;
+    color: crimson;
     background-color: #fff
 }
 
 .btn-info {
     color: #fff;
-    background-color: #5bc0de;
-    border-color: #46b8da
+    background-color: red;
+    border-color: red
 }
 
 .btn-info.focus,
 .btn-info:focus {
     color: #fff;
-    background-color: #31b0d5;
-    border-color: #1b6d85
+    background-color: red;
+    border-color: red
 }
 
 .btn-info.active,
@@ -4057,8 +4057,8 @@ fieldset[disabled] .btn-success:hover {
 .btn-info:hover,
 .open>.dropdown-toggle.btn-info {
     color: #fff;
-    background-color: #31b0d5;
-    border-color: #269abc
+    background-color: red;
+    border-color: red
 }
 
 .btn-info.active.focus,
@@ -4071,8 +4071,8 @@ fieldset[disabled] .btn-success:hover {
 .open>.dropdown-toggle.btn-info:focus,
 .open>.dropdown-toggle.btn-info:hover {
     color: #fff;
-    background-color: #269abc;
-    border-color: #1b6d85
+    background-color: red;
+    border-color: red
 }
 
 .btn-info.disabled.focus,
@@ -4084,12 +4084,12 @@ fieldset[disabled] .btn-success:hover {
 fieldset[disabled] .btn-info.focus,
 fieldset[disabled] .btn-info:focus,
 fieldset[disabled] .btn-info:hover {
-    background-color: #5bc0de;
-    border-color: #46b8da
+    background-color: red;
+    border-color: red
 }
 
 .btn-info .badge {
-    color: #5bc0de;
+    color: red;
     background-color: #fff
 }
 
@@ -4202,7 +4202,7 @@ fieldset[disabled] .btn-danger:hover {
 }
 
 .btn-link {
-    color: #337ab7;
+    color: red;
     font-weight: 400;
     border-radius: 0
 }
@@ -4226,7 +4226,7 @@ fieldset[disabled] .btn-link {
 
 .btn-link:focus,
 .btn-link:hover {
-    color: #23527c;
+    color: red;
     text-decoration: underline;
     background-color: transparent
 }
@@ -4393,7 +4393,7 @@ tbody.collapse.in {
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: #337ab7
+    background-color: red
 }
 
 .dropdown-menu>.disabled>a,
@@ -4893,7 +4893,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .nav .open>a:focus,
 .nav .open>a:hover {
     background-color: #eee;
-    border-color: #337ab7
+    border-color: red
 }
 
 .nav .nav-divider {
@@ -4999,7 +4999,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .nav-pills>li.active>a:focus,
 .nav-pills>li.active>a:hover {
     color: #fff;
-    background-color: #337ab7
+    background-color: red
 }
 
 .nav-stacked>li+li {
@@ -5728,7 +5728,7 @@ fieldset[disabled] .navbar-inverse .btn-link:hover {
     padding: 6px 12px;
     line-height: 1.42857143;
     text-decoration: none;
-    color: #337ab7;
+    color: red;
     background-color: #fff;
     border: 1px solid #ddd;
     margin-left: -1px
@@ -5752,7 +5752,7 @@ fieldset[disabled] .navbar-inverse .btn-link:hover {
 .pagination>li>span:focus,
 .pagination>li>span:hover {
     z-index: 2;
-    color: #23527c;
+    color: red;
     background-color: #eee;
     border-color: #ddd
 }
@@ -5765,8 +5765,8 @@ fieldset[disabled] .navbar-inverse .btn-link:hover {
 .pagination>.active>span:hover {
     z-index: 3;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
+    background-color: red;
+    border-color: red;
     cursor: default
 }
 
@@ -5898,30 +5898,29 @@ a.label:hover {
 }
 
 .label-primary {
-    background-color: #337ab7
+    background-color: crimson
 }
 
 .label-primary[href]:focus,
 .label-primary[href]:hover {
-    background-color: #286090
-}
+    background-color: crimson
 
 .label-success {
-    background-color: #5cb85c
+    background-color: crimson
 }
 
 .label-success[href]:focus,
 .label-success[href]:hover {
-    background-color: #449d44
+    background-color: crimson
 }
 
 .label-info {
-    background-color: #5bc0de
+    background-color: crimson
 }
 
 .label-info[href]:focus,
 .label-info[href]:hover {
-    background-color: #31b0d5
+    background-color: crimson
 }
 
 .label-warning {
@@ -5970,7 +5969,7 @@ a.label:hover {
 
 .list-group-item.active>.badge,
 .nav-pills>.active>a>.badge {
-    color: #337ab7;
+    color: red;
     background-color: #fff
 }
 
@@ -6068,7 +6067,7 @@ a.label:hover {
 a.thumbnail.active,
 a.thumbnail:focus,
 a.thumbnail:hover {
-    border-color: #337ab7
+    border-color: red;
 }
 
 .thumbnail .caption {
@@ -6117,31 +6116,31 @@ a.thumbnail:hover {
 }
 
 .alert-success {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #3c763d
+    background-color: crimson;
+    border-color: crimson;
+    color: crimson
 }
 
 .alert-success hr {
-    border-top-color: #c9e2b3
+    border-top-color: crimson;
 }
 
 .alert-success .alert-link {
-    color: #2b542c
+    color: crimson
 }
 
 .alert-info {
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-    color: #31708f
+    background-color: red;
+    border-color: red;
+    color: red
 }
 
 .alert-info hr {
-    border-top-color: #a6e1ec
+    border-top-color: red;
 }
 
 .alert-info .alert-link {
-    color: #245269
+    color: red;
 }
 
 .alert-warning {
@@ -6209,7 +6208,7 @@ a.thumbnail:hover {
     line-height: 20px;
     color: #fff;
     text-align: center;
-    background-color: #337ab7;
+    background-color: red;
     -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
     -webkit-transition: width .6s ease;
@@ -6231,7 +6230,7 @@ a.thumbnail:hover {
 }
 
 .progress-bar-success {
-    background-color: #5cb85c
+    background-color: crimson
 }
 
 .progress-striped .progress-bar-success {
@@ -6245,7 +6244,7 @@ a.thumbnail:hover {
 }
 
 .progress-bar-info {
-    background-color: #5bc0de
+    background-color: red
 }
 
 .progress-striped .progress-bar-info {
@@ -6397,8 +6396,8 @@ button.list-group-item {
 .list-group-item.active:hover {
     z-index: 2;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7
+    background-color: red;
+    border-color: red
 }
 
 .list-group-item.active .list-group-item-heading,
@@ -6416,17 +6415,17 @@ button.list-group-item {
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text,
 .list-group-item.active:hover .list-group-item-text {
-    color: #c7ddef
+    color: red;
 }
 
 .list-group-item-success {
-    color: #3c763d;
-    background-color: #dff0d8
+    color: red;
+    background-color: crimson
 }
 
 a.list-group-item-success,
 button.list-group-item-success {
-    color: #3c763d
+    color: crimson
 }
 
 a.list-group-item-success .list-group-item-heading,
@@ -6438,8 +6437,8 @@ a.list-group-item-success:focus,
 a.list-group-item-success:hover,
 button.list-group-item-success:focus,
 button.list-group-item-success:hover {
-    color: #3c763d;
-    background-color: #d0e9c6
+    color: red;
+    background-color: crimson
 }
 
 a.list-group-item-success.active,
@@ -6449,18 +6448,18 @@ button.list-group-item-success.active,
 button.list-group-item-success.active:focus,
 button.list-group-item-success.active:hover {
     color: #fff;
-    background-color: #3c763d;
-    border-color: #3c763d
+    background-color: crimson;
+    border-color: crimson
 }
 
 .list-group-item-info {
-    color: #31708f;
-    background-color: #d9edf7
+    color: red;
+    background-color: crimson
 }
 
 a.list-group-item-info,
 button.list-group-item-info {
-    color: #31708f
+    color: red
 }
 
 a.list-group-item-info .list-group-item-heading,
@@ -6472,8 +6471,8 @@ a.list-group-item-info:focus,
 a.list-group-item-info:hover,
 button.list-group-item-info:focus,
 button.list-group-item-info:hover {
-    color: #31708f;
-    background-color: #c4e3f3
+    color: red;
+    background-color: crimson
 }
 
 a.list-group-item-info.active,
@@ -6483,8 +6482,8 @@ button.list-group-item-info.active,
 button.list-group-item-info.active:focus,
 button.list-group-item-info.active:hover {
     color: #fff;
-    background-color: #31708f;
-    border-color: #31708f
+    background-color: crimson;
+    border-color: red
 }
 
 .list-group-item-warning {
@@ -6847,72 +6846,72 @@ button.list-group-item-danger.active:hover {
 }
 
 .panel-primary {
-    border-color: #337ab7
+    border-color: red
 }
 
 .panel-primary>.panel-heading {
     color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7
+    background-color: red;
+    border-color: red
 }
 
 .panel-primary>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #337ab7
+    border-top-color: red
 }
 
 .panel-primary>.panel-heading .badge {
-    color: #337ab7;
+    color: red;
     background-color: #fff
 }
 
 .panel-primary>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #337ab7
+    border-bottom-color: red
 }
 
 .panel-success {
-    border-color: #d6e9c6
+    border-color: crimson
 }
 
 .panel-success>.panel-heading {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6
+    color: crimson;
+    background-color: crimson;
+    border-color: crimson
 }
 
 .panel-success>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #d6e9c6
+    border-top-color: crimson
 }
 
 .panel-success>.panel-heading .badge {
-    color: #dff0d8;
-    background-color: #3c763d
+    color: crimson;
+    background-color: crimson
 }
 
 .panel-success>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #d6e9c6
+    border-bottom-color: crimson;
 }
 
 .panel-info {
-    border-color: #bce8f1
+    border-color: red
 }
 
 .panel-info>.panel-heading {
-    color: #31708f;
+    color: red;
     background-color: #d9edf7;
-    border-color: #bce8f1
+    border-color: red
 }
 
 .panel-info>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: #bce8f1
+    border-top-color: red
 }
 
 .panel-info>.panel-heading .badge {
     color: #d9edf7;
-    background-color: #31708f
+    background-color: red
 }
 
 .panel-info>.panel-footer+.panel-collapse>.panel-body {
-    border-bottom-color: #bce8f1
+    border-bottom-color: red
 }
 
 .panel-warning {
@@ -7141,23 +7140,23 @@ button.close {
 
 .modal-title {
     margin: 0;
-    line-height: 1.42857143
+    line-height: 1.42857143;
 }
 
 .modal-body {
     position: relative;
-    padding: 15px
+    padding: 15px;
 }
 
 .modal-footer {
     padding: 15px;
     text-align: right;
-    border-top: 1px solid #e5e5e5
+    border-top: 1px solid #e5e5e5;
 }
 
 .modal-footer .btn+.btn {
     margin-left: 5px;
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .modal-footer .btn-group .btn+.btn {
@@ -7165,7 +7164,7 @@ button.close {
 }
 
 .modal-footer .btn-block+.btn-block {
-    margin-left: 0
+    margin-left: 0;
 }
 
 .modal-scrollbar-measure {
