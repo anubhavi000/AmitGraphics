@@ -11,7 +11,6 @@
 
 namespace Psy\CodeCleaner;
 
-use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Namespace_;
 use Psy\CodeCleaner;
@@ -47,8 +46,6 @@ class NamespacePass extends CodeCleanerPass
      * is encountered.
      *
      * @param array $nodes
-     *
-     * @return Node[]|null Array of nodes
      */
     public function beforeTraverse(array $nodes)
     {

@@ -35,8 +35,6 @@ class ValidFunctionNamePass extends NamespaceAwarePass
      * @throws FatalErrorException if a function is redefined in a non-conditional scope
      *
      * @param Node $node
-     *
-     * @return int|Node|null Replacement node (or special return value)
      */
     public function enterNode(Node $node)
     {
@@ -63,8 +61,6 @@ class ValidFunctionNamePass extends NamespaceAwarePass
 
     /**
      * @param Node $node
-     *
-     * @return int|Node|Node[]|null Replacement node (or special return value)
      */
     public function leaveNode(Node $node)
     {

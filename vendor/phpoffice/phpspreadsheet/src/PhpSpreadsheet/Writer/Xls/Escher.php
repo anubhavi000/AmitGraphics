@@ -413,6 +413,8 @@ class Escher
 
                 // the client anchor
                 if ($this->object->getStartCoordinates()) {
+                    $clientAnchorData = '';
+
                     $recVer = 0x0;
                     $recInstance = 0x0;
                     $recType = 0xF010;

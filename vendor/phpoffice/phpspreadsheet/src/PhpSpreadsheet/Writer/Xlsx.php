@@ -342,22 +342,19 @@ class Xlsx extends BaseWriter
                     //signed macros ?
                     // Yes : add the certificate file and the related rels file
                     $zipContent['xl/vbaProjectSignature.bin'] = $this->spreadSheet->getMacrosCertificate();
-                    $zipContent['xl/_rels/vbaProject.bin.rels'] = $this->getWriterPartRelsVBA()->writeVBARelationships();
+                    $zipContent['xl/_rels/vbaProject.bin.rels'] = $this->getWriterPartRelsVBA()->writeVBARelationships($this->spreadSheet);
                 }
             }
         }
         //a custom UI in this workbook ? add it ("base" xml and additional objects (pictures) and rels)
         if ($this->spreadSheet->hasRibbon()) {
             $tmpRibbonTarget = $this->spreadSheet->getRibbonXMLData('target');
-            $tmpRibbonTarget = is_string($tmpRibbonTarget) ? $tmpRibbonTarget : '';
             $zipContent[$tmpRibbonTarget] = $this->spreadSheet->getRibbonXMLData('data');
             if ($this->spreadSheet->hasRibbonBinObjects()) {
                 $tmpRootPath = dirname($tmpRibbonTarget) . '/';
                 $ribbonBinObjects = $this->spreadSheet->getRibbonBinObjects('data'); //the files to write
-                if (is_array($ribbonBinObjects)) {
-                    foreach ($ribbonBinObjects as $aPath => $aContent) {
-                        $zipContent[$tmpRootPath . $aPath] = $aContent;
-                    }
+                foreach ($ribbonBinObjects as $aPath => $aContent) {
+                    $zipContent[$tmpRootPath . $aPath] = $aContent;
                 }
                 //the rels for files
                 $zipContent[$tmpRootPath . '_rels/' . basename($tmpRibbonTarget) . '.rels'] = $this->getWriterPartRelsRibbon()->writeRibbonRelationships($this->spreadSheet);
@@ -377,7 +374,7 @@ class Xlsx extends BaseWriter
         }
 
         // Add theme to ZIP file
-        $zipContent['xl/theme/theme1.xml'] = $this->getWriterPartTheme()->writeTheme();
+        $zipContent['xl/theme/theme1.xml'] = $this->getWriterPartTheme()->writeTheme($this->spreadSheet);
 
         // Add string table to ZIP file
         $zipContent['xl/sharedStrings.xml'] = $this->getWriterPartStringTable()->writeStringTable($this->stringTable);
@@ -687,7 +684,6 @@ class Xlsx extends BaseWriter
         return $this;
     }
 
-    /** @var array */
     private $pathNames = [];
 
     private function addZipFile(string $path, string $content): void
@@ -714,7 +710,7 @@ class Xlsx extends BaseWriter
         $filename = $drawing->getPath();
         $imageData = getimagesize($filename);
 
-        if (!empty($imageData)) {
+        if (is_array($imageData)) {
             switch ($imageData[2]) {
                 case 1: // GIF, not supported by BIFF8, we convert to PNG
                     $image = imagecreatefromgif($filename);

@@ -24,8 +24,6 @@ class FinalClassPass extends CodeCleanerPass
 
     /**
      * @param array $nodes
-     *
-     * @return Node[]|null Array of nodes
      */
     public function beforeTraverse(array $nodes)
     {
@@ -36,8 +34,6 @@ class FinalClassPass extends CodeCleanerPass
      * @throws FatalErrorException if the node is a class that extends a final class
      *
      * @param Node $node
-     *
-     * @return int|Node|null Replacement node (or special return value)
      */
     public function enterNode(Node $node)
     {

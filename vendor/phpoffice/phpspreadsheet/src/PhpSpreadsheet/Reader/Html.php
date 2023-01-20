@@ -201,7 +201,7 @@ class Html extends BaseReader
     /**
      * Loads Spreadsheet from file.
      */
-    public function loadSpreadsheetFromFile(string $filename): Spreadsheet
+    protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
@@ -619,7 +619,7 @@ class Html extends BaseReader
     {
         foreach ($element->childNodes as $child) {
             if ($child instanceof DOMText) {
-                $domText = (string) preg_replace('/\s+/u', ' ', trim($child->nodeValue ?? ''));
+                $domText = preg_replace('/\s+/u', ' ', trim($child->nodeValue ?: ''));
                 if (is_string($cellContent)) {
                     //    simply append the text if the cell content is a plain text string
                     $cellContent .= $domText;
@@ -630,6 +630,16 @@ class Html extends BaseReader
                 $this->processDomElementBody($sheet, $row, $column, $cellContent, $child);
             }
         }
+    }
+
+    /**
+     * Make sure mb_convert_encoding returns string.
+     *
+     * @param mixed $result
+     */
+    private static function ensureString($result): string
+    {
+        return is_string($result) ? $result : '';
     }
 
     /**
@@ -650,14 +660,8 @@ class Html extends BaseReader
         $dom = new DOMDocument();
         // Reload the HTML file into the DOM object
         try {
-            $convert = $this->securityScanner->scanFile($filename);
-            $lowend = "\u{80}";
-            $highend = "\u{10ffff}";
-            $regexp = "/[$lowend-$highend]/u";
-            /** @var callable */
-            $callback = [self::class, 'replaceNonAscii'];
-            $convert = preg_replace_callback($regexp, $callback, $convert);
-            $loaded = ($convert === null) ? false : $dom->loadHTML($convert);
+            $convert = mb_convert_encoding($this->securityScanner->scanFile($filename), 'HTML-ENTITIES', 'UTF-8');
+            $loaded = $dom->loadHTML(self::ensureString($convert));
         } catch (Throwable $e) {
             $loaded = false;
         }
@@ -666,11 +670,6 @@ class Html extends BaseReader
         }
 
         return $this->loadDocument($dom, $spreadsheet);
-    }
-
-    private static function replaceNonAscii(array $matches): string
-    {
-        return '&#' . mb_ord($matches[0], 'UTF-8') . ';';
     }
 
     /**
@@ -684,14 +683,8 @@ class Html extends BaseReader
         $dom = new DOMDocument();
         //    Reload the HTML file into the DOM object
         try {
-            $convert = $this->securityScanner->scan($content);
-            $lowend = "\u{80}";
-            $highend = "\u{10ffff}";
-            $regexp = "/[$lowend-$highend]/u";
-            /** @var callable */
-            $callback = [self::class, 'replaceNonAscii'];
-            $convert = preg_replace_callback($regexp, $callback, $convert);
-            $loaded = ($convert === null) ? false : $dom->loadHTML($convert);
+            $convert = mb_convert_encoding($this->securityScanner->scan($content), 'HTML-ENTITIES', 'UTF-8');
+            $loaded = $dom->loadHTML(self::ensureString($convert));
         } catch (Throwable $e) {
             $loaded = false;
         }
