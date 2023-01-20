@@ -12,6 +12,7 @@ vendor
 /venodor_old
 vendor_old
 /vendor
+./vendor
 composer.json
 composer.lock
 .php.ini
