@@ -45,6 +45,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        {{--
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -59,6 +60,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="{{ config('app.account_app_url') }}" target="_blank">{{ __('Accounts') }}</a>
                             </li>
+                        --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
