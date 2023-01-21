@@ -588,6 +588,7 @@ $layout_status = Auth::user()->layout_status;
                                           </span>
                                           @endif
                                     </div>
+                                    {{--
                                     <ul class="show-notification profile-notification notification-view dropdown-menu"
                                         data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
 
@@ -622,6 +623,7 @@ $layout_status = Auth::user()->layout_status;
 
 
                                     </ul>
+                                --}}
                                 </div>
                             </li>
                             <li class="user-profile header-notification" style="margin-top: -6px;">
