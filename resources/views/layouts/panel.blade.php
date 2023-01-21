@@ -528,7 +528,7 @@ $layout_status = Auth::user()->layout_status;
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo" style="padding-top: 25px;">
-                        <a href="##" class="grv_imp">
+                        <a href="home" class="grv_imp">
                             <img class="img-fluid" src="{{ asset('images/logo-light.png') }}"
                                 style="margin-top: -24px;width: 130px;height: 50px;margin-left: 20px;">
 <!--                             <img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="Theme-Logo"

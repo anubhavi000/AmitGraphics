@@ -135,6 +135,7 @@ class TransporterController extends Controller
                                  ->update([
                             'status' => 0,
                           ]);
+        if ($delete){
             DB::commit();
             return redirect()->back()->with('success' , 'Deleted SuccessFully');
         }
