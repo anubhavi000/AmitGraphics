@@ -1,7 +1,5 @@
 ﻿/vendor/
-/vendor_old/
-node_modules/
-npm-debug.log
+vendor
 yarn-error.log
 
 # Laravel 4 specific
@@ -23,7 +21,3 @@ Homestead.json
 .phpunit.result.cache
 
 
-#custom ignored folders
-public/Backups
-public/ReportSpace
-public/ExcelReportSpace

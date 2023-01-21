@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\EntryLogs;
 use Auth;
 use DB;
 
@@ -36,5 +37,37 @@ class EntryMast extends Model
     	else{
     		return false;
     	}
+    }
+    static function generateslip($req , $id){
+        $now_id = decrypt($id);
+        $entry = self::where('slip_no' , $now_id)->first();
+        if(empty($entry)){
+            return false;
+        }
+        else{
+            DB::begintransaction();
+
+            // updating the entry in entry_mast
+            $update = self::where('slip_no' , $now_id)
+                          ->update([
+                                'acess_weight_quantity' => $req['acess_weight_quantity'],
+                                'items_included'        => json_encode($req['items_included'] , true)
+                          ]);
+            // inserting in the log table
+            $arr = [
+                'updated_by' => Auth::user()->id,
+                'updated_at' => date('Y-m-d h:i:s'),
+                'entry_slip_no'
+            ];
+            $insert = EntryLogs::create($arr);
+            if($insert && $update){
+                DB::commit();
+                return true;
+            }
+            else{
+                DB::rollback();
+                return false;
+            }
+        }
     }
 }

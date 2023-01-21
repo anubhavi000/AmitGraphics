@@ -45,12 +45,14 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
-      <input style="height: 2vh;width: 2vh;" type="checkbox" name="is_acess_weight">
-      <label>Acess Weight</label>
+      <label class="form-label"><b>Acess Weight (In Kg)</b></label>
+      <input class="form-control" type="number" name="acess_weight_quantity">
    </div>
    
     <div class="col-md-3 mb-3 px-3">
+      <label class="form-label">Plant</label>
       <select class="chosen-select">
+        <option value="">Select</option>
         @if(!empty($plants))
           @foreach($plants as $key => $value)
             <option value="{{$key}}">{{$value}}</option>
@@ -59,10 +61,10 @@
       </select>
     </div>
     <div class="col-md-12 mb-2">
-      <div class="col-md-3">
+<!--       <div class="col-md-3">
         <label class="form-label">Sort Items By Name</label>
         <input onkeyup="sort_items(this.value)" type="text" id="sortinput" class="form-control">
-      </div>
+      </div> -->
     </div>
     <div class="col-md-12">
       <div id="hide_2" class="table-responsive">

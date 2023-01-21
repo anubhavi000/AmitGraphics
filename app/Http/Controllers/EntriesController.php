@@ -171,7 +171,13 @@ class EntriesController extends Controller
             }
         }
     }
-    public function SlipGeneration(Request $request){
-        dd($request);
+    public function SlipGeneration(Request $request , $id){
+        $response = EntryMast::generateslip($request->except('_token' , '_method') , $id);
+        if($response){
+            return redirect('EntryForm')->with('success' , 'Generated SuccessFully');
+        }
+        else{
+            return redirect()->back()->with('success' , 'Could Not Generate');
+        }
     }
 }
