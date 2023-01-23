@@ -1,5 +1,3 @@
-
-
  @extends('layouts.panel')
 
 @section('content')
@@ -43,9 +41,7 @@
                                     <div class="col-md-3 mb-3 px-3">
                                         <label style="margin-bottom:0px" for="slip_no"
                                             class="yash_star">SLip No.</label>
-                                        <select name="slip_no" class="client" required>
-                                            <option value="">Select</option>
-                                        </select>
+                                        <input type="text" name="slip_no"class="form-control" >
                                     </div>
                                     <div class="col-md-2"><label for="from_date">From Date</label>
                                         <fieldset>

@@ -20,7 +20,6 @@ class ModuleAccess extends Middleware
      * @return mixed
      */
     public function handle($request, Closure $next, ...$auth) {
-        
         $permission = 0;
         $user_id = Auth::user()->id;
         $authUser = Auth::user();

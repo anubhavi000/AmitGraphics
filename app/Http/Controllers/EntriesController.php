@@ -182,9 +182,19 @@ class EntriesController extends Controller
     }
     public function ShowGeneratedSlips(Request $request){
         
-        $records  = EntryMast::whereNotNull('items_included')
-                             ->get();
+        $recordsraw   = EntryMast::whereNotNull('items_included');
 
+        if(!empty($request->slip_no)){
+            $recordsraw->where('slip_no' , $request->slip_no);
+        }
+        if(!empty($request->from_date) && !empty($request->to_date)){
+        
+        $from_date = date('Y-m-d' , strtotime($request->from_date));
+        $to_date   = date('Y-m-d' , strtotime($request->to_date));
+
+            $recordsraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
+        }
+            $records = $recordsraw->get();
         return view($this->module_folder.'.show' , [
             'data' => $records
         ]);

@@ -154,7 +154,8 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::post('SlipGeneration/{id}' , 'EntriesController@SlipGeneration')->name('SlipGeneration');
     Route::get('GeneratedSlips' , 'EntriesController@ShowGeneratedSlips')->name('GeneratedSlips');
     Route::resource('Module', "ModuleController");
-    Route::resource('DesignationModule', "DesignationModuleController");    
+    Route::resource('DesignationModule', "DesignationModuleController");   
+    Route::get('print_invoice/{id}' , 'EntriesController@PrintInvoice'); 
     //ends
 
     // always add routes on above this line 
