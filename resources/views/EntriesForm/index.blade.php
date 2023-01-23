@@ -94,9 +94,12 @@
                     <div class="col-lg-8 mt-3">
                         <div class="page-header-breadcrumb">
                             <div class="buttons" style="text-align:right;margin:4px;">
-
+                                <a href="{{ route('GeneratedSlips') }}"><button type="button"
+                                        class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Generated Slips</button>
+                                </a>
                                 <a href="{{ url('EntryForm/create') }}"><button type="button"
-                                        class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button></a>
+                                        class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -119,7 +122,7 @@
                                                         id="basic-addon7"
                                                         style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: #4f81a4 !important;border: #4f81a4;"><i
                                                             class="fas fa-briefcase"></i></span>
-                                                    <input type="text" value="{{ Request::get('name') }}" name="slip_no"
+                                                    <input type="text" value="{{ Request::get('slip_no') }}" name="slip_no"
                                                         class="form-control" id="file_no"
                                                         placeholder="Enter Slip No">
                                                 </div>

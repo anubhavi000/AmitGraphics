@@ -19,6 +19,9 @@ class EntryMast extends Model
     					'datetime', 
                         'entry_rate',
                         'entry_weight',
+                        'plant',
+                        'items_included',
+                        'acess_weight_quantity',
     					'created_at',
     					'created_by',
     					'updated_by'
@@ -46,18 +49,19 @@ class EntryMast extends Model
         }
         else{
             DB::begintransaction();
-
             // updating the entry in entry_mast
             $update = self::where('slip_no' , $now_id)
                           ->update([
-                                'acess_weight_quantity' => $req['acess_weight_quantity'],
-                                'items_included'        => json_encode($req['items_included'] , true)
+                                'acess_weight_quantity' => !empty($req['acess_weight_quantity']) ? $req['acess_weight_quantity'] : NULL,
+                                'items_included'        => !empty($req['items_included']) ? json_encode($req['items_included'] , true) : NULL,
+                                'plant'                 => !empty($req['plant']) ? $req['plant'] : NUll,
+                                'updated_at'            => date('Y-m-d h:i:s')             
                           ]);
             // inserting in the log table
             $arr = [
-                'updated_by' => Auth::user()->id,
-                'updated_at' => date('Y-m-d h:i:s'),
-                'entry_slip_no'
+                'updated_by'    => Auth::user()->id,
+                'updated_at'    => date('Y-m-d h:i:s'),
+                'entry_slip_no' => $now_id 
             ];
             $insert = EntryLogs::create($arr);
             if($insert && $update){

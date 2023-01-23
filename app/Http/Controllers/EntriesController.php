@@ -180,4 +180,13 @@ class EntriesController extends Controller
             return redirect()->back()->with('success' , 'Could Not Generate');
         }
     }
+    public function ShowGeneratedSlips(Request $request){
+        
+        $records  = EntryMast::whereNotNull('items_included')
+                             ->get();
+
+        return view($this->module_folder.'.show' , [
+            'data' => $records
+        ]);
+    }
 }

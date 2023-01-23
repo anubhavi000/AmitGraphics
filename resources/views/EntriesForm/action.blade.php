@@ -51,7 +51,7 @@
    
     <div class="col-md-3 mb-3 px-3">
       <label class="form-label">Plant</label>
-      <select class="chosen-select">
+      <select name="plant" class="chosen-select">
         <option value="">Select</option>
         @if(!empty($plants))
           @foreach($plants as $key => $value)
@@ -78,7 +78,7 @@
                     @if($count == 0)
                       <tr> 
                     @endif
-                        <td style="border: none !important;"><input type ="checkbox" value="{{$key}}" name="item[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                        <td style="border: none !important;"><input type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
                     @if($count == 2)
                       <?php $count = 0; ?>
                       </tr>

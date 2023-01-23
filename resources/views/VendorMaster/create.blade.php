@@ -51,17 +51,12 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    
     <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star">Vendor Code </label>
-        <input type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Code Here" required>
-    </div>
-
-    <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Vendor Name </label>
         <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Vendor Name. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">GST No. </label>
-        <input type="text" name="gst" id="item_Name" class="form-control client_margin" placeholder="Enter GST Number Here" required>
+        <input type="text" name="gst" id="item_Name" class="form-control client_margin" placeholder="Enter GST Number Here">
     </div>
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Address</label>
@@ -78,7 +73,7 @@
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Pin </label>
-        <input type="text" name="pin" pattern="[0-9]{6}" maxlength="6" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" required>
+        <input type="text" name="pin" pattern="[0-9]{6}" maxlength="6" id="item_Name" class="form-control client_margin" placeholder="Enter Pin Here" >
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Phone </label>
@@ -86,7 +81,7 @@
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star" >Email </label>
-        <input type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" required>
+        <input type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Email Here" >
     </div>
    
 
@@ -94,7 +89,10 @@
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
     </div>
-  
+      <div class="col-md-3 mb-3 px-3">
+        <label for="item_Name" class="yash_star">Vendor Code </label>
+        <input type="text" name="vendor_code" id="item_Name" value="{{$vendor_code}}" class="form-control client_margin" placeholder="Enter Vendor Code Here" readonly="true">
+    </div>
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 

@@ -161,7 +161,7 @@
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ !empty($value->v_code) ? $value->v_code : '' }}</td>
+                                                <td>{{ !empty($value->vendor_code) ? $value->vendor_code : '' }}</td>
 
                                                 <td>{{ !empty($value->v_name) ? $value->v_name : '' }}</td>
 

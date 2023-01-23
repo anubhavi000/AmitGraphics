@@ -62,21 +62,6 @@
       <label for="item_Name" class="yash_star">Vehicle Code </label>
       <input type="text" name="code" id="" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
     </div>
-
-    <div class="col-md-3 mb-3">
-      
-      <label for="">Transporter</label>
-      <br>
-      <select class="chosen-select col-md-3" name="transporter" id="">
-        <option value="">Select</option>
-        @foreach ($trans as $key => $value)
-          <option value="{{$key}}">{{$value}}</option>
-        @endforeach
-      </select>
-    </div>
-
-    
-
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
       <input type="text" name="wt" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
@@ -87,7 +72,20 @@
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
     </div>
-  
+    <div class="col-md-3 mb-3">
+      
+      <label for="">vendor (Transporter)</label>
+      <br>
+      <select onchange="get_vendor(this.value)" class="chosen-select col-md-3" name="vendor" id="">
+        <option value="">Select</option>
+        @foreach ($vendors as $key => $value)
+          <option value="{{$key}}">{{$value}}</option>
+        @endforeach
+      </select>
+    </div> 
+    <div id="infodiv" class="col-md-3">
+
+    </div> 
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 
@@ -139,4 +137,32 @@
 
 
 @endsection
-    
+@section('js')
+<script type="text/javascript">
+    function get_vendor(val){
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{route("return_vendor")}}',
+          dataType: 'json',
+          data: {'vendor': val},
+          success: function (data) 
+          {
+            if(data){
+              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+               html += data.name;
+               html += "<br> Code: ";
+               html += data.code;
+               html += "</span>";
+               $("#infodiv").html(html);
+            }
+          }
+      });    
+  }
+</script>
+@endsection  

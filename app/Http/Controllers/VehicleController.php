@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\VehicleMast;
 use Illuminate\Support\Facades\Auth;
-use App\Models\TransporterMast;
+use App\Models\VendorMast;
 use DB;
 class VehicleController extends Controller
 {
@@ -16,8 +16,8 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $record = VehicleMast::leftjoin('transporter_mast' , 'transporter_mast.id' , '=' , 'vehicle_mast.transporter')
-                             ->select('vehicle_mast.*' , 'transporter_mast.name as transporter')
+        $record = VehicleMast::leftjoin('vendor_mast' , 'vendor_mast.id' , '=' , 'vehicle_mast.vendor')
+                             ->select('vehicle_mast.*' , 'vendor_mast.v_name as transporter')
                              ->orderBy('vehicle_mast.id' , 'desc')
                              ->where('vehicle_mast.status', 1)
                              ->get();
@@ -33,10 +33,10 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        $transporter=TransporterMast::where('status', 1)->pluck('name', 'id')-> toArray();
+        $vendors=VendorMast::where('status', 1)->pluck('v_name', 'id')-> toArray(); //vendors are to be used as transporters
 
         return view('VehicleMaster.create', [
-            'trans' => $transporter,
+            'vendors' => $vendors,
         ]);
         
     }
@@ -59,7 +59,7 @@ class VehicleController extends Controller
                                 'created_at' => date('Y-m-d h:i:s'),
                                 'created_by' => Auth::user()->id,
                                 'status'     => 1,
-                                'transporter'=> $request->transporter
+                                'vendor'=> $request->vendor
                             ]);
             if($insert){
                 return redirect('VehicleMast')->with('success' , 'Added SuccessFully');
@@ -100,12 +100,12 @@ class VehicleController extends Controller
         if(empty($edit)){
             return redirect()->back();
         }
-        $transporter=TransporterMast::where('status', 1)
-                                    ->pluck('name', 'id')
+        $vendors=VendorMast::where('status', 1)
+                                    ->pluck('v_name', 'id')
                                     -> toArray();
 
         return view('VehicleMaster.edit', [
-            'trans' => $transporter,
+            'vendors' => $vendors,
             'edit' => $edit,
         ]);
         
@@ -130,7 +130,7 @@ class VehicleController extends Controller
                                 'pass_wt'    => $request->wt,
                                 'descr'      => $request->description,
                                 'status'     => 1,
-                                'transporter'=>$request->transporter,
+                                'vendor'     =>$request->vendor,
                                 'updated_at' => date('Y-m-d h:i:s'),
                                 'updated_by' => Auth::user()->id,
                             ]);
@@ -164,6 +164,18 @@ class VehicleController extends Controller
         else{
             DB::rollback();
             return redirect()->back();
+        }
+    }
+    function return_vendor(Request $request){
+        if(!empty($request->vendor)){
+            $res = VendorMast::ReturnVendorById($request->vendor);
+            if(!empty($res)){
+                $data = [
+                            'name' => $res->v_name,
+                            'code' => $res->vendor_code
+                        ];
+                return $data;
+            }
         }
     }
 }

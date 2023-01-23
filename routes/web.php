@@ -148,8 +148,11 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::delete('EntryForm_delete'  , 'EntriesController@delete');
     Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
     Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
+    Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
+    Route::post('return_vendor' , 'VehicleController@return_vendor')->name('return_vendor');
     Route::post('check_duplicacy' , 'EntriesController@check_if_duplicate');
     Route::post('SlipGeneration/{id}' , 'EntriesController@SlipGeneration')->name('SlipGeneration');
+    Route::get('GeneratedSlips' , 'EntriesController@ShowGeneratedSlips')->name('GeneratedSlips');
     Route::resource('Module', "ModuleController");
     Route::resource('DesignationModule', "DesignationModuleController");    
     //ends

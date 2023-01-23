@@ -36,7 +36,13 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('VendorMaster.create');
+        $entry = VendorMast::where('status' , 1)
+                           ->orderBy('id' , 'desc')
+                           ->first()->id;
+
+        return view('VendorMaster.create' , [
+            'vendor_code'  => 'ven'.$entry
+        ]);
     }
 
     /**
@@ -47,9 +53,8 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->code)) {
+        if (!empty($request->vendor_code)) {
             $insert = VendorMast::insert([
-                            'v_code'     => $request->code,
                             'v_name'     => $request->name,
                             'gst_no'     => $request->gst,
                             'address'    => $request->addr,
@@ -59,6 +64,7 @@ class VendorController extends Controller
                             'phone'      => $request->phone,
                             'email'      => $request->email,
                             'descr'      => !empty($request->description) ? $request->description : null,
+                            'vendor_code'=> $request->vendor_code,
                             'created_at' => date('Y-m-d h:i:s'),
                             'created_by' => Auth::user()->id,
                             'status'     => 1,
@@ -115,19 +121,19 @@ class VendorController extends Controller
         $decrypt = decrypt($id);
         $update = VendorMast::where('id', $decrypt)
                             ->update([
-                                'v_code' => $request->code,
-                                'v_name' => $request->name,
-                                'gst_no' => $request->gst,
-                                'address' => $request->addr,
-                                'city' => $request->city,
-                                'state' => $request->state,
-                                'pin' => $request->pin,
-                                'phone' => $request->phone,
-                                'email' => $request->email,
-                                'descr' => $request->description,
-                                'status' => 1,
-                                'updated_at' => date('Y-m-d h:i:s'),
-                                'updated_by' => Auth::user()->id,
+                                'vendor_code' => $request->vendor_code,
+                                'v_name'      => $request->name,
+                                'gst_no'      => $request->gst,
+                                'address'     => $request->addr,
+                                'city'        => $request->city,
+                                'state'       => $request->state,
+                                'pin'         => $request->pin,
+                                'phone'       => $request->phone,
+                                'email'       => $request->email,
+                                'descr'       => $request->description,
+                                'status'      => 1,
+                                'updated_at'  => date('Y-m-d h:i:s'),
+                                'updated_by'  => Auth::user()->id,
                             ]);
         if($update){
             return redirect('VendorMast')->with('success' , 'Updated SuccessFully');
