@@ -22,6 +22,7 @@ class EntryMast extends Model
                         'plant',
                         'items_included',
                         'acess_weight_quantity',
+                        'vendor_id',
     					'created_at',
     					'created_by',
     					'updated_by'
@@ -31,7 +32,7 @@ class EntryMast extends Model
     	$req['created_at'] = date('Y-m-d h:i:s');
     	$req['created_by'] =  Auth::user()->id;
     	$req['datetime']   =  date('Y-m-d h:i:s');
- 
+        
     	$obj = Self::create($req);
     	
     	if(!empty($obj)){
@@ -55,7 +56,10 @@ class EntryMast extends Model
                                 'acess_weight_quantity' => !empty($req['acess_weight_quantity']) ? $req['acess_weight_quantity'] : NULL,
                                 'items_included'        => !empty($req['items_included']) ? json_encode($req['items_included'] , true) : NULL,
                                 'plant'                 => !empty($req['plant']) ? $req['plant'] : NUll,
-                                'updated_at'            => date('Y-m-d h:i:s')             
+                                'updated_at'            => date('Y-m-d h:i:s'),
+                                'entry_rate'            => !empty($req['entry_rate']) ? $req['entry_rate'] : NUll,
+                                'entry_weight'          => !empty($req['entry_weight']) ? $req['entry_weight'] : NULL,
+                                'vendor_id'             => !empty($req['vendor_id']) ? $req['vendor_id'] : NUll
                           ]);
             // inserting in the log table
             $arr = [

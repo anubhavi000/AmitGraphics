@@ -67,7 +67,7 @@
         
     <div class="col-md-3">
       <label class="form-label">Transporter Name</label>
-      <select name = "transporter" onchange="get_transporter(this.value)" class="chosen-select">
+      <select name = "vendor_id" onchange="get_transporter(this.value)" class="chosen-select">
           <option value="">Select</option>
           @if(!empty($transporters))
             @foreach($transporters as $key => $value)
@@ -144,9 +144,9 @@
           {
             if(data){
               var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
-               html += data.name;
+               html += data.v_name;
                html += "<br> Contact: ";
-               html += data.contact_no;
+               html += data.phone;
                html += "</span>";
                $("#infodiv").html(html);
             }

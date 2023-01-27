@@ -43,10 +43,41 @@
                   </div>
                 </div>
       <hr class="border-dark bold">
+  <div class="form-row mb-3">
+   <div class="col-md-3 mb-3 px-3">
+        <label for="description">Entry Rate</label>
+        <input type="text" value="{{!empty($entry->entry_rate) ? $entry->entry_rate : ''}}"   name="entry_rate" placeholder ="Enter Entry Rate"  class="form-control client_margin">
+    </div>
+    <div class="col-md-3 mb-3 px-3">
+        <label for="description">Entry Weight ( In Kgs )</label>
+        <input type="text" name="entry_weight" value="{{!empty($entry->entry_weight ) ? $entry->entry_weight : ''}}" name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
+    </div>
+
+    <div class="col-md-3 mb-3 px-3">
+        <label for="description">Date And Time</label>
+        <input type="text" name="datetime" value="{{!empty($entry->datetime) ? date('d-m-Y h:i:A' , strtotime($entry->datetime)) : ''}}"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Transporter Name</label>
+      <select name = "vendor_id" onchange="get_transporter(this.value)" class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($transporters))
+            @foreach($transporters as $key => $value)
+              @if($entry->vendor_id == $key)
+                <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+                <option value="{{$key}}">{{$value}}</option>
+              @endif
+            @endforeach
+          @endif
+      </select>
+    </div>          
+  </div>
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
       <label class="form-label"><b>Acess Weight (In Kg)</b></label>
-      <input class="form-control" type="number" name="acess_weight_quantity">
+      <input class="form-control" type="number" value="{{!empty($entry->acess_weight_quantity) ? $entry->acess_weight_quantity : ''}}" name="acess_weight_quantity">
    </div>
    
     <div class="col-md-3 mb-3 px-3">
@@ -55,7 +86,11 @@
         <option value="">Select</option>
         @if(!empty($plants))
           @foreach($plants as $key => $value)
-            <option value="{{$key}}">{{$value}}</option>
+            @if($entry->plant == $key)
+              <option selected="true" value="{{$key}}">{{$value}}</option>
+            @else
+              <option value="{{$key}}">{{$value}}</option>
+            @endif
           @endforeach
         @endif
       </select>
@@ -66,6 +101,14 @@
         <input onkeyup="sort_items(this.value)" type="text" id="sortinput" class="form-control">
       </div> -->
     </div>
+    @php
+      if(!empty($entry->items_included)){
+        $items_checked = json_decode($entry->items_included);
+      }
+      else{
+        $items_checked = [];
+      }
+    @endphp
     <div class="col-md-12">
       <div id="hide_2" class="table-responsive">
 
@@ -78,7 +121,11 @@
                     @if($count == 0)
                       <tr> 
                     @endif
+                      @if(!in_array($key , $items_checked))
                         <td style="border: none !important;"><input type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      @else
+                      <td style="border: none !important;"><input checked="true" type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      @endif
                     @if($count == 2)
                       <?php $count = 0; ?>
                       </tr>

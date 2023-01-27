@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EntryMast;
-use App\Models\TransporterMast;
+use App\Models\VendorMast;
 use App\Models\PlantMast;
 use App\Models\ItemMast;
 
@@ -30,6 +30,12 @@ class EntriesController extends Controller
             $entries   = EntryMast::where('slip_no' , 'LIKE' , $slip_no.'%')
                                 ->orderBy('slip_no' , 'desc')
                                 ->get();
+            if(!empty($entries)){
+                if(count($entries)  == 1){
+                    $encrypted_id = enCrypt($entries[0]->slip_no);
+                    return redirect('EntryForm_action/'.$encrypted_id);
+                }
+            }
             return view($this->module_folder.'.index' , [
                 'entries' => $entries
             ]);            
@@ -43,8 +49,8 @@ class EntriesController extends Controller
      */
     public function create()
     {
-        $transporters = TransporterMast::where('status' , 1)
-                                       ->pluck('name' , 'id')
+        $transporters    =   VendorMast::where('status' , 1)
+                                       ->pluck('v_name' , 'id')
                                        ->toArray();
         return view($this->module_folder.'/create' , [
             'transporters' => $transporters
@@ -83,15 +89,19 @@ class EntriesController extends Controller
         $items = ItemMast::where('status' , 1)
                          ->pluck('name' , 'id')
                          ->toArray();
+        $transporters =     VendorMast::where('status' , 1)
+                                       ->pluck('v_name' , 'id')
+                                       ->toArray();                         
 
         if(empty($entry)){
             return redirect()->back();
         }
         else{
             return view($this->module_folder.'.action' , [
-                'entry' => $entry,
-                'plants'=> $plants,
-                'items' => $items
+                'entry'        => $entry,
+                'plants'       => $plants,
+                'items'        => $items,
+                'transporters' => $transporters
             ]);
         }        
     }
@@ -147,8 +157,8 @@ class EntriesController extends Controller
         if(empty($request->transporter)){
             return false;
         }
-        $transporter = TransporterMast::where('id' , (int)$request->transporter)
-                                       ->first();
+        $transporter =  VendorMast::where('id' , (int)$request->transporter)
+                                  ->first();
         if(empty($transporter)){
             return false;
         }
