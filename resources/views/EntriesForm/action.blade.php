@@ -95,6 +95,8 @@
         @endif
       </select>
     </div>
+        <div id="infodiv" class="col-md-3">
+    </div>
     <div class="col-md-12 mb-2">
 <!--       <div class="col-md-3">
         <label class="form-label">Sort Items By Name</label>
@@ -185,3 +187,32 @@
 
 
 @endsection
+<script type="text/javascript">
+
+  function get_transporter(val){
+
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{route("return_tranporter")}}',
+          dataType: 'json',
+          data: {'transporter': val},
+          success: function (data) 
+          {
+            if(data){
+              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+               html += data.v_name;
+               html += "<br> Contact: ";
+               html += data.phone;
+               html += "</span>";
+               $("#infodiv").html(html);
+            }
+          }
+      });    
+  }
+  </script>
