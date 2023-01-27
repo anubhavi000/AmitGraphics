@@ -52,11 +52,6 @@
      <label for="department_Name" class="yash_star"> Slip No. </label>
      <input type="text" name="slip_no" id="slip_no" class="form-control client_margin" placeholder="Enter Slip Here" required>
    </div>
-
-    <div class="col-md-4 mb-3 px-3">
-        <label for="description">Series</label>
-        <input type="text" name="series" id="series" placeholder="Enter Series" required class="form-control client_margin">
-    </div>
     <div class="col-md-4 mb-3 px-3">
         <label for="description">Date And  Time</label>
         <input type="text"   readonly="true" placeholder ="{{date('d-m-Y h:i:A')}}"  class="form-control client_margin">

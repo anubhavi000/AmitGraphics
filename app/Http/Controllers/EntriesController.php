@@ -59,7 +59,7 @@ class EntriesController extends Controller
      */
     public function store(Request $request)
     {
-        if(!empty($request->slip_no) && !empty($request->series)){
+        if(!empty($request->slip_no)){
             $store = EntryMast::store_slip($request->except('_token'));
 
             if($store){

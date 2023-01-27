@@ -164,7 +164,7 @@
 
                                             <th data-field="date" data-sortable="true">Slip No</th>
 
-                                            <th data-field="note" data-sortable="true">Series</th>
+                                            <!-- <th data-field="note" data-sortable="true">Series</th> -->
 
                                             <th data-field="note13" data-sortable="true">Action</th>
                                         </tr>
@@ -179,11 +179,11 @@
                                                 <td></td>
                                                <td>{{$key+1}}</td>
                                                
-                                                <td>{{ !empty($value->slip_no) ? $value->slip_no: '' }}</td>
-
+                                                <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
+                                                {{--
                                                 <td>{{ !empty($value->series) ? $value->series : '' }}</td>
-
-                                               <td>
+                                                --}}
+                                               <td> 
                                                 <span class="dropdown open">
                                                     <button id="btnGroup" type="button" data-toggle="dropdown"
                                                         aria-haspopup="true" aria-expanded="true"
