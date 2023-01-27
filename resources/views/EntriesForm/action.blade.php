@@ -96,6 +96,10 @@
       </select>
     </div>
         <div id="infodiv" class="col-md-3">
+          @if(!empty($selected_vendor))
+          <label class="form-label">Transporter Details</label>
+          <br><span style="margin-top:10px;" class="text-success"> Transporter Name:  {{$selected_vendor->v_name}}<br> Contact: {{$selected_vendor->phone}}</span>
+          @endif
     </div>
     <div class="col-md-12 mb-2">
 <!--       <div class="col-md-3">

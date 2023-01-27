@@ -92,7 +92,12 @@ class EntriesController extends Controller
         $transporters =     VendorMast::where('status' , 1)
                                        ->pluck('v_name' , 'id')
                                        ->toArray();                         
-
+        if(!empty($entry->vendor_id)){
+            $selected_vendor = VendorMast::where('id' , $entry->vendor_id)->first();
+        }
+        else{
+            $selected_vendor = [];
+        }
         if(empty($entry)){
             return redirect()->back();
         }
@@ -101,7 +106,8 @@ class EntriesController extends Controller
                 'entry'        => $entry,
                 'plants'       => $plants,
                 'items'        => $items,
-                'transporters' => $transporters
+                'transporters' => $transporters,
+                'selected_vendor' => $selected_vendor
             ]);
         }        
     }
