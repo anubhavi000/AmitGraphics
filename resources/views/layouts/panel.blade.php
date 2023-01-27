@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Synergy | Manacle Technologies Pvt. Lmt.</title>
+    <title>Atswask | Manacle Technologies Pvt. Lmt.</title>
 
     @yield('title')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -556,12 +556,7 @@ $layout_status = Auth::user()->layout_status;
                                     <i class="full-screen feather icon-maximize"></i>
                                 </a>
                             </li>
-                            <li class="hide__a" style="margin-top:-12px">
-                                <label class="switch">
-                                    <input id="mobile_grv" type="checkbox" hidden checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </li>
+                            
                         </ul>
                         <ul class="nav-right">
                             <?php
@@ -569,81 +564,8 @@ $layout_status = Auth::user()->layout_status;
                             
                             ?>
                           
-                            <li class="header-notification" style="margin-top: -7px">
-                                <div class="dropdown-primary dropdown">
-                                    <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="feather icon-bell"></i>
-                                        @if(!empty($data[1]))
-                                        
-                                        <span class="badge bg-c-red"  >
-                                          
-                                           {{$data[1]}}
-                                         
-                                        </span>
-                                       
-                                    
-                                         @else
-                                         <span class="badge bg-secondary text-light"  >
-                                           
-                                            0
-                                           
-                                          </span>
-                                          @endif
-                                    </div>
-                                    {{--
-                                    <ul class="show-notification profile-notification notification-view dropdown-menu"
-                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-
-
-                                       
-                                        @if (!empty($data[0]))
-                                            @foreach ($data[0] as $i => $notification)
-                                                <li>
-
-                                                      <span class="fw-bolder fs-4">{{$notification->parent}}</span>  
-                                                    <a href='{{ url("$notification->url") }}'
-                                                        class="notifications p-1"> <span
-                                                            class="text-primary mr-2">{{ $i + 1 }} </span>
-                                                        {{ $notification->text }}
-                                                        @if ($notification->is_seen != 1)
-                                                            <span
-                                                                class="badge bg-c-red inside_count">{{ $notification->count }}</span>
-                                                            <input type="text" value="{{ $notification->count }}"
-                                                                hidden class="count">
-                                                        @else
-                                                            <span
-                                                                class="bg-secondary text-light p-1 rounded-pill">{{ $notification->count }}</span>
-                                                            <input type="text" value="0" hidden class="count">
-                                                        @endif
-                                                    </a>
-
-
-
-                                                </li>
-                                            @endforeach
-                                        @endif
-
-
-                                    </ul>
-                                --}}
-                                </div>
-                            </li>
-                            <li class="user-profile header-notification" style="margin-top: -6px;">
-                                <div class="dropdown-primary dropdown">
-                                    <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <span>
-                                            {{ session('ses_plant_name') ? session('ses_plant_name') : 'Select Plant' }}</span>
-                                        <i class="feather icon-chevron-down"></i>
-                                    </div>
-                                    <ul class="show-notification profile-notification dropdown-menu user-plants"
-                                        style="padding: 0px !important;" data-dropdown-in="fadeIn"
-                                        data-dropdown-out="fadeOut">
-                                        {{-- Set Plant --}}
-
-
-                                    </ul>
-                                </div>
-                            </li>
+                            
+                            
                             <li class="user-profile header-notification" style="margin-top: -6px;">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
