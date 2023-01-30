@@ -112,6 +112,7 @@ class SiteMastController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $now_id = decrypt($id);
         if(!empty($request->name) && !empty($request->address)){
             $arr  = [
                 'name'      => !empty( $request->name ) ? $request->name : NULL,
@@ -122,7 +123,6 @@ class SiteMastController extends Controller
                 'created_by'=> Auth::user()->id,
                 'status'   => 1
             ];
-
             $update = sites::where('id' , $now_id)
                             ->update($arr);
 

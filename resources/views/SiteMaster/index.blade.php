@@ -248,9 +248,9 @@
                                                         class="dropdown-menu mt-1 dropdown-menu-right">
                                                         <a href ="{{ url('SiteMaster/edit', $encrypt_id) }}"
                                                             method="GET" class="blockuie dropdown-item"
-                                                            style="margin-bottom:-10px">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                                Edit
+                                                            style="margin-bottom:-10px;margin-left: -17px;">
+                                                                <i  class="fas fa-pencil-alt"></i>
+                                                                <span style="font-size: 16px;color: black;"><b>Edit</b></span>
                                                         </a>
 
                                                                 
@@ -264,7 +264,7 @@
                                                                         value="{{ $value->id}}">
                                                                     <button style="background:none;border: none; margin-left:-20px;"
                                                                         type="button" onclick="confirMationAlert({{$value->id}})"><i
-                                                                            class="fas fa-trash"
+                                                                           style="margin-left: 5px;" class="fas fa-trash"
                                                                              ></i> delete</button>
                                                                 </form>
 

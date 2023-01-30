@@ -44,10 +44,6 @@
                 </div>
       <hr class="border-dark bold">
   <div class="form-row mb-3">
-   <div class="col-md-3 mb-3 px-3">
-        <label for="description">Entry Rate</label>
-        <input type="text" value="{{!empty($entry->entry_rate) ? $entry->entry_rate : ''}}"   name="entry_rate" placeholder ="Enter Entry Rate"  class="form-control client_margin">
-    </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="description">Entry Weight ( In Kgs )</label>
         <input type="text" name="entry_weight" value="{{!empty($entry->entry_weight ) ? $entry->entry_weight : ''}}" name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">

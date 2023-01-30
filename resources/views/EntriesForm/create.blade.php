@@ -48,17 +48,14 @@
                 </div>
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
-   <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
-     <input type="text" name="slip_no" id="slip_no" class="form-control client_margin" placeholder="Enter Slip Here" required>
-   </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="description">Entry Rate</label>
-        <input type="text"   name="entry_rate" placeholder ="Enter Entry Rate"  class="form-control client_margin">
+    <div class="col-md-3">
+      <label class="form-label">Vehicle No</label>
+      <input name = "vehicle" placeholder="Vehicle No"  class="form-control">
     </div>
-    <div class="col-md-3 mb-3 px-3">
+    
+    <div class="col-md-3 ">
         <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text" name="entry_weight"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
+        <input type="text" name="entry_weight"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control ">
     </div>
 
     <div class="col-md-3">
@@ -73,29 +70,10 @@
       </select>
     </div>
 
-    <div class="col-md-3">
-      <label class="form-label">Supervisor</label>
-      <select name = "supervisor"  class="chosen-select">
-          <option value="">Select</option>
-          @if(!empty($supervisors))
-            @foreach($supervisors as $key => $value)
-              <option value="{{$key}}">{{$value}}</option>
-            @endforeach
-          @endif
-      </select>
-    </div>
-
-    <div class="col-md-3">
-      <label class="form-label">Vehicle Name</label>
-      <select name = "vehicle"  class="chosen-select">
-          <option value="">Select</option>
-          @if(!empty($vehicles))
-            @foreach($vehicles as $key => $value)
-              <option value="{{$key}}">{{$value}}</option>
-            @endforeach
-          @endif
-      </select>
-    </div>
+   <div class="col-md-3 mb-3 px-3">
+     <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
+     <input type="text" name="slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
+   </div>
 
     <div class="col-md-3">
       <label class="form-label">Unloading Place ( Site ) </label>
@@ -109,22 +87,28 @@
       </select>
     </div>    
 
+
     <div class="col-md-3">
-      <label class="form-label">Transporter Name</label>
-      <select onchange="get_transporter(this.value)" name = "vendor_id" class="chosen-select">
+      <label class="form-label">Supervisor</label>
+      <select name = "supervisor"  class="chosen-select">
           <option value="">Select</option>
-          @if(!empty($transporters))
-            @foreach($transporters as $key => $value)
+          @if(!empty($supervisors))
+            @foreach($supervisors as $key => $value)
               <option value="{{$key}}">{{$value}}</option>
             @endforeach
           @endif
       </select>
-    </div>  
+    </div>
+    <div class="col-md-3">
+      <label> Date And Time </label>
+      <input type="text" class="form-control" readonly="true" value="{{date('Y-m-d h:i:A')}}">
+    </div>
+
     <div id="infodiv" class="col-md-3">
     </div>
       <div class="col-md-12 mt-4">
       <div id="hide_2" class="table-responsive">
-
+        <h4><b>Select Items</b></h4>
           <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
               <tbody>
                 @php

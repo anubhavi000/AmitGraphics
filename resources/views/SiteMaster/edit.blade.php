@@ -30,7 +30,7 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('PlantMast.update' , $encrypt_id )}}" method="POST">
+<form action="{{route('SiteMaster.update' , $encrypt_id )}}" method="POST">
     @csrf
     @method('patch')
 <div class="container-fluid">
@@ -55,7 +55,7 @@
      </div>
        <div class="col-md-3 mb-3 px-3">
        <label for="item_Name" class="yash_star"> Latitude </label>
-       <input type="text" name="latitude" value="{{!empty($value->latitude) ? $value->latitude : ''}}" id="latitude" class="form-control client_margin" placeholder="Enter Latitude" >
+       <input type="text" name="latitude" value="{{!empty($data->latitude) ? $data->latitude : ''}}" id="latitude" class="form-control client_margin" placeholder="Enter Latitude" >
        </div>
     <div class="col-md-3 mb-3 px-3">
        <label for="item_Name" class="yash_star"> Longitude </label>
