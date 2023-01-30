@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EntryLogs;
-use App\models\VehicleMast;
+use App\Models\VehicleMast;
 use App\Models\VendorMast;
 use Auth;
 use DB;
