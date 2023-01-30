@@ -39,7 +39,7 @@
                   <input value="{{$vehicle_info->vehicle_Number}}" type="text" name="vehicle_Number" id="vehicle_Number" class="form-control" placeholder="Vehicle Number" data-toggle="tooltip" data-placement="bottom" required>
                   <!-- <p class="heading_Bottom">Please Enter Your Vehicle Number Carefully</p> -->
                 </div>
-                <div class="col-md-3 px-3">
+                <div class="col-md-3">
                   <label style="margin-bottom:0px" for="vehicle_Type" class="yash_star">Vehicle Type</label>
                   <select class="form-control fstdropdown-select" id="vehicle_Type" name="vehicle_Type" required>
                   <option value="">Select</option>
@@ -54,7 +54,7 @@
                   </select>
                 </div>
               
-                <div class="col-md-3 px-3">
+                <div class="col-md-3">
                   <label style="margin-bottom:0px" for="manufacturer" class="yash_star">Manufacturer</label>
                   <select class="form-control fstdropdown-select" id="manufacturer" name="manufacturer" required>
                     <option value="">select</option>
