@@ -237,23 +237,21 @@
                                                         <td>{{ !empty($value->longitude) ? $value->longitude : '' }}</td>
 
                                                         <?php $encrypt_id = enCrypt($value->id); ?>
-                                                         <td><span class="dropdown open">
-                                                                <button id="btnGroup" type="button" data-toggle="dropdown"
-                                                                    aria-haspopup="true" aria-expanded="true"
-                                                                    class="btn btn-primary btn-sm dropdown-toggle dropdown-menu-right">
-                                                                    <i class="fas fa-cog"></i>
-                                                                </button>
-                                                                <span aria-labelledby="btnGroup"
-                                                                    class="dropdown-menu mt-1 dropdown-menu-right">
-                                                        <form action="{{ url('SiteMaster.edit', $encrypt_id) }}"
+                                                        <td>
+                                                <span class="dropdown open">
+                                                    <button id="btnGroup" type="button" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="true"
+                                                        class="btn btn-primary btn-sm dropdown-toggle dropdown-menu-right">
+                                                        <i class="fas fa-cog"></i>
+                                                    </button>
+                                                    <span aria-labelledby="btnGroup"
+                                                        class="dropdown-menu mt-1 dropdown-menu-right">
+                                                        <a href ="{{ url('SiteMaster/edit', $encrypt_id) }}"
                                                             method="GET" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
-                                                            @csrf
-
-                                                            <button style="background:none;border: none;"
-                                                                type="submit"><i class="fas fa-pencil-alt"></i>
-                                                                Edit</button>
-                                                        </form><br>
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                                Edit
+                                                        </a>
 
                                                                 
 

@@ -157,6 +157,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::resource('DesignationModule', "DesignationModuleController");   
     Route::get('print_invoice/{id}' , 'EntriesController@PrintInvoice'); 
     Route::resource('SiteMaster' , 'SiteMastController');
+    Route::get('SiteMaster/edit/{id}' , 'SiteMastController@edit');
     Route::delete('delete_site/{id}' , 'SiteMastController@delete');
     //ends
 

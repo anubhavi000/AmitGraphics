@@ -97,7 +97,7 @@ class SiteMastController extends Controller
             return redirect()->back();
         }
         else{
-            return redirect($this->url.'.edit' , [
+            return view($this->view.'.edit' , [
                 'data'  => $entry
             ]);
         }

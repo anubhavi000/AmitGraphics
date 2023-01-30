@@ -1,6 +1,9 @@
 @extends('layouts.panel')
 
 @section('content')
+@php
+  $encrypt_id = encrypt($data->id);
+@endphp
 <div class="pcoded-content">
             <!-- [ breadcrumb ] start -->
             <div class="page-header card"  id="grv_margin">
@@ -44,19 +47,19 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
      <div class="col-md-3 mb-3 px-3">
        <label for="item_Name" class="yash_star"> Site Name </label>
-       <input type="text" name="name" id="site_name" class="form-control client_margin" placeholder="Enter Site Name" required>
+       <input type="text" name="name" id="site_name" value="{{!empty($data->name) ? $data->name : ''}}" class="form-control client_margin" placeholder="Enter Site Name" required>
      </div>
        <div class="col-md-3 mb-3 px-3">
        <label for="item_Name" class="yash_star"> Address </label>
-       <input type="text" name="address" id="address" class="form-control client_margin" placeholder="Enter Site Address" required>
+       <input type="text" name="address" id="address" class="form-control client_margin" value="{{!empty($data->address) ? $data->address : ''}}" placeholder="Enter Site Address" required>
      </div>
        <div class="col-md-3 mb-3 px-3">
        <label for="item_Name" class="yash_star"> Latitude </label>
-       <input type="text" name="latitude" id="latitude" class="form-control client_margin" placeholder="Enter Latitude" >
+       <input type="text" name="latitude" value="{{!empty($value->latitude) ? $value->latitude : ''}}" id="latitude" class="form-control client_margin" placeholder="Enter Latitude" >
        </div>
     <div class="col-md-3 mb-3 px-3">
        <label for="item_Name" class="yash_star"> Longitude </label>
-       <input type="text" name="longitude" id="longitude" class="form-control client_margin" placeholder="Enter Longitude" >
+       <input type="text" name="longitude" value="{{!empty($data->longitude) ? $data->longitude : ''}}" id="longitude" class="form-control client_margin" placeholder="Enter Longitude" >
      </div> 
   
    <div class="col-md-12" style="text-align: right;">
