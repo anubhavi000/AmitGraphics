@@ -44,10 +44,109 @@
                 </div>
       <hr class="border-dark bold">
   <div class="form-row mb-3">
+    <div class="col-md-3">
+      <label class="form-label">Vehicle</label>
+      <select name = "vehicle"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($vehicles))
+            @foreach($vehicles as $key => $value)
+              @if($entry->vehicle == $key)
+                <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+                <option value="{{$key}}">{{$value}}</option>
+              @endif
+            @endforeach
+          @endif
+      </select>
+    </div>
+    
+    <div class="col-md-3 ">
+        <label for="description">Tare Weight ( In Kgs )</label>
+        <input type="text"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight" value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}" placeholder ="Enter Entry Weight"  class="form-control ">
+    </div>
+
+    <div class="col-md-3 ">
+        <label for="description">Gross Weight ( In Kgs )</label>
+        <input type="text" id="GrossWeight" name="gross_weight" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)' value="{{!empty($entry->gross_weight) ? $entry->gross_weight : ''}}" placeholder ="Enter Gross Weight"  class="form-control ">
+    </div>    
+
+    <div class="col-md-3 ">
+        <label for="description">Net Weight</label>
+        <input type="text" name="net_weight" readonly="true" id="NetWeight"  value="{{!empty($entry->net_weight) ? $entry->net_weight : ''}}" placeholder ="Enter Net Weight"  class="form-control ">
+    </div>
+
+    <div class="col-md-3 ">
+        <label for="description">Vehicle Pass WT</label>
+        <input type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()"  value="{{!empty($entry->vehicle_pass) ? $entry->vehicle_pass : ''}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
+    </div>
+
+    <div class="col-md-3 ">
+        <label for="description">Excess Weight</label>
+        <input type="text" name="excess_weight" id="excess_weight" readonly="true" value="{{!empty($entry->excess_weight) ? $entry->excess_weight : ''}}" placeholder ="Enter Excess Weight"  class="form-control ">
+    </div>        
+
+    <div class="col-md-3">
+      <label class="form-label">Loading Plant</label>
+      <select name = "plant"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($plants))
+            @foreach($plants as $key => $value)
+              @if($entry->plant == $key)
+                <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+                <option value="{{$key}}">{{$value}}</option>
+              @endif
+            @endforeach
+          @endif
+      </select>
+    </div>
+
+   <div class="col-md-3 mb-3 px-3">
+     <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
+     <input type="text" name="kanta_slip_no" value="{{ !empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
+   </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Unloading Place ( Site ) </label>
+      <select  class="chosen-select" name = "site">
+          <option value="">Select</option>
+          @if(!empty($sites))
+            @foreach($sites as $key => $value)
+              @if($entry->site == $key)
+                <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+                <option value="{{$key}}">{{$value}}</option>
+              @endif
+            @endforeach
+          @endif
+      </select>
+    </div>    
+
+    <div class="col-md-3">
+      <label class="form-label">Supervisor</label>
+      <select name = "supervisor"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($supervisors))
+            @foreach($supervisors as $key => $value)
+              @if($entry->supervisor == $key)
+                <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+              <option value="{{$key}}">{{$value}}</option>
+              @endif
+            @endforeach
+          @endif
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label> Date And Time </label>
+      <input type="text" class="form-control" readonly="true" value="{{!empty($entry->datetime) ? date('Y-m-d h:i:A' , strtotime($entry->datetime)) : ''}}">
+    </div>           
+    {{--
     <div class="col-md-3 mb-3 px-3">
         <label for="description">Entry Weight ( In Kgs )</label>
         <input type="text" name="entry_weight" value="{{!empty($entry->entry_weight ) ? $entry->entry_weight : ''}}" name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
     </div>
+
 
     <div class="col-md-3 mb-3 px-3">
         <label for="description">Date And Time</label>
@@ -91,6 +190,7 @@
         @endif
       </select>
     </div>
+    --}}
         <div id="infodiv" class="col-md-3">
           @if(!empty($selected_vendor))
           <label class="form-label">Transporter Details</label>
@@ -111,7 +211,8 @@
         $items_checked = [];
       }
     @endphp
-    <div class="col-md-12">
+    <div class="col-md-12 mt-4">
+      <h4> Select Items </h4>
       <div id="hide_2" class="table-responsive">
 
           <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
@@ -215,4 +316,40 @@
           }
       });    
   }
+  function FillNetWeight(e){
+       var x = e.which || e.keycode;
+    if((x>=48 && x<=57))
+      CalculateNetWeight();  
+    else
+      return false;
+   }
+   function CalculateNetWeight(){
+      var tare = $("#TareWeight").val();
+      var gross = $("#GrossWeight").val();
+
+      if(tare != '' && gross != ''){
+        var NewWeight = gross - tare;
+      }
+        if(!isNaN(NewWeight)){
+          $("#NetWeight").val(NewWeight);
+        }
+        else{
+          $("#NetWeight").val(0);
+        }
+        calculateexcessweight();
+   }
+   function calculateexcessweight(){
+     var net_weight = $("#NetWeight").val();
+     var pass = $("#vehicle_pass").val();
+
+     if(net_weight != '' && pass != ''){
+          if(net_weight > pass){
+              var excess = net_weight - pass; 
+          }
+          else{
+              var excess = 0;
+          }
+            $("#excess_weight").val(excess);
+        }
+     }
   </script>

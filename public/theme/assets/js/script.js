@@ -3,7 +3,6 @@
 
 
 
-
              $(document).ready( function() {
                 $(".datepicker").datepicker({
                    
@@ -1424,4 +1423,14 @@ var trBoldBlue = $("table");
 $(trBoldBlue).on("click", "tr", function () {
     $(this).toggleClass("bold-blue");
 });
+
+
+// script for preventing user from entring alphabets in input
+function restrictAlphabets(e){
+    var x = e.which || e.keycode;
+    if((x>=48 && x<=57))
+      return true;
+    else
+      return false;
+   }
 

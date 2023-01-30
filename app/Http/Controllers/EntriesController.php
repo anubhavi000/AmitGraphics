@@ -89,33 +89,44 @@ class EntriesController extends Controller
      */
     public function store(Request $request)
     {
-        if(!empty($request->slip_no)){
             $store = EntryMast::store_slip($request->except('_token'));
 
-            if($store){
-                return redirect('EntryForm')->with('success' , 'Slip Created SuccessFully');
-            }
-            else{
-                return redirect()->back()->with( 'success' , 'Could Not Create');
-            }
+        if($store){
+            return redirect('EntryForm')->with('success' , 'Slip Created SuccessFully');
         }
         else{
-            return redirect()->back()->with('success' , 'Could Not Created');
+            return redirect()->back()->with( 'success' , 'Could Not Create');
         }
     }
     public function action(Request $request  , $id){
         $now_id = decrypt($id);
         $entry =  EntryMast::where('slip_no' , $now_id)
                            ->first();
+
+        $vehicles        =  VehicleMast::where('status' , 1)
+                               ->pluck('vehicle_no' , 'id')
+                               ->toArray();
+
         $plants  = PlantMast::where('status' , 1)
                             ->pluck('name' , 'id')
                             ->toArray();
+
         $items = ItemMast::where('status' , 1)
                          ->pluck('name' , 'id')
                          ->toArray();
+
         $transporters =     VendorMast::where('status' , 1)
                                        ->pluck('v_name' , 'id')
-                                       ->toArray();                         
+                                       ->toArray();
+
+        $sites           =  Sites::where('status' , 1)
+                                 ->pluck('name' , 'id')
+                                 ->toArray();
+
+        $supervisors     = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+
         if(!empty($entry->vendor_id)){
             $selected_vendor = VendorMast::where('id' , $entry->vendor_id)->first();
         }
@@ -127,10 +138,13 @@ class EntriesController extends Controller
         }
         else{
             return view($this->module_folder.'.action' , [
-                'entry'        => $entry,
-                'plants'       => $plants,
-                'items'        => $items,
-                'transporters' => $transporters,
+                'entry'           => $entry,
+                'plants'          => $plants,
+                'items'           => $items,
+                'sites'           => $sites,
+                'supervisors'     => $supervisors,
+                'transporters'    => $transporters,
+                'vehicles'        => $vehicles,
                 'selected_vendor' => $selected_vendor
             ]);
         }        

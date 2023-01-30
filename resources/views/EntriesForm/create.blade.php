@@ -49,13 +49,20 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3">
-      <label class="form-label">Vehicle No</label>
-      <input name = "vehicle" placeholder="Vehicle No"  class="form-control">
+      <label class="form-label">Vehicle</label>
+      <select name = "vehicle"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($vehicles))
+            @foreach($vehicles as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
     </div>
     
     <div class="col-md-3 ">
         <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text" name="entry_weight"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control ">
+        <input type="text" name="entry_weight"  onkeypress='return restrictAlphabets(event)' name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control ">
     </div>
 
     <div class="col-md-3">
@@ -72,7 +79,7 @@
 
    <div class="col-md-3 mb-3 px-3">
      <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
-     <input type="text" name="slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
+     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
    </div>
 
     <div class="col-md-3">
@@ -99,6 +106,7 @@
           @endif
       </select>
     </div>
+
     <div class="col-md-3">
       <label> Date And Time </label>
       <input type="text" class="form-control" readonly="true" value="{{date('Y-m-d h:i:A')}}">
