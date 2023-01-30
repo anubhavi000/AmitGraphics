@@ -49,25 +49,69 @@
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star"> Slip No. </label>
+     <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
      <input type="text" name="slip_no" id="slip_no" class="form-control client_margin" placeholder="Enter Slip Here" required>
    </div>
-    <div class="col-md-4 mb-3 px-3">
-        <label for="description">Date And  Time</label>
-        <input type="text"   readonly="true" placeholder ="{{date('d-m-Y h:i:A')}}"  class="form-control client_margin">
-    </div>
-    <div class="col-md-4 mb-3 px-3">
+    <div class="col-md-3 mb-3 px-3">
         <label for="description">Entry Rate</label>
         <input type="text"   name="entry_rate" placeholder ="Enter Entry Rate"  class="form-control client_margin">
     </div>
-    <div class="col-md-4 mb-3 px-3">
-        <label for="description">Entry Weight ( In Kgs )</label>
+    <div class="col-md-3 mb-3 px-3">
+        <label for="description">Tare Weight ( In Kgs )</label>
         <input type="text" name="entry_weight"  name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control client_margin">
     </div>
-        
+
+    <div class="col-md-3">
+      <label class="form-label">Plant</label>
+      <select name = "plant"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($plant))
+            @foreach($plant as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Supervisor</label>
+      <select name = "supervisor"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($supervisors))
+            @foreach($supervisors as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Vehicle Name</label>
+      <select name = "vehicle"  class="chosen-select">
+          <option value="">Select</option>
+          @if(!empty($vehicles))
+            @foreach($vehicles as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Unloading Place ( Site ) </label>
+      <select  class="chosen-select" name = "site">
+          <option value="">Select</option>
+          @if(!empty($sites))
+            @foreach($sites as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
+    </div>    
+
     <div class="col-md-3">
       <label class="form-label">Transporter Name</label>
-      <select name = "vendor_id" onchange="get_transporter(this.value)" class="chosen-select">
+      <select onchange="get_transporter(this.value)" name = "vendor_id" class="chosen-select">
           <option value="">Select</option>
           @if(!empty($transporters))
             @foreach($transporters as $key => $value)
@@ -78,7 +122,30 @@
     </div>  
     <div id="infodiv" class="col-md-3">
     </div>
-  
+      <div class="col-md-12 mt-4">
+      <div id="hide_2" class="table-responsive">
+
+          <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
+              <tbody>
+                @php
+                  $count = 0;
+                @endphp
+                  @foreach ($items as $key => $value)
+                    @if($count == 0)
+                      <tr> 
+                    @endif
+                      <td style="border: none !important;"><input  type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                    @if($count == 2)
+                      <?php $count = 0; ?>
+                      </tr>
+                    @else
+                      <?php $count += 1; ?>
+                    @endif
+                  @endforeach
+              </tbody>
+          </table>
+      </div>
+    </div>
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 

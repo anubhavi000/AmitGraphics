@@ -25,14 +25,20 @@ class EntryMast extends Model
                         'vendor_id',
     					'created_at',
     					'created_by',
-    					'updated_by'
+    					'updated_by',
+                        'supervisor',
+                        'vehicle',
+                        'site'
     					];
 
     static function store_slip($req){
     	$req['created_at'] = date('Y-m-d h:i:s');
     	$req['created_by'] =  Auth::user()->id;
     	$req['datetime']   =  date('Y-m-d h:i:s');
-        
+        if(!empty($req['items_included'])){
+            $req['items_included']  = json_encode($req['items_included']);
+        }
+
     	$obj = Self::create($req);
     	
     	if(!empty($obj)){

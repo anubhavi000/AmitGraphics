@@ -156,6 +156,8 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::resource('Module', "ModuleController");
     Route::resource('DesignationModule', "DesignationModuleController");   
     Route::get('print_invoice/{id}' , 'EntriesController@PrintInvoice'); 
+    Route::resource('SiteMaster' , 'SiteMastController');
+    Route::delete('delete_site/{id}' , 'SiteMastController@delete');
     //ends
 
     // always add routes on above this line 

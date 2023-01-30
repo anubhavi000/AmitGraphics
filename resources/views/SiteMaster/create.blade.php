@@ -9,8 +9,8 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Add Vehicles</h5>
-                                <p class="heading_Bottom">Create New Vehicle</p>
+                                <h5>Add Sites</h5>
+                                <p class="heading_Bottom">Create New unloading Place ( Site )</p>
                             </div>
                         </div>
                   </div>
@@ -24,17 +24,11 @@
                     </ul>
                 </div>
                 </div>
-<!-- <div class="container">
- <div class="row">
-  <div class="col-md-6">
-    <h3>Add Designation</h3>
-    <p class="heading_Bottom"><i class="far fa-building mr-2"></i> Create New Designation</p>
-    </div> -->
 </div>
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('VehicleMast.store')}}" method="POST">
+<form action="{{route('SiteMaster.store')}}" method="POST">
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
@@ -49,47 +43,28 @@
       <hr class="border-dark bold"> --}}
 
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
-   
-    <div class="col-md-3 mb-3 px-3">
-        <label for="vehicle_no" class="yash_star">Vehicle No. </label>
-        <input type="text" name="number" id="vehicle_no" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-        <label for="item_Name" class="yash_star">Vehicle Type </label>
-        <input type="text" name="type" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Type Here" required>
-    </div>
-    <div class="col-md-3 mb-3 px-3">
-      <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
-      <input type="text" name="wt" id="vehicle_pass"  onkeypress='return restrictAlphabets(event)' class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
-  </div>
-   
-
-    <div class="col-md-6 mb-3 px-3">
-        <label for="description">Description</label>
-        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
-    </div>
-    <div class="col-md-3 mb-3">
-      
-      <label for="">vendor (Transporter)</label>
-      <br>
-      <select onchange="get_vendor(this.value)" class="chosen-select col-md-3" name="vendor" id="">
-        <option value="">Select</option>
-        @foreach ($vendors as $key => $value)
-          <option value="{{$key}}">{{$value}}</option>
-        @endforeach
-      </select>
-    </div> 
-    <div id="infodiv" class="col-md-3">
-
-    </div> 
+   <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star"> Site Name </label>
+     <input type="text" name="name" id="site_name" class="form-control client_margin" placeholder="Enter Site Name" required>
+   </div>
+     <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star"> Address </label>
+     <input type="text" name="address" id="address" class="form-control client_margin" placeholder="Enter Site Address" required>
+   </div>
+     <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star"> Latitude </label>
+     <input type="text" name="latitude" id="latitude" class="form-control client_margin" placeholder="Enter Latitude" >
+   </div>
+  <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star"> Longitude </label>
+     <input type="text" name="longitude" id="longitude" class="form-control client_margin" placeholder="Enter Longitude" >
+   </div>  
+   <div class="col-md-3 mb-3 px-3">
+   </div> 
    <div class="col-md-12" style="text-align: right;">
   <hr class="mt-3 border-dark bold">
 
-  @php
-   $defaulturl= "VehicleMast";   
-  @endphp
-
- <button class="blob-btn"  id="cancelbtn"   
+ <button class="blob-btn" id="cancelbtn"  action="action"
     type="button"><i class="fas fa-times pr-2"></i>
     Cancel
     <span class="blob-btn__inner">
@@ -131,45 +106,5 @@
 <!-- Close Container -->
 </div>
 
-@endsection
-@section('js')
-<script type="text/javascript">
-        $('#vehicle_no').on('keypress', function(e) {
-            if (e.which == 32){
-                return false;
-            }
-        });
-    function get_vendor(val){
-      $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-              });
 
-      $.ajax({
-          type: "POST",
-          url:  '{{route("return_vendor")}}',
-          dataType: 'json',
-          data: {'vendor': val},
-          success: function (data) 
-          {
-            if(data){
-              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
-               html += data.name;
-               html += "<br> Code: ";
-               html += data.code;
-               html += "</span>";
-               $("#infodiv").html(html);
-            }
-          }
-      });        
-  }
-     function restrictAlphabets(e){
-       var x = e.which || e.keycode;
-    if((x>=48 && x<=57))
-      return true;
-    else
-      return false;
-   }
-</script>
-@endsection  
+@endsection

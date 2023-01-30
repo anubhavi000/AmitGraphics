@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\EntryMast;
 use App\Models\VendorMast;
 use App\Models\PlantMast;
+use App\Models\SupervisorMast;
+use App\Models\VehicleMast;
 use App\Models\ItemMast;
+use App\Models\sites;
 
 class EntriesController extends Controller
 {
@@ -52,8 +55,29 @@ class EntriesController extends Controller
         $transporters    =   VendorMast::where('status' , 1)
                                        ->pluck('v_name' , 'id')
                                        ->toArray();
+        $vehicles        =  VehicleMast::where('status' , 1)
+                                       ->pluck('vehicle_no' , 'id')
+                                       ->toArray();
+        $sites           =  Sites::where('status' , 1)
+                                 ->pluck('name' , 'id')
+                                 ->toArray();
+        $supervisors     = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+        $items           = ItemMast::where('status' , 1)
+                                   ->pluck('name' , 'id')
+                                   ->toArray();
+        $plants          =  PlantMast::where('status' , 1)
+                                     ->pluck('name' , 'id')
+                                     ->toArray();
+
         return view($this->module_folder.'/create' , [
-            'transporters' => $transporters
+            'transporters' => $transporters ,
+            'vehicles'     => $vehicles,
+            'sites'        => $sites,
+            'supervisors'  => $supervisors,
+            'items'        => $items,
+            'plant'        => $plants
         ]);   
     }
 

@@ -46,19 +46,15 @@ $encrypt_id = encrypt($edit->id);
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Vehicle No. </label>
-        <input value="{{$edit->vehicle_no}}" type="text" name="number" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
+        <input value="{{$edit->vehicle_no}}" type="text" name="number" id="vehicle_no" class="form-control client_margin" placeholder="Enter Vehicle No. Here" required>
     </div>
     <div class="col-md-3 mb-3 px-3">
         <label for="item_Name" class="yash_star">Vehicle Type </label>
         <input value="{{$edit->type}}" type="text" name="type" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Type Here" required>
     </div>
-    <div class="col-md-3 mb-3 px-3">
-      <label for="item_Name" class="yash_star">Vehicle Code </label>
-      <input value="{{$edit->v_code}}" type="text" name="code" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Code Here" required>
-    </div>
     <div class="col-md-3 mb-3">
     <label for="">vendor (Transporter)</label>
-      <select class="chosen-select" name="vendor" id="">
+      <select onchange="get_vendor(this.value)" class="chosen-select" name="vendor" id="">
         <option value="">Select</option>
         @foreach ($vendors as $key => $value)
           @if($key == $edit->vendor)
@@ -74,13 +70,17 @@ $encrypt_id = encrypt($edit->id);
 
     <div class="col-md-3 mb-3 px-3">
       <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
-      <input value="{{$edit->pass_wt}}" type="text" name="wt" id="item_Name" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
+      <input value="{{$edit->pass_wt}}" type="text" onkeypress='return restrictAlphabets(event)'  name="wt" id="vehicle_pass_wt" class="form-control client_margin" placeholder="Enter Vehicle Pass Here" required>
   </div>
    
 
     <div class="col-md-6 mb-3 px-3">
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->descr}}</textarea>
+    </div>
+
+    <div class="col-md-3 mb-3 px-3">
+      <div id="infodiv"></div>
     </div>
 
    <div class="col-md-12" style="text-align: right;">
@@ -128,5 +128,47 @@ $encrypt_id = encrypt($edit->id);
 <!-- Close Container -->
 </div>
 
-
 @endsection
+@section('js')
+<script type="text/javascript">
+      $('#vehicle_no').on('keypress', function(e) {
+            if (e.which == 32){
+                return false;
+            }
+        });
+        function get_vendor(val){
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{route("return_vendor")}}',
+          dataType: 'json',
+          data: {'vendor': val},
+          success: function (data) 
+          {
+            if(data){
+              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+               html += data.name;
+               html += "<br> Code: ";
+               html += data.code;
+               html += "</span>";
+               $("#infodiv").html(html);
+            }
+          }
+      });     
+
+  }
+       function restrictAlphabets(e){
+       var x = e.which || e.keycode;
+    if((x>=48 && x<=57))
+      return true;
+    else
+      return false;
+   }
+       
+</script>
+@endsection  
