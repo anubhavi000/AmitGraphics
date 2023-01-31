@@ -38,15 +38,15 @@
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
-        {{-- <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Designation Information</b></h2>
+        <div class="col-md-6">
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Vehicle Information</b></h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
                   <i class="fa" aria-hidden="true"></i></a>            
                   </div>
                 </div> 
-      <hr class="border-dark bold"> --}}
+      <hr class="border-dark bold">
 
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    

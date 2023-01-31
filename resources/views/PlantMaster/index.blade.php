@@ -112,7 +112,6 @@
 
 
                             </div>
-                            <hr class="border-dark bold">
                             <div id="hide_2" class="table-responsive">
                                 <!--<div id="toolbar">-->
                                 <!--  <select class="form-control">-->

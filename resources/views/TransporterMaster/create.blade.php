@@ -38,28 +38,28 @@
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
-        {{-- <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Designation Information</b></h2>
+         <div class="col-md-6">
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Transporter Information</b></h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
                   <i class="fa" aria-hidden="true"></i></a>            
                   </div>
                 </div> 
-      <hr class="border-dark bold"> --}}
+      <hr class="border-dark bold"> 
 
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
-   <div class="col-md-3 mb-3 px-3">
+   <div class="col-md-4 mb-3 px-3">
      <label for="item_Name" class="yash_star">Transporter Name </label>
      <input type="text" name="name" id="item_Name" class="form-control client_margin" placeholder="Enter Transporter Name Here" required>
     </div>
-    <div class="col-md-3 mb-3 px-3">
+    <div class="col-md-4 mb-3 px-3">
         <label for="item_Name" class="yash_star" type='email'>Transporter Email </label>
         <input type="email" name="email" id="item_Name" class="form-control client_margin" placeholder="Enter Transporter Email Here" >
     </div>
-    <div class="col-md-3 mb-3 px-3">
+    <div class="col-md-4 mb-3 px-3">
         <label for="item_Name" class="yash_star">Transporter Contact No. </label>
-        <input type="text" name="contact_no"  pattern="[0-9]{10}" maxlength="10" id="item_Name" class="form-control client_margin" placeholder="Enter Transporter Contact Number Here" required>
+        <input type="text" name="contact_no"  onkeypress='return restrictAlphabets(event)' maxlength="10" id="item_Name" class="form-control client_margin" placeholder="Enter Transporter Contact Number Here" required>
     </div>
    
 

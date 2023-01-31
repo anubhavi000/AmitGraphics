@@ -112,7 +112,6 @@
 
 
                             </div>
-                            <hr class="border-dark bold">
                             <div id="hide_2" class="table-responsive">
                                 <!--<div id="toolbar">-->
                                 <!--  <select class="form-control">-->
@@ -134,7 +133,7 @@
 
                                             <th data-field="type" data-sortable="true">Vehicle Type</th>
 
-                                            <th data-field="code" data-sortable="true">Vehicle Code</th>
+                                            {{--<th data-field="code" data-sortable="true">Vehicle Code</th>--}}
 
                                             <th data-field="pass" data-sortable="true">Vehicle Pass</th>
 
@@ -161,7 +160,7 @@
 
                                                 <td>{{ !empty($value->type) ? $value->type :''  }}</td>
 
-                                                <td>{{ !empty($value->v_code) ? $value->v_code : '' }}</td>
+                                                {{--<td>{{ !empty($value->v_code) ? $value->v_code : '' }}</td>--}}
 
                                                 <td>{{ !empty($value->pass_wt) ? $value->pass_wt : '' }}</td>
 

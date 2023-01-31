@@ -102,6 +102,13 @@ class EntriesController extends Controller
         $now_id = decrypt($id);
         $entry =  EntryMast::where('slip_no' , $now_id)
                            ->first();
+        
+        if(!empty($entry->vehicle)){
+             $selected_vehicle = VehicleMast::where('id' , $entry->vehicle)->first();
+             $vehicle_pass_weight = !empty($selected_vehicle->pass_wt) ? $selected_vehicle->pass_wt : 0;
+        }   
+                                
+        $chosenvehicle = 
 
         $vehicles        =  VehicleMast::where('status' , 1)
                                ->pluck('vehicle_no' , 'id')
@@ -138,14 +145,15 @@ class EntriesController extends Controller
         }
         else{
             return view($this->module_folder.'.action' , [
-                'entry'           => $entry,
-                'plants'          => $plants,
-                'items'           => $items,
-                'sites'           => $sites,
-                'supervisors'     => $supervisors,
-                'transporters'    => $transporters,
-                'vehicles'        => $vehicles,
-                'selected_vendor' => $selected_vendor
+                'entry'               => $entry,
+                'plants'              => $plants,
+                'items'               => $items,
+                'sites'               => $sites,
+                'vehicle_pass_weight' => $vehicle_pass_weight,
+                'supervisors'         => $supervisors,
+                'transporters'        => $transporters,
+                'vehicles'            => $vehicles,
+                'selected_vendor'     => $selected_vendor
             ]);
         }        
     }

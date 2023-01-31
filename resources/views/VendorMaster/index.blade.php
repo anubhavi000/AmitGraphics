@@ -112,7 +112,6 @@
 
 
                             </div>
-                            <hr class="border-dark bold">
                             <div id="hide_2" class="table-responsive">
                                
                                 <table id="table" data-toggle="table" data-search="true" data-filter-control="true"

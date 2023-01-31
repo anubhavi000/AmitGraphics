@@ -77,7 +77,7 @@
 
     <div class="col-md-3 ">
         <label for="description">Vehicle Pass WT</label>
-        <input type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()"  value="{{!empty($entry->vehicle_pass) ? $entry->vehicle_pass : ''}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
+        <input type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()"  value="{{!empty($vehicle_pass_weight) ? $vehicle_pass_weight : 0}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
     </div>
 
     <div class="col-md-3 ">
@@ -167,7 +167,8 @@
             @endforeach
           @endif
       </select>
-    </div>          
+    </div>  
+            
   </div>
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
@@ -318,7 +319,13 @@
   }
   function FillNetWeight(e){
        var x = e.which || e.keycode;
-    if((x>=48 && x<=57))
+       if(x>=48 && x<=57){
+        var first = true;
+       }
+       if(x== 46){
+        var second = true;
+       }
+    if((first || second))
       CalculateNetWeight();  
     else
       return false;
@@ -341,12 +348,13 @@
    function calculateexcessweight(){
      var net_weight = $("#NetWeight").val();
      var pass = $("#vehicle_pass").val();
-
      if(net_weight != '' && pass != ''){
-          if(net_weight > pass){
+          if(parseInt(net_weight) > parseInt(pass)){
+            console.log('excess');
               var excess = net_weight - pass; 
           }
           else{
+            console.log('not excess');
               var excess = 0;
           }
             $("#excess_weight").val(excess);
