@@ -552,7 +552,7 @@ $layout_status = Auth::user()->layout_status;
                            
                             </li>
                             <li>
-                                <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                                <a href="#!" style="margin-left: -100px;" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="full-screen feather icon-maximize"></i>
                                 </a>
                             </li>
