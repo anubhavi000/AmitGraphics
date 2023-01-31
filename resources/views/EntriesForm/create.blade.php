@@ -114,10 +114,10 @@
 
     <div id="infodiv" class="col-md-3">
     </div>
-      <div style="background-color: #BCCEFB;" class="col-md-12 mt-4">
+      <div class="col-md-12 mt-4">
       <div id="hide_2" class="table-responsive">
         <h4><b>Select Items</b></h4>
-          <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
+          <table style="background-color: #BCCEFB;" id="table" data-toggle="table" data-search="true" data-filter-control="true">
               <tbody>
                 @php
                   $count = 0;

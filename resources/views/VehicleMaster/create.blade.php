@@ -66,7 +66,7 @@
       
       <label for="">vendor (Transporter)</label>
       <br>
-      <select onchange="get_vendor(this.value)" class="chosen-select col-md-3" name="vendor" id="" required="true">
+      <select onchange="get_vendor(this.value)" class="fstdropdown-select col-md-3" name="vendor" id="" required="true">
         <option value="">Select</option>
         @foreach ($vendors as $key => $value)
           <option value="{{$key}}">{{$value}}</option>

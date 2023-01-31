@@ -212,11 +212,11 @@
         $items_checked = [];
       }
     @endphp
-    <div style="background-color: #BCCEFB;" class="col-md-12 mt-4">
+    <div class="col-md-12 mt-4">
       <h4> Select Items </h4>
       <div id="hide_2" class="table-responsive">
 
-          <table  id="table" data-toggle="table" data-search="true" data-filter-control="true">
+          <table style="background-color: #BCCEFB;" id="table" data-toggle="table" data-search="true" data-filter-control="true">
               <tbody>
                 @php
                   $count = 0;
