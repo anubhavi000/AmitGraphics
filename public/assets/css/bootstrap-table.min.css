@@ -126,7 +126,7 @@
 }
 
 .fixed-table-container tbody .selected td {
-    background-color: crimson
+    background-color: darkslategray
 }
 
 .fixed-table-container .bs-checkbox .th-inner {
@@ -211,7 +211,7 @@
     bottom: 0;
     left: 0;
     z-index: 99;
-    background-color: crimson;
+    background-color: darkslategray;
     text-align: center
 }
 
@@ -255,7 +255,7 @@
 .bootstrap-table .table>thead>tr>th {
     vertical-align: top;
     border-bottom: 1px solid #ddd;
-    background-color: crimson;
+    background-color: darkslategray;
     color: white;
     font-weight: bolder;
 }

@@ -35,7 +35,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b></b>{{$entry->slip_no}}</h2>
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b></b> Slip No <b style="font-weight: 700;">:</b> {{$entry->slip_no}}</h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -73,11 +73,6 @@
     <div class="col-md-3 ">
         <label for="description">Net Weight</label>
         <input type="text" name="net_weight" readonly="true" id="NetWeight"  value="{{!empty($entry->net_weight) ? $entry->net_weight : ''}}" placeholder ="Enter Net Weight"  class="form-control ">
-    </div>
-
-    <div class="col-md-3 ">
-        <label for="description">Vehicle Pass WT</label>
-        <input type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()"  value="{{!empty($vehicle_pass_weight) ? $vehicle_pass_weight : 0}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
     </div>
 
     <div class="col-md-3 ">
@@ -140,7 +135,12 @@
     <div class="col-md-3">
       <label> Date And Time </label>
       <input type="text" class="form-control" readonly="true" value="{{!empty($entry->datetime) ? date('Y-m-d h:i:A' , strtotime($entry->datetime)) : ''}}">
-    </div>           
+    </div>
+
+    <div class="col-md-3 ">
+        <label for="description">Vehicle Pass WT</label>
+        <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()"  value="{{!empty($vehicle_pass_weight) ? $vehicle_pass_weight : 0}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
+    </div>               
     {{--
     <div class="col-md-3 mb-3 px-3">
         <label for="description">Entry Weight ( In Kgs )</label>
@@ -212,11 +212,11 @@
         $items_checked = [];
       }
     @endphp
-    <div class="col-md-12 mt-4">
+    <div style="background-color: #BCCEFB;" class="col-md-12 mt-4">
       <h4> Select Items </h4>
       <div id="hide_2" class="table-responsive">
 
-          <table id="table" data-toggle="table" data-search="true" data-filter-control="true">
+          <table  id="table" data-toggle="table" data-search="true" data-filter-control="true">
               <tbody>
                 @php
                   $count = 0;

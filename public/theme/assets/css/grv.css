@@ -11,7 +11,7 @@ nav.pcoded-navbar.is-hover .pcoded-inner-navbar {
 } */
 
 .highlight {
-  background-color: red;
+  background-color: darkslategray;
   /* color: white; */
   -webkit-text-stroke-width: thin;
 
@@ -22,24 +22,24 @@ nav.pcoded-navbar.is-hover .pcoded-inner-navbar {
     top:7vh;
     height: 93vh;
     overflow-y: auto;
-    background-color: crimson;
+    background-color: darkslategray;
 }
 
 .pcoded[theme-layout="vertical"] .pcoded-navbar[pcoded-navbar-position="fixed"]::-webkit-scrollbar {
     width: 0px;
   }
   .bttn{
-  background-color: red;
+  background-color: darkslategray;
 }
 .bttn1{
-  background-color: red;
+  background-color: darkslategray;
 }
 .bttn:hover{
-  background-color: red;
+  background-color: darkslategray;
   opacity: 0.8;
 }
 .bttn1:hover{
-  background-color: red;
+  background-color: darkslategray;
   opacity: 0.8;
 }
 .an_receipt{
@@ -106,24 +106,24 @@ padding-bottom: 20px;
     background-color: #3498db;
 }*/
 .btn_an:hover{
-  border: 2px solid red !important;
+  border: 2px solid darkslategray !important;
   background: none !important;
   color: black;
 }
 .btn_an1{
-  border: 2px solid red;
+  border: 2px solid darkslategray;
   background-color: none;
   font-weight: 900;
 font-size: 20px;
 }
 .btn_an{
-  background: red;
+  background: darkslategray;
 color: white;
 font-weight: 900;
 font-size: 20px;
 }
 .btn_an1:hover{
-  background-color: red;
+  background-color: darkslategray;
   color: white;
 }
 .btn_an2:hover{
@@ -255,7 +255,7 @@ color: white;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: red;
+  color: darkslategray;
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
@@ -273,7 +273,7 @@ color: white;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;
+  border: 2px solid darkslategray;
   border-radius: 30px;
 }
 .blob-btn1:after {
@@ -319,7 +319,7 @@ color: white;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: red;
+  background: darkslategray;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -360,7 +360,7 @@ color: white;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: red;
+  color: darkslategray;
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
@@ -378,7 +378,7 @@ color: white;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;
+  border: 2px solid darkslategray;
   border-radius: 30px;
 }
 .blob-btn3:after {
@@ -424,7 +424,7 @@ color: white;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: red !important;
+  background: darkslategray !important;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -465,7 +465,7 @@ padding: 6px 6px;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: red;
+  color: darkslategray;
   font-size: 14px;
   font-weight: bold;
   background-color: transparent;
@@ -483,7 +483,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;
+  border: 2px solid darkslategray;
   border-radius: 30px;
 }
 .blob-btn31:after {
@@ -529,7 +529,7 @@ padding: 6px 6px;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: red !important;
+  background: darkslategray !important;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -570,7 +570,7 @@ padding: 6px 6px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: red;
+    color: darkslategray;
     font-size: 14px;
     font-weight: bold;
     background-color: transparent;
@@ -588,7 +588,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;;
+  border: 2px solid darkslategray;;
   border-radius: 30px;
 }
 .blob-btn4:after {
@@ -634,7 +634,7 @@ padding: 6px 6px;
   top: 2px;
   width: 33%;
   height: 100%;
-  background: red;
+  background: darkslategray;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -675,7 +675,7 @@ padding: 6px 6px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: red;
+    color: darkslategray;
     font-size: 14px;
     font-weight: bold;
     background-color: transparent;
@@ -693,7 +693,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;;
+  border: 2px solid darkslategray;;
   border-radius: 30px;
 }
 .blob-btn40:after {
@@ -739,7 +739,7 @@ padding: 6px 6px;
   top: 2px;
   width: 33%;
   height: 100%;
-  background: red;
+  background: darkslategray;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -780,7 +780,7 @@ padding: 6px 6px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: red;
+    color: darkslategray;
     font-size: 14px;
     font-weight: bold;
     background-color: transparent;
@@ -798,7 +798,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;;
+  border: 2px solid darkslategray;;
   border-radius: 30px;
 }
 .blob-btn44:after {
@@ -844,7 +844,7 @@ padding: 6px 6px;
   top: 2px;
   width: 33%;
   height: 100%;
-  background: red;
+  background: darkslategray;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -904,7 +904,7 @@ padding: 6px 6px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red;
+  border: 2px solid darkslategray;
   border-radius: 30px;
 }
 .blob-btn42:after {
@@ -919,7 +919,7 @@ padding: 6px 6px;
   border-radius: 30px;
 }
 .blob-btn42:hover {
-  color: red;
+  color: darkslategray;
   border-radius: 30px;
 }
 .blob-btn42:hover:after {
@@ -991,7 +991,7 @@ border-radius: 18px;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: red;
+  color: darkslategray;
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
@@ -1009,7 +1009,7 @@ border-radius: 18px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red !important;
+  border: 2px solid darkslategray !important;
  border-radius: 30px;
 }
 .blob-btn41:after {
@@ -1055,7 +1055,7 @@ border-radius: 18px;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: red;
+  background: darkslategray;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -1096,7 +1096,7 @@ border-radius: 18px;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
-    color: red;
+    color: darkslategray;
     font-size: 13px;
     font-weight: bold;
     background-color: transparent;
@@ -1114,7 +1114,7 @@ border-radius: 18px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid red !important;
+  border: 2px solid darkslategray !important;
  border-radius: 30px;
 }
 .blob-btn5:after {
@@ -1162,7 +1162,7 @@ border-radius: 18px;
   top: 2px;
   width: 25%;
   height: 100%;
-  background: red;
+  background: darkslategray;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -1242,7 +1242,7 @@ label{
 height: 23px;
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
-  background: crimson;
+  background: darkslategray;
   color: #fff;
 }
 
@@ -1303,25 +1303,25 @@ height: 23px;
   background: #e11d48 !important;
 }
 .smgeneratebtn:hover{
-  background: red !important;
+  background: darkslategray !important;
 }
 .generatebtn:hover{
-  background: red !important;
+  background: darkslategray !important;
 }
 .blob-btn5.btn_shw.client_data_btn:hover {
-    background: red;
+    background: darkslategray;
 }
 .client_data_btn:hover{
-    background: red;
+    background: darkslategray;
 }
 .plant_wise_btn:hover{
-  background: red !important;
+  background: darkslategray !important;
 }
 .minus_btn:hover{
-  background: red !important;
+  background: darkslategray !important;
 }
 .downloadbtn:hover{
-    background: red !important;
+    background: darkslategray !important;
 }
 .ledgerbtn:hover{
     background: white !important;
@@ -1362,7 +1362,7 @@ span.select2-selection.select2-selection--single{
 }
 
 .select2-dropdown.select2-dropdown--below:hover {
-    border-color: crimson;
+    border-color: darkslategray;
     overflow-x: hidden;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 8, 0, 0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255,0,0,.6);

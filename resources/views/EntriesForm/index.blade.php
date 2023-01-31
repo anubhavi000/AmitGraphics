@@ -120,7 +120,7 @@
                                                 <div class="input-group client_margin">
                                                     <span class="input-group-addon bg-primary border-primary white"
                                                         id="basic-addon7"
-                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: crimson !important;border: crimson;"><i
+                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
                                                             class="fas fa-briefcase"></i></span>
                                                     <input type="text" value="{{ Request::get('slip_no') }}" name="slip_no"
                                                         class="form-control" id="file_no"
@@ -135,7 +135,7 @@
                                                 <div class="input-group client_margin">
                                                     <span class="input-group-addon bg-primary border-primary white"
                                                         id="basic-addon7"
-                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: crimson !important;border: crimson;"><i
+                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
                                                             class="fas fa-briefcase"></i></span>
                                                     <input type="text" value="{{ Request::get('kanta_slip_no') }}" name="kanta_slip_no"
                                                         class="form-control" id="file_no"

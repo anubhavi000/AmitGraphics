@@ -48,7 +48,7 @@
                                             <div class="input-group client_margin">
                                                 <span class="input-group-addon bg-primary border-primary white"
                                                     id="basic-addon7"
-                                                    style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: #4f81a4 !important;border: #4f81a4;"><i
+                                                    style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
                                                         class="fas fa-briefcase"></i></span>
                                                 <input type="text"  name="from_date" class="form-control datepicker"
                                                     id="from_date" 
@@ -61,7 +61,7 @@
                                             <div class="input-group client_margin">
                                                 <span class="input-group-addon bg-primary border-primary white"
                                                     id="basic-addon7"
-                                                    style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: #4f81a4 !important;border: #4f81a4;"><i
+                                                    style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
                                                         class="fas fa-briefcase"></i></span>
                                                 <input type="text" name="to_date" class="form-control datepicker" id="to_date"
                                                     value="">
@@ -71,7 +71,7 @@
                                     <div class="col-md-4 mt-3">
                                         <input type="submit" name="find" value="find" class="btn btn-success">
                                         <input type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
-                                        <input type="submit" class="btn btn-info" name="export_pdf" value="Export Pdf">
+                                        <input type="submit" class="btn btn-primary" name="export_pdf" value="Export Pdf">
                                     </div>  
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                         </div>
                         <table id="table" class="table table-bordered" style="padding-top: 30px;">
                             <thead>
-                                <tr style="background-color:crimson; color: white;">
+                                <tr style="background-color:darkslategray; color: white;">
                                     <th >S.no</th>
                                     <th  >Slip No</th>
                                     <th> Excess Weight (in kgs)</th>
