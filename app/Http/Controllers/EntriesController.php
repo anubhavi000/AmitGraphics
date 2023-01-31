@@ -25,14 +25,22 @@ class EntriesController extends Controller
     }
     public function index(Request $request)
     {
-        if(empty($request->slip_no)){
+        if(empty($request->slip_no) && empty($request->kanta_slip_no)){
             return view($this->module_folder.'/index');                       
         }   
         else{
-            $slip_no = $request->slip_no;
-            $entries   = EntryMast::where('slip_no' , 'LIKE' , $slip_no.'%')
-                                ->orderBy('slip_no' , 'desc')
-                                ->get();
+            $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
+            $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
+
+            if(!empty($slip_no)){ 
+            $entriesraw   = EntryMast::where('slip_no' , 'LIKE' , $slip_no.'%')
+                                ->orderBy('slip_no' , 'desc');
+            }
+            if(!empty($kanta_slip_no)){
+            $entriesraw   = EntryMast::where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%')
+                                ->orderBy('slip_no' , 'desc');
+            }
+            $entries = $entriesraw->get();
             if(!empty($entries)){
                 if(count($entries)  == 1){
                     $encrypted_id = enCrypt($entries[0]->slip_no);

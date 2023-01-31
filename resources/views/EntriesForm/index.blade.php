@@ -120,7 +120,7 @@
                                                 <div class="input-group client_margin">
                                                     <span class="input-group-addon bg-primary border-primary white"
                                                         id="basic-addon7"
-                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: #4f81a4 !important;border: #4f81a4;"><i
+                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: crimson !important;border: crimson;"><i
                                                             class="fas fa-briefcase"></i></span>
                                                     <input type="text" value="{{ Request::get('slip_no') }}" name="slip_no"
                                                         class="form-control" id="file_no"
@@ -128,6 +128,21 @@
                                                 </div>
                                             </fieldset>
                                         </div>
+
+                                        <div class="col-md-4">
+                                            <label for="client_id">Kanta Slip No</label>
+                                            <fieldset>
+                                                <div class="input-group client_margin">
+                                                    <span class="input-group-addon bg-primary border-primary white"
+                                                        id="basic-addon7"
+                                                        style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: crimson !important;border: crimson;"><i
+                                                            class="fas fa-briefcase"></i></span>
+                                                    <input type="text" value="{{ Request::get('kanta_slip_no') }}" name="kanta_slip_no"
+                                                        class="form-control" id="file_no"
+                                                        placeholder="Enter Kanta Slip No">
+                                                </div>
+                                            </fieldset>
+                                        </div>                                        
                                         <div class="col-md-4 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
