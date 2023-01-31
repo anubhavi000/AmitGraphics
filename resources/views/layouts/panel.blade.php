@@ -371,7 +371,7 @@
         }
 body{
   margin: 0;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .drawing{
