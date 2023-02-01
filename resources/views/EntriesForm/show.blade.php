@@ -93,9 +93,15 @@
                                 <tr style="background-color:darkslategray; color: white;">
                                     <th >S.no</th>
                                     <th  >Slip No</th>
+                                    <th  >Kanta Slip No.</th>
+                                    <th>Net Weight</th>
+                                    <th> Site(Unloading Place) </th>
+                                    <th> Plant</th>
                                     <th> Excess Weight (in kgs)</th>
-                                    <th  >Created At</th>
-                                    <th  >Last Updated</th>
+                                    <th>Created At</th>
+                                    <th>Last Updated</th>
+                                    <th>Print Slip</th>
+                                    <th>Print Invoice</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,9 +109,27 @@
                                     <tr>
                                         <td>{{$key +1}}</td>
                                         <td>{{!empty($value->slip_no) ? $value->slip_no : ''}}</td>
-                                        <td>{{ !empty($value->acess_weight_quantity) ? $value->acess_weight_quantity.' KG' : '' }}</td>
+                                        <td>{{!empty($value->kanta_slip_no) ? $value->kanta_slip_no  : '' }}</td>
+                                        <td> {{ !empty($value->net_weight) ? $value->net_weight  :''}} </td>
+                                        <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] :'' }}</td>
+                                        <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : ''}}</td>
+                                        <td>{{ !empty($value->acess_weight_quantity) ? $value->acess_weight_quantity.' KG' : 'NA' }}</td>
                                         <td>{{ !empty($value->created_at) ? date('d-m-Y h:i:A' , strtotime($value->created_at)) : '' }}</td>
                                         <td>{{ !empty($value->updated_at) ? $value->updated_at : ''}}</td>
+                                        <td>
+                                                    <a target="blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                        aria-haspopup="true" aria-expanded="true"
+                                                        class="btn btn-primary btn-sm ">
+                                                        slip
+                                                    </a>                                            
+                                        </td>
+                                        <td>
+                                            <a target="blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                aria-haspopup="true" aria-expanded="true"
+                                                class="btn btn-primary btn-sm ">
+                                                Print Invoice
+                                            </a>                                            
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

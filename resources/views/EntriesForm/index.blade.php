@@ -114,7 +114,7 @@
                                 <form action="" method="GET" id="user-search">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <label for="client_id">Slip No</label>
                                             <fieldset>
                                                 <div class="input-group client_margin">
@@ -129,7 +129,7 @@
                                             </fieldset>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <label for="client_id">Kanta Slip No</label>
                                             <fieldset>
                                                 <div class="input-group client_margin">
@@ -142,8 +142,50 @@
                                                         placeholder="Enter Kanta Slip No">
                                                 </div>
                                             </fieldset>
-                                        </div>                                        
-                                        <div class="col-md-4 mb-3 px-3">
+                                        </div>  
+                                        <div class="col-md-2">              
+                                            <fieldset>
+                                                @php
+                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : '';
+                                                    
+                                                    $opt_arr = [
+                                                        'today' => 'Today',
+                                                        'last_seven_days' => 'Last 7 Days',
+                                                        'last_fifteen_days' => 'Last 15 Days',
+                                                        'last_thirty_days' => 'Last 30 Days' 
+                                                        ];  
+                                                @endphp
+                                                <div class="input-group client_margin">
+                                                    <label>Datetime</label>
+                                                    <select name="from_date" class="fstdropdown-select col-md-3">
+                                                        <option value="">Select</option>
+                                                        @foreach($opt_arr as $key => $value)
+                                                            @if($key == $val)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                                <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </fieldset>                                            
+                                        </div>    
+                                        @php
+                                            $statusval = !empty(Request::get('status')) ? Request::get('status') : ''; 
+                                        @endphp
+                                        <div class="col-md-2">
+                                            <fieldset>
+                                                <div class="input-group client_margin">
+                                                    <label>Generation Status</label>
+                                                    <select value="{{$statusval}}" name="status" class="fstdropdown-select col-md-3">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Generated</option>
+                                                        <option value="0"> Not Generated</option>
+                                                    </select>
+                                                </div>                                                
+                                            </fieldset>
+                                        </div>            
+                                        <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
                                             <input style="margin-top:23px" type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
@@ -177,11 +219,14 @@
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-field="date23" width="10" data-sortable="true">S.No</th>
 
-                                            <th data-field="date" data-sortable="true">Slip No</th>
-
-                                            <!-- <th data-field="note" data-sortable="true">Series</th> -->
-
+                                            <th data-field="dae3te" data-sortable="true">Slip No</th>
+                                            <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
+                                            <th data-field="dat2323e" data-sortable="true">Net Weight</th>
+                                            <th data-field="d33at2323e" data-sortable="true">Site</th>
+                                            <th data-field="d33at2323ew" data-sortable="true">Plant</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
+                                            <th>Print Slip</th>
+                                            <th>Print Invoice</th>
                                         </tr>
                                     </thead>
                                   
@@ -195,9 +240,10 @@
                                                <td>{{$key+1}}</td>
                                                
                                                 <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
-                                                {{--
-                                                <td>{{ !empty($value->series) ? $value->series : '' }}</td>
-                                                --}}
+                                                <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
+                                                <td>{{ !empty($value->net_weight) ? $value->net_weight : ''}}</td>
+                                                <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
+                                                <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button id="btnGroup" type="button" data-toggle="dropdown"
@@ -230,6 +276,20 @@
                                                     </span>
                                                 </span>
                                                </td>
+                                        <td>
+                                                    <a target="blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                        aria-haspopup="true" aria-expanded="true"
+                                                        class="btn btn-primary btn-sm ">
+                                                        Print slip
+                                                    </a>                                            
+                                        </td>
+                                        <td>
+                                            <a target="blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                aria-haspopup="true" aria-expanded="true"
+                                                class="btn btn-primary btn-sm ">
+                                                Print Invoice
+                                            </a>                                            
+                                        </td>                                               
 
                                             </tr>
                                         @endforeach

@@ -58,7 +58,18 @@
   <div class="col-md-3 mb-3 px-3">
      <label for="item_Name" class="yash_star"> Longitude </label>
      <input type="text" name="longitude" id="longitude" class="form-control client_margin" placeholder="Enter Longitude" >
-   </div>  
+   </div>
+
+     <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star"> Series </label>
+     <input type="text" name="series" id="series" class="form-control client_margin" placeholder="Enter Series" >
+   </div>
+
+    <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star">  Owner </label>
+     <input type="checkbox" name="is_owner" value="1" style="height: 1.5vw;width: 1.5vw;" id="series" class="form-check client_margin" >
+   </div>
+
    <div class="col-md-3 mb-3 px-3">
    </div> 
    <div class="col-md-12" style="text-align: right;">

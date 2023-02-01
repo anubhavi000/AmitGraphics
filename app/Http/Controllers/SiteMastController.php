@@ -54,7 +54,9 @@ class SiteMastController extends Controller
                 'longitude' => !empty( $request->longitude ) ? $request->longitude : NULL,
                 'created_at'=> date('Y-m-d h:i:s'),
                 'created_by'=> Auth::user()->id,
-                'status'   => 1
+                'series'    => !empty( $request->series ) ? $request->series : NULL,
+                'status'    => 1,
+                'is_owner'  => !empty($request->is_owner) ? $request->is_owner : 0
             ];
 
             $insert = sites::create($arr);
@@ -121,6 +123,8 @@ class SiteMastController extends Controller
                 'longitude' => !empty( $request->longitude ) ? $request->longitude : NULL,
                 'created_at'=> date('Y-m-d h:i:s'),
                 'created_by'=> Auth::user()->id,
+                'series'    => !empty($request->series) ? $request->series : NULL,
+                'is_owner'  => !empty($request->is_owner) ? $request->is_owner : 0,
                 'status'   => 1
             ];
             $update = sites::where('id' , $now_id)

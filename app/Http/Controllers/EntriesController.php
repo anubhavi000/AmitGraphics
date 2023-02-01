@@ -10,6 +10,8 @@ use App\Models\SupervisorMast;
 use App\Models\VehicleMast;
 use App\Models\ItemMast;
 use App\Models\sites;
+use Session;
+use PDF;
 
 class EntriesController extends Controller
 {
@@ -25,22 +27,53 @@ class EntriesController extends Controller
     }
     public function index(Request $request)
     {
-        if(empty($request->slip_no) && empty($request->kanta_slip_no)){
+        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
             return view($this->module_folder.'/index');                       
         }   
         else{
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
-
-            if(!empty($slip_no)){ 
-            $entriesraw   = EntryMast::where('slip_no' , 'LIKE' , $slip_no.'%')
-                                ->orderBy('slip_no' , 'desc');
+            $from_date = !empty($request->from_date) ? $request->from_date : NULL;
+            $entriesraw = EntryMast::whereNotNull('slip_no');
+            $sites = Sites::activesitespluck();
+            $plants = PlantMast::where('status' , 1)
+                               ->pluck('name' , 'id')
+                               ->toArray();
+            if($from_date){
+                $current_date = date('Y-m-d');
+                if($from_date == 'today'){
+                    $filter = $current_date;  
+                }
+                elseif($from_date == 'last_seven_days'){
+                    $filter = date('Y-m-d' , strtotime('-7 days'));
+                }
+                elseif($from_date ==  'last_fifteen_days'){
+                    $filter = date('Y-m-d' , strtotime('-15 days'));
+                } 
+                elseif($from_date ==  'last_thirty_days'){
+                    $filter = date('Y-m-d' , strtotime('-30 days'));
+                }
+                if(!empty($filter)){
+                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
+                }
             }
             if(!empty($kanta_slip_no)){
-            $entriesraw   = EntryMast::where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%')
-                                ->orderBy('slip_no' , 'desc');
+                $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
-            $entries = $entriesraw->get();
+            if(!empty($slip_no)){
+                $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
+            }
+            if(!empty($request->status)){
+                if($request->status == 1){
+                    $entriesraw->where('is_generated' , 1);
+                }
+                if($request->status == 0){
+                    $entriesraw->where('is_generated' , 0);
+                }
+            }
+            $entries = $entriesraw->orderBy('slip_no' , 'DESC')
+                                  ->get();
+
             if(!empty($entries)){
                 if(count($entries)  == 1){
                     $encrypted_id = enCrypt($entries[0]->slip_no);
@@ -48,7 +81,9 @@ class EntriesController extends Controller
                 }
             }
             return view($this->module_folder.'.index' , [
-                'entries' => $entries
+                'entries' => $entries,
+                'sites'   => $sites,
+                'plants'  => $plants
             ]);            
         }
     }
@@ -97,10 +132,11 @@ class EntriesController extends Controller
      */
     public function store(Request $request)
     {
-            $store = EntryMast::store_slip($request->except('_token'));
+        $store = EntryMast::store_slip($request->except('_token'));
 
-        if($store){
-            return redirect('EntryForm')->with('success' , 'Slip Created SuccessFully');
+        if($store['res']){
+            Session::put('SlipStored' , 'Slip Generated SuccessFully With Slip No '.$store['slip_no']);
+            return redirect('EntryForm');
         }
         else{
             return redirect()->back()->with( 'success' , 'Could Not Create');
@@ -252,7 +288,9 @@ class EntriesController extends Controller
     }
     public function ShowGeneratedSlips(Request $request){
         
-        $recordsraw   = EntryMast::whereNotNull('items_included');
+        $recordsraw   = EntryMast::where('is_generated' , 1);
+        $sites = Sites::activesitespluck();
+        $plants = PlantMast::pluckactives();
 
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
@@ -266,7 +304,101 @@ class EntriesController extends Controller
         }
             $records = $recordsraw->get();
         return view($this->module_folder.'.show' , [
-            'data' => $records
+            'data'  => $records,
+            'sites' => $sites,
+            'plants'=> $plants
         ]);
     }
+    public function PrintInvoice(Request $request , $plant , $slip_no){
+        if(!empty($plant) && !empty($slip_no)){
+            $data  = EntryMast::where('plant' , $plant)
+                              ->where('slip_no' , $slip_no)
+                              ->where('is_generated' , 1)
+                              ->first();            
+            if(empty($data)){
+                Session::put('error' , 'Slip Not Found');            
+                return redirect()->back();
+            }
+            else{
+            $items = ItemMast::where('status' , 1)
+                             ->pluck('name' , 'id')
+                             ->toArray();
+
+            $vehicles = VehicleMast::where('status' , 1)
+                                   ->pluck('id' , 'vehicle_no')
+                                   ->toArray();
+
+            $supervisors = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+
+            $sites  = Sites::where('status' , 1)
+                           ->pluck('name' , 'id')
+                           ->toArray();
+            $siteaddresses = Sites::where('status' , 1)
+                                  ->pluck('address' , 'id')
+                                  ->toArray();
+
+            $plants = PlantMast::where('status' , 1)
+                               ->pluck('name' , 'id')
+                               ->toArray();
+            $custumpaper = 'A5';
+            $pdf = PDF::loadView($this->module_folder.'.invoice_pdf', array(
+                'data'          => $data,
+                'items'         => $items,
+                'vehicles'      => $vehicles,
+                'supervisors'   => $supervisors,
+                'sites'         => $sites,
+                'plants'        => $plants,
+                'siteaddresses' => $siteaddresses          
+            ))->setPaper($custumpaper);                                
+            return $pdf->stream($this->module_folder.'.pdf');
+            }
+        }
+    }
+    public function PrintSlip(Request $request , $plant , $slip_no){
+        if(!empty($plant) && !empty($slip_no)){
+
+            $data = EntryMast::where('plant' , $plant)
+                             ->where('slip_no' , $slip_no)
+                             ->where('is_generated' , 1)
+                             ->first();
+            if(empty($data)){
+                return redirect()->back()->with('error' , 'Not Found');
+            }
+            $items = ItemMast::where('status' , 1)
+                             ->pluck('name' , 'id')
+                             ->toArray();
+
+            $vehicles = VehicleMast::where('status' , 1)
+                                   ->pluck('id' , 'vehicle_no')
+                                   ->toArray();
+
+            $supervisors = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+
+            $sites  = Sites::where('status' , 1)
+                           ->pluck('name' , 'id')
+                           ->toArray();
+            $siteaddresses = Sites::where('status' , 1)
+                                  ->pluck('address' , 'id')
+                                  ->toArray();
+
+            $plants = PlantMast::where('status' , 1)
+                               ->pluck('name' , 'id')
+                               ->toArray();
+            $custumpaper = 'A5';
+            $pdf = PDF::loadView($this->module_folder.'.pdf', array(
+                'data'          => $data,
+                'items'         => $items,
+                'vehicles'      => $vehicles,
+                'supervisors'   => $supervisors,
+                'sites'         => $sites,
+                'plants'        => $plants,
+                'siteaddresses' => $siteaddresses          
+            ))->setPaper($custumpaper);                                
+            return $pdf->stream($this->module_folder.'.pdf');
+        }
+    }   
 }

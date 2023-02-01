@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PlantMast;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class PlantController extends Controller
 {
@@ -48,7 +49,7 @@ class PlantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {           
         if (!empty($request->name)) {
             $insert = PlantMast::insert([
                                 'name' => $request->name,
@@ -61,6 +62,7 @@ class PlantController extends Controller
                 return redirect('PlantMast')->with('success' , 'Inserted SuccessFully');
             }
             else{
+                Session::put('error' , 'Could Not Create');
                 return redirect()->back();
             }
         }

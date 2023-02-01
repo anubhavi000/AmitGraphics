@@ -61,10 +61,18 @@ class EntryMast extends Model
     	$obj = Self::create($req);
     	
     	if(!empty($obj)){
-    		return true;
+            $res = [
+                'res'    => true,
+                'slip_no'=> $obj['slip_no'] 
+            ];
+    		return $res;
     	}
     	else{
-    		return false;
+            $res = [
+                'res'    => false,
+                'slip_no'=> NULL 
+            ];
+    		return $res;
     	}
     }
     static function generateslip($req , $id){

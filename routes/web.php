@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth', 'module_assign']], function () {
     Route::resource('PharmaBill', 'PharmaBillController');
 
     Route::resource('Users', 'UserController');
+    Route::delete('user_delete/{id}' , 'UserController@destroy');
 
     Route::resource('UserAccSetting', "UserAccSettingController");
 
@@ -146,6 +147,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     // Routes added By ved
     Route::resource('EntryForm'  , 'EntriesController');
     Route::delete('EntryForm_delete'  , 'EntriesController@delete');
+
     Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
     Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
     Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');
@@ -153,12 +155,19 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::post('check_duplicacy' , 'EntriesController@check_if_duplicate');
     Route::post('SlipGeneration/{id}' , 'EntriesController@SlipGeneration')->name('SlipGeneration');
     Route::get('GeneratedSlips' , 'EntriesController@ShowGeneratedSlips')->name('GeneratedSlips');
+
     Route::resource('Module', "ModuleController");
     Route::resource('DesignationModule', "DesignationModuleController");   
-    Route::get('print_invoice/{id}' , 'EntriesController@PrintInvoice'); 
+    Route::get('print_invoice/{plant}/{slip_no}' , 'EntriesController@PrintInvoice'); 
+    Route::get('PrintEntrySlip/{plant}/{slip_no}', 'EntriesController@PrintSlip'); 
+
+
     Route::resource('SiteMaster' , 'SiteMastController');
     Route::get('SiteMaster/edit/{id}' , 'SiteMastController@edit');
     Route::delete('delete_site/{id}' , 'SiteMastController@delete');
+
+    Route::resource('Designation' , 'DesignationController');
+    Route::delete('designation_delete/{id}' , 'DesignationController@destroy');
     //ends
 
     // always add routes on above this line 

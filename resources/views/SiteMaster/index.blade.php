@@ -206,6 +206,8 @@
 
                                                     <th data-field="date" data-sortable="true">Site Name</th>
 
+                                                    <th data-field="note32222" data-sortable="true">Series</th>           
+
                                                     <th data-field="note3" data-sortable="true">Address</th>
 
                                                     <th data-field="note31" data-sortable="true">Latitude</th>
@@ -229,6 +231,8 @@
                                                         <td>{{ $key + 1 }}</td>
 
                                                         <td>{{ !empty($value->name) ? $value->name : '' }}</td>
+
+                                                        <td>{{ !empty($value->series) ? $value->series : ''}}</td>
 
                                                         <td>{{ !empty($value->address) ? $value->address : '' }}</td>
 

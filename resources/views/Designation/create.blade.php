@@ -52,14 +52,7 @@
      <label for="department_Name" class="yash_star">Designation Name </label>
      <input type="text" name="name" id="department_Name" class="form-control client_margin" placeholder="Enter Designation Here" required>
    </div>
-   <div class="col-md-3 mb-3 px-3">
-   <label for="enabled" class="yash_star"style="margin-bottom: 0px;">Enabled </label>
-   <select class="form-control client_margin fstdropdown-select" id="enabled" name="enabled" required>
-      <option value="enabled">Select</option>
-      <option value="1">Yes</option>
-    <option value="0">No</option>
-  </select>
-   </div>
+
     <div class="col-md-6 mb-3 px-3">
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>

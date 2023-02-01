@@ -134,7 +134,7 @@
     </div>
     <div class="col-md-3">
       <label> Date And Time </label>
-      <input type="text" class="form-control" readonly="true" value="{{!empty($entry->datetime) ? date('Y-m-d h:i:A' , strtotime($entry->datetime)) : ''}}">
+      <input type="text" class="form-control" readonly="true" value="{{!empty($entry->datetime) ? date('d-m-Y' , strtotime($entry->datetime)) : ''}}">
     </div>
 
     <div class="col-md-3 ">
@@ -239,6 +239,7 @@
                   @endforeach
               </tbody>
           </table>
+          <div class="mt-3 text-danger" id="danger"></div>
       </div>
     </div>
   
@@ -257,7 +258,7 @@
       </span>
     </span>
   </button>  
-  <button  id="submitbtn" type="submit" class="blob-btn1"><i class="fas fa-check pr-2"></i>
+  <button  id="submitbtn" onclick="checkform()" type="submit" class="blob-btn1"><i class="fas fa-check pr-2"></i>
     Save Changes
     <span class="blob-btn__inner1">
       <span class="blob-btn__blobs1">
@@ -351,10 +352,13 @@
      if(net_weight != '' && pass != ''){
           if(parseInt(net_weight) > parseInt(pass)){
             console.log('excess');
-              var excess = net_weight - pass; 
+              var excess = net_weight - pass;
+              $("#submitbtn").prop('disabled' , true);
+              $("#danger").html('<h3>Vehicle Capacity Has Been Reached Excess Quantity Should be 0 To Submit<h3>'); 
           }
           else{
             console.log('not excess');
+              $("#submitbtn").prop('disabled' , false);
               var excess = 0;
           }
             $("#excess_weight").val(excess);

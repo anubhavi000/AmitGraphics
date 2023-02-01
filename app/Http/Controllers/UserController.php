@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Sites;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -14,12 +16,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->view  = 'users';
+        $this->table =  'users';
+        $this->url   =  'Users'; 
+    }
+
     public function index()
     {
-        $company_id = Auth::user()->company_id;
-        $details = DB::table('users')->where('layout_status', 1)->where('company_id', $company_id)
-            ->take(500)->get();
-        return view('CreateUser.index', compact('details'));
+        $entries =  User::where('status' , 1)
+                        ->get();
+        $sites = Sites::where('status' , 1)
+                      ->pluck('name' , 'id')
+                      ->toArray(); 
+        return view($this->view.'.index', [
+            'url'  => $this->url,
+            'data' => $entries,
+            'sites'=> $sites
+        ]);
     }
 
     /**
@@ -29,7 +43,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('CreateUser.create');
+        $sites = Sites::where('status' , 1)
+                      ->pluck('name' , 'id')
+                      ->toArray();
+        return view($this->view.'.create' , [
+            'sites'  => $sites
+        ]);
     }
 
     /**
@@ -40,22 +59,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+       
+        $additional_parameters = [
+            'created_at'        => date('Y-m-d h:i:s'),
+            'created_by'        => Auth::user()->id,
+            'status'            => 1,
+            'orignal_password'  => $request->password
+        ];
 
-        // dd(Auth::user());
-        // dd(bcrypt($request->password));
-        date_default_timezone_set('Asia/Kolkata');
-        DB::table('users')->insert([
-            'company_id' => Auth::user()->company_id,
-            'name' => $request->username,
-            'email' => $request->emailid,
-            'password' => bcrypt($request->password),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-            'created_by' => Auth::user()->id,
-            'updated_by' => Auth::user()->id,
-            'layout_status' => 1,
-        ]);
-        return redirect('Users')->with('success','Inserted Successfully');
+        $request->merge($additional_parameters);
+
+        $insert_arr = $request->except('_token' , '_method');
+        $insert_arr['password'] = bcrypt($insert_arr['password']);
+        
+        $insert = User::insert($insert_arr);
+
+        if($insert){
+            return redirect('Users')->with('success','User Created Successfully');    
+        }
+        else{
+            return redirect()->back()->with('success' , 'Could Not Insert');
+        }
     }
 
     /**
@@ -77,10 +101,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
         $decrypt_id = Crypt::deCrypt($id);
-        $details = DB::table('users')->find($decrypt_id);
-        return view('CreateUser.edit', compact('details'));
+        $data = DB::table('users')->find($decrypt_id);
+        $sites = Sites::where('status' , 1)
+                      ->pluck('name' , 'id')
+                      ->toArray();
+
+        if(!empty($data)){
+            return view('users.edit', compact('data' , 'sites'));
+        }
+
     }
 
     /**
@@ -92,31 +122,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        date_default_timezone_set('Asia/Kolkata');
-        if (!empty($request->password)) {
-            DB::table('users')->where('id', $id)->update([
-                'name' => $request->username,
-                'email' => $request->emailid,
-                'password' => bcrypt($request->password),
+        $now_id = decrypt($id);
+        $additional_parameters = [
+            'updated_at'        => date('Y-m-d h:i:s'),
+            'updated_by'        => Auth::user()->id,
+            'status'            => 1,
+            'orignal_password'  => $request->password
+        ];
 
-                'updated_at' => date('Y-m-d H:i:s'),
+        $request->merge($additional_parameters);
 
-                'updated_by' => Auth::user()->id,
+        $update_arr = $request->except('_token'  , '_method');
+        $update_arr['password'] = bcrypt($update_arr['password']);
+        
+        $update = User::where('id' , $now_id)
+                      ->update($update_arr);
 
-            ]);
-        } else {
-            DB::table('users')->where('id', $id)->update([
-                'name' => $request->username,
-                'email' => $request->emailid,
-
-
-                'updated_at' => date('Y-m-d H:i:s'),
-
-                'updated_by' => Auth::user()->id,
-
-            ]);
+        if($update){
+            return redirect('Users')->with('success','User Updated Successfully');    
         }
-        return redirect('Users')->with('success','Updated Successfully');
+        else{
+            return redirect()->back()->with('success' , 'Could Not Update');
+        }
     }
 
     /**
@@ -127,18 +154,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('users')->where('id', $id)->update([
-            'layout_status' => 0
-        ]);
+        $now_id = decrypt($id); 
+        $delete = User::where('id' , $now_id)
+                       ->update([
+                            'status' => 0
+                       ]);
+        if($delete){
         return redirect('Users')->with('success','Deleted Successfully');
+        }
+        else{
+            return redirect()->back()->with('success' , 'Could Not Delete');
+        }
     }
-    // public function getpdf($id){
-    //     // dd($id);
-    //     $decrypt_id= Crypt::deCrypt($id);
-    //     $client_type= DB::table('client_type')->find($decrypt_id);
-
-
-    //     return view('ClientType.clienttypepdf' , ['client_type'=>$client_type ]);
-
-    // }
 }

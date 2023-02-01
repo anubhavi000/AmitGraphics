@@ -27,7 +27,7 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('Designation.update' , $designation->id)}}" method="POST">
+<form action="{{route('Designation.update' , encrypt($data->id))}}" method="POST">
     @csrf
     @method('patch')
 <div class="container-fluid">
@@ -44,29 +44,12 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3 mb-3 px-3">
      <label for="department_Name" class="yash_star" style="margin-bottom: 0px;">Designation Name</label>
-     <input value="{{$designation->name}}" type="text" name="name" id="department_Name" class="form-control" placeholder="Name" required>
+     <input value="{{ !empty($data->name) ? $data->name : ''}}" type="text" name="name" id="department_Name" class="form-control" placeholder="Name" required>
    </div>
-   <div class="col-md-3 mb-3 px-3">
-   <label for="enabled" class="yash_star"style="margin-bottom: 0px;">Enabled </label>
-   <select class="form-control client_margin fstdropdown-select" id="enabled" name="enabled" required>
-         <option value="">Select</option>
-    @if($designation->enabled==1)
-  
-    <option value="1" selected>Yes</option>
-    <option value="0" >no</option>
-    @elseif($designation->enabled==0)
-   
-    <option value="1" >Yes</option>
-    <option value="0" selected>No</option>
-    @else
-     <option value="1" >Yes</option>
-    <option value="0" >No</option>
-    @endif
-  </select>
-   </div>
+
     <div class="col-md-6 mb-3 px-3">
         <label for="description" style="margin-bottom: 0px;">Description</label>
-        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$designation->description}}</textarea>
+        <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{ !empty($data->description) ? $data->description : ''}}</textarea>
     </div>
   
    <div class="col-md-12" style="text-align: right;">

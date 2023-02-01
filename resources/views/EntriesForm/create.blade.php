@@ -109,7 +109,7 @@
 
     <div class="col-md-3">
       <label> Date And Time </label>
-      <input type="text" class="form-control" readonly="true" value="{{date('Y-m-d h:i:A')}}">
+      <input type="text" class="form-control" readonly="true" value="{{date('d-m-Y')}}">
     </div>
 
     <div id="infodiv" class="col-md-3">

@@ -1,9 +1,8 @@
 @extends('layouts.panel')
-
-@section('content')
 @php
-  $encrypt_id = encrypt($data->id);
+$encrypt_id = encrypt($data->id);    
 @endphp
+@section('content')
 <div class="pcoded-content">
             <!-- [ breadcrumb ] start -->
             <div class="page-header card"  id="grv_margin">
@@ -12,8 +11,8 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Edit Site</h5>
-                                <p class="heading_Bottom">Edit {{!empty($data->name) ? $data->name : ''}}</p>
+                                <h5>Edit User</h5>
+                                <p class="heading_Bottom">Edit {{!empty($data->name) ? $data->name :''}}</p>
                             </div>
                         </div>
                   </div>
@@ -30,13 +29,13 @@
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form action="{{route('SiteMaster.update' , $encrypt_id )}}" method="POST">
+<form action="{{route('Users.update' , $encrypt_id )}}" method="POST">
     @csrf
     @method('patch')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Site</b></h2>
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Vehicle</b></h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -45,40 +44,44 @@
                 </div>
       <hr class="border-dark bold">
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
-     <div class="col-md-3 mb-3 px-3">
-       <label for="item_Name" class="yash_star"> Site Name </label>
-       <input type="text" name="name" id="site_name" value="{{!empty($data->name) ? $data->name : ''}}" class="form-control client_margin" placeholder="Enter Site Name" required>
-     </div>
-       <div class="col-md-3 mb-3 px-3">
-       <label for="item_Name" class="yash_star"> Address </label>
-       <input type="text" name="address" id="address" class="form-control client_margin" value="{{!empty($data->address) ? $data->address : ''}}" placeholder="Enter Site Address" required>
-     </div>
-       <div class="col-md-3 mb-3 px-3">
-       <label for="item_Name" class="yash_star"> Latitude </label>
-       <input type="text" name="latitude" value="{{!empty($data->latitude) ? $data->latitude : ''}}" id="latitude" class="form-control client_margin" placeholder="Enter Latitude" >
-       </div>
-    <div class="col-md-3 mb-3 px-3">
-       <label for="item_Name" class="yash_star"> Longitude </label>
-       <input type="text" name="longitude" value="{{!empty($data->longitude) ? $data->longitude : ''}}" id="longitude" class="form-control client_margin" placeholder="Enter Longitude" >
-     </div> 
-     <div class="col-md-3 mb-3 px-3">
-     <label for="item_Name" class="yash_star"> Series </label>
-     <input type="text" name="series" value="{{!empty($data->series) ? $data->series : ''}}" id="series" class="form-control client_margin" placeholder="Enter Series" >
-   </div>
+    <div class="col-md-3">
+        <label for="vehicle_no" class="yash_star">Name</label>
+        <input type="text" name="name" value="{{!empty($data->name) ? $data->name :''}}" id="vehicle_no" value class="form-control " placeholder="Enter User Name" required>
+    </div>
+    <div class="col-md-3">
+        <label for="item_Name" class="yash_star">Email</label>
+        <input type="text" name="email" id="item_Name" value="{{!empty($data->email) ? $data->email : ''}}" class="form-control" placeholder="Enter Email" required>
+    </div>
+    <div class="col-md-3">
+      <label for="item_Name" class="yash_star">Password</label>
+      <input type="text" name="password" id="vehicle_pass" value="{{!empty($data->orignal_password) ? $data->orignal_password : ''}}"   class="form-control" placeholder="Enter Password" required>
+  </div>
+      <div class="col-md-3">
+      
+      <label for="">Site</label>
+      <br>
+      <select  class="fstdropdown-select col-md-3" name="site" id="" >
+        <option value="">Select</option>
+        @if(!empty($sites))
+          @foreach ($sites as $key => $value)
+            @if($data->site == $key)
+            <option selected="true" value="{{$key}}">{{$value}}</option>
+            @else
+            <option value="{{$key}}">{{$value}}</option>
+            @endif
+          @endforeach
+        @endif
+      </select>
+    </div> 
 
     <div class="col-md-3 mb-3 px-3">
-     <label for="item_Name" class="yash_star">  Owner </label>
-     @if($data->is_owner == 1)
-     <input type="checkbox" name="is_owner" checked="true" value="1" style="height: 1.5vw;width: 1.5vw;" id="series" class="form-check client_margin" >
-     @else
-     <input type="checkbox" name="is_owner" value="1" style="height: 1.5vw;width: 1.5vw;" id="series" class="form-check client_margin" >
-     @endif
-   </div>        
-  
+      <div id="infodiv"></div>
+    </div>
+
    <div class="col-md-12" style="text-align: right;">
-  <hr class="mt-3 border-dark bold">
+    <hr class="mt-3 border-dark bold">
 
-  <button class="blob-btn" id="cancelbtn"  action="action"``
+  <button class="blob-btn" id="cancelbtn"  action="action"
     type="button"><i class="fas fa-times pr-2"></i>
     Cancel
     <span class="blob-btn__inner">
@@ -120,5 +123,6 @@
 <!-- Close Container -->
 </div>
 
-
 @endsection
+@section('js')
+@endsection  

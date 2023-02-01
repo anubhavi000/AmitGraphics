@@ -381,8 +381,14 @@ body{
     display: block;
     background-color: darkslategray;
 }
-
-
+@if(!empty((session()->get('SlipStored'))) && session()->get('SlipStored') != '')
+.swal2-popup{
+    width : auto !important;
+}
+.swal2-title{
+    text-align: left !important;
+}
+@endif
 
 
 /* -- Loading thingy --*/
@@ -694,7 +700,30 @@ $layout_status = Auth::user()->layout_status;
 @endphp
 
 <body>
-
+    @if (!empty((session()->get('error'))) && session()->get('error') != '')
+        @php
+            $errorstatus = 1;
+            $errormessage = !empty(session()->get('error')) ? session()->get('error') : ''; 
+            session()->forget('error');
+        @endphp
+    @else
+            @php
+            $errorstatus = 0;     
+            $errormessage = '';
+            @endphp
+    @endif   
+    @if (!empty((session()->get('SlipStored'))) && session()->get('SlipStored') != '')
+        @php
+            $slip_generation_status = 1;
+            $generationmessage = !empty(session()->get('SlipStored')) ? session()->get('SlipStored') : ''; 
+            session()->forget('SlipStored');
+        @endphp
+    @else
+            @php
+            $slip_generation_status = 0;     
+            $generationmessage = '';
+            @endphp
+    @endif
     @if (session()->has('success'))
         @php
             $sweet_alert_status = 1;
@@ -907,11 +936,8 @@ $layout_status = Auth::user()->layout_status;
                                 </div>
                             </li>
                         </ul>
-
-
                     </div>
                 </div>
-
             </nav>
          
             <div class="pcoded-main-container">
@@ -945,9 +971,13 @@ $layout_status = Auth::user()->layout_status;
     </div>
     </div>
     {{-- this is sweetalertbtn --}}
+    <button id="slipgeneratedbtn" onclick="slipgenerated()" style="display: none;">
     <button id="sweetalertbtn" onclick="sweetalert()" style="display: none">see sweetalert</button>
+    <button id="errorbtn" onclick="errorsweetalert()" style="display: none"></button>
     @php
         empty($sweet_alert_status) ? ($sweet_alert_status = 0) : ($sweet_alert_status = 1);
+        empty($slip_generation_status) ? ($slip_generation_status = 0) : ($slip_generation_status = 1);
+        empty($errorstatus) ? ($errorstatus = 0) : ($errorstatus = 1);        
     @endphp
 
 
@@ -1065,7 +1095,7 @@ $layout_status = Auth::user()->layout_status;
         }
     </script>
     <script>
-        // sweetalert code starts here
+        // ved => success sweetalert code starts here 
         var status = "<?php echo $sweet_alert_status; ?>";
         var message = "<?php echo $message; ?>";
 
@@ -1086,7 +1116,42 @@ $layout_status = Auth::user()->layout_status;
 
         // sweetalert code ends here
     </script>
+    <script type="text/javascript">
+        // ved =>  slip generation sweetalert code 
+        var generated = "<?php echo $slip_generation_status; ?>";
+        var generationmsg = "<?php echo $generationmessage; ?>";
 
+        if( generated == 1 ){
+            document.getElementById("slipgeneratedbtn").click();
+        }
+
+        function slipgenerated(){
+            Swal.fire({
+                position: 'middle',
+                icon: 'success',
+                title: generationmsg,
+                showConfirmButton: true,
+            })            
+        }
+        // slip generation sweetalert code ends
+    </script>
+    <script type="text/javascript">
+        // ved => error sweetalert code starts
+        var error = "<?php echo $errorstatus; ?>";
+        var errormsg = "<?php echo $errormessage; ?>";
+
+        if( error == 1 ){
+            document.getElementById("errorbtn").click();
+        }   
+        function errorsweetalert(){
+            Swal.fire({
+                position: 'middle',
+                icon: 'error',
+                title: errormsg,
+                showConfirmButton: true,
+            })            
+        }             
+    </script>
 
     <?php
       if($layout_status == '2' ) {

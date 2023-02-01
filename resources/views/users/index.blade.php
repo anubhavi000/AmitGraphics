@@ -87,15 +87,15 @@
                     <div class="col-lg-4">
                         <div class="page-header-title">
                             <i class="fas fa-users"></i>
-                            <h5>Designations</h5>
-                            <p class="heading_Bottom"> Complete list of designations</p>
+                            <h5>Users</h5>
+                            <p class="heading_Bottom"> Complete list of Users</p>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="page-header-breadcrumb">
                             <div class="buttons" style="text-align:right;margin:4px;">
 
-                                <a href="{{ url('Designation/create') }}"><button type="button"
+                                <a href="{{ route('Users.create') }}"><button type="button"
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button></a>
                             </div>
                         </div>
@@ -106,7 +106,12 @@
                 <div class="container-fluid bg-white mt-2 mb-5 border_radius box">
                     <div class="row">
                         <div class="col-md-12 mt-3 mb-3">
-                            <hr class="border-dark bold">
+
+                            <div class="container-fluid mt-3">
+                            
+
+
+                            </div>
                             <div id="hide_2" class="table-responsive">
                                 <!--<div id="toolbar">-->
                                 <!--  <select class="form-control">-->
@@ -122,28 +127,30 @@
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
-                                            <th data-field="date23" data-sortable="true">Id</th>
+                                            <th data-field="date23" data-sortable="true">S. No</th>
 
-                                            <th data-field="date" data-sortable="true">Designation Name</th>
+                                            <th data-field="date" data-sortable="true">user Name</th>
 
-                                            <th data-field="note" data-sortable="true">Description</th>
+                                            <th data-field="type" data-sortable="true"> Site</th>
 
                                             <th data-field="note13" data-sortable="true">Action</th>
+                                            
                                         </tr>
                                     </thead>
+                                  
                                     <tbody>
                                         @if(!empty($data))
                                         @foreach ($data as $key => $value)
                                             <?php
-                                            $encrypt_id = enCrypt($value->id);
-                                            
+                                                $encrypt_id = enCrypt($value->id);
                                             ?>
                                             <tr>
-                                               <td></td>
-                                               <td >{{ $key + 1 }}</td>
-                                                <td>{{ $value->name }}</td>
+                                                <td></td>
+                                               <td>{{$key+1}}</td>
+                                               
+                                                <td>{{ !empty($value->name) ? $value->name : ''}}</td>
 
-                                                <td>{{ $value->description }}</td>
+                                                <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] :''  }}</td>
 
                                                <td>
                                                 <span class="dropdown open">
@@ -154,7 +161,7 @@
                                                     </button>
                                                     <span aria-labelledby="btnGroup"
                                                         class="dropdown-menu mt-1 dropdown-menu-right">
-                                                        <form action="{{ route('Designation.edit', $encrypt_id) }}"
+                                                        <form action="{{ route('Users.edit', $encrypt_id) }}"
                                                             method="GET" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
                                                             @csrf
@@ -163,12 +170,11 @@
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
                                                                 Edit</button>
                                                         </form>
-
                                                         <form action="" method="GET" class="blockuie dropdown-item"
                                                                 style="margin-bottom:-10px">
                                                                 @csrf
                                                                 <input type="text" id="route_id{{$value->id}}" name="route" hidden
-                                                                    value="{{ 'designation_delete' }}">
+                                                                    value="{{ 'user_delete' }}">
                                                                 <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
                                                                     value="{{ $encrypt_id }}">
                                                                 <button style="background:none;border: none;"
@@ -186,7 +192,7 @@
                                             </tr>
                                         @endforeach
                                         @endif
-                                    </tbody>
+                                    </tbody> 
                                 </table>
                             </div>
                         </div>
