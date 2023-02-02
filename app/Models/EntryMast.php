@@ -32,7 +32,8 @@ class EntryMast extends Model
                         'supervisor',
                         'vehicle',
                         'kanta_slip_no',
-                        'site'
+                        'site',
+                        'is_generated'
     					];
 
     static function store_slip($req){
@@ -102,7 +103,8 @@ class EntryMast extends Model
                                 'gross_weight'          => !empty($req['gross_weight']) ? $req['gross_weight'] : NULL,
                                 'net_weight'            => !empty($req['net_weight']) ? $req['net_weight'] : NULL,
                                 'excess_weight'         => !empty($req['excess_weight']) ? $req['excess_weight'] : NULL,
-                                'vehicle_pass'          => !empty($req['vehicle_pass']) ? $req['vehicle_pass'] : NULL
+                                'vehicle_pass'          => !empty($req['vehicle_pass']) ? $req['vehicle_pass'] : NULL,
+                                'is_generated'     => 1
                           ]);
             // inserting in the log table
             $arr = [

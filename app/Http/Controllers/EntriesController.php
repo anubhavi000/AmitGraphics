@@ -316,7 +316,7 @@ class EntriesController extends Controller
                               ->where('is_generated' , 1)
                               ->first();            
             if(empty($data)){
-                Session::put('error' , 'Slip Not Found');            
+                Session::put('error' , 'Slip Not Found Either Not Generated');            
                 return redirect()->back();
             }
             else{
@@ -342,12 +342,29 @@ class EntriesController extends Controller
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
+            $filepath  = asset('images/logo-light.png');
+
+            $filetype = pathinfo($filepath, PATHINFO_EXTENSION);
+
+            if ($filetype==='svg'){
+                $filetype .= '+xml';
+            }
+            $arrContextOptions=array(
+                "ssl"=>array(
+                    "verify_peer"=>false,
+                    "verify_peer_name"=>false,
+                ),
+            );  
+
+            $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
+            $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img );                                
             $custumpaper = 'A5';
             $pdf = PDF::loadView($this->module_folder.'.invoice_pdf', array(
                 'data'          => $data,
                 'items'         => $items,
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
+                'logo'          => $image,
                 'sites'         => $sites,
                 'plants'        => $plants,
                 'siteaddresses' => $siteaddresses          
@@ -358,14 +375,30 @@ class EntriesController extends Controller
     }
     public function PrintSlip(Request $request , $plant , $slip_no){
         if(!empty($plant) && !empty($slip_no)){
-
             $data = EntryMast::where('plant' , $plant)
                              ->where('slip_no' , $slip_no)
                              ->where('is_generated' , 1)
                              ->first();
             if(empty($data)){
-                return redirect()->back()->with('error' , 'Not Found');
+                return redirect()->back()->with('error' , 'Slip Not Found');
             }
+            $filepath  = asset('images/logo-light.png');
+
+                $filetype = pathinfo($filepath, PATHINFO_EXTENSION);
+
+                if ($filetype==='svg'){
+                    $filetype .= '+xml';
+                }
+                $arrContextOptions=array(
+                    "ssl"=>array(
+                        "verify_peer"=>false,
+                        "verify_peer_name"=>false,
+                    ),
+                );  
+
+                $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
+                $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img ); 
+
             $items = ItemMast::where('status' , 1)
                              ->pluck('name' , 'id')
                              ->toArray();
@@ -395,6 +428,7 @@ class EntriesController extends Controller
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
                 'sites'         => $sites,
+                'logo'          => $image,
                 'plants'        => $plants,
                 'siteaddresses' => $siteaddresses          
             ))->setPaper($custumpaper);                                

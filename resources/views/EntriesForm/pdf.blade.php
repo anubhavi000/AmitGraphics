@@ -7,7 +7,9 @@
 </style>
 <div>
 	<div style="width: 24%;float: left;">
-		<!-- <img src="{{asset('images/logo-light.png')}}"> -->
+		@if(!empty($logo))
+		<img style="width: 80%;margin-top: 15%;" src="{{!empty($logo) ? $logo : ''}}">
+		@endif
 	</div>
 	<div style="width: 50%;float: left;">
 		<h2 style="text-align: center;">{{ !empty($sites[$data->site]) ? $sites[$data->site] : ''}}<br>{{!empty($siteaddresses[$data->site]) ? $siteaddresses[$data->site] : ''}}</h2>
