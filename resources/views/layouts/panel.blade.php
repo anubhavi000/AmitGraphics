@@ -84,6 +84,15 @@
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: darkslategray !important;
 }
+    .ui-datepicker-title , .ui-datepicker-header {
+        background-color: darkslategray !important;
+    }
+    .ui-state-default , .ui-state-highlight{
+        background-color: #fff;
+    }
+    .ui-state-default{
+        color : darkslategray !important;
+    }
         #overlay {
             position: fixed;
             top: 0;

@@ -50,7 +50,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-      <select name = "vehicle"  class="chosen-select">
+      <select name = "vehicle"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($vehicles))
             @foreach($vehicles as $key => $value)
@@ -67,7 +67,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Plant</label>
-      <select name = "plant"  class="chosen-select">
+      <select name = "plant"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($plant))
             @foreach($plant as $key => $value)
@@ -84,7 +84,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Unloading Place ( Site ) </label>
-      <select  class="chosen-select" name = "site">
+      <select  class="fstdropdown-select" name = "site">
           <option value="">Select</option>
           @if(!empty($sites))
             @foreach($sites as $key => $value)
@@ -97,7 +97,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Supervisor</label>
-      <select name = "supervisor"  class="chosen-select">
+      <select name = "supervisor"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($supervisors))
             @foreach($supervisors as $key => $value)

@@ -76,12 +76,12 @@
     </div> 
    
 
-    <div class="col-md-6 mb-3 px-3 mt-3">
+    <div class="col-md-6 mb-3  mt-3">
         <label for="description">Description</label>
-        <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
+        <textarea class="form-control " name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
     </div>
 
-    <div id="infodiv" class="col-md-3">
+    <div id="infodiv" class="col-md-3 mt-3">
 
     </div> 
    <div class="col-md-12" style="text-align: right;">

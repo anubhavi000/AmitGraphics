@@ -46,7 +46,7 @@
   <div class="form-row mb-3">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-      <select name = "vehicle"  class="chosen-select">
+      <select name = "vehicle"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($vehicles))
             @foreach($vehicles as $key => $value)
@@ -75,14 +75,14 @@
         <input type="text" name="net_weight" readonly="true" id="NetWeight"  value="{{!empty($entry->net_weight) ? $entry->net_weight : ''}}" placeholder ="Enter Net Weight"  class="form-control ">
     </div>
 
-    <div class="col-md-3 ">
+    <div class="col-md-3 mt-2">
         <label for="description">Excess Weight</label>
         <input type="text" name="excess_weight" id="excess_weight" readonly="true" value="{{!empty($entry->excess_weight) ? $entry->excess_weight : ''}}" placeholder ="Enter Excess Weight"  class="form-control ">
     </div>        
 
-    <div class="col-md-3">
+    <div class="col-md-3 mt-2">
       <label class="form-label">Loading Plant</label>
-      <select name = "plant"  class="chosen-select">
+      <select name = "plant"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($plants))
             @foreach($plants as $key => $value)
@@ -96,14 +96,14 @@
       </select>
     </div>
 
-   <div class="col-md-3 mb-3 px-3">
+   <div class="col-md-3 mb-3 px-3 mt-2">
      <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
      <input type="text" name="kanta_slip_no" value="{{ !empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
    </div>
 
-    <div class="col-md-3">
-      <label class="form-label">Unloading Place ( Site ) </label>
-      <select  class="chosen-select" name = "site">
+    <div class="col-md-3 mt-2">
+      <label class="">Unloading Place ( Site ) </label>
+      <select  class="fstdropdown-select" name = "site">
           <option value="">Select</option>
           @if(!empty($sites))
             @foreach($sites as $key => $value)
@@ -119,7 +119,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Supervisor</label>
-      <select name = "supervisor"  class="chosen-select">
+      <select name = "supervisor"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($supervisors))
             @foreach($supervisors as $key => $value)
@@ -155,7 +155,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Transporter Name</label>
-      <select name = "vendor_id" onchange="get_transporter(this.value)" class="chosen-select">
+      <select name = "vendor_id" onchange="get_transporter(this.value)" class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($transporters))
             @foreach($transporters as $key => $value)

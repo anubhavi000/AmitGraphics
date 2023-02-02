@@ -22,6 +22,7 @@ class SiteMastController extends Controller
     public function index()
     {
         $data  = sites::where('status' , 1)
+                      ->orderBy('id' , 'DESC')
                       ->get();
         return view($this->view.'.index' , [
             'data'  => $data

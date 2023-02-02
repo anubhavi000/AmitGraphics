@@ -36,9 +36,8 @@ class VendorController extends Controller
      */
     public function create()
     {
-        $entry = VendorMast::where('status' , 1)
-                           ->orderBy('id' , 'desc')
-                           ->first()->id;
+        $entry = VendorMast::orderBy('id' , 'desc')
+                           ->first()->id + 1;
 
         return view('VendorMaster.create' , [
             'vendor_code'  => 'ven'.$entry

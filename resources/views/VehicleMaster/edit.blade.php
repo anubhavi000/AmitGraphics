@@ -74,12 +74,12 @@ $encrypt_id = encrypt($edit->id);
   </div>
    
 
-    <div class="col-md-6 mb-3 px-3">
+    <div class="col-md-6 mb-3 mt-3">
         <label for="description">Description</label>
         <textarea class="form-control client_margin" name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;">{{$edit->descr}}</textarea>
     </div>
 
-    <div class="col-md-3 mb-3 px-3">
+    <div class="col-md-3  mt-3">
       <div id="infodiv"></div>
     </div>
 

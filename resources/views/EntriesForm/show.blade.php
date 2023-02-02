@@ -120,14 +120,14 @@
                                                     <a target="blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                         aria-haspopup="true" aria-expanded="true"
                                                         class="btn btn-primary btn-sm ">
-                                                        slip
+                                                        slip : {{$value->slip_no}}
                                                     </a>                                            
                                         </td>
                                         <td>
                                             <a target="blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                 aria-haspopup="true" aria-expanded="true"
                                                 class="btn btn-primary btn-sm ">
-                                                Print Invoice
+                                                Print Invoice : {{$value->slip_no}}
                                             </a>                                            
                                         </td>
                                     </tr>
