@@ -377,7 +377,6 @@ class EntriesController extends Controller
         if(!empty($plant) && !empty($slip_no)){
             $data = EntryMast::where('plant' , $plant)
                              ->where('slip_no' , $slip_no)
-                             ->where('is_generated' , 1)
                              ->first();
             if(empty($data)){
                 return redirect()->back()->with('error' , 'Slip Not Found');
