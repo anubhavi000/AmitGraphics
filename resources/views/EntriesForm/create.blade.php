@@ -67,7 +67,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Plant</label>
-      <select name = "plant"  class="fstdropdown-select" id="plant" required="true">
+      <select name = "plant"  class="fstdropdown-select" id="plant">
           <option value="">Select</option>
           @if(!empty($plant))
             @foreach($plant as $key => $value)
@@ -97,7 +97,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Supervisor</label>
-      <select name = "supervisor"  class="fstdropdown-select" id="supervisor" required="true">
+      <select name = "supervisor"  class="fstdropdown-select" id="supervisor" >
           <option value="">Select</option>
           @if(!empty($supervisors))
             @foreach($supervisors as $key => $value)
@@ -126,7 +126,7 @@
                     @if($count == 0)
                       <tr> 
                     @endif
-                      <td style="border: none !important;"><input  type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      <td style="border: none !important;"><input  type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
                     @if($count == 2)
                       <?php $count = 0; ?>
                       </tr>
@@ -231,12 +231,8 @@
       else if(vehicle == ''){
         alert('Vehcile Must Be Selected');
       }
-      else if(site == ''){
-        alert('Site Must Be Selected');
-      }
-      else if(supervisor == ''){
-        alert('Supervisor Must Be Selected');
-      }
+      
+
       else{
         $.ajaxSetup({
                     headers: {

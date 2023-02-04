@@ -27,6 +27,7 @@ class EntriesController extends Controller
     }
     public function index(Request $request)
     {
+        $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
         $auth = Auth::user();
         if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
             return view($this->module_folder.'/index');                       
@@ -38,6 +39,7 @@ class EntriesController extends Controller
             
             $entriesraw = EntryMast::whereNotNull('slip_no')
                                    ->where('owner_site' , $auth->site)
+                                   ->where('is_generated' , 0)
                                    ->where('delete_status' , 0);
 
             $sites = Sites::activesitespluck();
@@ -79,12 +81,12 @@ class EntriesController extends Controller
             $entries = $entriesraw->orderBy('slip_no' , 'DESC')
                                   ->get();
 
-            if(!empty($entries)){
-                if(count($entries)  == 1){
-                    $encrypted_id = enCrypt($entries[0]->slip_no);
-                    return redirect('EntryForm_action/'.$encrypted_id);
-                }
-            }
+            // if(!empty($entries)){
+            //     if(count($entries)  == 1){
+            //         $encrypted_id = enCrypt($entries[0]->slip_no);
+            //         return redirect('EntryForm_action/'.$encrypted_id);
+            //     }
+            // }
             return view($this->module_folder.'.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
@@ -404,29 +406,29 @@ class EntriesController extends Controller
                                    ->pluck('vehicle_no' , 'id')
                                    ->toArray();                                  
 
-            $filepath  = asset('images/logo-light.png');
+            // $filepath  = asset('images/logo-light.png');
 
-            $filetype = pathinfo($filepath, PATHINFO_EXTENSION);
+            // $filetype = pathinfo($filepath, PATHINFO_EXTENSION);
 
-            if ($filetype==='svg'){
-                $filetype .= '+xml';
-            }
-            $arrContextOptions=array(
-                "ssl"=>array(
-                    "verify_peer"=>false,
-                    "verify_peer_name"=>false,
-                ),
-            );  
+            // if ($filetype==='svg'){
+            //     $filetype .= '+xml';
+            // }
+            // $arrContextOptions=array(
+            //     "ssl"=>array(
+            //         "verify_peer"=>false,
+            //         "verify_peer_name"=>false,
+            //     ),
+            // );  
 
-            $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
-            $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img );                                
+            // $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
+            // $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img );                                
             $custumpaper = 'A5';
             $pdf = PDF::loadView($this->module_folder.'.invoice_pdf', array(
                 'data'          => $data,
                 'items'         => $items,
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
-                'logo'          => $image,
+                // 'logo'          => $image,
                 'vehicles'      => $vehicles,
                 'sites'         => $sites,
                 'siteaddresses' => $siteaddresses          
@@ -501,4 +503,80 @@ class EntriesController extends Controller
             return $pdf->stream($this->module_folder.'.pdf');
         }
     }   
+
+
+
+
+
+    // function  For Challan Generation Starts here
+
+    public function chalanindex(Request  $request){
+        $auth = Auth::user();
+            $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
+
+        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
+            return view($this->module_folder.'/index');                       
+        }   
+        else{
+            $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
+            $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
+            $from_date = !empty($request->from_date) ? $request->from_date : 'today';
+
+            
+            $entriesraw = EntryMast::whereNotNull('slip_no')
+                                   ->where('owner_site' , $auth->site)
+                                   ->where('delete_status' , 0);
+
+            $sites = Sites::activesitespluck();
+            $plants = PlantMast::where('status' , 1)
+                               ->pluck('name' , 'id')
+                               ->toArray();
+            if($from_date){
+                $current_date = date('Y-m-d');
+                if($from_date == 'today'){
+                    $filter = $current_date;  
+                }
+                elseif($from_date == 'last_seven_days'){
+                    $filter = date('Y-m-d' , strtotime('-7 days'));
+                }
+                elseif($from_date ==  'last_fifteen_days'){
+                    $filter = date('Y-m-d' , strtotime('-15 days'));
+                } 
+                elseif($from_date ==  'last_thirty_days'){
+                    $filter = date('Y-m-d' , strtotime('-30 days'));
+                }
+                if(!empty($filter)){
+                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
+                }
+            }
+            if(!empty($kanta_slip_no)){
+                $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
+            }
+            if(!empty($slip_no)){
+                $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
+            }
+            if(isset($request->status)){
+                if($request->status == 1){
+                    $entriesraw->where('is_generated' , 1);
+                }
+                if($request->status == 0){
+                    $entriesraw->where('is_generated' , 0);
+                }
+            }
+            $entries = $entriesraw->orderBy('id' , 'DESC')
+                                  ->get();
+
+            if(!empty($entries)){
+                if(count($entries)  == 1){
+                    $encrypted_id = enCrypt($entries[0]->slip_no);
+                    return redirect('EntryForm_action/'.$encrypted_id);
+                }
+            }
+            return view($this->module_folder.'.Challan.index' , [
+                'entries' => $entries,
+                'sites'   => $sites,
+                'plants'  => $plants
+            ]);            
+        }
+    }
 }

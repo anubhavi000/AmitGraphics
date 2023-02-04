@@ -168,6 +168,9 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
     Route::resource('Designation' , 'DesignationController');
     Route::delete('designation_delete/{id}' , 'DesignationController@destroy');
+
+    // routes For chalan generation ved
+    Route::get('ChalanGeneration' , 'EntriesController@chalanindex');
     //ends
 
     // always add routes on above this line 

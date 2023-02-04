@@ -98,10 +98,10 @@
                                 <a href="{{ route('GeneratedSlips') }}"><button type="button"
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Generated Slips</button>
                                 </a>
-                                --}}
                                 <a href="{{ url('EntryForm/create') }}"><button type="button"
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button>
                                 </a>
+                                --}}
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                                         <div class="col-md-2">              
                                             <fieldset>
                                                 @php
-                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : '';
+                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : 'today';
                                                     
                                                     $opt_arr = [
                                                         'today' => 'Today',
@@ -232,11 +232,13 @@
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
+                                            <th data-field="dat2323e" data-sortable="true">Net Weight</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
+                                            <th>Print Challan</th>
                                         </tr>
                                     </thead>
                                   
@@ -250,9 +252,10 @@
                                                
                                                 <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
+                                                <td>{{ !empty($value->net_weight) ? $value->net_weight : '0'}} KG</td>
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
-                                                <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] : '' }}</td>
-                                                <td>{{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : '' }}</td>
+                                                <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
+                                                <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"
@@ -294,13 +297,13 @@
                                                             }
                                                         @endphp
                                                         @if($show == 1)
-                                                        <form action="{{ route('EntryForm.edit', $encrypt_id) }}"
+                                                        <form action="{{ url('EntryForm_action', $encrypt_id) }}"
                                                             method="GET" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
                                                             @csrf
                                                             <button style="background:none;border: none;"
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
-                                                                Edit Slip</button>
+                                                                Generate Challan</button>
                                                         </form>
                                                         @endif
                                                         @endif
@@ -313,7 +316,6 @@
                                                                 $show = 1;
                                                             }                                           
                                                         @endphp
-                                                        @if($value->is_generated == 0)
                                                         @if($show == 1)
                                                         <form action="" method="GET" class="blockuie dropdown-item"
                                                                 style="margin-bottom:-10px">
@@ -329,7 +331,6 @@
                                                                 </button>
                                                         </form>        
                                                         @endif           
-                                                        @endif
                                                     </span>
                                                 </span>
                                                </td>
@@ -344,7 +345,6 @@
                                                     <span class="text-danger mt-2">Excess</span>
                                                 @endif
                                         </td>
-                                        {{--
                                         <td>
                                             @if($value->is_generated == 1)
                                             @if(empty($value->excess_weight) || $value->excess_weight <= 0)
@@ -360,7 +360,6 @@
                                                 <span class="mt-2"> Not generated </span>
                                             @endif                   
                                         </td>                            
-                                        --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

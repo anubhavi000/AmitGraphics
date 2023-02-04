@@ -65,7 +65,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Plant</label>
-      <select name = "plant"  class="fstdropdown-select" required="true">
+      <select name = "plant"  class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($plant))
             @foreach($plant as $key => $value)
@@ -140,9 +140,9 @@
                       <tr> 
                     @endif
                       @if(in_array($key , $items_selected))
-                      <td style="border: none !important;"><input checked="true"  type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      <td style="border: none !important;"><input checked="true"  type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
                       @else
-                      <td style="border: none !important;"><input  type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      <td style="border: none !important;"><input  type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
                       @endif
                     @if($count == 2)
                       <?php $count = 0; ?>
@@ -231,33 +231,38 @@
   }
   function validateinputs(){
       var slip    = $("#slip_no").val();
-      var sliplenth = slip.length;
-      if(sliplenth = 0 || slip == ''){
-        alert('Filling Slip Number Is Neccessary');
-        return;
-      } 
-      else{
-        $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+      if(slip != "{{$entry->kanta_slip_no}}"){
+        var sliplenth = slip.length;
+        if(sliplenth = 0 || slip == ''){
+          alert('Filling Slip Number Is Neccessary');
+          return;
+        } 
+        else{
+          $.ajaxSetup({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      }
+                  });
 
-        $.ajax({
-            type: "POST",
-            url:  '{{url("check_duplicacy")}}',
-            dataType: 'json',
-            data: {'slip_no': slip},
-            success: function (data) 
-            {
-              if(data){
-                  $("#storeform").submit();
+          $.ajax({
+              type: "POST",
+              url:  '{{url("check_duplicacy")}}',
+              dataType: 'json',
+              data: {'slip_no': slip},
+              success: function (data) 
+              {
+                if(data){
+                    $("#storeform").submit();
+                }
+                else{
+                    alert('kanta Slip no. Already Exist');
+                }
               }
-              else{
-                  alert('Slip no. Already Exist');
-              }
-            }
-        });        
-      }
+          });        
+       }
+     }
+     else{
+                    $("#storeform").submit();
+     }
   }
 </script>

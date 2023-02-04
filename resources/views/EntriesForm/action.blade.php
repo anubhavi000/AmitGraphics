@@ -214,9 +214,9 @@
                       <tr> 
                     @endif
                       @if(!in_array($key , $items_checked))
-                        <td style="border: none !important;"><input type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                        <td style="border: none !important;"><input type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
                       @else
-                      <td style="border: none !important;"><input checked="true" type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      <td style="border: none !important;"><input checked="true" type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
                       @endif
                     @if($count == 2)
                       <?php $count = 0; ?>

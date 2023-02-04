@@ -37,7 +37,8 @@ class EntryMast extends Model
                         'excess_wt_allowance',
                         'print_status',
                         'delete_status',
-                        'owner_site'
+                        'owner_site',
+                        'generation_time'
     					];
 
     static function store_slip($req){
@@ -97,8 +98,8 @@ class EntryMast extends Model
         }
 
         $req['excess_wt_allowance'] = $vehicle->excess_wt_allowance; 
-        $obj = Self::where('slip_no' , $slip_no)->first();
-        dd($slip_no);
+        $obj = Self::where('slip_no' , $slip_no)->update($req);
+
                     // ->update($req);
         
         if($obj){
@@ -135,9 +136,7 @@ class EntryMast extends Model
             else{
                 $print_status = 0;
             }
-            $update = self::where('slip_no' , $now_id)
-                          ->update([
-                                // 'acess_weight_quantity' => !empty($req['acess_weight_quantity']) ? $req['acess_weight_quantity'] : NULL,
+            $update_arr = [
                                 'items_included'        => !empty($req['items_included']) ? json_encode($req['items_included'] , true) : NULL,
                                 'plant'                 => !empty($req['plant']) ? $req['plant'] : NUll,
                                 'updated_at'            => date('Y-m-d h:i:s'),
@@ -156,7 +155,34 @@ class EntryMast extends Model
                                 'is_generated'          => 1,
                                 'print_status'          => $print_status,
                                 'owner_site'            => $auth->site
-                          ]);
+                            ];
+            $checkifedited = EntryLogs::where('entry_slip_no' , $now_id)
+                                      ->get();
+            if(count($checkifedited) == 0){
+                $update_arr['generation_time'] = date('Y-m-d h:i:s');
+            }                            
+            $update = self::where('slip_no' , $now_id)
+                          ->update($update_arr
+                                // 'acess_weight_quantity' => !empty($req['acess_weight_quantity']) ? $req['acess_weight_quantity'] : NULL,
+                                // 'items_included'        => !empty($req['items_included']) ? json_encode($req['items_included'] , true) : NULL,
+                                // 'plant'                 => !empty($req['plant']) ? $req['plant'] : NUll,
+                                // 'updated_at'            => date('Y-m-d h:i:s'),
+                                // // 'entry_rate'            => !empty($req['entry_rate']) ? $req['entry_rate'] : NUll,
+                                // 'entry_weight'          => !empty($req['entry_weight']) ? $req['entry_weight'] : NULL,
+                                // 'supervisor'            => !empty($req['supervisor']) ? $req['supervisor'] : NULL,
+                                // 'site'                  => !empty($req['site']) ? $req['site'] : NULL,
+                                // 'kanta_slip_no'         => !empty($req['kanta_slip_no']) ? $req['kanta_slip_no'] : NULL,
+                                // 'vendor_id'             => !empty($req['vendor_id']) ? $req['vendor_id'] : NUll,
+                                // 'datetime'              => date('Y-m-d h:i:S'),
+                                // 'updated_by'            => Auth::user()->id,
+                                // 'gross_weight'          => !empty($req['gross_weight']) ? $req['gross_weight'] : NULL,
+                                // 'net_weight'            => !empty($req['net_weight']) ? $req['net_weight'] : NULL,
+                                // 'excess_weight'         => !empty($req['excess_weight']) ? $req['excess_weight'] : NULL,
+                                // 'vehicle_pass'          => !empty($req['vehicle_pass']) ? $req['vehicle_pass'] : NULL,
+                                // 'is_generated'          => 1,
+                                // 'print_status'          => $print_status,
+                                // 'owner_site'            => $auth->site
+                          );
             // inserting in the log table
             $arr = [
                 'updated_by'    => Auth::user()->id,
