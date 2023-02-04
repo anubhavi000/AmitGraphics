@@ -159,7 +159,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::resource('Module', "ModuleController");
     Route::resource('DesignationModule', "DesignationModuleController");   
     Route::get('print_invoice/{plant}/{slip_no}' , 'EntriesController@PrintInvoice'); 
-    Route::get('PrintEntrySlip/{plant}/{slip_no}', 'EntriesController@PrintSlip'); 
+    Route::get('PrintEntrySlip/{slip_no}', 'EntriesController@PrintSlip'); 
 
 
     Route::resource('SiteMaster' , 'SiteMastController');

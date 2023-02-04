@@ -373,7 +373,7 @@ class EntriesController extends Controller
         ]);
     }
     public function PrintInvoice(Request $request , $plant , $slip_no){
-        if(!empty($plant) && !empty($slip_no)){
+        if( !empty($slip_no)){
             $data = EntryMast::join('plant_mast' , 'plant_mast.id' , '=' ,'entry_mast.plant')
                              ->where('plant_mast.id' , $plant )
                              ->where('slip_no' , $slip_no)
@@ -437,15 +437,19 @@ class EntriesController extends Controller
             }
         }
     }
-    public function PrintSlip(Request $request , $plant , $slip_no){
-        if(!empty($plant) && !empty($slip_no)){
-            $data = EntryMast::join('plant_mast' , 'plant_mast.id' , '=' ,'entry_mast.plant')
-                             ->where('plant_mast.id' , $plant )
-                             ->where('slip_no' , $slip_no)
-                             ->select('entry_mast.*' , 'plant_mast.name as plantname')
+    public function PrintSlip(Request $request  , $slip_no){
+        if(!empty($slip_no)){
+            $data = EntryMast::where('slip_no' , $slip_no)
                              ->first();
             if(empty($data)){
                 return redirect()->back()->with('error' , 'Slip Not Found');
+            }
+            if(!empty($data->pant)){
+                    $plant =  PlantMast::where('id' , $data->plant)->first();
+                    $data->plantname = !empty($plant->name) ? $plant->name : '';
+            }            
+            else{
+                $data->plantname = '';
             }
             $filepath  = asset('images/logo-light.png');
 

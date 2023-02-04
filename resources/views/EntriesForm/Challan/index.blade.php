@@ -336,7 +336,7 @@
                                                </td>
                                         <td>
                                                 @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                                    <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                    <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip'.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                         aria-haspopup="true" aria-expanded="true"
                                                         class="btn btn-primary btn-sm ">
                                                         Print Loading slip : {{$value->slip_no}}

@@ -57,6 +57,7 @@
 	<div style="clear: left;">
 		@php
 			$items_selected = json_decode($data->items_included);
+			$items_selected = !empty($items_selected) ? $items_selected : [];
 		@endphp
 		@foreach($items as $key => $value)
 			<div style="width: 25%;float: left;">
