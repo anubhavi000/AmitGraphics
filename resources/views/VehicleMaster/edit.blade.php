@@ -134,10 +134,11 @@ $encrypt_id = encrypt($edit->id);
 @endsection
 @section('js')
 <script type="text/javascript">
-      $('#vehicle_no').on('keypress', function(e) {
-            if (e.which == 32){
+        $('#vehicle_no').on('keypress', function(e) {
+            if (e.which <= 47 && (e.which < 48 || e.which > 57)) {
                 return false;
             }
+
         });
         function get_vendor(val){
       $.ajaxSetup({
