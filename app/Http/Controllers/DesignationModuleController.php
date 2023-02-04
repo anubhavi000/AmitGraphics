@@ -34,7 +34,8 @@ class DesignationModuleController extends Controller
     {
         $all_modules = Module::whereNull('parent_id')->get();
         // dd($all_modules);
-        $designations = Designation::all();
+        $designations = Designation::where('status' , 1)
+                                   ->get();
 
         
         return view('DesignationModule.create', compact('all_modules', 'designations'));

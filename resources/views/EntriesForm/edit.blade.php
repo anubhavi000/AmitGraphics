@@ -9,8 +9,8 @@
                         <div class="page-header-title">
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
-                                <h5>Add Entry</h5>
-                                <p class="heading_Bottom">Create New Entry</p>
+                                <h5>Edit Entry</h5>
+                                <p class="heading_Bottom">Edit Entry</p>
                             </div>
                         </div>
                   </div>
@@ -24,18 +24,13 @@
                     </ul>
                 </div>
                 </div>
-<!-- <div class="container">
- <div class="row">
-  <div class="col-md-6">
-    <h3>Add Designation</h3>
-    <p class="heading_Bottom"><i class="far fa-building mr-2"></i> Create New Designation</p>
-    </div> -->
 </div>
  <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
 <div class="row">
 <div class="col-md-12 mt-3 mb-3">
-<form id="storeform" action="{{route('EntryForm.store')}}" method="POST">
+<form id="storeform" action="{{route('EntryForm.update' , encrypt($entry->id))}}" method="POST">
     @csrf
+    @method('patch')
 <div class="container-fluid">
     <div class="row first_row_margin">
         <div class="col-md-6">
@@ -50,28 +45,35 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-      <select name = "vehicle"  class="fstdropdown-select" id="vehicle" required="true">
+      <select  name = "vehicle"  class="fstdropdown-select" required="true">
           <option value="">Select</option>
           @if(!empty($vehicles))
             @foreach($vehicles as $key => $value)
+              @if($entry->vehicle == $key)
+              <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
               <option value="{{$key}}">{{$value}}</option>
+              @endif
             @endforeach
           @endif
       </select>
     </div>
-    
     <div class="col-md-3 ">
         <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text" name="entry_weight" id="tare_weight" required="true"  onkeypress='return restrictAlphabets(event)' name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control ">
+        <input type="text" name="entry_weight" required="true"  onkeypress='return restrictAlphabets(event)' value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}" name="entry_weight" placeholder ="Enter Entry Weight"  class="form-control ">
     </div>
 
     <div class="col-md-3">
       <label class="form-label">Plant</label>
-      <select name = "plant"  class="fstdropdown-select" id="plant" required="true">
+      <select name = "plant"  class="fstdropdown-select" required="true">
           <option value="">Select</option>
           @if(!empty($plant))
             @foreach($plant as $key => $value)
+              @if($entry->plant == $key)
+              <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
               <option value="{{$key}}">{{$value}}</option>
+              @endif
             @endforeach
           @endif
       </select>
@@ -79,16 +81,20 @@
 
    <div class="col-md-3 mb-3 px-3">
      <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
-     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
+     <input type="text" name="kanta_slip_no" value="{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
    </div>
 
     <div class="col-md-3">
       <label class="form-label">Unloading Place ( Site ) </label>
-      <select  class="fstdropdown-select" id="site" name = "site">
+      <select  class="fstdropdown-select" name = "site">
           <option value="">Select</option>
           @if(!empty($sites))
             @foreach($sites as $key => $value)
-              <option value="{{$key}}">{{$value}}</option>
+              @if($key == $entry->site)
+              <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+              <option value="{{$key}}">{{$value}}</option>              
+              @endif
             @endforeach
           @endif
       </select>
@@ -97,11 +103,15 @@
 
     <div class="col-md-3">
       <label class="form-label">Supervisor</label>
-      <select name = "supervisor"  class="fstdropdown-select" id="supervisor" required="true">
+      <select name = "supervisor"  class="fstdropdown-select" required="true">
           <option value="">Select</option>
           @if(!empty($supervisors))
             @foreach($supervisors as $key => $value)
-              <option value="{{$key}}">{{$value}}</option>
+              @if($key == $entry->supervisor)
+              <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+              <option value="{{$key}}">{{$value}}</option>              
+              @endif
             @endforeach
           @endif
       </select>
@@ -114,6 +124,9 @@
 
     <div id="infodiv" class="col-md-3">
     </div>
+    @php
+      $items_selected = json_decode($entry->items_included);
+    @endphp
       <div class="col-md-12 mt-4">
       <div id="hide_2" class="table-responsive">
         <h4><b>Select Items</b></h4>
@@ -126,7 +139,11 @@
                     @if($count == 0)
                       <tr> 
                     @endif
+                      @if(in_array($key , $items_selected))
+                      <td style="border: none !important;"><input checked="true"  type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      @else
                       <td style="border: none !important;"><input  type ="checkbox" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      @endif
                     @if($count == 2)
                       <?php $count = 0; ?>
                       </tr>
@@ -213,30 +230,12 @@
       });    
   }
   function validateinputs(){
-      var slip      = $("#slip_no").val();
+      var slip    = $("#slip_no").val();
       var sliplenth = slip.length;
-      var tare      = $("#tare_weight").val();
-      var vehicle   = $("#vehicle").val();
-      var plant     = $("#plant").val();
-      var site      = $("#site").val();  
-      var supervisor= $("#supervisor").val();
-      
       if(sliplenth = 0 || slip == ''){
         alert('Filling Slip Number Is Neccessary');
         return;
       } 
-      else if(tare = 0 || tare == ''){
-        alert('Filling Tare Weight Is Neccessary');
-      }
-      else if(vehicle == ''){
-        alert('Vehcile Must Be Selected');
-      }
-      else if(site == ''){
-        alert('Site Must Be Selected');
-      }
-      else if(supervisor == ''){
-        alert('Supervisor Must Be Selected');
-      }
       else{
         $.ajaxSetup({
                     headers: {
@@ -255,7 +254,7 @@
                   $("#storeform").submit();
               }
               else{
-                  alert('Kanta Slip no.: '+slip+' Already Exist');
+                  alert('Slip no. Already Exist');
               }
             }
         });        

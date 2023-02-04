@@ -67,10 +67,23 @@
       
       <label for="">Site</label>
       <br>
-      <select  class="fstdropdown-select col-md-3" name="site" id="" >
+      <select  class="fstdropdown-select col-md-3" name="site" id="" required="true">
         <option value="">Select</option>
         @if(!empty($sites))
         @foreach ($sites as $key => $value)
+          <option value="{{$key}}">{{$value}}</option>
+        @endforeach
+        @endif
+      </select>
+    </div> 
+      <div class="col-md-3 mt-3">
+      
+      <label for="">Designation</label>
+      <br>
+      <select  class="fstdropdown-select col-md-3" name="designation_id" id="" required="true">
+        <option value="">Select</option>
+        @if(!empty($designations))
+        @foreach ($designations as $key => $value)
           <option value="{{$key}}">{{$value}}</option>
         @endforeach
         @endif

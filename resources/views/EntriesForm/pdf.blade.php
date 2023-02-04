@@ -5,26 +5,25 @@
   font-size: 30px;
 }
 </style>
-<div>
-	<div style="width: 24%;float: left;">
-		@if(!empty($logo))
-		<img style="width: 80%;margin-top: 15%;" src="{{!empty($logo) ? $logo : ''}}">
-		@endif
-	</div>
-	<div style="width: 50%;float: left;">
-		<h2 style="text-align: center;">{{ !empty($sites[$data->site]) ? $sites[$data->site] : ''}}<br>{{!empty($siteaddresses[$data->site]) ? $siteaddresses[$data->site] : ''}}</h2>
+<div style="margin-top: -40px;">
+	<div style="width: 100%;float: left;border: 1px solid black;">
+		<h2 style="text-align: center;">Loading Slip<br>{{!empty($siteaddresses[$data->site]) ? $siteaddresses[$data->site] : ''}}</h2>
 	</div>
 	<div style="clear: left;width: 100%;">
 		<div style="width: 50%;float: left;">
 			<span style="text-align: left;">Slip No. : {{!empty($data->slip_no) ? $data->slip_no : ''}}</span><br>
 			<p>
 				<span style="text-align: left;">
-					Vehicle No. : {{!empty($vehicles[$data->vehicle]) ? $vehicles[$data->vehicles] : ''}}
+					Vehicle No. : {{!empty($vehicles[$data->vehicle]) ? $vehicles[$data->vehicle] : ''}}
 				</span>
 			</p>
-			<br>
 			<p>
-				<span style="text-align: left;">Tare Weight : {{!empty($data->tare_weight) ? $data->tare_weight : ''}}</span>
+				<span style="text-align: left;">
+					Driver : {{!empty($vendor->name) ? $vendor->name : ''}}
+				</span>
+			</p>
+			<p>
+				<span style="text-align: left;">Tare Weight : {{!empty($data->entry_weight) ? $data->entry_weight : ''}} KG</span>
 			</p>
 			<br>
 			<p>
@@ -45,7 +44,7 @@
 			<p></p>
 			<p></p>
 			<br>
-				<span style="margin-top: 10px;">
+				<span style="margin-top: 9px;">
 					Kanta Slip No. : {{!empty($data->kanta_slip_no) ? $data->kanta_slip_no : ''}}
 				</span>
 		</div>
@@ -72,7 +71,7 @@
 	<div style="margin-top: 40px;clear: left;">
 		<div style="width: 50%;float: left;">
 			<p>
-				Loading Plant : {{ !empty($plants[$data->plant]) ? $plants[$data->plant] : ''}}
+				Loading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
 			</p>
 		</div>
 		<div style="width: 50%;float: left;text-align: right;">

@@ -46,43 +46,31 @@
   <div class="form-row mb-3">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-      <select name = "vehicle"  class="fstdropdown-select">
-          <option value="">Select</option>
-          @if(!empty($vehicles))
-            @foreach($vehicles as $key => $value)
-              @if($entry->vehicle == $key)
-                <option selected="true" value="{{$key}}">{{$value}}</option>
-              @else
-                <option value="{{$key}}">{{$value}}</option>
-              @endif
-            @endforeach
-          @endif
-      </select>
+          <input class="form-control" readonly="true" type="text" name="vehicle" value="{{ !empty($vehicles[$entry->vehicle]) ? $vehicles[$entry->vehicle] : ''}}">
     </div>
     
     <div class="col-md-3 ">
         <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight" value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}" placeholder ="Enter Entry Weight"  class="form-control ">
+        <input type="text" required="true"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight" value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}" placeholder ="Enter Entry Weight"  class="form-control ">
     </div>
 
     <div class="col-md-3 ">
         <label for="description">Gross Weight ( In Kgs )</label>
-        <input type="text" id="GrossWeight" name="gross_weight" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)' value="{{!empty($entry->gross_weight) ? $entry->gross_weight : ''}}" placeholder ="Enter Gross Weight"  class="form-control ">
+        <input required="true" type="text" id="GrossWeight" name="gross_weight" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)' value="{{!empty($entry->gross_weight) ? $entry->gross_weight : ''}}" placeholder ="Enter Gross Weight"  class="form-control ">
     </div>    
 
     <div class="col-md-3 ">
         <label for="description">Net Weight</label>
-        <input type="text" name="net_weight" readonly="true" id="NetWeight"  value="{{!empty($entry->net_weight) ? $entry->net_weight : ''}}" placeholder ="Enter Net Weight"  class="form-control ">
+        <input type="text" required="true" name="net_weight" readonly="true" id="NetWeight"  value="{{!empty($entry->net_weight) ? $entry->net_weight : ''}}" placeholder ="Enter Net Weight"  class="form-control ">
     </div>
-
     <div class="col-md-3 mt-2">
         <label for="description">Excess Weight</label>
-        <input type="text" name="excess_weight" id="excess_weight" readonly="true" value="{{!empty($entry->excess_weight) ? $entry->excess_weight : ''}}" placeholder ="Enter Excess Weight"  class="form-control ">
+        <input type="text" name="excess_weight" id="excess_weight" readonly="true" value="{{!empty($entry->excess_weight) ? $entry->excess_weight : 0}}" placeholder ="Enter Excess Weight"  class="form-control ">
     </div>        
 
     <div class="col-md-3 mt-2">
       <label class="form-label">Loading Plant</label>
-      <select name = "plant"  class="fstdropdown-select">
+      <select name = "plant"  class="fstdropdown-select" required="true">
           <option value="">Select</option>
           @if(!empty($plants))
             @foreach($plants as $key => $value)
@@ -98,12 +86,12 @@
 
    <div class="col-md-3 mb-3 px-3 mt-2">
      <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
-     <input type="text" name="kanta_slip_no" value="{{ !empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
+     <input type="text" name="kanta_slip_no"  value="{{ !empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
    </div>
 
     <div class="col-md-3 mt-2">
       <label class="">Unloading Place ( Site ) </label>
-      <select  class="fstdropdown-select" name = "site">
+      <select  class="fstdropdown-select" required="true" name = "site">
           <option value="">Select</option>
           @if(!empty($sites))
             @foreach($sites as $key => $value)
@@ -119,7 +107,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Supervisor</label>
-      <select name = "supervisor"  class="fstdropdown-select">
+      <select name = "supervisor" required="true" class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($supervisors))
             @foreach($supervisors as $key => $value)
@@ -139,8 +127,8 @@
 
     <div class="col-md-3 ">
         <label for="description">Vehicle Pass WT</label>
-        <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()"  value="{{!empty($vehicle_pass_weight) ? $vehicle_pass_weight : 0}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
-    </div>               
+        <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" required="true" value="{{!empty($vehicle_pass_weight) ? $vehicle_pass_weight : 0}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
+    </div>
     {{--
     <div class="col-md-3 mb-3 px-3">
         <label for="description">Entry Weight ( In Kgs )</label>
@@ -346,9 +334,27 @@
         }
         calculateexcessweight();
    }
-   function calculateexcessweight(){
+function calculateexcessweight(){
+     var net_wt = parseFloat($("#NetWeight").val());
+     var pass_wt = parseFloat($("#vehicle_pass").val());
+     var excess_wt_allowed = parseFloat("{{!empty($entry->excess_wt_allowance) ? $entry->excess_wt_allowance : 0}}");
+     if(net_wt != '' && pass_wt != ''){
+       var new_wt = parseFloat($("#GrossWeight").val());
+       var limit =  pass_wt + (pass_wt/100*excess_wt_allowed);
+          if(net_wt >= limit){
+            var excess = parseFloat(limit) - parseFloat(net_wt);
+            excess = -1*(excess);
+          }
+          else{
+            var excess = 0;
+          } 
+          $("#excess_weight").val(excess);
+     }
+  }   
+   function calculateexcessweight_old(){
      var net_weight = $("#NetWeight").val();
      var pass = $("#vehicle_pass").val();
+     var excess_wt_allowance = "{{!empty($entry->excess_wt_allowance) ? $entry->excess_wt_allowance : 0}}";
      if(net_weight != '' && pass != ''){
           if(parseInt(net_weight) > parseInt(pass)){
             console.log('excess');
@@ -360,6 +366,7 @@
             console.log('not excess');
               $("#submitbtn").prop('disabled' , false);
               var excess = 0;
+              $("#danger").html('');
           }
             $("#excess_weight").val(excess);
         }

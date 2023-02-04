@@ -146,7 +146,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
     // Routes added By ved
     Route::resource('EntryForm'  , 'EntriesController');
-    Route::delete('EntryForm_delete'  , 'EntriesController@delete');
+    Route::delete('EntryForm_delete/{id}'  , 'EntriesController@destroy');
 
     Route::get('EntryForm_action/{id}'  , 'EntriesController@action');
     Route::post('return_tranporter' , 'EntriesController@return_tranporter')->name('return_tranporter');

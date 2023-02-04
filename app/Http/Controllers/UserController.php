@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Sites;
+use App\Models\Designation as role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -26,13 +27,18 @@ class UserController extends Controller
     {
         $entries =  User::where('status' , 1)
                         ->get();
+
         $sites = Sites::where('status' , 1)
                       ->pluck('name' , 'id')
                       ->toArray(); 
+
+        $designations = role::pluckactives();
+
         return view($this->view.'.index', [
-            'url'  => $this->url,
-            'data' => $entries,
-            'sites'=> $sites
+            'url'   => $this->url,
+            'data'  => $entries,
+            'sites' => $sites,
+            'roles' => $designations
         ]);
     }
 
@@ -43,11 +49,16 @@ class UserController extends Controller
      */
     public function create()
     {
-        $sites = Sites::where('status' , 1)
-                      ->pluck('name' , 'id')
-                      ->toArray();
+        $sites        = Sites::where('status' , 1)
+                              ->where('is_owner' , 1)
+                              ->pluck('name' , 'id')
+                              ->toArray();
+
+        $designations = role::pluckactives();
+
         return view($this->view.'.create' , [
-            'sites'  => $sites
+            'sites'       => $sites,
+            'designations' => $designations
         ]);
     }
 
@@ -66,7 +77,6 @@ class UserController extends Controller
             'status'            => 1,
             'orignal_password'  => $request->password
         ];
-
         $request->merge($additional_parameters);
 
         $insert_arr = $request->except('_token' , '_method');
@@ -104,13 +114,14 @@ class UserController extends Controller
         $decrypt_id = Crypt::deCrypt($id);
         $data = DB::table('users')->find($decrypt_id);
         $sites = Sites::where('status' , 1)
+                      ->where('is_owner' , 1)
                       ->pluck('name' , 'id')
                       ->toArray();
+        $designations = role::pluckactives();
 
         if(!empty($data)){
-            return view('users.edit', compact('data' , 'sites'));
+            return view('users.edit', compact('data' , 'sites' , 'designations'));
         }
-
     }
 
     /**

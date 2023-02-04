@@ -94,7 +94,7 @@
                                     <th >S.no</th>
                                     <th  >Slip No</th>
                                     <th  >Kanta Slip No.</th>
-                                    <th>Net Weight</th>
+                                    <th> Net Weight</th>
                                     <th> Site(Unloading Place) </th>
                                     <th> Plant</th>
                                     <th> Excess Weight (in kgs)</th>
@@ -110,26 +110,38 @@
                                         <td>{{$key +1}}</td>
                                         <td>{{!empty($value->slip_no) ? $value->slip_no : ''}}</td>
                                         <td>{{!empty($value->kanta_slip_no) ? $value->kanta_slip_no  : '' }}</td>
-                                        <td> {{ !empty($value->net_weight) ? $value->net_weight  :''}} </td>
+                                        <td> {{ !empty($value->net_weight) ? $value->net_weight  :''}} KG </td>
                                         <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] :'' }}</td>
                                         <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : ''}}</td>
-                                        <td>{{ !empty($value->acess_weight_quantity) ? $value->acess_weight_quantity.' KG' : 'NA' }}</td>
+                                        <td>{{ !empty($value->acess_weight_quantity) ? $value->acess_weight_quantity.' KG' : '0' }} KG</td>
                                         <td>{{ !empty($value->created_at) ? date('d-m-Y h:i:A' , strtotime($value->created_at)) : '' }}</td>
                                         <td>{{ !empty($value->updated_at) ? $value->updated_at : ''}}</td>
                                         <td>
-                                                    <a target="blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                @if(empty($value->excess_weight) || $value->excess_weight <= 0)
+                                                    <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                         aria-haspopup="true" aria-expanded="true"
                                                         class="btn btn-primary btn-sm ">
-                                                        slip : {{$value->slip_no}}
+                                                        Print Loading slip : {{$value->slip_no}}
                                                     </a>                                            
+                                                @else
+                                                    <span class="text-danger mt-2">Excess</span>
+                                                @endif
                                         </td>
                                         <td>
-                                            <a target="blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                            @if($value->is_generated == 1)
+                                            @if(empty($value->excess_weight) || $value->excess_weight <= 0)
+                                            <a style="width: 100%;" target="_blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                 aria-haspopup="true" aria-expanded="true"
                                                 class="btn btn-primary btn-sm ">
-                                                Print Invoice : {{$value->slip_no}}
-                                            </a>                                            
-                                        </td>
+                                                Print Challan : {{$value->slip_no}}
+                                            </a>             
+                                            @else
+                                                <span class="text-danger mt-2">Excess</span>
+                                            @endif            
+                                            @else
+                                                <span class="mt-2"> Not generated </span>
+                                            @endif                   
+                                        </td> 
                                     </tr>
                                 @endforeach
                             </tbody>

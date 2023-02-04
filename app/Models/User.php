@@ -6,6 +6,8 @@ use App\Models\UserPlant;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
+use App\Models\Designation;
 
 class User extends Authenticatable
 {
@@ -82,5 +84,35 @@ class User extends Authenticatable
             return $designationModule;
         }
         return false;
+    }
+    public static function is_admin(){ 
+        $desig      = Self::where('id' , Auth::user()->designation_id)->first()->designation_id;
+        $desig_info =  Designation::where('id' , $desig)->first();
+        if(!empty($desig_info)){
+            if( $desig_info->id == '1'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+    public static function is_supervisor(){
+        $desig      = Self::where('id' , Auth::user()->designation_id)->first()->designation_id;
+        $desig_info =  Designation::where('id' , $desig)->first();
+        if(!empty($desig_info)){
+            if( $desig_info->id == '3'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 }

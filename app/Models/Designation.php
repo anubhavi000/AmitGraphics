@@ -9,5 +9,9 @@ class Designation extends Model
 {
     use HasFactory;
     protected $table= "designation";
-
+    public static function pluckactives(){
+    	return self::where('status' , 1)
+    			   ->pluck('name' , 'id')
+    			   ->toArray();
+    }
 }

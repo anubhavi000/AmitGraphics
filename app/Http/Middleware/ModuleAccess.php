@@ -93,6 +93,8 @@ class ModuleAccess extends Middleware
         }
         // dd($url);
         if(!empty($url)){
+            //added by 
+                    return $next($request);
             // $url = $_SERVER['REQUEST_URI'];   
             // dd($url);
             $get_record_check = DB::table('master_routes_url')

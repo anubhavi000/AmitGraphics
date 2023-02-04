@@ -12,7 +12,7 @@ use App\Models\ItemMast;
 use App\Models\sites;
 use Session;
 use PDF;
-
+use Auth;
 class EntriesController extends Controller
 {
     /**
@@ -27,6 +27,7 @@ class EntriesController extends Controller
     }
     public function index(Request $request)
     {
+        $auth = Auth::user();
         if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
             return view($this->module_folder.'/index');                       
         }   
@@ -34,7 +35,11 @@ class EntriesController extends Controller
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
             $from_date = !empty($request->from_date) ? $request->from_date : NULL;
-            $entriesraw = EntryMast::whereNotNull('slip_no');
+            
+            $entriesraw = EntryMast::whereNotNull('slip_no')
+                                   ->where('owner_site' , $auth->site)
+                                   ->where('delete_status' , 0);
+
             $sites = Sites::activesitespluck();
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
@@ -63,7 +68,7 @@ class EntriesController extends Controller
             if(!empty($slip_no)){
                 $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
             }
-            if(!empty($request->status)){
+            if(isset($request->status)){
                 if($request->status == 1){
                     $entriesraw->where('is_generated' , 1);
                 }
@@ -102,6 +107,7 @@ class EntriesController extends Controller
                                        ->pluck('vehicle_no' , 'id')
                                        ->toArray();
         $sites           =  Sites::where('status' , 1)
+                                 ->where('is_owner' , 0)
                                  ->pluck('name' , 'id')
                                  ->toArray();
         $supervisors     = SupervisorMast::where('status' , 1)
@@ -146,7 +152,6 @@ class EntriesController extends Controller
         $now_id = decrypt($id);
         $entry =  EntryMast::where('slip_no' , $now_id)
                            ->first();
-        
         if(!empty($entry->vehicle)){
              $selected_vehicle = VehicleMast::where('id' , $entry->vehicle)->first();
              $vehicle_pass_weight = !empty($selected_vehicle->pass_wt) ? $selected_vehicle->pass_wt : 0;
@@ -171,6 +176,7 @@ class EntriesController extends Controller
                                        ->toArray();
 
         $sites           =  Sites::where('status' , 1)
+                                 ->where('is_owner' , 0)
                                  ->pluck('name' , 'id')
                                  ->toArray();
 
@@ -212,17 +218,45 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // edit function is to edit the slip before generation
     public function edit($id)
     {
         $now_id = decrypt($id);
         $entry =  EntryMast::where('slip_no' , $now_id)
                            ->first();
+        $transporters    =   VendorMast::where('status' , 1)
+                                       ->pluck('v_name' , 'id')
+                                       ->toArray();
+        $vehicles        =  VehicleMast::where('status' , 1)
+                                       ->pluck('vehicle_no' , 'id')
+                                       ->toArray();
+        $sites           =  Sites::where('status' , 1)
+                                 ->where('is_owner' , 0)
+                                 ->pluck('name' , 'id')
+                                 ->toArray();
+        $supervisors     = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+        $items           = ItemMast::where('status' , 1)
+                                   ->pluck('name' , 'id')
+                                   ->toArray();
+        $plants          =  PlantMast::where('status' , 1)
+                                     ->pluck('name' , 'id')
+                                     ->toArray();
+
         if(empty($entry)){
             return redirect()->back();
         }
         else{
             return view($this->module_folder.'.edit' , [
-                'entry' => $entry
+                'entry'        => $entry,
+                'transporters' => $transporters,
+                'vehicles'     => $vehicles,
+                'sites'        => $sites,
+                'supervisors'  => $supervisors,
+                'items'        => $items,
+                'plant'        => $plants
             ]);
         }
     }
@@ -236,7 +270,13 @@ class EntriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = EntryMast::editslip($request->except('_token' , '_method') , decrypt($id));
+        if($update){
+            return redirect($this->route)->with('success' , 'Updated SuccessFully');
+        }
+        else{
+            return redirect()->back()->with('success' , 'Could Not Update');
+        }
     }
 
     /**
@@ -247,7 +287,16 @@ class EntriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $now_id = decrypt($id);
+
+        $delete = EntryMast::where('slip_no' , $now_id)
+                           ->update([
+                                'delete_status' => 1
+                           ]);
+        if($delete){
+            return redirect()->back()->with('status' , 'Deleted SuccessFully');
+        }
+
     }
     public function return_tranporter(Request $request){
         if(empty($request->transporter)){
@@ -267,7 +316,7 @@ class EntriesController extends Controller
             return reponse()->json(false);
         }
         else{
-            $entry = EntryMast::where('slip_no' , $request->slip_no)
+            $entry = EntryMast::where('kanta_slip_no' , $request->slip_no)
                               ->first();
             if(empty($entry)){
                 return response()->json(true);
@@ -279,19 +328,30 @@ class EntriesController extends Controller
     }
     public function SlipGeneration(Request $request , $id){
         $response = EntryMast::generateslip($request->except('_token' , '_method') , $id);
-        if($response){
-            return redirect('EntryForm')->with('success' , 'Generated SuccessFully');
+        if($response['res']){
+            if($response['print'] == 1){
+                $plant = $response['plant'];
+                $slip_no = decrypt($id);
+                return redirect('print_invoice/'.$plant.'/'.$slip_no);
+            }
+            else{
+                $slip_no = decrypt($id);
+                Session::put('error' , 'Slip Generated With Excess Weight And Slip No : '.$slip_no);
+                return redirect($this->route);
+            }
         }
         else{
             return redirect()->back()->with('success' , 'Could Not Generate');
         }
     }
     public function ShowGeneratedSlips(Request $request){
-        
-        $recordsraw   = EntryMast::where('is_generated' , 1);
+        $auth = Auth::user();
+        $recordsraw   = EntryMast::where('is_generated' , 1)
+                                  ->where('delete_status' , 0)
+                                  ->where('owner_site' , $auth->site);
         $sites = Sites::activesitespluck();
         $plants = PlantMast::pluckactives();
-
+        $vehicles = VehicleMast::where('status' , 1)->pluck('vehicle_no' , 'id');
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
         }
@@ -304,17 +364,19 @@ class EntriesController extends Controller
         }
             $records = $recordsraw->get();
         return view($this->module_folder.'.show' , [
-            'data'  => $records,
-            'sites' => $sites,
-            'plants'=> $plants
+            'data'      => $records,
+            'sites'     => $sites,
+            'vehicles'  => $vehicles,
+            'plants'    => $plants
         ]);
     }
     public function PrintInvoice(Request $request , $plant , $slip_no){
         if(!empty($plant) && !empty($slip_no)){
-            $data  = EntryMast::where('plant' , $plant)
-                              ->where('slip_no' , $slip_no)
-                              ->where('is_generated' , 1)
-                              ->first();            
+            $data = EntryMast::join('plant_mast' , 'plant_mast.id' , '=' ,'entry_mast.plant')
+                             ->where('plant_mast.id' , $plant )
+                             ->where('slip_no' , $slip_no)
+                             ->select('entry_mast.*' , 'plant_mast.name as plantname')
+                             ->first();
             if(empty($data)){
                 Session::put('error' , 'Slip Not Found Either Not Generated');            
                 return redirect()->back();
@@ -338,10 +400,10 @@ class EntriesController extends Controller
             $siteaddresses = Sites::where('status' , 1)
                                   ->pluck('address' , 'id')
                                   ->toArray();
+            $vehicles = VehicleMast::where('status' , 1)
+                                   ->pluck('vehicle_no' , 'id')
+                                   ->toArray();                                  
 
-            $plants = PlantMast::where('status' , 1)
-                               ->pluck('name' , 'id')
-                               ->toArray();
             $filepath  = asset('images/logo-light.png');
 
             $filetype = pathinfo($filepath, PATHINFO_EXTENSION);
@@ -365,18 +427,20 @@ class EntriesController extends Controller
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
                 'logo'          => $image,
+                'vehicles'      => $vehicles,
                 'sites'         => $sites,
-                'plants'        => $plants,
                 'siteaddresses' => $siteaddresses          
-            ))->setPaper($custumpaper);                                
+            ))->setPaper($custumpaper , 'landscape');                                
             return $pdf->stream($this->module_folder.'.pdf');
             }
         }
     }
     public function PrintSlip(Request $request , $plant , $slip_no){
         if(!empty($plant) && !empty($slip_no)){
-            $data = EntryMast::where('plant' , $plant)
+            $data = EntryMast::join('plant_mast' , 'plant_mast.id' , '=' ,'entry_mast.plant')
+                             ->where('plant_mast.id' , $plant )
                              ->where('slip_no' , $slip_no)
+                             ->select('entry_mast.*' , 'plant_mast.name as plantname')
                              ->first();
             if(empty($data)){
                 return redirect()->back()->with('error' , 'Slip Not Found');
@@ -403,7 +467,7 @@ class EntriesController extends Controller
                              ->toArray();
 
             $vehicles = VehicleMast::where('status' , 1)
-                                   ->pluck('id' , 'vehicle_no')
+                                   ->pluck('vehicle_no' , 'id')
                                    ->toArray();
 
             $supervisors = SupervisorMast::where('status' , 1)
@@ -416,21 +480,24 @@ class EntriesController extends Controller
             $siteaddresses = Sites::where('status' , 1)
                                   ->pluck('address' , 'id')
                                   ->toArray();
-
-            $plants = PlantMast::where('status' , 1)
-                               ->pluck('name' , 'id')
-                               ->toArray();
+            if(isset($data->vendor_id)){
+            $vendor = VendorMast::where('id' , $data->vendor_id)
+                                ->first();
+            }
+            else{
+                 $vendor ='';
+            }
             $custumpaper = 'A5';
             $pdf = PDF::loadView($this->module_folder.'.pdf', array(
                 'data'          => $data,
                 'items'         => $items,
+                'vendor'         => $vendor,
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
                 'sites'         => $sites,
                 'logo'          => $image,
-                'plants'        => $plants,
                 'siteaddresses' => $siteaddresses          
-            ))->setPaper($custumpaper);                                
+            ))->setPaper($custumpaper , 'landscape');                                
             return $pdf->stream($this->module_folder.'.pdf');
         }
     }   

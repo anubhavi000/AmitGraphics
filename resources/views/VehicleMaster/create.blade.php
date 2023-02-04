@@ -75,7 +75,10 @@
       </select>
     </div> 
    
-
+    <div class="col-md-3 mb-3  mt-3">
+      <label for="item_Name" class="yash_star">Excess Weight Allowed (In %) </label>
+      <input type="text" name="excess_wt_allowance" id="excess_wt_allowance"  onkeypress='return restrictAlphabets(event)' class="form-control" placeholder="Enter Vehicle Pass Here" required>
+  </div>
     <div class="col-md-6 mb-3  mt-3">
         <label for="description">Description</label>
         <textarea class="form-control " name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
@@ -136,10 +139,12 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+
         $('#vehicle_no').on('keypress', function(e) {
-            if (e.which == 32){
+            if (e.which <= 47 && (e.which < 48 || e.which > 57)) {
                 return false;
             }
+
         });
     function get_vendor(val){
       $.ajaxSetup({

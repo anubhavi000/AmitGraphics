@@ -130,7 +130,7 @@
                                             <th data-field="date23" data-sortable="true">S. No</th>
 
                                             <th data-field="date" data-sortable="true">user Name</th>
-
+                                            <th data-field="datewww" data-sortable="true">Designation</th>
                                             <th data-field="type" data-sortable="true"> Site</th>
 
                                             <th data-field="note13" data-sortable="true">Action</th>
@@ -149,6 +149,8 @@
                                                <td>{{$key+1}}</td>
                                                
                                                 <td>{{ !empty($value->name) ? $value->name : ''}}</td>
+
+                                                <td>{{ !empty($roles[$value->designation_id]) ? $roles[$value->designation_id] : ''}}</td>
 
                                                 <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] :''  }}</td>
 

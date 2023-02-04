@@ -60,7 +60,7 @@ $encrypt_id = encrypt($data->id);
       
       <label for="">Site</label>
       <br>
-      <select  class="fstdropdown-select col-md-3" name="site" id="" >
+      <select  class="fstdropdown-select col-md-3" name="site" id="" required="true">
         <option value="">Select</option>
         @if(!empty($sites))
           @foreach ($sites as $key => $value)
@@ -73,6 +73,24 @@ $encrypt_id = encrypt($data->id);
         @endif
       </select>
     </div> 
+
+      <div class="col-md-3 mt-3">
+      
+      <label for="">Designation</label>
+      <br>
+      <select  class="fstdropdown-select col-md-3" name="designation_id" id="" required="true">
+        <option value="">Select</option>
+        @if(!empty($designations))
+        @foreach ($designations as $key => $value)
+          @if($key == $data->designation_id)
+          <option selected="true" value="{{$key}}">{{$value}}</option>
+          @else
+          <option value="{{$key}}">{{$value}}</option>
+          @endif
+        @endforeach
+        @endif
+      </select>
+    </div>    
 
     <div class="col-md-3 mb-3 px-3">
       <div id="infodiv"></div>

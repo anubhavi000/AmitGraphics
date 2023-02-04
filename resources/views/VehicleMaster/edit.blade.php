@@ -72,7 +72,10 @@ $encrypt_id = encrypt($edit->id);
       <label for="item_Name" class="yash_star">Vehicle Pass WT </label>
       <input value="{{$edit->pass_wt}}" type="text" onkeypress='return restrictAlphabets(event)'  name="wt" id="vehicle_pass_wt" class="form-control " placeholder="Enter Vehicle Pass Here" required>
   </div>
-   
+    <div class="col-md-3 mb-3  mt-3">
+      <label for="item_Name" class="yash_star">Excess Weight Allowed (In %) </label>
+      <input type="text" name="excess_wt_allowance" id="excess_wt_allowance"  onkeypress='return restrictAlphabets(event)' value="{{!empty($edit->excess_wt_allowance) ? $edit->excess_wt_allowance : ''}}" class="form-control" placeholder="Enter Vehicle Pass Here" required>
+  </div>   
 
     <div class="col-md-6 mb-3 mt-3">
         <label for="description">Description</label>

@@ -33,14 +33,19 @@ class EntryMast extends Model
                         'vehicle',
                         'kanta_slip_no',
                         'site',
-                        'is_generated'
+                        'is_generated',
+                        'excess_wt_allowance',
+                        'print_status',
+                        'delete_status',
+                        'owner_site'
     					];
 
     static function store_slip($req){
+        $auth = Auth::user();
     	$req['created_at'] = date('Y-m-d h:i:s');
     	$req['created_by'] =  Auth::user()->id;
-    	$req['datetime']   =  date('Y-m-d h:i:s');
-
+    	$req['datetime']   =  date('Y-m-d');
+        $req['owner_site'] =  $auth->site;
         $LastSlip  = Self::orderBy('id' , 'DESC')
                         ->first();
         if(!empty($LastSlip)){
@@ -51,7 +56,7 @@ class EntryMast extends Model
         }
 
         if(!empty($req['vehicle'])){
-            $vehicle = VehicleMast::where('vehicle_no' , (int)$req['vehicle'])
+            $vehicle = VehicleMast::where('id' , $req['vehicle'])
                                    ->first();
             $req['vendor_id'] = !empty($vehicle->vendor) ? $vehicle->vendor : NULL;
         }
@@ -59,6 +64,7 @@ class EntryMast extends Model
             $req['items_included']  = json_encode($req['items_included']);
         }
 
+        $req['excess_wt_allowance'] = $vehicle->excess_wt_allowance; 
     	$obj = Self::create($req);
     	
     	if(!empty($obj)){
@@ -76,15 +82,59 @@ class EntryMast extends Model
     		return $res;
     	}
     }
+    static function editslip($req  , $slip_no){
+        $req['updated_at'] = date('Y-m-d h:i:s');
+        $req['updated_by'] =  Auth::user()->id;
+        $req['datetime']   =  date('Y-m-d');
+
+        if(!empty($req['vehicle'])){
+            $vehicle = VehicleMast::where('id' , $req['vehicle'])
+                                   ->first();
+            $req['vendor_id'] = !empty($vehicle->vendor) ? $vehicle->vendor : NULL;
+        }
+        if(!empty($req['items_included'])){
+            $req['items_included']  = json_encode($req['items_included']);
+        }
+
+        $req['excess_wt_allowance'] = $vehicle->excess_wt_allowance; 
+        $obj = Self::where('slip_no' , $slip_no)->first();
+        dd($slip_no);
+                    // ->update($req);
+        
+        if($obj){
+            // $res = [
+            //     'res'    => true,
+            //     'slip_no'=> $id 
+            // ];
+            return true;
+        }
+        else{
+            // $res = [
+            //     'res'    => false,
+            //     'slip_no'=> NULL 
+            // ];
+            return false;
+        }        
+    }
     static function generateslip($req , $id){
         $now_id = decrypt($id);
         $entry = self::where('slip_no' , $now_id)->first();
         if(empty($entry)){
-            return false;
+            return [
+                'res'   => false,
+                'print' => false
+            ];
         }
         else{
+        $auth = Auth::user();
             DB::begintransaction();
             // updating the entry in entry_mast
+            if($req['excess_weight'] == 0 || $req['excess_weight'] < 0){
+                $print_status = 1;
+            }
+            else{
+                $print_status = 0;
+            }
             $update = self::where('slip_no' , $now_id)
                           ->update([
                                 // 'acess_weight_quantity' => !empty($req['acess_weight_quantity']) ? $req['acess_weight_quantity'] : NULL,
@@ -99,12 +149,13 @@ class EntryMast extends Model
                                 'vendor_id'             => !empty($req['vendor_id']) ? $req['vendor_id'] : NUll,
                                 'datetime'              => date('Y-m-d h:i:S'),
                                 'updated_by'            => Auth::user()->id,
-                                'vehicle'               => !empty($req['vehicle']) ? $req['vehicle'] :NULL,
                                 'gross_weight'          => !empty($req['gross_weight']) ? $req['gross_weight'] : NULL,
                                 'net_weight'            => !empty($req['net_weight']) ? $req['net_weight'] : NULL,
                                 'excess_weight'         => !empty($req['excess_weight']) ? $req['excess_weight'] : NULL,
                                 'vehicle_pass'          => !empty($req['vehicle_pass']) ? $req['vehicle_pass'] : NULL,
-                                'is_generated'     => 1
+                                'is_generated'          => 1,
+                                'print_status'          => $print_status,
+                                'owner_site'            => $auth->site
                           ]);
             // inserting in the log table
             $arr = [
@@ -115,11 +166,19 @@ class EntryMast extends Model
             $insert = EntryLogs::create($arr);
             if($insert && $update){
                 DB::commit();
-                return true;
+                return [
+                    'res'  => true,
+                    'plant'=> $req['plant'],
+                    'print'=> $print_status
+                ];
             }
             else{
                 DB::rollback();
-                return false;
+                return [
+                    'res'   => true,
+                    'plant' => $req['plant'],
+                    'print' => false
+                ];
             }
         }
     }

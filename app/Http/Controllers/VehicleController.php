@@ -51,14 +51,15 @@ class VehicleController extends Controller
     {
         if (!empty($request->number)) {
             $insert = VehicleMast::insert([
-                                'vehicle_no' => $request->number,
-                                'descr'      => !empty($request->description) ? $request->description : null,
-                                'type'       => $request->type,
-                                'pass_wt'    => $request->wt,
-                                'created_at' => date('Y-m-d h:i:s'),
-                                'created_by' => Auth::user()->id,
-                                'status'     => 1,
-                                'vendor'=> $request->vendor
+                                'vehicle_no'          => $request->number,
+                                'descr'               => !empty($request->description) ? $request->description : null,
+                                'type'                => $request->type,
+                                'pass_wt'             => $request->wt,
+                                'created_at'          => date('Y-m-d h:i:s'),
+                                'created_by'          => Auth::user()->id,
+                                'status'              => 1,
+                                'vendor'              => $request->vendor,
+                                'excess_wt_allowance' => !empty($request->excess_wt_allowance) ? $request->excess_wt_allowance : NULL
                             ]);
             if($insert){
                 return redirect('VehicleMast')->with('success' , 'Added SuccessFully');
@@ -122,15 +123,16 @@ class VehicleController extends Controller
         $decrypt = decrypt($id);
         $update = VehicleMast::where('id', $decrypt)
                             ->update([
-                                'vehicle_no' => $request->number,
-                                'descr'      => !empty($request->email) ? $request->description : null,
-                                'type'       => $request->type,
-                                'pass_wt'    => $request->wt,
-                                'descr'      => $request->description,
-                                'status'     => 1,
-                                'vendor'     =>$request->vendor,
-                                'updated_at' => date('Y-m-d h:i:s'),
-                                'updated_by' => Auth::user()->id,
+                                'vehicle_no'         => $request->number,
+                                'descr'              => !empty($request->email) ? $request->description : null,
+                                'type'               => $request->type,
+                                'pass_wt'            => $request->wt,
+                                'descr'              => $request->description,
+                                'status'             => 1,
+                                'vendor'             =>$request->vendor,
+                                'updated_at'         => date('Y-m-d h:i:s'),
+                                'updated_by'         => Auth::user()->id,
+                                'excess_wt_allowance'=> !empty($request->excess_wt_allowance) ? $request->excess_wt_allowance : NULL 
                             ]);
         if($update){
             return redirect('VehicleMast')->with('success' , 'Updated SuccessFully');

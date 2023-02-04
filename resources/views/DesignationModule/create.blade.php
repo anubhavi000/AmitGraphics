@@ -62,7 +62,7 @@
                                             <label class="yash_star" style="margin-bottom:0px;"> Select Designation
                                             </label>
 
-                                            <select name="designation_id" class="chosen-select" required
+                                            <select name="designation_id" class="fstdropdown-select" required
                                                 onchange="getModulePrevAccess(this.value)">
                                                 <option value="">Select</option>
                                                 @foreach ($designations as $designation)

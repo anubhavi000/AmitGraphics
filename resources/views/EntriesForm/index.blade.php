@@ -155,8 +155,8 @@
                                                         'last_thirty_days' => 'Last 30 Days' 
                                                         ];  
                                                 @endphp
-                                                <div class="input-group client_margin">
-                                                    <label>Datetime</label>
+                                                <div class="input-group client_margin mt-1">
+                                                    <label class="mb-0">Datetime</label>
                                                     <select name="from_date" class="fstdropdown-select col-md-3">
                                                         <option value="">Select</option>
                                                         @foreach($opt_arr as $key => $value)
@@ -172,17 +172,26 @@
                                         </div>    
                                         @php
                                             $statusval = !empty(Request::get('status')) ? Request::get('status') : ''; 
+                                            $opt_arr = [
+                                                    0 => 'Generated',
+                                                    1 => 'Not Generated'
+                                                 ];
                                         @endphp
                                         <div class="col-md-2">
                                             <fieldset>
-                                                <div class="input-group client_margin">
-                                                    <label>Generation Status</label>
+                                                <div class="input-group client_margin mt-1">
+                                                    <label class="mb-0">Generation Status</label>
                                                     <select value="{{$statusval}}" name="status" class="fstdropdown-select col-md-3">
                                                         <option value="">Select</option>
-                                                        <option value="1">Generated</option>
-                                                        <option value="0"> Not Generated</option>
+                                                        @foreach($opt_arr as $key => $value)
+                                                            @if($statusval == $key)
+                                                                <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                                <option  value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
                                                     </select>
-                                                </div>                                                
+                                                </div>
                                             </fieldset>
                                         </div>            
                                         <div class="col-md-3 mb-3 px-3">
@@ -217,13 +226,12 @@
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
-                                            <th data-field="date23" width="10" data-sortable="true">S.No</th>
-
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
                                             <th data-field="dat2323e" data-sortable="true">Net Weight</th>
-                                            <th data-field="d33at2323e" data-sortable="true">Site</th>
-                                            <th data-field="d33at2323ew" data-sortable="true">Plant</th>
+                                            <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
+                                            <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
+                                            <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                             <th>Print Invoice</th>
@@ -237,59 +245,114 @@
                                             ?>
                                             <tr>
                                                 <td></td>
-                                               <td>{{$key+1}}</td>
                                                
                                                 <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
-                                                <td>{{ !empty($value->net_weight) ? $value->net_weight : ''}}</td>
+                                                <td>{{ !empty($value->net_weight) ? $value->net_weight : ''}} KG</td>
+                                                <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
                                                 <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
                                                 <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
                                                <td> 
                                                 <span class="dropdown open">
-                                                    <button id="btnGroup" type="button" data-toggle="dropdown"
+                                                    <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"
                                                         aria-haspopup="true" aria-expanded="true"
                                                         class="btn btn-primary btn-sm dropdown-toggle dropdown-menu-right">
                                                         <i class="fas fa-cog"></i>
                                                     </button>
-                                                    <span aria-labelledby="btnGroup"
+                                                    <span  aria-labelledby="btnGroup"
                                                         class="dropdown-menu mt-1 dropdown-menu-right">
                                                         <form action="{{ url('EntryForm_action', $encrypt_id) }}"
                                                             method="GET" class="blockuie dropdown-item"
                                                             style="margin-bottom:-10px">
                                                             @csrf
+                                                            @php
+                                                            $admin  = App\Models\User::is_admin();
+                                                            $supervisor = App\Models\User::is_supervisor();
+                                                            @endphp
+                                                            @if($value->is_generated == 0)
                                                             <button style="background:none;border: none;"
                                                                 type="submit"><i class="fas fa-pencil-alt"></i>
-                                                                Action</button>
+                                                                {{$value->is_generated == 1 ? 'Edit Challan' : 'Generate Challan'}}</button>
+                                                            @elseif($admin || $supervisor)
+                                                            <button style="background:none;border: none;"
+                                                                type="submit"><i class="fas fa-pencil-alt"></i>
+                                                                {{$value->is_generated == 1 ? 'Edit Challan' : 'Generate Challan'}}</button>     
+                                                            @endif
                                                         </form>
+                                                        @if($value->is_generated == 0)
+                                                        @php
+                                                            $show = 0;
+                                                            if(date('Y-m-d' , strtotime($value->datetime)) == date('Y-m-d')){
+                                                                $show = 1;
+                                                            }
+                                                            if($admin || $supervisor){
+                                                                $show = 1;
+                                                            }
+                                                        @endphp
+                                                        @if($show == 1)
+                                                        <form action="{{ route('EntryForm.edit', $encrypt_id) }}"
+                                                            method="GET" class="blockuie dropdown-item"
+                                                            style="margin-bottom:-10px">
+                                                            @csrf
+                                                            <button style="background:none;border: none;"
+                                                                type="submit"><i class="fas fa-pencil-alt"></i>
+                                                                Edit Slip</button>
+                                                        </form>
+                                                        @endif
+                                                        @endif
+                                                        @php
+                                                            $show = 0;
+                                                            if(date('Y-m-d' , strtotime($value->datetime)) == date('Y-m-d')){
+                                                                $show = 1;
+                                                            }
+                                                            if($admin || $supervisor){
+                                                                $show = 1;
+                                                            }                                           
+                                                        @endphp
+                                                        @if($show == 1)
                                                         <form action="" method="GET" class="blockuie dropdown-item"
                                                                 style="margin-bottom:-10px">
                                                                 @csrf
                                                                 <input type="text" id="route_id{{$value->id}}" name="route" hidden
-                                                                    value="{{ 'Entry_delete' }}">
+                                                                    value="{{ 'EntryForm_delete' }}">
                                                                 <input type="text" id="delete_id{{$value->id}}"  name="id" hidden
                                                                     value="{{ $encrypt_id }}">
                                                                 <button style="background:none;border: none;"
                                                                     type="button" onclick="confirMationAlert({{$value->id}})"><i
                                                                         class="fas fa-trash"
-                                                                         ></i> delete</button>
-                                                            </form>
+                                                                         ></i> Cancel Slip
+                                                                </button>
+                                                        </form>        
+                                                        @endif           
                                                     </span>
                                                 </span>
                                                </td>
                                         <td>
-                                                    <a target="blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                @if(empty($value->excess_weight) || $value->excess_weight <= 0)
+                                                    <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                         aria-haspopup="true" aria-expanded="true"
                                                         class="btn btn-primary btn-sm ">
-                                                        Print slip : {{$value->slip_no}}
+                                                        Print Loading slip : {{$value->slip_no}}
                                                     </a>                                            
+                                                @else
+                                                    <span class="text-danger mt-2">Excess</span>
+                                                @endif
                                         </td>
                                         <td>
-                                            <a target="blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                            @if($value->is_generated == 1)
+                                            @if(empty($value->excess_weight) || $value->excess_weight <= 0)
+                                            <a style="width: 100%;" target="_blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                 aria-haspopup="true" aria-expanded="true"
                                                 class="btn btn-primary btn-sm ">
-                                                Print Invoice : {{$value->slip_no}}
-                                            </a>                                            
-                                        </td>                                               
+                                                Print Challan : {{$value->slip_no}}
+                                            </a>             
+                                            @else
+                                                <span class="text-danger mt-2">Excess</span>
+                                            @endif            
+                                            @else
+                                                <span class="mt-2"> Not generated </span>
+                                            @endif                   
+                                        </td>                            
 
                                             </tr>
                                         @endforeach
