@@ -126,6 +126,7 @@
     </div>
     @php
       $items_selected = json_decode($entry->items_included);
+      $items_selected = !empty($items_selected) ? $items_selected : [];
     @endphp
       <div class="col-md-12 mt-4">
       <div id="hide_2" class="table-responsive">
