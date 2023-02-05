@@ -46,7 +46,18 @@
   <div class="form-row mb-3">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-          <input class="form-control" readonly="true" type="text" name="vehicle" value="{{ !empty($vehicles[$entry->vehicle]) ? $vehicles[$entry->vehicle] : ''}}">
+      <select name = "vehicle"  class="fstdropdown-select" id="vehicle" required="true">
+          <option value="">Select</option>
+          @if(!empty($vehicles))
+            @foreach($vehicles as $key => $value)
+              @if($key == $entry->vehicle)
+              <option selected="true" value="{{$key}}">{{$value}}</option>
+              @else
+              <option value="{{$key}}">{{$value}}</option>
+              @endif
+            @endforeach
+          @endif
+      </select>
     </div>
     
     <div class="col-md-3 ">

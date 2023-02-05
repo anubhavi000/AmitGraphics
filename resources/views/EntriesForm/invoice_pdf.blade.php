@@ -17,7 +17,7 @@
 </style>
 <div>
 	<div style="width: 100%;float: left;border: 1px solid black;margin-top: -40px;">
-		<h2 style="text-align: center;">Challan<br>{{!empty($siteaddresses[$data->site]) ? $siteaddresses[$data->site] : ''}}</h2>
+		<h2 style="text-align: center;">Challan<br>{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}</h2>
 	</div>
 	<div style="clear: left;width: 100%;">
 		<div style="width: 50%;float: left;">
@@ -28,8 +28,8 @@
 				</span>
 			</p>
 			<p>
-				<span style="text-align: left;margin-left: 7px;">Tare  Weight : {{!empty($data->entry_weight) ? $data->entry_weight : 0}} KG</span>
-				<br><span>Gross Weight : {{!empty($data->gross_weight) ? $data->gross_weight :0}} KG</span><br><span style="margin-left: 13px;margin-top: 6px;"><b style="margin-left: 13px;">Net Weight : {{!empty($data->net_weight) ? $data->net_weight : 0}} KG</b></span><br>
+				<span style="text-align: left;">Tare  Weight : {{!empty($data->entry_weight) ? $data->entry_weight : 0}} KG</span>
+				<br><span>Gross Weight : {{!empty($data->gross_weight) ? $data->gross_weight :0}} KG</span><br><span style=";margin-top: 6px;"><b>Net Weight : {{!empty($data->net_weight) ? $data->net_weight : 0}} KG</b></span><br>
 
 			</p>
 			<br>
@@ -41,15 +41,15 @@
 			<br>
 
 		</div>
-		<div style="width: 50%; float: left;text-align: right;">
-			<span>Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
-			<span>Dispatch Date : {{!empty($data->generation_time) ? date('d-m-Y' , strtotime($data->generation_time)) : ''}}</span><br><br>
-			<span>Dispatch Time :  {{!empty($data->generation_time) ? date('h:i:A' , strtotime($data->generation_time)) : ''}}</span>
+		<div style="width: 50%; float: left;text-align:left;">
+			<span style="margin-left: 60%;">Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
+			<span style="margin-left: 42%;">Dispatch Date : {{!empty($data->generation_time) ? date('d-m-Y' , strtotime($data->generation_time)) : ''}}</span><br><br>
+			<span style="margin-left: 42%;">Dispatch Time :  {{!empty($data->generation_time) ? date('h:i:A' , strtotime($data->generation_time)) : ''}}</span>
 			<p></p>
 			<p></p>
 			<p></p>
 			<br>
-				<span style="margin-top: 9px;">
+				<span style="margin-left: 42%;" style="margin-top: 9px;">
 					Kanta Slip No. : {{!empty($data->kanta_slip_no) ? $data->kanta_slip_no : ''}}
 				</span>
 		</div>

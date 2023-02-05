@@ -130,6 +130,11 @@ class EntryMast extends Model
         $auth = Auth::user();
             DB::begintransaction();
             // updating the entry in entry_mast
+            if(isset($req['vehicle'])){
+                $vehicle = VehicleMast::where('id' , $req['vehicle'])
+                                       ->first();
+                $req['vendor_id'] = !empty($vehicle->vendor) ? $vehicle->vendor : NULL;
+            }            
             if($req['excess_weight'] == 0 || $req['excess_weight'] < 0){
                 $print_status = 1;
             }
@@ -140,6 +145,7 @@ class EntryMast extends Model
                                 'items_included'        => !empty($req['items_included']) ? json_encode($req['items_included'] , true) : NULL,
                                 'plant'                 => !empty($req['plant']) ? $req['plant'] : NUll,
                                 'updated_at'            => date('Y-m-d h:i:s'),
+                                'vehicle'               => !empty($req['vehicle']) ? $req['vehicle'] : NULL,
                                 // 'entry_rate'            => !empty($req['entry_rate']) ? $req['entry_rate'] : NUll,
                                 'entry_weight'          => !empty($req['entry_weight']) ? $req['entry_weight'] : NULL,
                                 'supervisor'            => !empty($req['supervisor']) ? $req['supervisor'] : NULL,
@@ -156,6 +162,8 @@ class EntryMast extends Model
                                 'print_status'          => $print_status,
                                 'owner_site'            => $auth->site
                             ];
+                            // dd($update_arr);
+                            // dd($req);
             $checkifedited = EntryLogs::where('entry_slip_no' , $now_id)
                                       ->get();
             if(count($checkifedited) == 0){

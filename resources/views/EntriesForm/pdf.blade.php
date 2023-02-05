@@ -17,7 +17,7 @@
 </style>
 <div style="margin-top: -40px;">
 	<div style="width: 100%;float: left;border: 1px solid black;">
-		<h2 style="text-align: center;">Loading Slip<br>{{!empty($siteaddresses[$data->site]) ? $siteaddresses[$data->site] : ''}}</h2>
+		<h2 style="text-align: center;">Loading Slip<br>{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}</h2>
 	</div>
 	<div style="clear: left;width: 100%;">
 		<div style="width: 50%;float: left;">
