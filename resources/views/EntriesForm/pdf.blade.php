@@ -44,7 +44,7 @@
 
 		</div>
 		<div style="width: 50%; float: left;text-align: right;">
-			<span>Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
+			<span>Date : {{!empty($data->datetime) ? date('d-m-Y' , strtotime($data->datetime)) : ''}}</span><br><br>
 			<p></p>
 			<p></p>
 			<p></p>

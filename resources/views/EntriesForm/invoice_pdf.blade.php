@@ -43,7 +43,7 @@
 		</div>
 		<div style="width: 50%; float: left;text-align: right;">
 			<span>Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
-			<span>Dispatch Date : {{!empty($data->generation_time) ? date('Y-m-d' , strtotime($data->generation_time)) : ''}}</span><br><br>
+			<span>Dispatch Date : {{!empty($data->generation_time) ? date('d-m-Y' , strtotime($data->generation_time)) : ''}}</span><br><br>
 			<span>Dispatch Time :  {{!empty($data->generation_time) ? date('h:i:A' , strtotime($data->generation_time)) : ''}}</span>
 			<p></p>
 			<p></p>
