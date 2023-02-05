@@ -58,6 +58,7 @@
 		<span><b>Items</b></span><br>
 		@php
 			$items_selected = json_decode($data->items_included);
+			$items_selected = !empty($items_selected) ? $items_selected : [];
 		@endphp
 		@foreach($items as $key => $value)
 			@if(in_array($key , $items_selected))
