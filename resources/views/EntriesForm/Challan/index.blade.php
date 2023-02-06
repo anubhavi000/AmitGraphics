@@ -197,7 +197,18 @@
                                                 </div>
                                             </fieldset>
                                         </div>
-                                        --}}            
+                                        --}} 
+                                        <div class="col-md-2">
+                                            <label>Venddor</label>
+                                            <select name="vendor" class="fstdropdown-select">
+                                                <option value="">Select</option>
+                                                @if(!empty($vendors))
+                                                    @foreach($vendors as $key => $value)
+                                                        <option value="{{$key}}">{{$value}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>                      
                                         <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">

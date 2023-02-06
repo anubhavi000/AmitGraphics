@@ -198,7 +198,7 @@
                                             </fieldset>
                                         </div>
                                         --}} 
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <label>Venddor</label>
                                             <select name="vendor" class="fstdropdown-select">
                                                 @if(!empty($vendors))

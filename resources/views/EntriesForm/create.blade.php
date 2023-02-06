@@ -131,7 +131,7 @@
                     @if($count == 0)
                       <tr> 
                     @endif
-                      <td style="border: none !important;"><input  type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;">{{$value}}</span></td>
+                      <td style="border: none !important;"><input  type ="radio" value="{{$key}}" name="items_included[]"><span style="margin-left: 10px;font-size: 20px;">{{$value}}</span></td>
                     @if($count == 2)
                       <?php $count = 0; ?>
                       </tr>

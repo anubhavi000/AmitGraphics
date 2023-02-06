@@ -531,6 +531,9 @@ class EntriesController extends Controller
     public function chalanindex(Request  $request){
         $auth = Auth::user();
             $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
+            $vendors = VendorMast::where('status' , 1)
+                                 ->pluck('v_name' , 'id')
+                                 ->toArray();            
 
         if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
             return view($this->module_folder.'/index');                       
@@ -573,6 +576,9 @@ class EntriesController extends Controller
             if(!empty($slip_no)){
                 $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
             }
+            if(isset($request->vendor)){
+                $entriesraw->where('vendor_id' , $request->vendor);
+            }            
             if(isset($request->status)){
                 if($request->status == 1){
                     $entriesraw->where('is_generated' , 1);
@@ -593,7 +599,8 @@ class EntriesController extends Controller
             return view($this->module_folder.'.Challan.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
-                'plants'  => $plants
+                'plants'  => $plants,
+                'vendors' => $vendors
             ]);            
         }
     }
