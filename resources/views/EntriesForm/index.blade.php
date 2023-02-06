@@ -197,7 +197,17 @@
                                                 </div>
                                             </fieldset>
                                         </div>
-                                        --}}            
+                                        --}} 
+                                        <div class="col-md-3">
+                                            <label>Venddor</label>
+                                            <select name="vendor" class="fstdropdown-select">
+                                                @if(!empty($vendors))
+                                                    @foreach($vendors as $key => $value)
+                                                        <option value="{{$key}}">{{$value}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>           
                                         <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
@@ -235,6 +245,7 @@
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
+                                            <th>Date</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                         </tr>
@@ -253,6 +264,7 @@
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
                                                 <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] : '' }}</td>
                                                 <td>{{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : '' }}</td>
+                                                <td>{{ !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''}}</td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"

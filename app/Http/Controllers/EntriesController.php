@@ -46,6 +46,10 @@ class EntriesController extends Controller
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
+
+            $vendors = VendorMast::where('status' , 1)
+                                 ->pluck('v_name' , 'id')
+                                 ->toArray();
             if($from_date){
                 $current_date = date('Y-m-d');
                 if($from_date == 'today'){
@@ -70,6 +74,9 @@ class EntriesController extends Controller
             if(!empty($slip_no)){
                 $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
             }
+            if(isset($request->vendor)){
+                $entriesraw->where('vendor_id' , $request->vendor);
+            }
             if(isset($request->status)){
                 if($request->status == 1){
                     $entriesraw->where('is_generated' , 1);
@@ -91,7 +98,8 @@ class EntriesController extends Controller
             return view($this->module_folder.'.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
-                'plants'  => $plants
+                'plants'  => $plants,
+                'vendors' => $vendors
             ]);            
         }
     }
@@ -323,6 +331,7 @@ class EntriesController extends Controller
         else{
             $entry = EntryMast::where('kanta_slip_no' , $request->slip_no)
                               ->first();
+
             if(empty($entry)){
                 return response()->json(true);
             }

@@ -236,39 +236,56 @@
       });    
   }
   function validateinputs(){
-      var slip    = $("#slip_no").val();
-      if(slip != "{{$entry->kanta_slip_no}}"){
-        var sliplenth = slip.length;
-        if(sliplenth = 0 || slip == ''){
-          alert('Filling Slip Number Is Neccessary');
-          return;
-        } 
-        else{
-          $.ajaxSetup({
-                      headers: {
-                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                      }
-                  });
+      var slip      = $("#slip_no").val();
+      var sliplenth = slip.length;
+      var tare      = $("#tare_weight").val();
+      var vehicle   = $("#vehicle").val();
+      var plant     = $("#plant").val();
+      var site      = $("#site").val();  
+      var supervisor= $("#supervisor").val();
+      
+      // if(sliplenth = 0 || slip == ''){
+      //   alert('Filling Slip Number Is Neccessary');
+      //   return;
+      // } 
+      if(tare = 0 || tare == ''){
+        alert('Filling Tare Weight Is Neccessary');
+        return false;
+      }
+      else if(vehicle == ''){
+        alert('Vehcile Must Be Selected');
+        return false;
+      }
+      else{
+        var prev_slip_no = "{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}";
 
-          $.ajax({
-              type: "POST",
-              url:  '{{url("check_duplicacy")}}',
-              dataType: 'json',
-              data: {'slip_no': slip},
-              success: function (data) 
-              {
-                if(data){
-                    $("#storeform").submit();
-                }
-                else{
-                    alert('kanta Slip no. Already Exist');
-                }
+        if(slip != '' || slip != prev_slip_no){
+        $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+        $.ajax({
+            type: "POST",
+            url:  '{{url("check_duplicacy")}}',
+            dataType: 'json',
+            data: {'slip_no': slip},
+            success: function (data) 
+            {
+              if(data){
+                  $("#storeform").submit();
               }
-          });        
-       }
-     }
-     else{
-                    $("#storeform").submit();
-     }
+              else{
+                  alert('Kanta Slip no.: '+slip+' Already Exist');
+                  return false;
+              }
+            }
+        });        
+      }
+      else{
+        $("#storeform").submit();        
+      }
+    }
   }
 </script>

@@ -79,7 +79,7 @@
 
    <div class="col-md-3 mb-3 px-3">
      <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
-     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
+     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" >
    </div>
 
     <div class="col-md-3">
@@ -226,19 +226,20 @@
       var site      = $("#site").val();  
       var supervisor= $("#supervisor").val();
       
-      if(sliplenth = 0 || slip == ''){
-        alert('Filling Slip Number Is Neccessary');
-        return;
-      } 
-      else if(tare = 0 || tare == ''){
+      // if(sliplenth = 0 || slip == ''){
+      //   alert('Filling Slip Number Is Neccessary');
+      //   return;
+      // } 
+      if(tare = 0 || tare == ''){
         alert('Filling Tare Weight Is Neccessary');
+        return false;
       }
       else if(vehicle == ''){
         alert('Vehcile Must Be Selected');
+        return false;
       }
-      
-
       else{
+        if(slip != ''){
         $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -257,9 +258,14 @@
               }
               else{
                   alert('Kanta Slip no.: '+slip+' Already Exist');
+                  return false;
               }
             }
         });        
       }
+      else{
+        $("#storeform").submit();        
+      }
+    }
   }
 </script>

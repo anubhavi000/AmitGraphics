@@ -236,6 +236,7 @@
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
+                                            <th>Date</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                             <th>Print Challan</th>
@@ -256,6 +257,7 @@
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
                                                 <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
                                                 <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
+                                                <td>{{ !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''}}</td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"
