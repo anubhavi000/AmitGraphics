@@ -132,7 +132,7 @@
                                         </div>
 
                                         <div class="col-md-2">
-                                            <label for="client_id">Kanta Slip No</label>
+                                            <label for="client_id"> Weighbridge Slip No.</label>
                                             <fieldset>
                                                 <div class="input-group client_margin">
                                                     <span class="input-group-addon bg-primary border-primary white"

@@ -80,7 +80,7 @@
     </div>
 
    <div class="col-md-3 mb-3 px-3">
-     <label for="department_Name" class="yash_star"> Kanta Slip No. </label>
+     <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
      <input type="text" name="kanta_slip_no" value="{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}" id="slip_no" class="form-control " placeholder="Enter Slip Here" required>
    </div>
 

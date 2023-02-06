@@ -50,7 +50,7 @@
 			<p></p>
 			<br>
 				<span style="margin-top: 9px;">
-					Kanta Slip No. : {{!empty($data->kanta_slip_no) ? $data->kanta_slip_no : ''}}
+					 Weighbridge Slip No. : {{!empty($data->kanta_slip_no) ? $data->kanta_slip_no : ''}}
 				</span>
 		</div>
 	</div>
