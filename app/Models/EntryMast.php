@@ -38,7 +38,8 @@ class EntryMast extends Model
                         'print_status',
                         'delete_status',
                         'owner_site',
-                        'generation_time'
+                        'generation_time',
+                        'driver'
     					];
 
     static function store_slip($req){
@@ -160,7 +161,8 @@ class EntryMast extends Model
                                 'vehicle_pass'          => !empty($req['vehicle_pass']) ? $req['vehicle_pass'] : NULL,
                                 'is_generated'          => 1,
                                 'print_status'          => $print_status,
-                                'owner_site'            => $auth->site
+                                'owner_site'            => $auth->site,
+                                'driver'           => !empty($req['driver']) ? $req['driver'] : NULL
                             ];
                             // dd($update_arr);
                             // dd($req);

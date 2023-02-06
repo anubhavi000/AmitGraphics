@@ -118,6 +118,11 @@
     </div>
 
     <div class="col-md-3">
+      <label class="form-label">Driver</label>
+      <input type="text" value="{{!empty($entry->driver) ? $entry->driver : ''}}" class="form-control" name="driver" placeholder="Enter Driver Name">
+    </div>    
+
+    <div class="col-md-3">
       <label> Date And Time </label>
       <input type="text" class="form-control" readonly="true" value="{{date('d-m-Y')}}">
     </div>
@@ -220,7 +225,7 @@
           success: function (data) 
           {
             if(data){
-              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+              var html  = '<label class="form-label">Vendor Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
                html += data.v_name;
                html += "<br> Contact: ";
                html += data.phone;

@@ -87,6 +87,7 @@ class EntriesController extends Controller
             //         return redirect('EntryForm_action/'.$encrypted_id);
             //     }
             // }
+
             return view($this->module_folder.'.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
@@ -144,6 +145,8 @@ class EntriesController extends Controller
 
         if($store['res']){
             Session::put('SlipStored' , 'Slip Generated SuccessFully With Slip No '.$store['slip_no']);
+            $newUrl = url('PrintEntrySlip/'.$store['slip_no']);
+            Session::put('newtab' , $newUrl);
             return redirect('EntryForm');
         }
         else{
@@ -334,7 +337,9 @@ class EntriesController extends Controller
             if($response['print'] == 1){
                 $plant = $response['plant'];
                 $slip_no = decrypt($id);
-                return redirect('print_invoice/'.$plant.'/'.$slip_no);
+                $newUrl = url('print_invoice/'.$plant.'/'.$slip_no);
+                Session::put('newtab' , $newUrl);
+                return redirect('ChalanGeneration')->with('success'  , 'Challan Generated SuccessFully');
             }
             else{
                 $slip_no = decrypt($id);

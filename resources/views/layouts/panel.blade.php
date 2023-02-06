@@ -709,6 +709,18 @@ $layout_status = Auth::user()->layout_status;
 @endphp
 
 <body>
+    @if (!empty((session()->get('newtab'))) && session()->get('newtab') != '')
+        @php
+            $newtabstatus = 1;
+            $newtab = !empty(session()->get('newtab')) ? session()->get('newtab') : ''; 
+            session()->forget('newtab');
+        @endphp
+    @else
+            @php
+            $newtabstatus = 0;     
+            $newtab = '';
+            @endphp
+    @endif     
     @if (!empty((session()->get('error'))) && session()->get('error') != '')
         @php
             $errorstatus = 1;
@@ -1161,7 +1173,16 @@ $layout_status = Auth::user()->layout_status;
             })            
         }             
     </script>
-
+    <script type="text/javascript">
+        //script to redirect new tab on request from controller
+        var newtab = "{{$newtab}}";
+        if(newtab != ''){
+            let a= document.createElement('a');
+            a.target= '_blank';
+            a.href= '{{$newtab}}';
+            a.click();
+        }
+    </script>
     <?php
       if($layout_status == '2' ) {
     ?>

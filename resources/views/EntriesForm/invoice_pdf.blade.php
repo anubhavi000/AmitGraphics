@@ -25,6 +25,9 @@
 			<p>
 				<span style="text-align: left;">
 					Vehicle No. : {{!empty($vehicles[$data->vehicle]) ? $vehicles[$data->vehicle] : ''}}
+				</span><br>
+				<span style="text-align: left;">
+					Driver : {{!empty($data->driver) ? $data->driver : ''}}
 				</span>
 			</p>
 			<p>
@@ -32,10 +35,9 @@
 				<br><span>Gross Weight : {{!empty($data->gross_weight) ? $data->gross_weight :0}} KG</span><br><span style=";margin-top: 6px;"><b>Net Weight : {{!empty($data->net_weight) ? $data->net_weight : 0}} KG</b></span><br>
 
 			</p>
-			<br>
 			<p>
 				<span style="text-align: left;">
-					Unloading Place : {{!empty( $sites[$data->site]) ? $sites[$data->site] : ''}}
+					Unloading Site : {{!empty( $sites[$data->site]) ? $sites[$data->site] : ''}}
 				</span>
 			</p>
 			<br>
@@ -54,8 +56,8 @@
 				</span>
 		</div>
 	</div>
-	<div style="clear: left;">
-		<span><b>Items</b></span><br>
+	<div style="clear: left;margin: 0px;">
+		<span><b>Material</b></span><br>
 		@php
 			$items_selected = json_decode($data->items_included);
 			$items_selected = !empty($items_selected) ? $items_selected : [];
@@ -67,16 +69,25 @@
 		@endforeach
 	</div>
 
-	<div style="margin-top: 40px;clear: left;">
+	<div style="margin-top: 20px;clear: left;">
 		<div style="width: 50%;float: left;">
 			<p>
 				Loading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
-			</p>
+			</p>	
+			<p>
+				Reciever Signature & Stamp
+			</p>	
 		</div>
 		<div style="width: 50%;float: left;text-align: right;">
 			<p>
 				Supervisor Plant : {{ !empty($supervisors[$data->supervisor]) ? $supervisors[$data->supervisor] : ''}}
 			</p>
+			<p>
+				For 
+				<b>
+				{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}
+				</b>
+			</p>				
 		</div>		
 	</div>
 </div>

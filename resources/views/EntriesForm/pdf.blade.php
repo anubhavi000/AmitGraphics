@@ -29,7 +29,7 @@
 			</p>
 			<p>
 				<span style="text-align: left;">
-					Driver : {{!empty($vendor->name) ? $vendor->name : ''}}
+					Driver : {{!empty($data->driver) ? $data->driver : ''}}
 				</span>
 			</p>
 			<p>
@@ -94,7 +94,7 @@
 		</div>
 		<div style="width: 50%;float: left;text-align: right;">
 			<p>
-				Supervisor Plant : {{ !empty($supervisors[$data->supervisor]) ? $supervisors[$data->supervisor] : ''}}
+				Supervisor  : {{ !empty($supervisors[$data->supervisor]) ? $supervisors[$data->supervisor] : ''}}
 			</p>
 		</div>		
 	</div>

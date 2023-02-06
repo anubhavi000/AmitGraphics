@@ -22,7 +22,6 @@ function open_update_parent_modal(_this,target){
   _f.attr('action',$(_this).data('action'));
   $(target).show();
 }
-
 (function($){
 $.ajaxSetup({
     headers: {

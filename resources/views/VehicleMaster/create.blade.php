@@ -178,5 +178,48 @@
     else
       return false;
    }
+// $("input").focus(function(){
+//     $("#e1").trigger('select2:open');
+// });   
+// $("input").on('blur' , function(){
+//   $this = $(this);
+
+//   if($(this).next()){
+//     if($(this).next().hasClass('fstdropdown-select')){
+//         $(this).next('select .fstdropdown-select').select2('ope');
+//     }
+//   }
+  // $(this).next('select .fstdropdown-select').closest('span .select2-container').RemoveClass('select2-container--focus');
+  // $(this).next('.fstdropdown-select').addClass('ved');
+  // alert('done');
+  // console.log($(this).next('select .fstdropdown-select').closest('span .select2-container'));
+
+
+  // if($(this).next().hasClass('form-control')){
+    // alert('ved');
+  // }
+ // if($(this).next(':has(.fstdropdown-select)')){
+ //  alert('ved');
+//}
+// if($(this).next().hasClass("fstdropdown-select")){
+  // alert('ved');
+// }
+
+ 
+
+  // alert(next_elem); 
+// });
 </script>
+
+<!-- <script type="text/javascript">
+ 
+$('input').keypress(function (e){
+  if(e.keyCode == 13){
+      alert('you pressed enter key');
+  }
+  else{
+    alert(e.keyCode);
+  }
+});
+</script> -->
 @endsection  

@@ -69,6 +69,7 @@ $(function () {
         }
     });
 
+
     // ______________ RATING STAR
 
     var ratingOptions = {

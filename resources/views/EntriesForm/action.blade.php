@@ -140,6 +140,10 @@
         <label for="description">Vehicle Pass WT</label>
         <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" required="true" value="{{!empty($vehicle_pass_weight) ? $vehicle_pass_weight : 0}}" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
     </div>
+    <div class="col-md-3">
+      <label class="form-label">Driver</label>
+      <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" placeholder="Enter Driver Name" required="true">
+    </div>
     {{--
     <div class="col-md-3 mb-3 px-3">
         <label for="description">Entry Weight ( In Kgs )</label>
@@ -193,7 +197,7 @@
     --}}
         <div id="infodiv" class="col-md-3">
           @if(!empty($selected_vendor))
-          <label class="form-label">Transporter Details</label>
+          <label class="form-label">Vendor Details</label>
           <br><span style="margin-top:10px;" class="text-success"> Transporter Name:  {{$selected_vendor->v_name}}<br> Contact: {{$selected_vendor->phone}}</span>
           @endif
     </div>
@@ -307,7 +311,7 @@
           success: function (data) 
           {
             if(data){
-              var html  = '<label class="form-label">Transporter Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
+              var html  = '<label class="form-label">Vendor Details</label><br><span style="margin-top:10px;" class="text-success"> Transporter Name: ';
                html += data.v_name;
                html += "<br> Contact: ";
                html += data.phone;
@@ -346,7 +350,8 @@
         calculateexcessweight();
    }
 function calculateexcessweight(){
-     var net_wt = parseFloat($("#NetWeight").val());
+  // we require to take net weight as gross weight for calculation so changing
+     var net_wt = parseFloat($("#GrossWeight").val());
      var pass_wt = parseFloat($("#vehicle_pass").val());
      var excess_wt_allowed = parseFloat("{{!empty($entry->excess_wt_allowance) ? $entry->excess_wt_allowance : 0}}");
      if(net_wt != '' && pass_wt != ''){
