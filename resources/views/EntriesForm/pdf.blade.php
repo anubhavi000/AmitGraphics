@@ -37,7 +37,7 @@
 			</p>
 			<p>
 				<span style="text-align: left;">
-					Unloading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
+					loading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
 				</span>
 			</p>
 			<br>

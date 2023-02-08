@@ -181,6 +181,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::post('ManualChallanupdate/{id}' , 'EntriesController@manualupdate');
     Route::post('check_duplicacy_both_slips'  , 'EntriesController@check_duplicacy_orignal_slip');
     Route::post('get_vehicle_pass_wt' , 'VehicleController@get_vehicle_pass_wt');    
+    Route::resource('ExcessWeightedSlips' , 'ExcessweightSlipController');
     //ends
 
     // always add routes on above this line 
