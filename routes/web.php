@@ -182,6 +182,7 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::post('check_duplicacy_both_slips'  , 'EntriesController@check_duplicacy_orignal_slip');
     Route::post('get_vehicle_pass_wt' , 'VehicleController@get_vehicle_pass_wt');    
     Route::resource('ExcessWeightedSlips' , 'ExcessweightSlipController');
+    Route::post('checkslipduplicate' , 'EntriesController@checkslipduplicatemanual');
     //ends
 
     // always add routes on above this line 

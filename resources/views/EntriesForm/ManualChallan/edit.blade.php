@@ -161,8 +161,12 @@
     <div class="col-md-3">
       <label> Out Date And Time </label>
       <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->generation_time)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+    </div>     
+   <div class="col-md-3">
+      <label>  Out Time </label>
+      <input type="time" id="generationtime" value="{{!empty($entry->generation_time) ? date('h:i:s' , strtotime($entry->generation_time)) : ''}}" name="generation_hourminute" class="form-control" required="true"  placeholder="Loading time">
     </div>        
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label>Remarks</label>
       <textarea name="remarks" placeholder="Remarks" class="form-control">{{!empty($entry->remarks) ? $entry->remarks : ''}}</textarea>
     </div>

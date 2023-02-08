@@ -51,6 +51,30 @@
         <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
         <i class="fa" aria-hidden="true"></i></a>            
       </div>
+<<<<<<< HEAD
+       <div class="col-md-6" style="text-align:right;">
+                  <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
+                  <i class="fa" aria-hidden="true"></i></a>            
+                  </div>
+                </div>
+      <hr class="border-dark bold">
+   <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
+   <div class="col-md-3">
+     <label for="department_Name" class="yash_star">  Slip No. </label>
+     <input type="text" name="slip_no" onblur="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
+   </div>
+    <div class="col-md-3">
+      <label class="form-label">Vehicle</label>
+      <select name = "vehicle"  class="fstdropdown-select" id="vehicle" onchange="get_pass_wt(this.value)" required="true">
+          <option value="">Select</option>
+          @if(!empty($vehicles))
+            @foreach($vehicles as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          @endif
+      </select>
+=======
+>>>>>>> 1e89553277cb7976cf9e82c8f40a97984a72d5f8
     </div>
     <hr class="border-dark bold">
     <div class=" mt-3 mb-3 collapse show" id="collapseExample">
@@ -145,6 +169,30 @@
         </div>
         <div class="form-row mt-3 ">
 
+<<<<<<< HEAD
+    <div class="col-md-3 ">
+        <label for="description">Vehicle Pass WT</label>
+        <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" required="true" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Driver</label>
+      <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" >
+    </div>
+    <div class="col-md-3">
+      <label> Out Date  </label>
+      <input type="text" id="generationdate" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date ">
+    </div> 
+   <div class="col-md-3">
+      <label>  Out Time </label>
+      <input type="time" id="generationtime" name="generation_hourminute" class="form-control" required="true"  placeholder="Loading time">
+    </div>        
+    <div class="col-md-3">
+      <label>Remarks</label>
+      <textarea name="remarks" placeholder="Remarks" class="form-control">
+        
+      </textarea>
+    </div>
+=======
             <div class="col-md-3">
               <label class="form-label">Driver</label>
               <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" >
@@ -158,6 +206,7 @@
               <textarea name="remarks" placeholder="Remarks" class="form-control"></textarea>
             </div>
         </div>
+>>>>>>> 1e89553277cb7976cf9e82c8f40a97984a72d5f8
         <div id="infodiv" class="col-md-3">
             @if(!empty($selected_vendor))
             <label class="form-label">Vendor Details</label>
@@ -239,6 +288,31 @@
 
 @endsection
 <script type="text/javascript">  
+  function checkslipduplicate(val){
+      var main_slip_no = val;
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{url("checkslipduplicate")}}',
+          dataType: 'json',
+          data: {'slip_no': val},
+          success: function (data) 
+          {
+            if(data){
+              return true;
+            }
+            else{
+              $("#main_slip_no").val('');
+                alert('A Slip No With '+val+' Already Exists');
+              }
+          }
+      });    
+  }
   function FillNetWeight(e){
        var x = e.which || e.keycode;
        if(x>=48 && x<=57){
