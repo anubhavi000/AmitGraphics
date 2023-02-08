@@ -42,7 +42,8 @@ class EntryMast extends Model
                         'generation_time',
                         'driver',
                         'manual',
-                        'vehicle_pass'
+                        'vehicle_pass',
+                        'remarks'
                         ];
 
     static function store_slip($req){
@@ -222,11 +223,11 @@ class EntryMast extends Model
         }
     }
     static function storeManualChallan($res){
-        $res['datetime']         = date('Y-m-d');
+        $res['datetime']         = !empty($res['datetime']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d');
         $res['created_by']       = Auth::user()->id;
-        $res['generation_time']  = date('Y-m-d h:i:s');
         $res['manual']           = 1;
         $res['print_status']     = 1;
+        $res['generation_time']  = !empty($res['generation_time']) ? date('Y-m-d h:i:s' , strtotime($res['generation_time'])) : date('Y-m-d h:i:s');
         $res['is_generated']     = 1;
         $res['items_included']   = json_encode($res['items_included'] , true);
         if(!empty($res['vehicle'])){
@@ -253,18 +254,20 @@ class EntryMast extends Model
             $excess_wt_allowance = !empty($vehicle_selected->excess_wt_allowance) ? $vehicle_selected->excess_wt_allowance : NULL; 
         }
         $update_arr = [
-            'datetime' => date('Y-m-d'),
+            'datetime' => !empty($res['datetime']) ? date('Y-m-d' ,  strtotime($res['datetime'])) : date('Y-m-d'),
             'updated_by' => Auth::user()->id,
             'manual'   => 1,
             'updated_at' => date('Y-m-d h:i:s'),
             'print_status' => 1,
             'is_generated' => 1,
+            'generation_time' => !empty($res['generation_time']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d h:i:s'),
             'items_included' => json_encode($res['items_included'] , true),
             'vehicle'    => $res['vehicle'],
             'vendor_id' => $vendor_id,
             'excess_wt_allowance' => $excess_wt_allowance,
             'owner_site' => Auth::user()->owner_site,
             'slip_no' => $res['slip_no'],
+            'remarks' => !empty($res['remarks']) ? $res['remarks'] : NULL,
             'entry_weight' => $res['entry_weight'],
             'gross_weight' => $res['gross_weight'],
             'net_weight' => $res['net_weight'],

@@ -75,14 +75,14 @@
     </div>
     
     <div class="col-md-3 ">
-        <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text" required="true" value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
-    </div>
-
-    <div class="col-md-3 ">
         <label for="description">Gross Weight ( In Kgs )</label>
         <input required="true" type="text" id="GrossWeight" name="gross_weight" value="{{!empty($entry->gross_weight) ? $entry->gross_weight : ''}}" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)'  placeholder ="Enter Gross Weight"  class="form-control ">
     </div>    
+
+    <div class="col-md-3 ">
+        <label for="description">Tare Weight ( In Kgs )</label>
+        <input type="text" required="true" value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
+    </div>
 
     <div class="col-md-3">
         <label for="description">Net Weight</label>
@@ -147,7 +147,7 @@
     </div>
     <div class="col-md-3">
       <label> Date And Time </label>
-      <input type="text" class="form-control" readonly="true" value="{{!empty($entry->dattime) ? $entry->dattime : ''}}" placeholder="{{date('d-m-Y')}}">
+      <input type="text" class="form-control datepicker" name="datetime" value="{{!empty($entry->datetime) ? $entry->datetime : ''}}"  placeholder="Loading Date time">
     </div>
 
     <div class="col-md-3 ">
@@ -156,15 +156,24 @@
     </div>
     <div class="col-md-3">
       <label class="form-label">Driver</label>
-      <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" id="driver" placeholder="Enter Driver Name" required="true">
+      <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" id="driver" placeholder="Enter Driver Name" >
     </div>
-
+    <div class="col-md-3">
+      <label> Out Date And Time </label>
+      <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->generation_time)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+    </div>        
+    <div class="col-md-4">
+      <label>Remarks</label>
+      <textarea name="remarks" placeholder="Remarks" class="form-control">
+        {{!empty($entry->remarks) ? $entry->remarks : ''}}
+      </textarea>
+    </div>
         <div id="infodiv" class="col-md-3">
           @if(!empty($selected_vendor))
           <label class="form-label">Vendor Details</label>
           <br><span style="margin-top:10px;" class="text-success"> Transporter Name:  {{$selected_vendor->v_name}}<br> Contact: {{$selected_vendor->phone}}</span>
           @endif
-    </div>
+    </div>    
     <div id="infodiv" class="col-md-3">
     </div>
       <div class="col-md-12 mt-4">
@@ -372,10 +381,6 @@ function calculateexcessweight(){
       }
       else if(supervisor  == '' ){
         alert('Supervisor Must be Selected');
-        return false;
-      }
-      else if(driver  == ''){
-        alert('Driver Name must be Filled');
         return false;
       }
       else{

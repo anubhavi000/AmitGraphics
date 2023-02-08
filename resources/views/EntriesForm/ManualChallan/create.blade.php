@@ -71,14 +71,14 @@
     </div>
     
     <div class="col-md-3 ">
-        <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text" required="true"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
-    </div>
-
-    <div class="col-md-3 ">
         <label for="description">Gross Weight ( In Kgs )</label>
         <input required="true" type="text" id="GrossWeight" name="gross_weight" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)'  placeholder ="Enter Gross Weight"  class="form-control ">
     </div>    
+
+    <div class="col-md-3 ">
+        <label for="description">Tare Weight ( In Kgs )</label>
+        <input type="text" required="true"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
+    </div>
 
     <div class="col-md-3">
         <label for="description">Net Weight</label>
@@ -131,7 +131,7 @@
     </div>
     <div class="col-md-3">
       <label> Date And Time </label>
-      <input type="text" class="form-control" readonly="true" placeholder="{{date('d-m-Y')}}">
+      <input type="text" class="form-control datepicker" name="datetime"  placeholder="Loading Date time">
     </div>
 
     <div class="col-md-3 ">
@@ -140,15 +140,24 @@
     </div>
     <div class="col-md-3">
       <label class="form-label">Driver</label>
-      <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" required="true">
+      <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" >
     </div>
-
+    <div class="col-md-3">
+      <label> Out Date And Time </label>
+      <input type="text" id="generationdate" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+    </div>    
+    <div class="col-md-4">
+      <label>Remarks</label>
+      <textarea name="remarks" placeholder="Remarks" class="form-control">
+        
+      </textarea>
+    </div>
         <div id="infodiv" class="col-md-3">
           @if(!empty($selected_vendor))
           <label class="form-label">Vendor Details</label>
           <br><span style="margin-top:10px;" class="text-success"> Transporter Name:  {{$selected_vendor->v_name}}<br> Contact: {{$selected_vendor->phone}}</span>
           @endif
-    </div>
+    </div>    
     <div id="infodiv" class="col-md-3">
     </div>
       <div class="col-md-12 mt-4">
@@ -309,7 +318,6 @@ function calculateexcessweight(){
       var supervisor= $("#supervisor").val();
       var Unloading_place = $("#Unloading_place").val();
       var gross_weight = $("#GrossWeight").val();
-      var driver  = $("#driver").val();
 
       // if(sliplenth = 0 || slip == ''){
       //   alert('Filling Slip Number Is Neccessary');
@@ -345,10 +353,6 @@ function calculateexcessweight(){
       }
       else if(supervisor  == '' ){
         alert('Supervisor Must be Selected');
-        return false;
-      }
-      else if(driver  == ''){
-        alert('Driver Name must be Filled');
         return false;
       }
       else{

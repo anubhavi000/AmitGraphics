@@ -447,7 +447,7 @@ class EntriesController extends Controller
 
             // $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
             // $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img );                                
-            $custumpaper = 'A5';
+            $custumpaper = 'A4';
             $pdf = PDF::loadView($this->module_folder.'.invoice_pdf', array(
                 'data'          => $data,
                 'items'         => $items,
@@ -457,7 +457,7 @@ class EntriesController extends Controller
                 'vehicles'      => $vehicles,
                 'sites'         => $sites,
                 'siteaddresses' => $siteaddresses          
-            ))->setPaper($custumpaper , 'landscape');                                
+            ))->setPaper($custumpaper);                                
             return $pdf->stream($this->module_folder.'.pdf');
             }
         }
@@ -767,7 +767,7 @@ class EntriesController extends Controller
         }
         $store = EntryMast::storeManualChallan($request->except('_token'));
         if(!empty($store)){
-            return redirect('ManualChallan')->with('success' , 'Generated SuccessFully');
+            return redirect('ManualChallan/create')->with('success' , 'Generated SuccessFully');
         }
         else{
             Session::put('error' , 'Could not Generate');
