@@ -142,6 +142,8 @@
               <label> In Time </label>
               <input type="time" class="form-control" name="datetimehourminute"  placeholder="Loading time">
             </div>            
+          </div>
+        <div class="form-row mt-3 ">
 
             <div class="col-md-3 ">
                 <label for="description">Vehicle Pass WT</label>
@@ -159,6 +161,9 @@
       <label>  Out Time </label>
       <input type="time" id="generationtime" name="generation_hourminute" class="form-control" required="true"  placeholder="Loading time">
     </div>        
+  </div>
+        <div class="form-row mt-3 ">
+  
     <div class="col-md-3">
       <label>Remarks</label>
       <textarea name="remarks" placeholder="Remarks" class="form-control">
