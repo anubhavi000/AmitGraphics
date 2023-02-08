@@ -62,6 +62,7 @@ class User extends Authenticatable
     public function hasModuleAccess($moduleId)
     {
         $authUser = \Auth::user();
+        // dd($authUser);
         $designationModule = DesignationModule::where('designation_id', $authUser->designation_id)
             ->where('module_id', $moduleId)
             // ->where('view',1)
@@ -86,7 +87,8 @@ class User extends Authenticatable
         return false;
     }
     public static function is_admin(){ 
-        $desig      = Self::where('id' , Auth::user()->designation_id)->first()->designation_id;
+        $desig_fir      = Self::where('id' , Auth::user()->designation_id)->first();
+        $desig = !empty($desig_fir->designation_id)?$desig_fir->designation_id:'0';
         $desig_info =  Designation::where('id' , $desig)->first();
         if(!empty($desig_info)){
             if( $desig_info->id == '1'){
@@ -101,7 +103,8 @@ class User extends Authenticatable
         }
     }
     public static function is_supervisor(){
-        $desig      = Self::where('id' , Auth::user()->designation_id)->first()->designation_id;
+        $desig_fir      = Self::where('id' , Auth::user()->designation_id)->first();
+        $desig = !empty($desig_fir->designation_id)?$desig_fir->designation_id:'0';
         $desig_info =  Designation::where('id' , $desig)->first();
         if(!empty($desig_info)){
             if( $desig_info->id == '3'){
