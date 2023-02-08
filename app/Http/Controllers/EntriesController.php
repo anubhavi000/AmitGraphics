@@ -647,7 +647,7 @@ class EntriesController extends Controller
                 $plants          =  PlantMast::where('status' , 1)
                                              ->pluck('name' , 'id')
                                              ->toArray();
-                                             
+                Session::put('error' , 'Entry With Slip No. Does Not Exist please Create One');
             return view($this->module_folder.'.ManualChallan.create' , [
             'data' => $request->all(),
             'transporters' => $transporters ,
