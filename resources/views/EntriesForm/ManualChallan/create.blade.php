@@ -56,7 +56,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3">
      <label for="department_Name" class="yash_star">  Slip No. </label>
-     <input type="text" name="slip_no" onkeyup="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
+     <input type="text" name="slip_no" onblur="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
    </div>
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
@@ -143,10 +143,14 @@
       <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" >
     </div>
     <div class="col-md-3">
-      <label> Out Date And Time </label>
-      <input type="text" id="generationdate" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
-    </div>    
-    <div class="col-md-4">
+      <label> Out Date  </label>
+      <input type="text" id="generationdate" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date ">
+    </div> 
+   <div class="col-md-3">
+      <label>  Out Time </label>
+      <input type="time" id="generationtime" name="generation_hourminute" class="form-control" required="true"  placeholder="Loading time">
+    </div>        
+    <div class="col-md-3">
       <label>Remarks</label>
       <textarea name="remarks" placeholder="Remarks" class="form-control">
         
@@ -251,13 +255,11 @@
               return true;
             }
             else{
-
-            }
+              $("#main_slip_no").val('');
+                alert('A Slip No With '+val+' Already Exists');
+              }
           }
       });    
-  }
-  function alertwhenduplicate(){
-    
   }
   function FillNetWeight(e){
        var x = e.which || e.keycode;

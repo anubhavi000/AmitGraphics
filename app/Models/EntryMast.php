@@ -227,7 +227,14 @@ class EntryMast extends Model
         $res['created_by']       = Auth::user()->id;
         $res['manual']           = 1;
         $res['print_status']     = 1;
-        $res['generation_time']  = !empty($res['generation_time']) ? date('Y-m-d h:i:s' , strtotime($res['generation_time'])) : date('Y-m-d h:i:s');
+        if(!empty($res['generation_time']) && !empty($res['generation_hourminute'])){
+            $time = $res['generation_time'].' '.$res['generation_hourminute'];
+            $res['generation_time'] = date('Y-m-d h:i:s' , strtotime($time));
+        }
+        else{
+            $res['generation_time'] = date('Y-m-d h:i:s');
+        }
+        // $res['generation_time']  = !empty($res['generation_time']) ? date('Y-m-d h:i:s' , strtotime($res['generation_time'])) : date('Y-m-d h:i:s');
         $res['is_generated']     = 1;
         $res['items_included']   = json_encode($res['items_included'] , true);
         if(!empty($res['vehicle'])){
@@ -259,8 +266,8 @@ class EntryMast extends Model
             'manual'   => 1,
             'updated_at' => date('Y-m-d h:i:s'),
             'print_status' => 1,
-            'is_generated' => 1,
-            'generation_time' => !empty($res['generation_time']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d h:i:s'),
+            'is_generated' => 1,        
+            // 'generation_time' => !empty($res['generation_time']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d h:i:s'),
             'items_included' => json_encode($res['items_included'] , true),
             'vehicle'    => $res['vehicle'],
             'vendor_id' => $vendor_id,
@@ -281,6 +288,13 @@ class EntryMast extends Model
             'driver' => $res['driver'],
             'items_included' => json_encode($res['items_included'])
         ];
+            if(!empty($res['generation_time']) && !empty($res['generation_hourminute'])){
+                $time = $res['generation_time'].' '.$res['generation_hourminute'];
+                $update_arr['generation_time'] = date('Y-m-d h:i:s' , strtotime($time));
+            }
+            else{
+                $update_arr['generation_time'] = date('Y-m-d h:i:s');
+            }            
 
         $store = EntryMast::where('id' , $id)->update($update_arr);
         if(!empty($store)){
