@@ -48,7 +48,7 @@ Route::get('client_view_ledger_webview', 'ClientController@client_view_ledger_we
 // dd($_SERVER[]);
 
 // original routing starts from here
-Route::any('/', function () {
+Route::get('/', function () {
     // dd('1');
     return redirect('login');
 });

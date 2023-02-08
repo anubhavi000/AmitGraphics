@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Atswask | Manacle Technologies Pvt. Lmt.</title>
+    <title>Atswask Logicedge</title>
 
     @yield('title')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -20,7 +20,7 @@
     <link rel='stylesheet'
         href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
     <link rel='stylesheet' href="{{ asset('assets/css/bootstrap-table.min.css') }}">
-    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" style="width: 10px;">
+    <!-- <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" style="width: 10px;"> -->
     <!-- Google font-->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('theme/bower_components/bootstrap/css/bootstrap.min.css') }}">
