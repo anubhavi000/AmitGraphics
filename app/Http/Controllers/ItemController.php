@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ItemMast;
 use DB;
+use Session;
 use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VendorMast;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Session;
 class VendorController extends Controller
 {
     /**
@@ -57,6 +58,13 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
+        if(!empty($request->name)){
+            $check = VendorMast::checknameduplicacy($request->name);
+            if($check){
+                Session::put('error' , 'Vendor Name '.$request->name.' already Exists');                
+                return redirect()->back();
+            }
+        }        
         if (!empty($request->vendor_code)) {
             $insert = VendorMast::insert([
                             'v_name'     => $request->name,

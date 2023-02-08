@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SupervisorMast;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Session;
 class SupervisorController extends Controller
 {
     /**
