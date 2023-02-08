@@ -83,7 +83,10 @@
         <label for="description">Description</label>
         <textarea class="form-control " name="description" id="description" rows="3" placeholder="Enter Description Here" style="height:40px;"></textarea>
     </div>
-
+    <div class="col-md-3  mt-3">
+        <label for="description">Fitness Valid Till</label>
+        <input type="date" name="fitness_valid_till" class="form-control" value="">
+    </div>
     <div id="infodiv" class="col-md-3 mt-3">
 
     </div> 

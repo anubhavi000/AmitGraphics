@@ -199,12 +199,12 @@
                                         </div>
                                         --}} 
                                         <div class="col-md-2">
-                                            <label>Venddor</label>
-                                            <select name="vendor" class="fstdropdown-select">
+                                            <label>Vehicle Mast</label>
+                                            <select name="vehicle" class="fstdropdown-select">
                                                 <option value="">Select</option>
-                                                @if(!empty($vendors))
-                                                    @foreach($vendors as $key => $value)
-                                                        <option value="{{$key}}">{{$value}}</option>
+                                                @if(!empty($vehicle_mast))
+                                                    @foreach($vehicle_mast as $key => $value)
+                                                        <option {{(Request::get('vehicle') == $key)?'selected':''}} value="{{$key}}">{{$value}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -243,6 +243,7 @@
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
+                                            <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
                                             <th data-field="dat2323e" data-sortable="true">Net Weight</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
@@ -264,6 +265,7 @@
                                                
                                                 <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
+                                                <td>{{ !empty($vehicle_mast[$value->vehicle]) ? $vehicle_mast[$value->vehicle] : ''}}</td>
                                                 <td>{{ !empty($value->net_weight) ? $value->net_weight : '0'}} KG</td>
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
                                                 <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>

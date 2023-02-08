@@ -47,8 +47,8 @@ class EntriesController extends Controller
                                ->pluck('name' , 'id')
                                ->toArray();
 
-            $vendors = VendorMast::where('status' , 1)
-                                 ->pluck('v_name' , 'id')
+            $vehicle_mast = VehicleMast::where('status' , 1)
+                                 ->pluck('vehicle_no' , 'id')
                                  ->toArray();
             if($from_date){
                 $current_date = date('Y-m-d');
@@ -74,8 +74,8 @@ class EntriesController extends Controller
             if(!empty($slip_no)){
                 $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
             }
-            if(isset($request->vendor)){
-                $entriesraw->where('vendor_id' , $request->vendor);
+            if(isset($request->vehicle)){
+                $entriesraw->where('vehicle' , $request->vehicle);
             }
             if(isset($request->status)){
                 if($request->status == 1){
@@ -88,18 +88,22 @@ class EntriesController extends Controller
             $entries = $entriesraw->orderBy('slip_no' , 'DESC')
                                   ->get();
 
-            // if(!empty($entries)){
-            //     if(count($entries)  == 1){
-            //         $encrypted_id = enCrypt($entries[0]->slip_no);
-            //         return redirect('EntryForm_action/'.$encrypted_id);
-            //     }
-            // }
+            if(!empty($request->slip_no)){
+                // dd($entries);
+                if(!empty($entries)){
+                    if(count($entries)  == 1){
+                        $encrypted_id = enCrypt($entries[0]->slip_no);
+                        return redirect('EntryForm_action/'.$encrypted_id);
+                    }
+                }
+            }
+                                  // dd($vehicle_mast);
 
             return view($this->module_folder.'.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
                 'plants'  => $plants,
-                'vendors' => $vendors
+                'vehicle_mast' => $vehicle_mast
             ]);            
         }
     }
@@ -582,8 +586,8 @@ class EntriesController extends Controller
             if(!empty($slip_no)){
                 $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
             }
-            if(isset($request->vendor)){
-                $entriesraw->where('vendor_id' , $request->vendor);
+            if(isset($request->vehicle)){
+                $entriesraw->where('vehicle' , $request->vehicle);
             }            
             if(isset($request->status)){
                 if($request->status == 1){
@@ -602,10 +606,15 @@ class EntriesController extends Controller
                     return redirect('EntryForm_action/'.$encrypted_id);
                 }
             }
+
+            $vehicle_mast = VehicleMast::where('status' , 1)
+                                 ->pluck('vehicle_no' , 'id')
+                                 ->toArray();
             return view($this->module_folder.'.Challan.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
                 'plants'  => $plants,
+                'vehicle_mast'=>$vehicle_mast,
                 'vendors' => $vendors
             ]);            
         }

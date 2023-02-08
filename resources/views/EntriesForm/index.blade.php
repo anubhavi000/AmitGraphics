@@ -141,7 +141,7 @@
                                                             class="fas fa-briefcase"></i></span>
                                                     <input type="text" value="{{ Request::get('kanta_slip_no') }}" name="kanta_slip_no"
                                                         class="form-control" id="file_no"
-                                                        placeholder="Enter Kanta Slip No">
+                                                        placeholder="Enter Weighbridge Slip No">
                                                 </div>
                                             </fieldset>
                                         </div>  
@@ -199,11 +199,12 @@
                                         </div>
                                         --}} 
                                         <div class="col-md-2">
-                                            <label>Venddor</label>
-                                            <select name="vendor" class="fstdropdown-select">
-                                                @if(!empty($vendors))
-                                                    @foreach($vendors as $key => $value)
-                                                        <option value="{{$key}}">{{$value}}</option>
+                                            <label>Vehicle</label>
+                                            <select name="vehicle" class="fstdropdown-select">
+                                                        <option value="">Please Select</option>
+                                                @if(!empty($vehicle_mast))
+                                                    @foreach($vehicle_mast as $key => $value)
+                                                        <option {{(Request::get('vehicle') == $key)?'selected':''}} value="{{$key}}">{{$value}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -241,7 +242,8 @@
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
-                                            <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
+                                            <th data-field="dat32e" data-sortable="true">Weighbridge Slip No</th>
+                                            <th data-field="da1t32e" data-sortable="true">Vehicle Number</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
@@ -261,6 +263,7 @@
                                                
                                                 <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
+                                                <td>{{ !empty($vehicle_mast[$value->vehicle]) ? $vehicle_mast[$value->vehicle] : ''}}</td>
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
                                                 <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] : '' }}</td>
                                                 <td>{{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : '' }}</td>
