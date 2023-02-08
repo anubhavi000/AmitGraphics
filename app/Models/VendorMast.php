@@ -15,4 +15,15 @@ class VendorMast extends Model
     				  ->first();
     	return $vendor;
     }
+    static function checknameduplicacy($name){
+    	$check = self::where('v_name' , $name)
+    				 ->where('status' , 1)
+    				 ->first();
+    	if(empty($check)){
+    		return false;
+    	}
+    	else{
+    		return true;
+    	}
+	}    
 }

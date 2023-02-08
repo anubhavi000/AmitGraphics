@@ -178,4 +178,23 @@ class VehicleController extends Controller
             }
         }
     }
+    function get_vehicle_pass_wt(Request $request){
+        if(!empty($request->vehicle)){
+            $res = VehicleMast::where('id' , $request->vehicle)
+                              ->first();
+            if(!empty($res->pass_wt)){
+                $data = [
+                    'res' => 200,
+                    'pass_wt' => $res->pass_wt
+                ];
+            }
+            else{
+                $data = [
+                    'res'     => 400,
+                    'pass_wt' => ''
+                ];
+            }
+            return response()->json($data);
+        }
+    }    
 }

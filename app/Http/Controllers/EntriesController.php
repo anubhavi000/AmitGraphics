@@ -149,6 +149,13 @@ class EntriesController extends Controller
      */
     public function store(Request $request)
     {
+        if(!empty($request->name)){
+            $check = VendorMast::checknameduplicacy($request->name);
+            if($check){
+                Session::put('error' , 'Vendor Name '.$request->name.' already Exists');                
+                return redirect()->back();
+            }
+        }        
         $store = EntryMast::store_slip($request->except('_token'));
 
         if($store['res']){
@@ -534,8 +541,7 @@ class EntriesController extends Controller
             $vendors = VendorMast::where('status' , 1)
                                  ->pluck('v_name' , 'id')
                                  ->toArray();            
-
-        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
+        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date) && empty($request->vendor)){
             return view($this->module_folder.'/index');                       
         }   
         else{
@@ -603,5 +609,253 @@ class EntriesController extends Controller
                 'vendors' => $vendors
             ]);            
         }
+    }
+     public function ManualChallan(Request $request){
+      
+      $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
+        $auth = Auth::user();
+
+        if(!empty($request->slip_no)){
+            $check = EntryMast::where('slip_no' , $request->slip_no)
+                              ->first();
+            if(empty($check)){
+                $transporters    =   VendorMast::where('status' , 1)
+                                               ->pluck('v_name' , 'id')
+                                               ->toArray();
+                $vehicles        =  VehicleMast::where('status' , 1)
+                                               ->pluck('vehicle_no' , 'id')
+                                               ->toArray();
+                $sites           =  Sites::where('status' , 1)
+                                         ->where('is_owner' , 0)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+                $supervisors     = SupervisorMast::where('status' , 1)
+                                                 ->pluck('name' , 'id')
+                                                 ->toArray();
+                $items           = ItemMast::where('status' , 1)
+                                           ->pluck('name' , 'id')
+                                           ->toArray();
+                $plants          =  PlantMast::where('status' , 1)
+                                             ->pluck('name' , 'id')
+                                             ->toArray();
+
+            return view($this->module_folder.'.ManualChallan.create' , [
+            'data' => $request->all(),
+            'transporters' => $transporters ,
+            'vehicles'     => $vehicles,
+            'sites'        => $sites,
+            'supervisors'  => $supervisors,
+            'items'        => $items,
+            'plant'        => $plants                
+            ]);
+            }
+            else{
+                return redirect('ManualChallan/edit/'.$check->id);
+            }
+        }
+        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date) && empty($request->vendor)){
+            return view($this->module_folder.'/index');                       
+        }   
+        else{
+            $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
+            $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
+            $from_date = !empty($request->from_date) ? $request->from_date : NULL;
+
+            $entriesraw = EntryMast::whereNotNull('slip_no')
+                                   ->where('owner_site' , $auth->site)
+                                   ->where('is_generated' , 1)
+                                   ->where('manual' , 1)
+                                   ->where('delete_status' , 0);
+
+            $sites = Sites::activesitespluck();
+            $plants = PlantMast::where('status' , 1)
+                               ->pluck('name' , 'id')
+                               ->toArray();
+
+            $vendors = VendorMast::where('status' , 1)
+                                 ->pluck('v_name' , 'id')
+                                 ->toArray();
+            if($from_date){
+                $current_date = date('Y-m-d');
+                if($from_date == 'today'){
+                    $filter = $current_date;  
+                }
+                elseif($from_date == 'last_seven_days'){
+                    $filter = date('Y-m-d' , strtotime('-7 days'));
+                }
+                elseif($from_date ==  'last_fifteen_days'){
+                    $filter = date('Y-m-d' , strtotime('-15 days'));
+                } 
+                elseif($from_date ==  'last_thirty_days'){
+                    $filter = date('Y-m-d' , strtotime('-30 days'));
+                }
+                if(!empty($filter)){
+                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
+                }
+            }
+            if(!empty($kanta_slip_no)){
+                $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
+            }
+            if(!empty($slip_no)){
+                $entriesraw->where('slip_no' , 'LIKE' , $slip_no.'%');
+            }            
+            if(isset($request->vendor)){
+                $entriesraw->where('vendor_id' , $request->vendor);
+            }
+            if(isset($request->status)){
+                if($request->status == 1){
+                    $entriesraw->where('is_generated' , 1);
+                }
+                if($request->status == 0){
+                    $entriesraw->where('is_generated' , 0);
+                }
+            }
+            $entries = $entriesraw->orderBy('slip_no' , 'DESC')
+                                  ->get();
+                                  // dd($entries);
+            return view($this->module_folder.'.ManualChallan.index' , [
+                'entries' => $entries,
+                'sites'   => $sites,
+                'plants'  => $plants,
+                'vendors' => $vendors
+            ]);            
+        }        
+    }
+    public function ManualChallanCreation(Request $request){
+        $transporters    =   VendorMast::where('status' , 1)
+                                       ->pluck('v_name' , 'id')
+                                       ->toArray();
+        $vehicles        =  VehicleMast::where('status' , 1)
+                                       ->pluck('vehicle_no' , 'id')
+                                       ->toArray();
+        $sites           =  Sites::where('status' , 1)
+                                 ->where('is_owner' , 0)
+                                 ->pluck('name' , 'id')
+                                 ->toArray();
+        $supervisors     = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+        $items           = ItemMast::where('status' , 1)
+                                   ->pluck('name' , 'id')
+                                   ->toArray();
+        $plants          =  PlantMast::where('status' , 1)
+                                     ->pluck('name' , 'id')
+                                     ->toArray();
+
+        return view($this->module_folder.'.ManualChallan.create' , [
+            'transporters' => $transporters ,
+            'vehicles'     => $vehicles,
+            'sites'        => $sites,
+            'supervisors'  => $supervisors,
+            'items'        => $items,
+            'plant'        => $plants
+        ]);  
+    }
+    public function ManualChallanStore(Request $request){
+        if(empty($request->items_included)){
+            Session::put('error' , 'Atleast One Item Must Be Selected');
+            return redirect()->back();
+        }
+        $store = EntryMast::storeManualChallan($request->except('_token'));
+        if(!empty($store)){
+            return redirect('ManualChallan')->with('success' , 'Generated SuccessFully');
+        }
+        else{
+            Session::put('error' , 'Could not Generate');
+            return redirect()->back();
+        }
+    }
+    public function check_duplicacy_orignal_slip(Request $request){
+        if(empty($request->kanta_slip_no) && empty($request->slip_no)){
+            return reponse()->json(false);
+        }
+        else{
+            $kanta_slip_no = $request->kanta_slip_no;
+            $slip_no       = $request->slip_no;
+
+            $kantaduplicates = EntryMast::where('kanta_slip_no' , $kanta_slip_no)
+                                        ->where('delete_status' , 0)
+                                        ->count();
+            $slipduplicates  = EntryMast::where('slip_no' , $slip_no)
+                                        ->where('delete_status' , 0)
+                                        ->count();
+
+            if($kantaduplicates > 0 && $slipduplicates > 0){
+                return response()->json([
+                    'res'   => 400,
+                    'kanta' => false,
+                    'slip'  => false
+                ]);
+            }
+            if($kantaduplicates == 0 && $slipduplicates == 0){
+                return response()->json([
+                    'res'   => 200,
+                    'kanta' => true,
+                    'slip'  => true
+                ]); 
+            } 
+            if($kantaduplicates == 0 && $slipduplicates > 0){
+                return response()->json([
+                    'res'  => 400,
+                    'kanta'=> true,
+                    'slip' => false
+                ]);
+            }
+            if($kantaduplicates > 0 && $slipduplicates == 0){
+                return response()->json([
+                    'res'  => 400,
+                    'kanta'=> false,
+                    'slip' => true
+                ]);                
+            }
+        }        
+    }
+    public function ManualChallanEdition(Request $request , $id){
+        $entry =  EntryMast::where('id' , $id)->first();
+        if(!empty($entry)){
+        $transporters    =   VendorMast::where('status' , 1)
+                                       ->pluck('v_name' , 'id')
+                                       ->toArray();
+        $vehicles        =  VehicleMast::where('status' , 1)
+                                       ->pluck('vehicle_no' , 'id')
+                                       ->toArray();
+        $sites           =  Sites::where('status' , 1)
+                                 ->where('is_owner' , 0)
+                                 ->pluck('name' , 'id')
+                                 ->toArray();
+        $supervisors     = SupervisorMast::where('status' , 1)
+                                         ->pluck('name' , 'id')
+                                         ->toArray();
+        $items           = ItemMast::where('status' , 1)
+                                   ->pluck('name' , 'id')
+                                   ->toArray();
+        $plants          =  PlantMast::where('status' , 1)
+                                     ->pluck('name' , 'id')
+                                     ->toArray();            
+            return view($this->module_folder.'.ManualChallan.edit' , [
+                'entry' => $entry,
+            'transporters' => $transporters ,
+            'vehicles'     => $vehicles,
+            'sites'        => $sites,
+            'supervisors'  => $supervisors,
+            'items'        => $items,
+            'plant'        => $plants                
+            ]);
+        }
+    }
+    public function manualupdate(Request $request , $id){
+        if(empty($request->items_included)){
+            Session::put('error' , 'Atleast One Item Must Be Selected');
+            return redirect()->back();
+        }
+        $update = EntryMast::updateManualChallan($request->except('_token' , '_method') , $id);
+
+        if(($update)){
+            return redirect('ManualChallan')->with('success' , 'Generated SuccessFully');
+        }
+        else{
+            Session::put('error' , 'Could not update');
+            return redirect()->back();
+        }        
     }
 }

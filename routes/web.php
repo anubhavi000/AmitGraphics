@@ -171,6 +171,16 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
     // routes For chalan generation ved
     Route::get('ChalanGeneration' , 'EntriesController@chalanindex');
+
+
+    //Routes for manual challan entries --ved
+    Route::get('ManualChallan' , 'EntriesController@ManualChallan');
+    Route::get('ManualChallan/create' , 'EntriesController@ManualChallanCreation');
+    Route::get('ManualChallan/edit/{id}' , 'EntriesController@ManualChallanEdition' );
+    Route::post('ManualChallanStore' , 'EntriesController@ManualChallanStore')->name('ManualChallanStore');
+    Route::post('ManualChallanupdate/{id}' , 'EntriesController@manualupdate');
+    Route::post('check_duplicacy_both_slips'  , 'EntriesController@check_duplicacy_orignal_slip');
+    Route::post('get_vehicle_pass_wt' , 'VehicleController@get_vehicle_pass_wt');    
     //ends
 
     // always add routes on above this line 
