@@ -56,7 +56,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3">
      <label for="department_Name" class="yash_star">  Slip No. </label>
-     <input type="text" name="slip_no" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
+     <input type="text" name="slip_no" onkeyup="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
    </div>
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
@@ -232,6 +232,33 @@
 
 @endsection
 <script type="text/javascript">  
+  function checkslipduplicate(val){
+      var main_slip_no = val;
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{url("checkslipduplicate")}}',
+          dataType: 'json',
+          data: {'slip_no': val},
+          success: function (data) 
+          {
+            if(data){
+              return true;
+            }
+            else{
+
+            }
+          }
+      });    
+  }
+  function alertwhenduplicate(){
+    
+  }
   function FillNetWeight(e){
        var x = e.which || e.keycode;
        if(x>=48 && x<=57){

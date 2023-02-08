@@ -867,4 +867,16 @@ class EntriesController extends Controller
             return redirect()->back();
         }        
     }
+    public function checkslipduplicatemanual(Request $request){
+        if(!empty($request->slip_no)){
+            $check = EntryMast::where('slip_no' , $request->slip_no)
+                              ->first();
+            if(!empty($check)){
+                return response()->json(false);
+            }
+            else{
+                return response()->json(true);
+            }
+        }
+    }
 }
