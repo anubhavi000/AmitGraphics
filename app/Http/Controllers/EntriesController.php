@@ -669,7 +669,7 @@ class EntriesController extends Controller
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
             $from_date = !empty($request->from_date) ? $request->from_date : NULL;
-
+            // dd($auth->site);
             $entriesraw = EntryMast::whereNotNull('slip_no')
                                    ->where('owner_site' , $auth->site)
                                    ->where('is_generated' , 1)
@@ -699,6 +699,7 @@ class EntriesController extends Controller
                     $filter = date('Y-m-d' , strtotime('-30 days'));
                 }
                 if(!empty($filter)){
+                    // dd($filter);
                     $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
                 }
             }
