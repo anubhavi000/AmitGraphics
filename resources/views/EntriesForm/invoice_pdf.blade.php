@@ -88,8 +88,7 @@
 				{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}
 				</b>
 			</p>				
-		</div>
-		<br><br>		
+		</div>	
 	</div>
 </div>
 
@@ -99,6 +98,7 @@
 
 <!-- Second copy -->
 <div style="border-right: 1px solid black;border-left: 1px solid black;clear: left;width: 110%;margin-left: -5%;">
+	<br><br><br>
 	<div style="width: 100%;float: left;border: 1px solid black;">
 		<h2 style="text-align: center;">Challan<br>{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}</h2>
 	</div>
