@@ -145,10 +145,14 @@
           @endif
       </select>
     </div>
-    <div class="col-md-3">
-      <label> Date And Time </label>
-      <input type="text" class="form-control datepicker" name="datetime" value="{{!empty($entry->datetime) ? $entry->datetime : ''}}"  placeholder="Loading Date time">
-    </div>
+            <div class="col-md-3">
+              <label> In Date  </label>
+              <input type="text" class="form-control datepicker" name="datetime" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->datetime)) : ''}}"  placeholder="Loading Date time">
+            </div>
+            <div class="col-md-3">
+              <label> In Time </label>
+              <input type="time" value="{{!empty($entry->datetime) ? date('h:i:s' , strtotime($entry->datetime)) : ''}}" class="form-control" name="datetimehourminute"  placeholder="Loading time">
+            </div>            
 
     <div class="col-md-3 ">
         <label for="description">Vehicle Pass WT</label>
@@ -159,8 +163,8 @@
       <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" id="driver" placeholder="Enter Driver Name" >
     </div>
     <div class="col-md-3">
-      <label> Out Date And Time </label>
-      <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->generation_time)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+      <label>  Date And Time </label>
+      <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->datetime)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
     </div>     
    <div class="col-md-3">
       <label>  Out Time </label>

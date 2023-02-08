@@ -647,7 +647,7 @@ class EntriesController extends Controller
                 $plants          =  PlantMast::where('status' , 1)
                                              ->pluck('name' , 'id')
                                              ->toArray();
-
+                                             
             return view($this->module_folder.'.ManualChallan.create' , [
             'data' => $request->all(),
             'transporters' => $transporters ,

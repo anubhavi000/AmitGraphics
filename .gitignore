@@ -1,6 +1,7 @@
 ﻿/vendor/
 vendor
 .env
+/.env
 yarn-error.log
 composer.lock
 composer.json

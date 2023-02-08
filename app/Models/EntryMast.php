@@ -223,10 +223,19 @@ class EntryMast extends Model
         }
     }
     static function storeManualChallan($res){
-        $res['datetime']         = !empty($res['datetime']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d');
+
+        // $res['datetime']         = !empty($res['datetime']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d');
         $res['created_by']       = Auth::user()->id;
         $res['manual']           = 1;
         $res['print_status']     = 1;
+        
+        if(!empty($res['datetime']) && !empty($res['datetimehourminute'])){
+            $time = $res['datetime'].' '.$res['datetimehourminute'];
+            $res['datetime'] = date('Y-m-d h:i:s' , strtotime($time));
+        }
+        else{
+            $res['datetime'] = date('Y-m-d h:i:s');
+        }
         if(!empty($res['generation_time']) && !empty($res['generation_hourminute'])){
             $time = $res['generation_time'].' '.$res['generation_hourminute'];
             $res['generation_time'] = date('Y-m-d h:i:s' , strtotime($time));
@@ -294,7 +303,14 @@ class EntryMast extends Model
             }
             else{
                 $update_arr['generation_time'] = date('Y-m-d h:i:s');
-            }            
+            }
+        if(!empty($res['datetime']) && !empty($res['datetimehourminute'])){
+            $time = $res['datetime'].' '.$res['datetimehourminute'];
+            $update_arr['datetime'] = date('Y-m-d h:i:s' , strtotime($time));
+        }
+        else{
+            $update_arr['datetime'] = date('Y-m-d h:i:s');
+        }                                
 
         $store = EntryMast::where('id' , $id)->update($update_arr);
         if(!empty($store)){

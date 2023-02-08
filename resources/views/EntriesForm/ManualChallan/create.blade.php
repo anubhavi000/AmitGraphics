@@ -135,18 +135,18 @@
               </select>
             </div>
             <div class="col-md-3">
-              <label> Date And Time </label>
+              <label> In Date  </label>
               <input type="text" class="form-control datepicker" name="datetime"  placeholder="Loading Date time">
             </div>
+            <div class="col-md-3">
+              <label> In Time </label>
+              <input type="time" class="form-control" name="datetimehourminute"  placeholder="Loading time">
+            </div>            
 
             <div class="col-md-3 ">
                 <label for="description">Vehicle Pass WT</label>
                 <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" required="true" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
             </div>
-        </div>
-        <div class="form-row mt-3 ">
-
-  
     <div class="col-md-3">
       <label class="form-label">Driver</label>
       <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" >
@@ -164,7 +164,11 @@
       <textarea name="remarks" placeholder="Remarks" class="form-control">
         
       </textarea>
-    </div>
+    </div>            
+        </div>
+        <div class="form-row mt-3 ">
+
+  
         </div>
 
         <div id="infodiv" class="col-md-3">
