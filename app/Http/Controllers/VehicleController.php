@@ -59,6 +59,7 @@ class VehicleController extends Controller
                                 'created_by'          => Auth::user()->id,
                                 'status'              => 1,
                                 'vendor'              => $request->vendor,
+                                'fitness_valid_till' => $fitness_valid_till,
                                 'excess_wt_allowance' => !empty($request->excess_wt_allowance) ? $request->excess_wt_allowance : NULL
                             ]);
             if($insert){
@@ -132,6 +133,7 @@ class VehicleController extends Controller
                                 'vendor'             =>$request->vendor,
                                 'updated_at'         => date('Y-m-d h:i:s'),
                                 'updated_by'         => Auth::user()->id,
+                                'fitness_valid_till' => $fitness_valid_till,
                                 'excess_wt_allowance'=> !empty($request->excess_wt_allowance) ? $request->excess_wt_allowance : NULL 
                             ]);
         if($update){

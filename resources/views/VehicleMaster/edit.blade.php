@@ -83,6 +83,11 @@ $encrypt_id = encrypt($edit->id);
     </div>
 
     <div class="col-md-3  mt-3">
+        <label for="description">Fitness Valid Till</label>
+        <input type="date" name="fitness_valid_till" class="form-control" value="{{!empty($edit->fitness_valid_till)?$edit->fitness_valid_till:''}}">
+    </div>
+
+    <div class="col-md-3  mt-3">
       <div id="infodiv"></div>
     </div>
 
