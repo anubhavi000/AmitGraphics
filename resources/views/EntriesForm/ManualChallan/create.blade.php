@@ -166,9 +166,7 @@
   
     <div class="col-md-3">
       <label>Remarks</label>
-      <textarea name="remarks" placeholder="Remarks" class="form-control">
-        
-      </textarea>
+      <textarea name="remarks" placeholder="Remarks" class="form-control"></textarea>
     </div>            
         </div>
         <div class="form-row mt-3 ">
