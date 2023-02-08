@@ -168,9 +168,7 @@
     </div>        
     <div class="col-md-3">
       <label>Remarks</label>
-      <textarea name="remarks" placeholder="Remarks" class="form-control">
-        {{!empty($entry->remarks) ? $entry->remarks : ''}}
-      </textarea>
+      <textarea name="remarks" placeholder="Remarks" class="form-control">{{!empty($entry->remarks) ? $entry->remarks : ''}}</textarea>
     </div>
         <div id="infodiv" class="col-md-3">
           @if(!empty($selected_vendor))

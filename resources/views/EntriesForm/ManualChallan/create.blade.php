@@ -44,9 +44,14 @@
     @csrf
 <div class="container-fluid">
     <div class="row first_row_margin">
-        <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Entry Information</b></h2>
+      <div class="col-md-6">
+        <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Entry Information</b></h2>
       </div>
+      <div class="col-md-6" style="text-align:right;">
+        <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
+        <i class="fa" aria-hidden="true"></i></a>            
+      </div>
+<<<<<<< HEAD
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
                   <i class="fa" aria-hidden="true"></i></a>            
@@ -68,72 +73,103 @@
             @endforeach
           @endif
       </select>
+=======
+>>>>>>> 1e89553277cb7976cf9e82c8f40a97984a72d5f8
     </div>
-    
-    <div class="col-md-3 ">
-        <label for="description">Gross Weight ( In Kgs )</label>
-        <input required="true" type="text" id="GrossWeight" name="gross_weight" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)'  placeholder ="Enter Gross Weight"  class="form-control ">
-    </div>    
+    <hr class="border-dark bold">
+    <div class=" mt-3 mb-3 collapse show" id="collapseExample">
+        <div class="form-row mt-3 ">
+            <div class="col-md-3">
+               <label for="department_Name" class="yash_star">  Slip No. </label>
+               <input type="text" name="slip_no" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
+             </div>
+            <div class="col-md-3">
+              <label class="form-label">Vehicle</label>
+              <select name = "vehicle"  class="fstdropdown-select" id="vehicle" onchange="get_pass_wt(this.value)" required="true">
+                  <option value="">Select</option>
+                  @if(!empty($vehicles))
+                    @foreach($vehicles as $key => $value)
+                      <option value="{{$key}}">{{$value}}</option>
+                    @endforeach
+                  @endif
+              </select>
+            </div>
+        
+            <div class="col-md-3 ">
+                <label for="description">Gross Weight ( In Kgs )</label>
+                <input required="true" type="text" id="GrossWeight" name="gross_weight" onkeyup="CalculateNetWeight()" onkeypress='return FillNetWeight(event)'  placeholder ="Enter Gross Weight"  class="form-control ">
+            </div>    
 
-    <div class="col-md-3 ">
-        <label for="description">Tare Weight ( In Kgs )</label>
-        <input type="text" required="true"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
-    </div>
+            <div class="col-md-3 ">
+                <label for="description">Tare Weight ( In Kgs )</label>
+                <input type="text" required="true"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
+            </div>
+        </div>
+        <div class="form-row mt-3 ">
+            <div class="col-md-3">
+                <label for="description">Net Weight</label>
+                <input type="text" required="true" name="net_weight" readonly="true" id="NetWeight" placeholder ="Enter Net Weight"  class="form-control ">
+            </div>
+            <div class="col-md-3">
+                <label for="description">Excess Weight</label>
+                <input type="text" name="excess_weight" id="excess_weight" readonly="true" placeholder ="Enter Excess Weight"  class="form-control ">
+            </div>        
 
-    <div class="col-md-3">
-        <label for="description">Net Weight</label>
-        <input type="text" required="true" name="net_weight" readonly="true" id="NetWeight" placeholder ="Enter Net Weight"  class="form-control ">
-    </div>
-    <div class="col-md-3">
-        <label for="description">Excess Weight</label>
-        <input type="text" name="excess_weight" id="excess_weight" readonly="true" placeholder ="Enter Excess Weight"  class="form-control ">
-    </div>        
+            <div class="col-md-3">
+              <label class="form-label">Loading Plant</label>
+              <select name = "plant"  class="fstdropdown-select" id="plant" required="true">
+                  <option value="">Select</option>
+                  @if(!empty($plant))
+                    @foreach($plant as $key => $value)
+                        <option value="{{$key}}">{{$value}}</option>
+                    @endforeach
+                  @endif
+              </select>
+            </div>
 
-    <div class="col-md-3">
-      <label class="form-label">Loading Plant</label>
-      <select name = "plant"  class="fstdropdown-select" id="plant" required="true">
-          <option value="">Select</option>
-          @if(!empty($plant))
-            @foreach($plant as $key => $value)
-                <option value="{{$key}}">{{$value}}</option>
-            @endforeach
-          @endif
-      </select>
-    </div>
+            <div class="col-md-3">
+                 <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
+                 <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
+            </div>
+        </div>
+        <div class="form-row mt-3 ">
 
-   <div class="col-md-3">
-     <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
-     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
-   </div>
+            <div class="col-md-3">
+              <label class="">Unloading Place ( Site ) </label>
+              <select  class="fstdropdown-select" required="true" id="Unloading_place" name = "site">
+                  <option value="">Select</option>
+                  @if(!empty($sites))
+                    @foreach($sites as $key => $value)
+                        <option value="{{$key}}">{{$value}}</option>
+                    @endforeach
+                  @endif
+              </select>
+            </div>    
 
-    <div class="col-md-3">
-      <label class="">Unloading Place ( Site ) </label>
-      <select  class="fstdropdown-select" required="true" id="Unloading_place" name = "site">
-          <option value="">Select</option>
-          @if(!empty($sites))
-            @foreach($sites as $key => $value)
-                <option value="{{$key}}">{{$value}}</option>
-            @endforeach
-          @endif
-      </select>
-    </div>    
+            <div class="col-md-3">
+              <label class="form-label">Supervisor</label>
+              <select name = "supervisor" required="true" id="supervisor" class="fstdropdown-select">
+                  <option value="">Select</option>
+                  @if(!empty($supervisors))
+                    @foreach($supervisors as $key => $value)
+                      <option value="{{$key}}">{{$value}}</option>
+                    @endforeach
+                  @endif
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label> Date And Time </label>
+              <input type="text" class="form-control datepicker" name="datetime"  placeholder="Loading Date time">
+            </div>
 
-    <div class="col-md-3">
-      <label class="form-label">Supervisor</label>
-      <select name = "supervisor" required="true" id="supervisor" class="fstdropdown-select">
-          <option value="">Select</option>
-          @if(!empty($supervisors))
-            @foreach($supervisors as $key => $value)
-              <option value="{{$key}}">{{$value}}</option>
-            @endforeach
-          @endif
-      </select>
-    </div>
-    <div class="col-md-3">
-      <label> Date And Time </label>
-      <input type="text" class="form-control datepicker" name="datetime"  placeholder="Loading Date time">
-    </div>
+            <div class="col-md-3 ">
+                <label for="description">Vehicle Pass WT</label>
+                <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" required="true" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
+            </div>
+        </div>
+        <div class="form-row mt-3 ">
 
+<<<<<<< HEAD
     <div class="col-md-3 ">
         <label for="description">Vehicle Pass WT</label>
         <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" required="true" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
@@ -156,12 +192,28 @@
         
       </textarea>
     </div>
+=======
+            <div class="col-md-3">
+              <label class="form-label">Driver</label>
+              <input type="text" class="form-control" name="driver" id="driver" placeholder="Enter Driver Name" >
+            </div>
+            <div class="col-md-3">
+              <label> Out Date And Time </label>
+              <input type="text" id="generationdate" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+            </div>    
+            <div class="col-md-4">
+              <label>Remarks</label>
+              <textarea name="remarks" placeholder="Remarks" class="form-control"></textarea>
+            </div>
+        </div>
+>>>>>>> 1e89553277cb7976cf9e82c8f40a97984a72d5f8
         <div id="infodiv" class="col-md-3">
-          @if(!empty($selected_vendor))
-          <label class="form-label">Vendor Details</label>
-          <br><span style="margin-top:10px;" class="text-success"> Transporter Name:  {{$selected_vendor->v_name}}<br> Contact: {{$selected_vendor->phone}}</span>
-          @endif
-    </div>    
+            @if(!empty($selected_vendor))
+            <label class="form-label">Vendor Details</label>
+            <br><span style="margin-top:10px;" class="text-success"> Transporter Name:  {{$selected_vendor->v_name}}<br> Contact: {{$selected_vendor->phone}}</span>
+            @endif
+        </div>    
+
     <div id="infodiv" class="col-md-3">
     </div>
       <div class="col-md-12 mt-4">
