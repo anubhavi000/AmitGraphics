@@ -11,9 +11,18 @@ class ExcessweightSlipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->view = 'EntriesForm/ExcessWeightedSlips';
+        $this->url = 'ExcessWeightedSlips';
+    }
     public function index()
     {
-        
+        return view($this->view.'.index' , [
+            'entries' => $entries,
+            'sites'   => $sites,
+            'plants'  => $plants,
+            'vendors' => $vendors
+        ]); 
     }
 
     /**
