@@ -41,6 +41,13 @@ class SupervisorController extends Controller
      */
     public function store(Request $request)
     {
+        if(!empty($request->name)){
+            $check = SupervisorMast::checknameduplicacy($request->name);
+            if($check){
+                Session::put('error' , 'Supervisor with name '.$request->name.' already exists');                
+                return redirect()->back();
+            }
+        }          
         if (!empty($request->name)) {
             $insert = SupervisorMast::insert([
                             'name' => $request->name,

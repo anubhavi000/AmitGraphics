@@ -50,7 +50,11 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->name)) {
-
+            $check = ItemMast::checknameduplicacy($request->name);
+            if($check){
+                Session::put('error' , 'Item With Name '.$request->name.' already Exists');                
+                return redirect()->back();
+            }
             $insert = ItemMast::insert([
                                 'name'       => $request->name,
                                 'status'     => 1,

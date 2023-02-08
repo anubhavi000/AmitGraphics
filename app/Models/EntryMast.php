@@ -16,19 +16,20 @@ class EntryMast extends Model
     protected $table = 'entry_mast';
     public $timestamps = false;
     protected $fillable = [
-    					'slip_no',
-    					'series',
-    					'datetime', 
+                        'slip_no',
+                        'series',
+                        'datetime', 
                         'entry_rate',
                         'entry_weight',
+                        'net_weight',
                         'plant',
                         'items_included',
                         'gross_weight',
                         'acess_weight_quantity',
                         'vendor_id',
-    					'created_at',
-    					'created_by',
-    					'updated_by',
+                        'created_at',
+                        'created_by',
+                        'updated_by',
                         'supervisor',
                         'vehicle',
                         'kanta_slip_no',
@@ -39,14 +40,16 @@ class EntryMast extends Model
                         'delete_status',
                         'owner_site',
                         'generation_time',
-                        'driver'
-    					];
+                        'driver',
+                        'manual',
+                        'vehicle_pass'
+                        ];
 
     static function store_slip($req){
         $auth = Auth::user();
-    	$req['created_at'] = date('Y-m-d h:i:s');
-    	$req['created_by'] =  Auth::user()->id;
-    	$req['datetime']   =  date('Y-m-d');
+        $req['created_at'] = date('Y-m-d h:i:s');
+        $req['created_by'] =  Auth::user()->id;
+        $req['datetime']   =  date('Y-m-d');
         $req['owner_site'] =  $auth->site;
         $LastSlip  = Self::orderBy('id' , 'DESC')
                         ->first();
@@ -67,22 +70,22 @@ class EntryMast extends Model
         }
 
         $req['excess_wt_allowance'] = $vehicle->excess_wt_allowance; 
-    	$obj = Self::create($req);
-    	
-    	if(!empty($obj)){
+        $obj = Self::create($req);
+        
+        if(!empty($obj)){
             $res = [
                 'res'    => true,
                 'slip_no'=> $obj['slip_no'] 
             ];
-    		return $res;
-    	}
-    	else{
+            return $res;
+        }
+        else{
             $res = [
                 'res'    => false,
                 'slip_no'=> NULL 
             ];
-    		return $res;
-    	}
+            return $res;
+        }
     }
     static function editslip($req  , $slip_no){
         $req['updated_at'] = date('Y-m-d h:i:s');
@@ -216,6 +219,72 @@ class EntryMast extends Model
                     'print' => false
                 ];
             }
+        }
+    }
+    static function storeManualChallan($res){
+        $res['datetime']         = date('Y-m-d');
+        $res['created_by']       = Auth::user()->id;
+        $res['generation_time']  = date('Y-m-d h:i:s');
+        $res['manual']           = 1;
+        $res['print_status']     = 1;
+        $res['is_generated']     = 1;
+        $res['items_included']   = json_encode($res['items_included'] , true);
+        if(!empty($res['vehicle'])){
+            $vehicle_selected = VehicleMast::where('id' , $res['vehicle'])
+                                            ->first();
+            $res['vendor_id'] = !empty($vehicle_selected->vendor) ? $vehicle_selected->vendor : '';
+            $res['excess_wt_allowance'] = !empty($vehicle_selected->excess_wt_allowance) ? $vehicle_selected->excess_wt_allowance : NULL; 
+        }
+        $res['print_status']  = 1;
+        $res['owner_site']    = Auth::user()->site;
+        $store = EntryMast::create($res);
+        if(!empty($store)){
+            return $store;
+        }
+        else{
+            return false;
+        }
+    }
+    public static function  updateManualChallan($res , $id){
+        if(!empty($res['vehicle'])){
+            $vehicle_selected = VehicleMast::where('id' , $res['vehicle'])
+                                            ->first();
+            $vendor_id = !empty($vehicle_selected->vendor) ? $vehicle_selected->vendor : '';
+            $excess_wt_allowance = !empty($vehicle_selected->excess_wt_allowance) ? $vehicle_selected->excess_wt_allowance : NULL; 
+        }
+        $update_arr = [
+            'datetime' => date('Y-m-d'),
+            'updated_by' => Auth::user()->id,
+            'manual'   => 1,
+            'updated_at' => date('Y-m-d h:i:s'),
+            'print_status' => 1,
+            'is_generated' => 1,
+            'items_included' => json_encode($res['items_included'] , true),
+            'vehicle'    => $res['vehicle'],
+            'vendor_id' => $vendor_id,
+            'excess_wt_allowance' => $excess_wt_allowance,
+            'owner_site' => Auth::user()->owner_site,
+            'slip_no' => $res['slip_no'],
+            'entry_weight' => $res['entry_weight'],
+            'gross_weight' => $res['gross_weight'],
+            'net_weight' => $res['net_weight'],
+            'excess_weight' => $res['excess_weight'],
+            'plant' => $res['plant'],
+            'site' => $res['site'],
+            'kanta_slip_no' => $res['kanta_slip_no'],
+            'supervisor' => $res['supervisor'],
+            'owner_site'  => !empty(Auth::user()->site) ? Auth::user()->site : NULL,
+            'vehicle_pass' => $res['vehicle_pass'],
+            'driver' => $res['driver'],
+            'items_included' => json_encode($res['items_included'])
+        ];
+
+        $store = EntryMast::where('id' , $id)->update($update_arr);
+        if(!empty($store)){
+            return $store;
+        }
+        else{
+            return false;
         }
     }
 }
