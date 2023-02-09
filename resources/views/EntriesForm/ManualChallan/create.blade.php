@@ -7,6 +7,7 @@
   }
 
 @endphp
+
 <div class="pcoded-content">
             <!-- [ breadcrumb ] start -->
             <div class="page-header card"  id="grv_margin">
@@ -16,7 +17,7 @@
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
                                 <h5>Add Entry</h5>
-                                <p class="heading_Bottom">Create New Entry</p>
+                                <p class="heading_Bottom">Create New Manual Challan</p>
                             </div>
                         </div>
                   </div>
@@ -45,7 +46,7 @@
 <div class="container-fluid">
     <div class="row first_row_margin">
       <div class="col-md-6">
-        <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Entry Information</b></h2>
+        <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Manual Entry Information</b></h2>
       </div>
       <div class="col-md-6" style="text-align:right;">
         <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -58,7 +59,7 @@
         <div class="form-row mt-3 ">
             <div class="col-md-3">
                <label for="department_Name" class="yash_star">  Slip No. </label>
-               <input type="text" name="slip_no" onblur="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
+               <input type="text" name="slip_no" onblur="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no"  class="form-control " placeholder="Enter Slip No. Here" >
              </div>
             <div class="col-md-3">
               <label class="form-label">Vehicle</label>
@@ -136,11 +137,11 @@
             </div>
             <div class="col-md-3">
               <label> In Date  </label>
-              <input type="text" class="form-control datepicker" name="datetime"  placeholder="Loading Date time">
+              <input type="text" class="form-control datepicker"  name="datetime" id="loadingdate"  placeholder="Loading Date time">
             </div>
             <div class="col-md-3">
               <label> In Time </label>
-              <input type="time" class="form-control" name="datetimehourminute"  placeholder="Loading time">
+              <input type="time" class="form-control" onblur = "setminval(this.value)" name="loading_minutehours" id="loadingtime"  placeholder="Loading time">
             </div>            
           </div>
         <div class="form-row mt-3 ">
@@ -155,11 +156,11 @@
     </div>
     <div class="col-md-3">
       <label> Out Date  </label>
-      <input type="text" id="generationdate" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date ">
+      <input type="text" id="generationdate"  name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date ">
     </div> 
    <div class="col-md-3">
       <label>  Out Time </label>
-      <input type="time" id="generationtime" name="generation_hourminute" class="form-control" required="true"  placeholder="Loading time">
+      <input type="time" id="generationtime"  name="generation_minutehours"  class="form-control" required="true"  placeholder="Loading time">
     </div>        
   </div>
         <div class="form-row mt-3 ">
@@ -254,7 +255,10 @@
 
 
 @endsection
-<script type="text/javascript">  
+<script type="text/javascript"> 
+  function setminval(val){
+      $("#generationtime").attr('min' , val);
+  }
   function checkslipduplicate(val){
       var main_slip_no = val;
       $.ajaxSetup({
@@ -367,6 +371,12 @@ function calculateexcessweight(){
       var Unloading_place = $("#Unloading_place").val();
       var gross_weight = $("#GrossWeight").val();
 
+      var loadingdate = $("#loadingdate").val();
+      var generationdate = $("#generationdate").val();
+      var loadingtime = $("#generationtime").val();
+      var generationtime = $("#generationtime").val();
+      //checking dates  
+
       // if(sliplenth = 0 || slip == ''){
       //   alert('Filling Slip Number Is Neccessary');
       //   return;
@@ -403,6 +413,19 @@ function calculateexcessweight(){
         alert('Supervisor Must be Selected');
         return false;
       }
+      else if(generationtime  == '' ){
+        alert('Out Time Must be Filled');
+        return false;
+      }      
+      else if(generationdate == ''){
+        alert('Out Date Must be Filled');
+      }
+      else if(loadingtime == ''){
+        alert('In Time Must be Filled');
+      }
+      else if(loadingdate == ''){
+        alert('Loading Date Must be Filled');
+      }
       else{
         $.ajaxSetup({
                     headers: {
@@ -415,11 +438,20 @@ function calculateexcessweight(){
             url:  '{{url("check_duplicacy_both_slips")}}',
             dataType: 'json',
             data: {'slip_no': main_slip_no,
-                    'kanta_slip_no':slip},
+                    'kanta_slip_no':slip,
+                      'generationdate':generationdate,
+                      'generationtime':generationtime,
+                      'loadingdate':loadingdate,
+                      'loadingtime':loadingtime},
             success: function (data) 
             {
               if(data.res == 200){
+                  if(data.date == 1){
                   $("#storeform").submit();
+                  }
+                  else{
+                    alert('Out Date Must be Greated Than To Date');
+                  }
               }
               else if(data.res == 400){
                 if(data.kanta == false && data.slip == false){

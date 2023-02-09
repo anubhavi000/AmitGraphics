@@ -16,7 +16,7 @@
                             <i class=" far fa-building mr-2"></i>
                             <div class="d-inline">
                                 <h5>Edit Entry</h5>
-                                <p class="heading_Bottom">Edit Entry</p>
+                                <p class="heading_Bottom">Edit Manual Entry</p>
                             </div>
                         </div>
                   </div>
@@ -45,7 +45,7 @@
 <div class="container-fluid">
     <div class="row first_row_margin">
         <div class="col-md-6">
-    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Entry Information</b></h2>
+    <h2 class="form-control-sm yash_heading form_style"><i class="far fa-building mr-2"></i><b>Manual Entry Information</b></h2>
       </div>
        <div class="col-md-6" style="text-align:right;">
                   <a class="btn btn-link btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" style="margin-top: 10px;">        
@@ -83,7 +83,8 @@
         <label for="description">Tare Weight ( In Kgs )</label>
         <input type="text" required="true" value="{{!empty($entry->entry_weight) ? $entry->entry_weight : ''}}"  onkeypress='return FillNetWeight(event)' onkeyup = "CalculateNetWeight()" name="entry_weight" id="TareWeight"  placeholder ="Enter Entry Weight"  class="form-control ">
     </div>
-
+  </div>
+    <div class="form-row mt-3">
     <div class="col-md-3">
         <label for="description">Net Weight</label>
         <input type="text" value="{{!empty($entry->net_weight) ? $entry->net_weight : 0}}" required="true" name="net_weight" readonly="true" id="NetWeight" placeholder ="Enter Net Weight"  class="form-control ">
@@ -113,7 +114,8 @@
      <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
      <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " value="{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : 'vehicle_pass'}}" placeholder="Enter Kanta Slip Here" required>
    </div>
-
+</div>
+<div class="form-row mt-3">
     <div class="col-md-3">
       <label class="">Unloading Place ( Site ) </label>
       <select  class="fstdropdown-select" required="true" id="Unloading_place" name = "site">
@@ -151,9 +153,10 @@
             </div>
             <div class="col-md-3">
               <label> In Time </label>
-              <input type="time" value="{{!empty($entry->datetime) ? date('h:i:s' , strtotime($entry->datetime)) : ''}}" class="form-control" name="datetimehourminute"  placeholder="Loading time">
+              <input type="time" value="{{!empty($entry->loading_minutehours) ? $entry->loading_minutehours : ''}}" class="form-control" name="loading_minutehours"  placeholder="Loading time">
             </div>            
-
+</div>
+<div class="form-row mt-3">
     <div class="col-md-3 ">
         <label for="description">Vehicle Pass WT</label>
         <input readonly="true" type="text" name="vehicle_pass" id="vehicle_pass" onkeyup="calculateexcessweight()" value="{{!empty($entry->vehicle_pass) ? $entry->vehicle_pass : ''}}" required="true" placeholder ="Enter Vehicle Pass WT"  class="form-control ">
@@ -168,8 +171,10 @@
     </div>     
    <div class="col-md-3">
       <label>  Out Time </label>
-      <input type="time" id="generationtime" value="{{!empty($entry->generation_time) ? date('h:i:s' , strtotime($entry->generation_time)) : ''}}" name="generation_hourminute" class="form-control" required="true"  placeholder="Loading time">
+      <input type="time" id="generationtime" value="{{!empty($entry->generation_minutehours) ? $entry->generation_minutehours : ''}}" name="generation_minutehours" class="form-control" required="true"  placeholder="Loading time">
     </div>        
+  </div>
+  <div class="form-row mt-3">
     <div class="col-md-3">
       <label>Remarks</label>
       <textarea name="remarks" placeholder="Remarks" class="form-control">{{!empty($entry->remarks) ? $entry->remarks : ''}}</textarea>
@@ -182,6 +187,7 @@
     </div>    
     <div id="infodiv" class="col-md-3">
     </div>
+  </div>
       <div class="col-md-12 mt-4">
       <div id="hide_2" class="table-responsive">
         <h4><b>Select Items</b></h4>
@@ -265,6 +271,31 @@
 
 @endsection
 <script type="text/javascript">  
+  function checkslipduplicate(val){
+      var main_slip_no = val;
+      $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+      $.ajax({
+          type: "POST",
+          url:  '{{url("checkslipduplicate")}}',
+          dataType: 'json',
+          data: {'slip_no': val},
+          success: function (data) 
+          {
+            if(data){
+              return true;
+            }
+            else{
+              $("#main_slip_no").val('');
+                alert('A Slip No With '+val+' Already Exists');
+              }
+          }
+      });    
+  }  
   function FillNetWeight(e){
        var x = e.which || e.keycode;
        if(x>=48 && x<=57){
@@ -277,7 +308,7 @@
       CalculateNetWeight();  
     else
       return false;
-   }
+   }   
    function CalculateNetWeight(){
       var tare = $("#TareWeight").val();
       var gross = $("#GrossWeight").val();
@@ -313,7 +344,7 @@ function calculateexcessweight(){
           } 
           $("#excess_weight").val(excess);
      }
-  }  
+  } 
   function get_transporter(val){
 
       $.ajaxSetup({
@@ -340,7 +371,7 @@ function calculateexcessweight(){
           }
       });    
   }
-  function validateinputs(){
+   function validateinputs(){
       var main_slip_no = $("#main_slip_no").val();
       var slip      = $("#slip_no").val();
       var sliplenth = slip.length;
@@ -351,7 +382,12 @@ function calculateexcessweight(){
       var supervisor= $("#supervisor").val();
       var Unloading_place = $("#Unloading_place").val();
       var gross_weight = $("#GrossWeight").val();
-      var driver  = $("#driver").val();
+
+      var loadingdate = $("#loadingdate").val();
+      var generationdate = $("#generationdate").val();
+      var loadingtime = $("#generationtime").val();
+      var generationtime = $("#generationtime").val();
+      //checking dates  
 
       // if(sliplenth = 0 || slip == ''){
       //   alert('Filling Slip Number Is Neccessary');
@@ -389,8 +425,20 @@ function calculateexcessweight(){
         alert('Supervisor Must be Selected');
         return false;
       }
+      else if(generationtime  == '' ){
+        alert('Out Time Must be Filled');
+        return false;
+      }      
+      else if(generationdate == ''){
+        alert('Out Date Must be Filled');
+      }
+      else if(loadingtime == ''){
+        alert('In Time Must be Filled');
+      }
+      else if(loadingdate == ''){
+        alert('Loading Date Must be Filled');
+      }
       else{
-        if(slip != "{{$entry->kanta_slip_no}}" &&  main_slip_no != "{{$entry->slip_no}}"){
         $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -402,31 +450,58 @@ function calculateexcessweight(){
             url:  '{{url("check_duplicacy_both_slips")}}',
             dataType: 'json',
             data: {'slip_no': main_slip_no,
-                    'kanta_slip_no':slip},
+                    'kanta_slip_no':slip,
+                      'generationdate':generationdate,
+                      'generationtime':generationtime,
+                      'loadingdate':loadingdate,
+                      'loadingtime':loadingtime},
             success: function (data) 
             {
               if(data.res == 200){
+                  if(data.date == 1){
                   $("#storeform").submit();
+                  }
+                  else{
+                    alert('Out Date Must be Greated Than To Date');
+                  }
               }
               else if(data.res == 400){
                 if(data.kanta == false && data.slip == false){
-                  alert('Both Weighbridge Slip No. And Slip No. already exists');
+                  // alert(parseInt(slip) == parseInt('{{$entry->kanta_slip_no}}'));
+                  // alert(parseInt('{{$entry->slip_no}}'));
+                    if(parseInt(main_slip_no) == parseInt('{{$entry->slip_no}}')  && parseInt(slip) == parseInt('{{$entry->kanta_slip_no}}')){
+                      $("#storeform").submit();
+                    }
+                    else{
+                      alert('Either Weighbridge Slip No. or Slip No. already exists');
+                    }
                 }
                 else if(data.kanta == false && data.slip == true){
-                  alert('Weighbridge Slip No. already exists');
+                    if(parseInt(slip) == parseInt('{{$entry->kanta_slip_no}}')){                  
+                        $("#storeform").submit();
+                      }
+                      else{
+                      alert('Either Weighbridge Slip No. or Slip No. already exists');
+
+                        // alert('Weighbridge Slip No. already exists');
+                      }
                 }
                 else if(data.kanta == true && data.slip ==false){
-                  alert('slip no. already exists');
-                }
+                    if(parseInt(main_slip_no) == parseInt("{{$entry->slip_no}}")){
+                      $("#storeform").submit();                  
+                    } 
+                    else{
+                      alert('Either Weighbridge Slip No. or Slip No. already exists');
+                      
+                      // alert('slip no. already exists');
+                    }                 
+                }                
               }
             }
-        }); 
-        }       
-        else{
-                  $("#storeform").submit();          
-        }
+        });        
       }
   }
+
 
   function get_pass_wt(val){
        $.ajaxSetup({

@@ -15,7 +15,7 @@
 	border-radius: 50%;
 }
 </style>
-<div style="border-right: 1px solid black;border-left: 1px solid black;width: 110%;margin-left: -5%;">
+<div style="border-right: 1px solid black;border-left: 1px solid black;width: 110%;margin-left: -5%;margin-top: -5%;">
 	<div style="width: 100%;float: left;border: 1px solid black;">
 		<h2 style="text-align: center;">Challan<br>{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}</h2>
 	</div>
@@ -71,15 +71,18 @@
 
 	<div style="margin-top: 20px;clear: left;">
 		<div style="width: 50%;float: left;border-left: 1px solid black;margin-left:-1px;border-bottom: 1px solid black;">
-			<p style="margin-left: 6px;">
+			<p style="margin-left: 6px;margin-right: 4px;">
 				Loading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
 			</p>	
-			<p style="margin-left: 6px;">
+			<p style="margin-left: 6px;margin-right: 4px;">
 				Reciever Signature & Stamp
-			</p>	
+			</p>
+			<p></p>
+			<p></p>	
+			<p></p>			
 		</div>
 		<div style="width: 50%;float: left;text-align: right;border-bottom: 1px solid black;border-right: 1px solid black;">
-			<p>
+			<p style="margin-right: 4px;">
 				Supervisor Plant : {{ !empty($supervisors[$data->supervisor]) ? $supervisors[$data->supervisor] : ''}}
 			</p>
 			<p>
@@ -87,7 +90,10 @@
 				<b>
 				{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}
 				</b>
-			</p>				
+			</p>	
+			<p></p>
+			<p></p>
+			<p></p>			
 		</div>	
 	</div>
 </div>
@@ -97,29 +103,28 @@
 
 
 <!-- Second copy -->
-<div style="border-right: 1px solid black;border-left: 1px solid black;clear: left;width: 110%;margin-left: -5%;">
-	<br><br><br>
+<div style="clear: left;width: 110%;margin-left: -5%;border-left:1px solid black;border-right:1px solid black;margin-top: 200px;">
 	<div style="width: 100%;float: left;border: 1px solid black;">
 		<h2 style="text-align: center;">Challan<br>{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}</h2>
 	</div>
 	<div style="clear: left;width: 100%;">
 		<div style="width: 50%;float: left;">
-			<span style="text-align: left;">Slip No. : {{!empty($data->slip_no) ? $data->slip_no : ''}}</span><br>
+			<span style="text-align: left;margin-left: 4px;">Slip No. : {{!empty($data->slip_no) ? $data->slip_no : ''}}</span><br>
 			<p>
-				<span style="text-align: left;">
+				<span style="text-align: left;margin-left: 4px;">
 					Vehicle No. : {{!empty($vehicles[$data->vehicle]) ? $vehicles[$data->vehicle] : ''}}
 				</span><br>
-				<span style="text-align: left;">
+				<span style="text-align: left;margin-left: 4px;">
 					Driver : {{!empty($data->driver) ? $data->driver : ''}}
 				</span>
 			</p>
 			<p>
-				<span style="text-align: left;">Tare  Weight : {{!empty($data->entry_weight) ? $data->entry_weight : 0}} KG</span>
-				<br><span>Gross Weight : {{!empty($data->gross_weight) ? $data->gross_weight :0}} KG</span><br><span style=";margin-top: 6px;"><b>Net Weight : {{!empty($data->net_weight) ? $data->net_weight : 0}} KG</b></span><br>
+				<span style="text-align: left;margin-left: 4px;">Tare  Weight : {{!empty($data->entry_weight) ? $data->entry_weight : 0}} KG</span>
+				<br><span style="margin-left: 4px;">Gross Weight : {{!empty($data->gross_weight) ? $data->gross_weight :0}} KG</span><br><span style=";margin-top: 6px;"><b style="margin-left: 4px;">Net Weight : {{!empty($data->net_weight) ? $data->net_weight : 0}} KG</b></span><br>
 
 			</p>
 			<p>
-				<span style="text-align: left;">
+				<span style="text-align: left;margin-left: 4px;">
 					Unloading Site : {{!empty( $sites[$data->site]) ? $sites[$data->site] : ''}}
 				</span>
 			</p>
@@ -133,8 +138,7 @@
 			<p></p>
 			<p></p>
 			<p></p>
-			<br>
-				<span style="margin-left: 32%;" style="margin-top: 9px;">
+				<span style="margin-left: 32%;" style="margin-top: 9px;margin-right: 1px solid black;">
 					 Weighbridge Slip No. : {{!empty($data->kanta_slip_no) ? $data->kanta_slip_no : ''}}
 				</span>
 		</div>
@@ -154,12 +158,15 @@
 
 	<div style="margin-top: 20px;clear: left;">
 		<div style="width: 50%;float: left;border-left: 1px solid black;margin-left:-1px;border-bottom: 1px solid black;">
-			<p>
+			<p style="margin-left: 4px;">
 				Loading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
 			</p>	
-			<p>
+			<p style="margin-left: 4px;">
 				Reciever Signature & Stamp
 			</p>	
+			<p></p>			
+			<p></p>
+			<p></p>			
 		</div>
 		<div style="width: 50%;float: left;text-align: right;border-bottom: 1px solid black;border-right: 1px solid black;">
 			<p>
@@ -170,7 +177,10 @@
 				<b>
 				{{!empty($siteaddresses[$data->owner_site]) ? $siteaddresses[$data->owner_site] : ''}}
 				</b>
-			</p>				
+			</p>	
+			<p></p>			
+			<p></p>
+			<p></p>
 		</div>		
 	</div>
 </div>

@@ -511,6 +511,10 @@ class EntriesController extends Controller
             $siteaddresses = Sites::where('status' , 1)
                                   ->pluck('address' , 'id')
                                   ->toArray();
+            $plants  = PlantMast::where('status' , 1)
+                                ->pluck('name' , 'id')
+                                ->toArray();
+
             if(isset($data->vendor_id)){
             $vendor = VendorMast::where('id' , $data->vendor_id)
                                 ->first();
@@ -527,6 +531,7 @@ class EntriesController extends Controller
                 'supervisors'   => $supervisors,
                 'sites'         => $sites,
                 'logo'          => $image,
+                'plants'        => $plants,
                 'siteaddresses' => $siteaddresses          
             ))->setPaper($custumpaper , 'landscape');                                
             return $pdf->stream($this->module_folder.'.pdf');
@@ -620,7 +625,6 @@ class EntriesController extends Controller
         }
     }
      public function ManualChallan(Request $request){
-      
       $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
         $auth = Auth::user();
 
@@ -700,7 +704,7 @@ class EntriesController extends Controller
                 }
                 if(!empty($filter)){
                     // dd($filter);
-                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
+                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.created_at,'%Y-%m-%d')>='$filter'");
                 }
             }
             if(!empty($kanta_slip_no)){
@@ -762,6 +766,10 @@ class EntriesController extends Controller
         ]);  
     }
     public function ManualChallanStore(Request $request){
+        if(date('Y-m-d' , strtotime($request->datetime)) > date('Y-m-d' , strtotime($request->generation_time))){
+            Session::put('error' , 'Out Date Must be More Than In Date');
+            return redirect()->back();
+        }
         if(empty($request->items_included)){
             Session::put('error' , 'Atleast One Item Must Be Selected');
             return redirect()->back();
@@ -790,25 +798,33 @@ class EntriesController extends Controller
                                         ->where('delete_status' , 0)
                                         ->count();
 
+            $from_date = date('Y-m-d' , strtotime($request->loadingdate));
+            $to_date = date('Y-m-d' , strtotime($request->generationdate));
+            $from_time  = $request->loadingtime;
+            $to_time = $request->generationtime;
+
             if($kantaduplicates > 0 && $slipduplicates > 0){
                 return response()->json([
                     'res'   => 400,
                     'kanta' => false,
-                    'slip'  => false
+                    'slip'  => false,
+                    'date'  => ($from_date > $to_date) ? 0 : 1
                 ]);
             }
             if($kantaduplicates == 0 && $slipduplicates == 0){
                 return response()->json([
                     'res'   => 200,
                     'kanta' => true,
-                    'slip'  => true
+                    'slip'  => true,
+                    'date'  => ($from_date > $to_date) ? 0 : 1
                 ]); 
             } 
             if($kantaduplicates == 0 && $slipduplicates > 0){
                 return response()->json([
                     'res'  => 400,
                     'kanta'=> true,
-                    'slip' => false
+                    'slip' => false,
+                    'date'  => ($from_date > $to_date) ? 0 : 1                    
                 ]);
             }
             if($kantaduplicates > 0 && $slipduplicates == 0){

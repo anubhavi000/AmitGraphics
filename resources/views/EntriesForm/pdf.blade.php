@@ -37,7 +37,7 @@
 			</p>
 			<p>
 				<span style="text-align: left;">
-					loading Plant : {{ !empty($data->plantname) ? $data->plantname : ''}}
+					loading Plant : {{ !empty($plants[$data->plant]) ? $plants[$data->plant] : ''}}
 				</span>
 			</p>
 			<br>
@@ -89,7 +89,7 @@
 	<div style="margin-top: 40px;clear: left;">
 		<div style="width: 50%;float: left;">
 			<p>
-				Unloading Place : {{!empty( $sites[$data->site]) ? $sites[$data->site] : ''}}
+				Unloading Site : {{!empty( $sites[$data->site]) ? $sites[$data->site] : ''}}
 			</p>
 		</div>
 		<div style="width: 50%;float: left;text-align: right;">

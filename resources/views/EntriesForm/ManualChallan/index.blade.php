@@ -148,7 +148,7 @@
                                         <div class="col-md-2">              
                                             <fieldset>
                                                 @php
-                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : '';
+                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : 'today';
                                                     
                                                     $opt_arr = [
                                                         'today' => 'Today',
@@ -158,7 +158,7 @@
                                                         ];  
                                                 @endphp
                                                 <div class="input-group client_margin mt-1">
-                                                    <label class="mb-0">Datetime</label>
+                                                    <label class="mb-0">Creation Time</label>
                                                     <select name="from_date" class="fstdropdown-select col-md-3">
                                                         <option value="">Select</option>
                                                         @foreach($opt_arr as $key => $value)
@@ -178,6 +178,7 @@
                                                     0 => 'Generated',
                                                     1 => 'Not Generated'
                                                  ];
+                                            $vendorval = !empty(Request::get('vendor')) ? Request::get('vendor') : '';
                                         @endphp
                                         {{--
                                         <div class="col-md-2">
@@ -204,7 +205,11 @@
                                                 <option value="">Select</option>
                                                 @if(!empty($vendors))
                                                     @foreach($vendors as $key => $value)
-                                                        <option value="{{$key}}">{{$value}}</option>
+                                                        @if($key == $vendorval)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                        @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             </select>

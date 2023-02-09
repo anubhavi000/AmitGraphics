@@ -43,7 +43,9 @@ class EntryMast extends Model
                         'driver',
                         'manual',
                         'vehicle_pass',
-                        'remarks'
+                        'remarks',
+                        'generation_minutehours',
+                        'loading_minutehours'
                         ];
 
     static function store_slip($req){
@@ -223,29 +225,19 @@ class EntryMast extends Model
         }
     }
     static function storeManualChallan($res){
-
         // $res['datetime']         = !empty($res['datetime']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d');
         $res['created_by']       = Auth::user()->id;
         $res['manual']           = 1;
         $res['print_status']     = 1;
-        
-        if(!empty($res['datetime']) && !empty($res['datetimehourminute'])){
-            $time = $res['datetime'].' '.$res['datetimehourminute'];
-            $res['datetime'] = date('Y-m-d h:i:s' , strtotime($time));
-        }
-        else{
-            $res['datetime'] = date('Y-m-d h:i:s');
-        }
-        if(!empty($res['generation_time']) && !empty($res['generation_hourminute'])){
-            $time = $res['generation_time'].' '.$res['generation_hourminute'];
-            $res['generation_time'] = date('Y-m-d h:i:s' , strtotime($time));
-        }
-        else{
-            $res['generation_time'] = date('Y-m-d h:i:s');
-        }
-        // $res['generation_time']  = !empty($res['generation_time']) ? date('Y-m-d h:i:s' , strtotime($res['generation_time'])) : date('Y-m-d h:i:s');
+        $res['created_at']       = date('Y-m-d h:i:s');
+        $res['datetime']         = date('Y-m-d' , strtotime($res['datetime']));
+        $res['generation_time']  = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
+        $res['loading_minutehours'] = $res['loading_minutehours'];
+        $res['generation_minutehours'] = $res['generation_minutehours'];    
+
         $res['is_generated']     = 1;
         $res['items_included']   = json_encode($res['items_included'] , true);
+        
         if(!empty($res['vehicle'])){
             $vehicle_selected = VehicleMast::where('id' , $res['vehicle'])
                                             ->first();
@@ -270,7 +262,7 @@ class EntryMast extends Model
             $excess_wt_allowance = !empty($vehicle_selected->excess_wt_allowance) ? $vehicle_selected->excess_wt_allowance : NULL; 
         }
         $update_arr = [
-            'datetime' => !empty($res['datetime']) ? date('Y-m-d' ,  strtotime($res['datetime'])) : date('Y-m-d'),
+            // 'datetime' => !empty($res['datetime']) ? date('Y-m-d' ,  strtotime($res['datetime'])) : date('Y-m-d'),
             'updated_by' => Auth::user()->id,
             'manual'   => 1,
             'updated_at' => date('Y-m-d h:i:s'),
@@ -297,21 +289,10 @@ class EntryMast extends Model
             'driver' => $res['driver'],
             'items_included' => json_encode($res['items_included'])
         ];
-            if(!empty($res['generation_time']) && !empty($res['generation_hourminute'])){
-                $time = $res['generation_time'].' '.$res['generation_hourminute'];
-                $update_arr['generation_time'] = date('Y-m-d h:i:s' , strtotime($time));
-            }
-            else{
-                $update_arr['generation_time'] = date('Y-m-d h:i:s');
-            }
-        if(!empty($res['datetime']) && !empty($res['datetimehourminute'])){
-            $time = $res['datetime'].' '.$res['datetimehourminute'];
-            $update_arr['datetime'] = date('Y-m-d h:i:s' , strtotime($time));
-        }
-        else{
-            $update_arr['datetime'] = date('Y-m-d h:i:s');
-        }                                
-
+            $update_arr['generation_time'] = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
+            $update_arr['datetime']        = date('Y-m-d' , strtotime($res['datetime']));
+            $update_arr['generation_minutehours'] = !empty($res['generation_minutehours']) ? $res['generation_minutehours'] : date('h:i');
+            $update_arr['loading_minutehours'] = !empty($res['loading_minutehours']) ? $res['loading_minutehours'] : date('h:i');
         $store = EntryMast::where('id' , $id)->update($update_arr);
         if(!empty($store)){
             return $store;

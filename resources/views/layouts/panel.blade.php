@@ -63,6 +63,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('msell/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('msell/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/light_ness.min.css') }}">
+
     <script src="{{ asset('theme/assets/js/ace-extra.min.js') }}"></script>
 
     <script>
@@ -695,7 +696,9 @@ body{
   }
 
 }
-
+label{
+    font-weight: 600;
+}
     </style>
 
    
