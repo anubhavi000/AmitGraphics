@@ -50,7 +50,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-      <select name = "vehicle"  class="fstdropdown-select" id="vehicle" required="true">
+      <select name = "vehicle" onchange="CheckAvailiblity(this.value)" class="fstdropdown-select" id="vehicle" required="true">
           <option value="">Select</option>
           @if(!empty($vehicles))
             @foreach($vehicles as $key => $value)
