@@ -258,8 +258,9 @@
       }
       else{
         var prev_slip_no = "{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}";
-
-        if(slip != '' || slip != prev_slip_no){
+        // alert(parseInt(slip) == parseInt(prev_slip_no));
+        // alert(prev_slip_no);
+        if(parseInt(slip) != parseInt(prev_slip_no)){
         $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

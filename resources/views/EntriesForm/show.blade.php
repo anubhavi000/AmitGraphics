@@ -15,6 +15,11 @@
                 </div>
             </div>
         </div>
+        @php
+            $slip = !empty(Request::get('slip_no')) ? Request::get('slip_no') : '';
+            $from_date = !empty(Request::get('from_date')) ? Request::get('from_date') : '';
+            $to_date  = !empty(Request::get('to_date')) ? Request::get('to_date') : '';  
+        @endphp
         <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
             <div class="row">
                 <div class="col-md-12 mt-3 mb-3">
@@ -41,7 +46,7 @@
                                     <div class="col-md-3 mb-3 px-3">
                                         <label style="margin-bottom:0px" for="slip_no"
                                             class="yash_star">SLip No.</label>
-                                        <input type="text" name="slip_no"class="form-control" >
+                                        <input type="text" value="{{$slip}}" name="slip_no"class="form-control" >
                                     </div>
                                     <div class="col-md-2"><label for="from_date">From Date</label>
                                         <fieldset>
@@ -50,7 +55,7 @@
                                                     id="basic-addon7"
                                                     style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
                                                         class="fas fa-briefcase"></i></span>
-                                                <input type="text"  name="from_date" class="form-control datepicker"
+                                                <input type="text" value="{{$from_date}}" name="from_date" class="form-control datepicker"
                                                     id="from_date" 
                                                     value=" ">
                                             </div>
@@ -63,7 +68,7 @@
                                                     id="basic-addon7"
                                                     style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
                                                         class="fas fa-briefcase"></i></span>
-                                                <input type="text" name="to_date" class="form-control datepicker" id="to_date"
+                                                <input type="text" value="{{$to_date}}" name="to_date" class="form-control datepicker" id="to_date"
                                                     value="">
                                             </div>
                                         </fieldset>
@@ -99,7 +104,6 @@
                                     <th> Plant</th>
                                     <th> Excess Weight (in kgs)</th>
                                     <th>Created At</th>
-                                    <th>Last Updated</th>
                                     <th>Print Slip</th>
                                     <th>Print Invoice</th>
                                 </tr>
@@ -114,11 +118,10 @@
                                         <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] :'' }}</td>
                                         <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : ''}}</td>
                                         <td>{{ !empty($value->acess_weight_quantity) ? $value->acess_weight_quantity.' KG' : '0' }} KG</td>
-                                        <td>{{ !empty($value->created_at) ? date('d-m-Y h:i:A' , strtotime($value->created_at)) : '' }}</td>
-                                        <td>{{ !empty($value->updated_at) ? $value->updated_at : ''}}</td>
+                                        <td>{{ !empty($value->created_at) ? date('d-m-Y' , strtotime($value->created_at)) : '' }}</td>
                                         <td>
                                                 @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                                    <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
+                                                    <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip/'.$value->slip_no) }}" id="btnGroup" type="button" 
                                                         aria-haspopup="true" aria-expanded="true"
                                                         class="btn btn-primary btn-sm ">
                                                         Print Loading slip : {{$value->slip_no}}

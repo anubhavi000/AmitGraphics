@@ -54,6 +54,8 @@ class EntryMast extends Model
         $req['created_by'] =  Auth::user()->id;
         $req['datetime']   =  date('Y-m-d');
         $req['owner_site'] =  $auth->site;
+        $req['loading_minutehours'] = date('h:i');
+
         $LastSlip  = Self::orderBy('id' , 'DESC')
                         ->first();
         if(!empty($LastSlip)){
@@ -91,9 +93,13 @@ class EntryMast extends Model
         }
     }
     static function editslip($req  , $slip_no){
+        $auth = Auth::user();
         $req['updated_at'] = date('Y-m-d h:i:s');
         $req['updated_by'] =  Auth::user()->id;
         $req['datetime']   =  date('Y-m-d');
+        $req['owner_site'] = $auth->site;
+        $req['loading_minutehours'] = date('h:i');
+
 
         if(!empty($req['vehicle'])){
             $vehicle = VehicleMast::where('id' , $req['vehicle'])
@@ -105,6 +111,7 @@ class EntryMast extends Model
         }
 
         $req['excess_wt_allowance'] = $vehicle->excess_wt_allowance; 
+
         $obj = Self::where('slip_no' , $slip_no)->update($req);
 
                     // ->update($req);
@@ -159,7 +166,7 @@ class EntryMast extends Model
                                 'site'                  => !empty($req['site']) ? $req['site'] : NULL,
                                 'kanta_slip_no'         => !empty($req['kanta_slip_no']) ? $req['kanta_slip_no'] : NULL,
                                 'vendor_id'             => !empty($req['vendor_id']) ? $req['vendor_id'] : NUll,
-                                'datetime'              => date('Y-m-d h:i:S'),
+                                // 'datetime'              => date('Y-m-d'),
                                 'updated_by'            => Auth::user()->id,
                                 'gross_weight'          => !empty($req['gross_weight']) ? $req['gross_weight'] : NULL,
                                 'net_weight'            => !empty($req['net_weight']) ? $req['net_weight'] : NULL,
@@ -172,33 +179,15 @@ class EntryMast extends Model
                             ];
                             // dd($update_arr);
                             // dd($req);
-            $checkifedited = EntryLogs::where('entry_slip_no' , $now_id)
-                                      ->get();
-            if(count($checkifedited) == 0){
+            // $checkifedited = EntryLogs::where('entry_slip_no' , $now_id)
+            //                           ->get();
+            // if(count($checkifedited) == 0){
                 $update_arr['generation_time'] = date('Y-m-d h:i:s');
-            }                            
+                $update_arr['generation_minutehours'] = date('h:i');
+            // }                
+
             $update = self::where('slip_no' , $now_id)
-                          ->update($update_arr
-                                // 'acess_weight_quantity' => !empty($req['acess_weight_quantity']) ? $req['acess_weight_quantity'] : NULL,
-                                // 'items_included'        => !empty($req['items_included']) ? json_encode($req['items_included'] , true) : NULL,
-                                // 'plant'                 => !empty($req['plant']) ? $req['plant'] : NUll,
-                                // 'updated_at'            => date('Y-m-d h:i:s'),
-                                // // 'entry_rate'            => !empty($req['entry_rate']) ? $req['entry_rate'] : NUll,
-                                // 'entry_weight'          => !empty($req['entry_weight']) ? $req['entry_weight'] : NULL,
-                                // 'supervisor'            => !empty($req['supervisor']) ? $req['supervisor'] : NULL,
-                                // 'site'                  => !empty($req['site']) ? $req['site'] : NULL,
-                                // 'kanta_slip_no'         => !empty($req['kanta_slip_no']) ? $req['kanta_slip_no'] : NULL,
-                                // 'vendor_id'             => !empty($req['vendor_id']) ? $req['vendor_id'] : NUll,
-                                // 'datetime'              => date('Y-m-d h:i:S'),
-                                // 'updated_by'            => Auth::user()->id,
-                                // 'gross_weight'          => !empty($req['gross_weight']) ? $req['gross_weight'] : NULL,
-                                // 'net_weight'            => !empty($req['net_weight']) ? $req['net_weight'] : NULL,
-                                // 'excess_weight'         => !empty($req['excess_weight']) ? $req['excess_weight'] : NULL,
-                                // 'vehicle_pass'          => !empty($req['vehicle_pass']) ? $req['vehicle_pass'] : NULL,
-                                // 'is_generated'          => 1,
-                                // 'print_status'          => $print_status,
-                                // 'owner_site'            => $auth->site
-                          );
+                          ->update($update_arr);
             // inserting in the log table
             $arr = [
                 'updated_by'    => Auth::user()->id,

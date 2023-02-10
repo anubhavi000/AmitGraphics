@@ -29,7 +29,7 @@
   @php
     $encrypted_id = encrypt($entry->slip_no);
   @endphp
-<form action="{{route('SlipGeneration' , $encrypted_id)}}" method="POST">
+<form action="{{route('SlipGeneration' , $encrypted_id)}}" id="storeform" method="POST">
     @csrf
     @method('post')
 <div class="container-fluid">
@@ -81,7 +81,7 @@
 
     <div class="col-md-3 mt-2">
       <label class="form-label">Loading Plant</label>
-      <select name = "plant"  class="fstdropdown-select" required="true">
+      <select name = "plant" id="plant" class="fstdropdown-select" required="true">
           <option value="">Select</option>
           @if(!empty($plants))
             @foreach($plants as $key => $value)
@@ -102,7 +102,7 @@
 
     <div class="col-md-3 mt-2">
       <label class="">Unloading Place ( Site ) </label>
-      <select  class="fstdropdown-select" required="true" name = "site">
+      <select  class="fstdropdown-select" required="true" id="site" name = "site">
           <option value="">Select</option>
           @if(!empty($sites))
             @foreach($sites as $key => $value)
@@ -118,7 +118,7 @@
 
     <div class="col-md-3">
       <label class="form-label">Supervisor</label>
-      <select name = "supervisor" required="true" class="fstdropdown-select">
+      <select name = "supervisor" id="supervisor" required="true" class="fstdropdown-select">
           <option value="">Select</option>
           @if(!empty($supervisors))
             @foreach($supervisors as $key => $value)
@@ -142,7 +142,7 @@
     </div>
     <div class="col-md-3">
       <label class="form-label">Driver</label>
-      <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" placeholder="Enter Driver Name" required="true">
+      <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" placeholder="Enter Driver Name" id="driver">
     </div>
     {{--
     <div class="col-md-3 mb-3 px-3">
@@ -261,7 +261,7 @@
       </span>
     </span>
   </button>  
-  <button  id="submitbtn" onclick="checkform()" type="submit" class="blob-btn1"><i class="fas fa-check pr-2"></i>
+  <button  onclick="validateinputs()" type="button" class="blob-btn1"><i class="fas fa-check pr-2"></i>
     Save Changes
     <span class="blob-btn__inner1">
       <span class="blob-btn__blobs1">
@@ -385,6 +385,72 @@ function calculateexcessweight(){
               $("#danger").html('');
           }
             $("#excess_weight").val(excess);
+        }
+     }
+     function validateinputs(){
+        var tare      = $("#TareWeight").val();
+        var gross     = $("#GrossWeight").val();
+        var vehicle   = $("#vehicle").val();
+        var plant     = $("#plant").val();
+        var site      = $("#site").val();  
+        var supervisor= $("#supervisor").val();  
+        var slip_no   = $("#slip_no").val();    
+
+        if(tare == ''){
+          alert('Tare Weight Must Be Filled');
+          return false;
+        }
+        else if(gross == ''){
+          alert('Gross Weight Must Be Filled');
+          return false;          
+        }
+        else if(vehicle == ''){
+          alert('Vehicle Must be Selected');
+          return false;
+        }
+        else if(plant == ''){
+          alert('Plant Must Be Selected');
+          return false;
+        }
+        else if(site == ''){
+          alert('Site Must be Selected');
+          return false;
+        }
+        else if(supervisor == ''){
+          alert('Supervisor Must Be Selected');
+        }
+        else if(slip_no == ''){
+          alert('Weight Bridge Slip No. Must Be Filled');
+        }
+        else{
+          var prev_slip_no = "{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : ''}}";
+          if(parseInt(prev_slip_no) != parseInt(slip_no)){
+            $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+            $.ajax({
+                type: "POST",
+                url:  '{{url("check_duplicacy")}}',
+                dataType: 'json',
+                data: {'slip_no': slip_no},
+                success: function (data) 
+                {
+                  if(data){
+                      $("#storeform").submit();
+                  }
+                  else{
+                      alert('Kanta Slip no.: '+slip_no+' Already Exist');
+                      return false;
+                  }
+                }
+            });        
+          }
+          else{
+            $("#storeform").submit();        
+          }          
         }
      }
   </script>

@@ -46,7 +46,7 @@
 		<div style="width: 50%; float: left;text-align:right;">
 			<span style="margin-right: 4px;">Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
 			<span style="margin-right: 4px;">Dispatch Date : {{!empty($data->generation_time) ? date('d-m-Y' , strtotime($data->generation_time)) : ''}}</span><br><br>
-			<span style="margin-right: 4px;">Dispatch Time :  {{!empty($data->generation_time) ? date('h:i:A' , strtotime($data->generation_time)) : ''}}</span>
+			<span style="margin-right: 4px;">Dispatch Time :  {{!empty($data->generation_minutehours) ? date('h:i:A' , strtotime($data->generation_minutehours)) : ''}}</span>
 			<p></p>
 			<p></p>
 			<p></p>
@@ -131,14 +131,15 @@
 			<br>
 
 		</div>
-		<div style="width: 50%; float: left;text-align:left;">
-			<span style="margin-left: 60%;">Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
-			<span style="margin-left: 42%;">Dispatch Date : {{!empty($data->generation_time) ? date('d-m-Y' , strtotime($data->generation_time)) : ''}}</span><br><br>
-			<span style="margin-left: 42%;">Dispatch Time :  {{!empty($data->generation_time) ? date('h:i:A' , strtotime($data->generation_time)) : ''}}</span>
+		<div style="width: 50%; float: left;text-align:right;">
+			<span style="margin-right: 4px;">Date : {{!empty($data->datetime) ? date('Y-m-d' , strtotime($data->datetime)) : ''}}</span><br><br>
+			<span style="margin-right: 4px;">Dispatch Date : {{!empty($data->generation_time) ? date('d-m-Y' , strtotime($data->generation_time)) : ''}}</span><br><br>
+			<span style="margin-right: 4px;">Dispatch Time :  {{!empty($data->generation_minutehours) ? date('h:i:A' , strtotime($data->generation_minutehours)) : ''}}</span>
 			<p></p>
 			<p></p>
 			<p></p>
-				<span style="margin-left: 32%;" style="margin-top: 9px;margin-right: 1px solid black;">
+			<br>
+				<span  style="margin-top: 9px;text-align: left;">
 					 Weighbridge Slip No. : {{!empty($data->kanta_slip_no) ? $data->kanta_slip_no : ''}}
 				</span>
 		</div>

@@ -79,7 +79,7 @@
 
    <div class="col-md-3 mb-3 px-3">
      <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
-     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Slip Here" >
+     <input type="text" name="kanta_slip_no" id="slip_no" value="{{!empty($latest_kanta_slip) ? $latest_kanta_slip : ''}}" class="form-control " placeholder="Enter Slip Here" >
    </div>
 
     <div class="col-md-3">
@@ -112,7 +112,7 @@
       <input type="text" class="form-control" name="driver" placeholder="Enter Driver Name">
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 px-3">
       <label> Date And Time </label>
       <input type="text" class="form-control" readonly="true" value="{{date('d-m-Y')}}">
     </div>

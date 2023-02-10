@@ -199,7 +199,7 @@
                                         </div>
                                         --}} 
                                         <div class="col-md-2">
-                                            <label>Vehicle Mast</label>
+                                            <label>Vehicle</label>
                                             <select name="vehicle" class="fstdropdown-select">
                                                 <option value="">Select</option>
                                                 @if(!empty($vehicle_mast))

@@ -134,14 +134,23 @@ class EntriesController extends Controller
         $plants          =  PlantMast::where('status' , 1)
                                      ->pluck('name' , 'id')
                                      ->toArray();
-
+        $last_kanta_slip = EntryMast::where('delete_status' , 0)
+                                    ->orderBy('created_at' , 'DESC')
+                                    ->first();
+        if(!empty($last_kanta_slip)){
+            $latest_kanta_slip = $last_kanta_slip->kanta_slip_no + 1;
+        }
+        else{
+            $latest_kanta_slip = 1;
+        }
         return view($this->module_folder.'/create' , [
-            'transporters' => $transporters ,
-            'vehicles'     => $vehicles,
-            'sites'        => $sites,
-            'supervisors'  => $supervisors,
-            'items'        => $items,
-            'plant'        => $plants
+            'transporters'      => $transporters ,
+            'vehicles'          => $vehicles,
+            'sites'             => $sites,
+            'supervisors'       => $supervisors,
+            'items'             => $items,
+            'plant'             => $plants,
+            'latest_kanta_slip' => $latest_kanta_slip
         ]);   
     }
 
