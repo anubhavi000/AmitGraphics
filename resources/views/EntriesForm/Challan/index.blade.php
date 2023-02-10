@@ -246,8 +246,8 @@
                                             <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
                                             <th data-field="dat2323e" data-sortable="true">Net Weight</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
-                                            <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
-                                            <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
+                                            <th data-field="d33at2323e" data-sortable="true">Unloading Plant</th>
+                                            <th data-field="d33at2323ew" data-sortable="true">Loading Site</th>
                                             <th>Date</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
