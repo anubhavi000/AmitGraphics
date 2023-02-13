@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VehicleMast;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VendorMast;
+use App\Models\EntryMast;
 use DB;
 class VehicleController extends Controller
 {
@@ -59,8 +60,9 @@ class VehicleController extends Controller
                                 'created_by'          => Auth::user()->id,
                                 'status'              => 1,
                                 'vendor'              => $request->vendor,
-                                'fitness_valid_till' => $fitness_valid_till,
-                                'excess_wt_allowance' => !empty($request->excess_wt_allowance) ? $request->excess_wt_allowance : NULL
+                                'fitness_valid_till' =>  !empty($request->fitness_valid_till) ? date('Y-m-d' , strtotime($request->fitness_valid_till)) : NULL,
+                                'excess_wt_allowance' => !empty($request->excess_wt_allowance) ? 
+                                $request->excess_wt_allowance : NULL
                             ]);
             if($insert){
                 return redirect('VehicleMast')->with('success' , 'Added SuccessFully');
@@ -133,7 +135,7 @@ class VehicleController extends Controller
                                 'vendor'             =>$request->vendor,
                                 'updated_at'         => date('Y-m-d h:i:s'),
                                 'updated_by'         => Auth::user()->id,
-                                'fitness_valid_till' => $fitness_valid_till,
+                                'fitness_valid_till' => !empty($request->fitness_valid_till) ? date('Y-m-d' , strtotime($request->fitness_valid_till)) : NULL,
                                 'excess_wt_allowance'=> !empty($request->excess_wt_allowance) ? $request->excess_wt_allowance : NULL 
                             ]);
         if($update){
@@ -197,6 +199,31 @@ class VehicleController extends Controller
                 ];
             }
             return response()->json($data);
+        }
+    }
+    function checkavailiblity(Request $request){
+
+        if(isset($request->vehicle_id)){
+            $vehicle = VehicleMast::where('id' , (int)$request->vehicle_id)
+                                  ->first();
+            $auth   = Auth::user();
+            $entry  = EntryMast::where('delete_status' , 0)
+                                ->where('is_generated' , 0)
+                                ->where('owner_site' , $auth->owner_site)
+                                ->where('manual' , 0)
+                                ->first();
+            if(!empty($entry)){
+                return [
+                    'res' => 400,
+                    'msg' => 'This Vehicle Is loaded For Another Slip With Slip No. '.$entry->Slip_no
+                ];
+            }
+            else{
+                return [
+                    'res' => 200,
+                    'masg'=> ''
+                ];
+            }
         }
     }    
 }

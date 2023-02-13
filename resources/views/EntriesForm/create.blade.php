@@ -50,7 +50,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
-      <select name = "vehicle" onchange="CheckAvailiblity(this.value)" class="fstdropdown-select" id="vehicle" required="true">
+      <select name = "vehicle" {{-- onchange="CheckAvailiblity(this.value)" --}} class="fstdropdown-select" id="vehicle" required="true">
           <option value="">Select</option>
           @if(!empty($vehicles))
             @foreach($vehicles as $key => $value)
@@ -191,6 +191,7 @@
 
 @endsection
 <script type="text/javascript">
+
   function get_transporter(val){
 
       $.ajaxSetup({
@@ -217,6 +218,25 @@
           }
       });    
   }
+  function select2hander(e){
+    var key = e.which || e.keycode;
+    if(key == 13){
+      alert('ved');
+      $('#vehicle').select2('close');
+
+      // $(".fstdropdown-select").select2('close');
+      $("#tare_weight").focus();
+      return false;
+          // var class = $('.select2-results__option--highlighted').text();        
+          // alert(class);s
+          // var closest = $(this).closest('.select2');
+          // console.log(closest);
+          // $(this).parent('.select2-results__options').attr('aria-hidden' , false);
+          // $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+          // e.stopPropagation();
+        // });
+    }
+}
   function validateinputs(){
       var slip      = $("#slip_no").val();
       var sliplenth = slip.length;
@@ -268,4 +288,38 @@
       }
     }
   }
+
+  // function CheckAvailiblity(val){
+  //       $.ajaxSetup({
+  //                   headers: {
+  //                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //                   }
+  //               });
+
+  //       $.ajax({
+  //           type: "GET",
+  //           url:  '{{url("check_vehicle_Availiblity")}}',
+  //           dataType: 'json',
+  //           data: {'vehicle_id': val},
+  //           success: function (data) 
+  //           {
+
+  //           }
+  //       }); 
+  // }
+  // var vehicle = document.getElementById('vehicle');
+//   $(document).on('select2:open', function(e) {
+//   document.querySelector(`[aria-controls="select2-${e.target.id}-results"]`).focus();
+// });
+//   document.addEventListener('keydown', function(e) {
+//     alert(event.keyCode);
+// if (event.keyCode === 13 && event.target.nodeName == 'SELECT') {
+//   alert('select');
+//   var form = event.target.closest('form');
+//   var index = Array.prototype.indexOf.call(form, event.target);
+//   form.elements[index + 1].focus();
+//   return false;
+// }
+// });
 </script>
+

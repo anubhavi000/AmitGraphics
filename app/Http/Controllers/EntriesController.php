@@ -10,6 +10,7 @@ use App\Models\SupervisorMast;
 use App\Models\VehicleMast;
 use App\Models\ItemMast;
 use App\Models\sites;
+use App\Models\ExportData as CSV;
 use Session;
 use PDF;
 use Auth;
@@ -399,6 +400,9 @@ class EntriesController extends Controller
             $recordsraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
         }
             $records = $recordsraw->get();
+        // if(!empty($request->export_to_excel)){
+        //     $res  =  EntryMast::export($records);
+        // }
         return view($this->module_folder.'.show' , [
             'data'      => $records,
             'sites'     => $sites,

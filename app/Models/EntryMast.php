@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EntryLogs;
 use App\Models\VehicleMast;
+use App\Models\sites;
+use App\Models\ItemMast;
 use App\Models\VendorMast;
 use Auth;
 use DB;
@@ -46,8 +48,7 @@ class EntryMast extends Model
                         'remarks',
                         'generation_minutehours',
                         'loading_minutehours'
-                        ];
-
+                        ];  
     static function store_slip($req){
         $auth = Auth::user();
         $req['created_at'] = date('Y-m-d h:i:s');
@@ -288,6 +289,17 @@ class EntryMast extends Model
         }
         else{
             return false;
+        }
+    }
+    public function export($data){
+        if(!empty($data)){
+            $str = 'Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Tare Weight , Gross Weight , Net Weight , Excess Weight , Unloading Site , Loading Site  Loading Plant , Supervisor ';
+            $vehicles = VehicleMast::where('status' , 1)
+                                   ->pluck('vehicle_no' , 'id')
+                                   ->toArray(); 
+            foreach ($data as $key => $value) {
+                $str .= '';
+            }
         }
     }
 }

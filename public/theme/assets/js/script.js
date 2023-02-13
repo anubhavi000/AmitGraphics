@@ -133,10 +133,17 @@ $(document).ready(function () {
             e.preventDefault();
             // console.log('1113457890');
             var self = $(this), form = self.parents('form:eq(0)'), focusable, next;
-            focusable = form.find('input:not([readonly])').filter(':visible');
+            focusable = form.find('input:not([readonly])').filter(':visible'); 
             next = focusable.eq(focusable.index(this) + 1);
             next.focus();
-            
+
+            // focusable_select = form.find('select').filter(':visible');
+            // next_select = focusable_select.eq(focusable_select.index(this) + 1);
+            // next_select.focus();
+            // var input_index = focusable.index(this) + 1;
+            // var select_index = focusable_select.index(this) + 1;
+            // alert(input_index);
+            // alert(select_index);
             return false;
     
         }
@@ -149,7 +156,7 @@ $(document).ready(function () {
     $(".fstdropdown-select").select2();
     // for cancel btn
     $(".blob-btn").click(function(){
-       window.location.reload();
+    //    window.location.reload();
     })
 });
 document.onkeydown = function (e) {
