@@ -218,6 +218,7 @@
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
                                             <input style="margin-top:23px" type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
+<!--                                             <button style="margin-top:23px" type="button" onclick="fnExcelReport('details_of_goods_table')" href="javascript:void(0)" name="export_to_excel" value="Export To Csv" class=""></a>                               -->                                                              
   <!--                                           <input style="margin-top:23px" type="submit" name="export_to_pdf" value="Export To PDF" class="btn btn-info"> -->
                                         </div>
 
@@ -239,8 +240,20 @@
                             <div class="container-fluid mt-3">
                             </div>
                             <div id="hide_2" class="table-responsive">
+                            <div id="toolbar">
 
-                                <table id="table" data-toggle="table" data-search="true" data-filter-control="true"
+                                <select class="form-control">
+
+                                    <option value="">Export Basic</option>
+
+                                    <option value="all">Export All</option>
+
+                                    <option value="selected">Export Selected</option>
+
+                                </select>
+
+                            </div>
+                                <table id="table" data-toggle="table" data-search="true" export-all="true" data-filter-control="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
                                     data-pagination="true" data-toolbar="#toolbar">
                                     <thead>

@@ -99,7 +99,9 @@ class EntriesController extends Controller
                 }
             }
                                   // dd($vehicle_mast);
-
+            if(!empty($request->export_to_excel)){
+                EntryMast::ExportManual($entries);
+            }
             return view($this->module_folder.'.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
@@ -400,9 +402,9 @@ class EntriesController extends Controller
             $recordsraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
         }
             $records = $recordsraw->get();
-        // if(!empty($request->export_to_excel)){
-        //     $res  =  EntryMast::export($records);
-        // }
+        if(!empty($request->export_to_excel)){
+            $res  =  EntryMast::ExportManual($records);
+        }
         return view($this->module_folder.'.show' , [
             'data'      => $records,
             'sites'     => $sites,
@@ -739,6 +741,9 @@ class EntriesController extends Controller
             }
             $entries = $entriesraw->orderBy('slip_no' , 'DESC')
                                   ->get();
+            if(!empty($request->export_to_excel)){
+                EntryMast::ExportManual($entries);
+            }
                                   // dd($entries);
             return view($this->module_folder.'.ManualChallan.index' , [
                 'entries' => $entries,

@@ -221,12 +221,12 @@
   function select2hander(e){
     var key = e.which || e.keycode;
     if(key == 13){
-      alert('ved');
-      $('#vehicle').select2('close');
+      // alert('ved');
+      // $('#vehicle').select2('close');
 
       // $(".fstdropdown-select").select2('close');
-      $("#tare_weight").focus();
-      return false;
+      // $("#tare_weight").focus();
+      // return false;
           // var class = $('.select2-results__option--highlighted').text();        
           // alert(class);s
           // var closest = $(this).closest('.select2');

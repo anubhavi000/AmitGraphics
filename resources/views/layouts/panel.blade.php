@@ -63,6 +63,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('msell/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('msell/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/light_ness.min.css') }}">
+    <script src="{{ asset('theme/assets/js/tableExport.js') }}"></script>
 
     <script src="{{ asset('theme/assets/js/ace-extra.min.js') }}"></script>
 
@@ -1033,9 +1034,9 @@ $layout_status = Auth::user()->layout_status;
     @yield('js')
 
     <script type="text/javascript">
-$(".fstdropdown-select").on('change' , function(){
-    $("this").next().trigger('click');
-});
+// $(".fstdropdown-select").on('change' , function(){
+//     $("this").next().trigger('click');
+// });
 $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
   $(this).closest(".select2-container").siblings('select:enabled').select2('open');
 });
@@ -1264,7 +1265,7 @@ $('select.select2').on('select2:closing', function (e) {
     <script src="{{ asset('theme/assets/js/bootstrap-table.js') }}"></script>
     <script src="{{ asset('theme/assets/js/bootstrap-table-editable.js') }}"></script>
     <script src="{{ asset('theme/assets/js/bootstrap-table-export.js') }}"></script>
-    <script src="{{ asset('theme/assets/js/tableExport.js') }}"></script>
+    <!-- <script src="{{ asset('theme/assets/js/tableExport.js') }}"></script> -->
     <script src="{{ asset('theme/assets/js/bootstrap-table-filter-control.js') }}"></script>
     <script src="{{ asset('theme/assets/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('theme/assets/js/state_district.js') }}"></script>
@@ -1273,6 +1274,23 @@ $('select.select2').on('select2:closing', function (e) {
     <script src="{{ asset('theme/assets/js/confirmation_alert.js') }}"></script>
 
     <script type="text/javascript">
+        // function select2hander(e){
+        //     var key = e.keyCode || e.which;
+        //     alert(key);
+        //     if(key == 13){
+        //         alert(33);
+        //         // select2-results__option--highlighted
+        //     var e = jQuery.Event("keydown");e.which = 3;  
+        //            // $(this).closest('select').select2("close");
+        //         // $(this).parent().next().find('input').focus();
+        //         var text = $(".select2-results__option--highlighted").html();
+        //         alert(text);
+        //     // $(this).closest('select').trigger('select2:select');
+        //     // var val = $('.select2-results__option--highlighted').attr('aria-selected' , true);
+        //         // alert($(this).parents('select').val());
+        //     }
+        // }
+
         jQuery(function($) {
             if (!ace.vars['touch']) {
                 $('.chosen-select').chosen({
