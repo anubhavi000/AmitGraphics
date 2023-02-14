@@ -63,7 +63,7 @@
              </div>
             <div class="col-md-3">
               <label class="form-label">Vehicle</label>
-              <select name = "vehicle"  class="fstdropdown-select" id="vehicle" onchange="get_pass_wt(this.value)" required="true">
+              <select name = "vehicle"   class="fstdropdown-select" id="vehicle" onchange="get_pass_wt(this.value);setfocus();" required="true">
                   <option value="">Select</option>
                   @if(!empty($vehicles))
                     @foreach($vehicles as $key => $value)
@@ -256,6 +256,22 @@
 
 @endsection
 <script type="text/javascript"> 
+  // $(".fstdropdown-select").on('change' , function(){
+  //   console.log($(this).next('input select'));
+  // });
+ function setfocus(){
+  console.log('focus needed');
+    // var press = jQuery.Event("keypress");
+// press.ctrlKey = false;
+// press.which = 9;
+// press.keyCode = 9;
+// $(this).closest('select').trigger(press);
+    // console.log($(this).next().find('input select').focus());
+    // $(this).closest('select2').select2('close');
+    //   var self = $(this).closest('select2'), form = self.parents('form:eq(0)'), focusable, next;
+    //   focusable = form.find('input:not([readonly]) , select').filter(':visible'); 
+    //   next = focusable.eq(focusable.index(this) + 1);
+ }
   function setminval(val){
       $("#generationtime").attr('min' , val);
   }

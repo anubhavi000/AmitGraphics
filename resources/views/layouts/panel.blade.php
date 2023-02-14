@@ -1047,6 +1047,26 @@ $('select.select2').on('select2:closing', function (e) {
     e.stopPropagation();
   });
 });
+$(function() {
+  $(document).off('keydown ,select2:close', '.form-control,.select2-search__field')
+  jQuery.extend(jQuery.expr[':'], {
+    focusable: function(el, index, selector) {
+      return $(el).is('a, button, :input, [tabindex]');
+    }
+  });
+  $(document).on('keydown ,select2:close', '.form-control,.select2-search__field', function(e) {
+
+    if (e.which == 13) {
+      e.preventDefault();
+      console.log($(this).index());
+      nextOnTabIndex($(this));
+    }
+  });
+});
+function nextOnTabIndex(element) {
+    $(this).next().focus();
+}
+
 
 
         let mobile_grv = document.getElementById("mobile_grv");
@@ -1274,23 +1294,24 @@ $('select.select2').on('select2:closing', function (e) {
     <script src="{{ asset('theme/assets/js/confirmation_alert.js') }}"></script>
 
     <script type="text/javascript">
-        // function select2hander(e){
-        //     var key = e.keyCode || e.which;
-        //     alert(key);
-        //     if(key == 13){
-        //         alert(33);
-        //         // select2-results__option--highlighted
-        //     var e = jQuery.Event("keydown");e.which = 3;  
-        //            // $(this).closest('select').select2("close");
-        //         // $(this).parent().next().find('input').focus();
-        //         var text = $(".select2-results__option--highlighted").html();
-        //         alert(text);
-        //     // $(this).closest('select').trigger('select2:select');
-        //     // var val = $('.select2-results__option--highlighted').attr('aria-selected' , true);
-        //         // alert($(this).parents('select').val());
-        //     }
-        // }
+         function select2hander(e){
+             var key = e.keyCode || e.which;
+             if(key == 13){
 
+                 // select2-results__option--highlighted
+             // var e = jQuery.Event("keydown");e.which = 3;  
+                    // $(this).closest('select').select2("close");
+                 // $(this).parent().next().find('input').focus();
+                 // var text = $(".select2-results__option--highlighted").trigger('select');
+                 // alert(text);
+             // $(this).closest('select').trigger('select2:select');
+             // var val = $('.select2-results__option--highlighted').attr('aria-selected' , true);
+                 // alert($(this).parents('select').val());
+             }
+         }
+        function focusnext(e){
+// document.activeElement.blur();
+        }
         jQuery(function($) {
             if (!ace.vars['touch']) {
                 $('.chosen-select').chosen({
