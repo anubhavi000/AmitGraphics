@@ -195,7 +195,25 @@
                                         <div class="col-md-2">
                                             <label>To Date</label>
                                             <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" name="to_date" placeholder="To Date" class="form-control datepicker">
-                                        </div>                                                        
+                                        </div>
+                                        @php
+                                            $vendor_requested = !empty(Request::get('vendor')) ? Request::get('vendor') : '';
+                                        @endphp
+                                        <div class="col-md-2">
+                                            <label>Vendor</label>
+                                            <select class="fstdropdown-select" name="vendor">
+                                                <option value="">Select</option>
+                                                @if(!empty($vendors))
+                                                    @foreach($vendors as $key => $value)
+                                                        @if($key == $vendor_requested)
+                                                        <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                        @else
+                                                        <option value="{{$key}}">{{$value}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>                                                                                                
                                         <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">

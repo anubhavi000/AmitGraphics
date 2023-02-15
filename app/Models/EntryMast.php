@@ -305,7 +305,7 @@ class EntryMast extends Model
         }
     }
     public static function  ExportManual($data){
-            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Tare Weight , Gross Weight , Net Weight , Excess Weight , Unloading Site , Loading Site , Loading Plant ';
+            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , Loading Date , Loading Time  , Dispatch Date , Dispatch Time ,  Unloading Site , Loading Site , Loading Plant';
             $str .= "\n";
             $vehicles = VehicleMast::where('status' , 1)
                                    ->pluck('vehicle_no' , 'id')
@@ -316,6 +316,7 @@ class EntryMast extends Model
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
+            $vendors  = VendorMast::pluckactives();
             foreach ($data as $key => $value) {
                 $str .= $key.',';
                 $str .= $value->slip_no.',';
@@ -323,15 +324,21 @@ class EntryMast extends Model
                 $str .= !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)).',' : ',';
                 $str .= !empty($vehicles[$value->vehicle]) ? $vehicles[$value->vehicle].',' : ',';
                 $str .= $value->vehicle_pass.',';
-                $str .= $value->entry_weight.',';
-                $str .= $value->gross_weight.',';
-                $str .= !empty($value->net_weight) ? $value->net_weight.',' : '0,';
-                $str .= !empty($value->excess_weight) ? $value->excess_weight.',' : '0,';
+                $str .= !empty($vendors[$value->vendor_id]) ? $vendors[$value->vendor_id] : '';$str.= ','; 
+                $str .= $value->entry_weight.' KG ,';
+                $str .= $value->gross_weight.'KG ,';
+                $str .= !empty($value->net_weight) ? $value->net_weight.' KG ,' : '0 KG,';
+                $str .= !empty($value->excess_weight) ? $value->excess_weight.' KG,' : '0 KG,';
+                $str .= !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''; $str .= ',';
+                $str .= !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : '';
+                $str .= ",";
+                $str .= !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)) : ''; $str .= ",";
+                $str .= !empty($value->generation_time) ? date('h:i:A' , strtotime($value->generation_minutehours)) : '';
+                $str .= ","; 
                 $str .= !empty($sites[$value->site]) ? $sites[$value->site].',' : ',';
                 $str .= !empty($sites[$value->owner_site]) ? $sites[$value->owner_site].',' : ',';
                 $str .=  !empty($plants[$value->plant]) ? $plants[$value->plant].',' : ',';
                 $str .= "\n";
-
             }
             header("Content-type: text/csv");
             header("Content-Disposition: attachment; filename=manualchallans.csv");

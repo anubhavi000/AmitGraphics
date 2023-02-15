@@ -394,6 +394,12 @@ class EntriesController extends Controller
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
         }
+        if(isset($request->vehicle)){
+            $recordsraw->where('vehicle' , $request->vehicle);
+        }
+        if(isset($request->vendor)){
+            $recordsraw->where('vendor_id' , $request->vendor);
+        }
         if(!empty($request->from_date) && !empty($request->to_date)){
         
         $from_date = date('Y-m-d' , strtotime($request->from_date));
@@ -405,11 +411,17 @@ class EntriesController extends Controller
         if(!empty($request->export_to_excel)){
             $res  =  EntryMast::ExportManual($records);
         }
+        $vendors = VendorMast::pluckactives();
+        $items = ItemMast::pluckactives();
+        $supervisors = SupervisorMast::pluckactives();
         return view($this->module_folder.'.show' , [
             'data'      => $records,
             'sites'     => $sites,
             'vehicles'  => $vehicles,
-            'plants'    => $plants
+            'items'     => $items,
+            'vendors'   => $vendors,
+            'plants'    => $plants,
+            'supervisors' => $supervisors
         ]);
     }
     public function PrintInvoice(Request $request , $plant , $slip_no){
@@ -587,7 +599,10 @@ class EntriesController extends Controller
             }
             if(isset($request->vehicle)){
                 $entriesraw->where('vehicle' , $request->vehicle);
-            }            
+            }   
+            if(isset($request->vendor)){
+                $entriesraw->where('vendor_id' , $request->vendor);
+            }         
             if(isset($request->status)){
                 if($request->status == 1){
                     $entriesraw->where('is_generated' , 1);

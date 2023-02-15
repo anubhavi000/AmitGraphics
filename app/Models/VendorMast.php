@@ -25,5 +25,10 @@ class VendorMast extends Model
     	else{
     		return true;
     	}
-	}    
+	}   
+    public static function pluckactives(){
+        return Self::where('status' , 1)
+                   ->pluck('v_name' , 'id')
+                   ->toArray();
+    } 
 }
