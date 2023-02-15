@@ -23,7 +23,7 @@
         <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
             <div class="row">
                 <div class="col-md-12 mt-3 mb-3">
-                    <form action="" method="get">
+                    <form action="" id="user-search" method="get">
                         @csrf
                         <div class="container-fluid">
                             <div class="row " style="margin-bottom:-11px">
@@ -46,7 +46,7 @@
                                     <div class="col-md-3 mb-3 px-3">
                                         <label style="margin-bottom:0px" for="slip_no"
                                             class="yash_star">SLip No.</label>
-                                        <input type="text" value="{{$slip}}" name="slip_no"class="form-control" >
+                                        <input type="text" placeholder="Enter Slip No." value="{{$slip}}" name="slip_no"class="form-control" >
                                     </div>
                                     <div class="col-md-2"><label for="from_date">From Date</label>
                                         <fieldset>

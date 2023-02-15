@@ -1054,17 +1054,57 @@ $(function() {
       return $(el).is('a, button, :input, [tabindex]');
     }
   });
-  $(document).on('keydown ,select2:close', '.form-control,.select2-search__field', function(e) {
+  $(document).on('keydown ,select2:close', '.select2-search__field', function(e) {
 
     if (e.which == 13) {
       e.preventDefault();
-      console.log($(this).index());
+      // console.log($(this).index());
       nextOnTabIndex($(this));
     }
   });
 });
 function nextOnTabIndex(element) {
-    $(this).next().focus();
+    var container = element.parent();
+    var parent_updateed_id = container.parent()[0].lastChild.childNodes[0].id;
+    var replced_parent =  parent_updateed_id.replace('select2-' , '');
+    var parent_id = replced_parent.replace('-results' , '');
+
+    var parentobj = $("#"+parent_id);
+            var self = parentobj, form = self.parents('form:eq(0)'), focusable, next;
+            
+            var  form_lenth = form[0].length;
+            var    form_elements  = form[0];
+            var cuurent_select_index = Array.from(form_elements.elements).indexOf(self[0]);
+
+            form[0][cuurent_select_index+1].focus();
+            
+                        // console.log(form[0][2] == self[0]);
+            // focusable = form.find('input:not([readonly]) , select').filter(':visible'); 
+            // next = focusable.eq(focusable.index(parentobj) + 1);
+            // next.focus();
+
+
+    // console.log(container.parent()[0].lastChild.childNodes[0].id);
+    // $(this).next().find('input')[0].firstChild.childNodes;
+    // $.tabNext();
+    // console.log(element[0]);
+    // console.log('container');
+    // var container = element.parent('.select2-container');
+    // console.log(container);
+    // console.log('select');
+    // var select = container.closest('select');
+    // console.log(select);
+      // var $focused = $(':focus');
+      // var  focusindex = $(':focus').index();
+      // var select = $focused.parents('select');
+      // console.log(select);
+      // var form = $focused.parents('form:eq(0)');
+      //       // var self = $(this), form = self.parents('form:eq(0)'), focusable, next;
+      //       focusable = form.find('input:not([readonly]) , select').filter(':visible'); 
+      //       console.log(element.index());
+      //        next = focusable.eq(focusable.index(focusindex) +1);
+      //        console.log(next);
+      //        next.focus();
 }
 
 
@@ -1297,7 +1337,8 @@ function nextOnTabIndex(element) {
          function select2hander(e){
              var key = e.keyCode || e.which;
              if(key == 13){
-
+                // console.log($(this));
+                // console.log($(this));
                  // select2-results__option--highlighted
              // var e = jQuery.Event("keydown");e.which = 3;  
                     // $(this).closest('select').select2("close");

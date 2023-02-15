@@ -184,6 +184,8 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::resource('ExcessWeightedSlips' , 'ExcessweightSlipController');
     Route::post('checkslipduplicate' , 'EntriesController@checkslipduplicatemanual');
     Route::get('check_vehicle_Availiblity'  ,   'VehicleController@checkavailiblity');
+
+    Route::get('Reports/{slug}' , 'ReportController@retunrnhnadler');
     //ends
 
     // always add routes on above this line 
