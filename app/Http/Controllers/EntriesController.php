@@ -823,13 +823,42 @@ class EntriesController extends Controller
             $to_date = date('Y-m-d' , strtotime($request->generationdate));
             $from_time  = $request->loadingtime;
             $to_time = $request->generationtime;
+            $validation = 0;
+            if($from_date > $to_date){
+                $validation = 0;
+            }
+            else if($to_date > $from_date){
+                $validation = 1;
+            }
+            else if($to_date == $from_date){
+                $exploded_from = explode(':' , $from_time);
+                $exploded_to   = explode(':', $to_time);
 
+                if($exploded_from[0] > $exploded_to[0]){
+                    $validation = 0;
+                }
+                else if($exploded_from[0] < $exploded_to[0]){
+                    $validation = 1;
+                }
+                else if($exploded_from[0] == $exploded_to[0]){
+                    if($exploded_from[1] < $exploded_to[1]){
+                        $validation = 1;
+                    }
+                    else if($exploded_from[1] > $exploded_to[1]){
+                        $validation = 0;
+                    }
+                    else if($exploded_from[1] == $exploded_to[1]){
+                        $validation = 0;
+                    }                    
+                }
+            }
+            // dd(date('Y-m-d h:i:s' , strtotime($from_date.$from_time)) , date('Y-m-d h:i:s' , strtotime($to_date.$to_time)) , $request->loadingtime , $request->generationtime , );
             if($kantaduplicates > 0 && $slipduplicates > 0){
                 return response()->json([
                     'res'   => 400,
                     'kanta' => false,
                     'slip'  => false,
-                    'date'  => ($from_date > $to_date) ? 0 : 1
+                    'date'  => $validation
                 ]);
             }
             if($kantaduplicates == 0 && $slipduplicates == 0){
@@ -837,7 +866,7 @@ class EntriesController extends Controller
                     'res'   => 200,
                     'kanta' => true,
                     'slip'  => true,
-                    'date'  => ($from_date > $to_date) ? 0 : 1
+                    'date'  => $validation
                 ]); 
             } 
             if($kantaduplicates == 0 && $slipduplicates > 0){
@@ -845,7 +874,7 @@ class EntriesController extends Controller
                     'res'  => 400,
                     'kanta'=> true,
                     'slip' => false,
-                    'date'  => ($from_date > $to_date) ? 0 : 1                    
+                    'date'  => $validation                    
                 ]);
             }
             if($kantaduplicates > 0 && $slipduplicates == 0){
