@@ -103,6 +103,18 @@ class ReportController extends Controller
 		]);
 	}
 	static function unloadingWiseChallans($request){
-		dd($request);
+		$dataraw = EntryMast::where('delete_status' , 0);
+		$from_date = !empty($request->from_date) ? $request->from_date : date('Y-m-d' ,strtotime('-7 days'));
+		$to_date = !empty($request->to_date) ? $request->to_date : date('Y-m-d');
+
+		$dataraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
+
+		$data = $dataraw->get();
+
+		return view( $this->view.'.UnloadingPlaceWise' , [
+			'from_date' => $from_date,
+			'to_date'   => $to_date,
+			'data'      => $data
+		])			
 	}
 }

@@ -398,8 +398,11 @@ function calculateexcessweight(){
 
       var loadingdate = $("#loadingdate").val();
       var generationdate = $("#generationdate").val();
-      var loadingtime = $("#generationtime").val();
+      var loadingtime = $("#loadingtime").val();
       var generationtime = $("#generationtime").val();
+      // alert(loadingtime);
+      // alert(generationtime);
+      // return false;
       //checking dates  
 
       // if(sliplenth = 0 || slip == ''){
@@ -476,17 +479,21 @@ function calculateexcessweight(){
                   }
                   else{
                     alert('Out Date Must be Greated Than To Date');
+                    return false;
                   }
               }
               else if(data.res == 400){
                 if(data.kanta == false && data.slip == false){
                   alert('Both Weighbridge Slip No. And Slip No. already exists');
+                  return false;
                 }
                 else if(data.kanta == false && data.slip == true){
                   alert('Weighbridge Slip No. already exists');
+                  return false;
                 }
                 else if(data.kanta == true && data.slip ==false){
                   alert('slip no. already exists');
+                  return false;
                 }
               }
             }

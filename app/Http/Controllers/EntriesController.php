@@ -561,18 +561,14 @@ class EntriesController extends Controller
 
     public function chalanindex(Request  $request){
         $auth = Auth::user();
-            $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
+            $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
+            $to_date = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
             $vendors = VendorMast::where('status' , 1)
                                  ->pluck('v_name' , 'id')
-                                 ->toArray();            
-        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date) && empty($request->vendor)){
-            return view($this->module_folder.'/index');                       
-        }   
-        else{
+                                 ->toArray();
+
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
-            $from_date = !empty($request->from_date) ? $request->from_date : 'today';
-
             
             $entriesraw = EntryMast::whereNotNull('slip_no')
                                    ->where('owner_site' , $auth->site)
@@ -582,24 +578,7 @@ class EntriesController extends Controller
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
-            if($from_date){
-                $current_date = date('Y-m-d');
-                if($from_date == 'today'){
-                    $filter = $current_date;  
-                }
-                elseif($from_date == 'last_seven_days'){
-                    $filter = date('Y-m-d' , strtotime('-7 days'));
-                }
-                elseif($from_date ==  'last_fifteen_days'){
-                    $filter = date('Y-m-d' , strtotime('-15 days'));
-                } 
-                elseif($from_date ==  'last_thirty_days'){
-                    $filter = date('Y-m-d' , strtotime('-30 days'));
-                }
-                if(!empty($filter)){
-                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
-                }
-            }
+            $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
@@ -630,14 +609,22 @@ class EntriesController extends Controller
             $vehicle_mast = VehicleMast::where('status' , 1)
                                  ->pluck('vehicle_no' , 'id')
                                  ->toArray();
+            $vendors = VendorMast::where('status' , 1)
+                                 ->pluck('v_name' , 'id')
+                                 ->toArray();
+
+            $item = ItemMast::pluckactives();
+            $supervisors = SupervisorMast::pluckactives();
             return view($this->module_folder.'.Challan.index' , [
                 'entries' => $entries,
                 'sites'   => $sites,
                 'plants'  => $plants,
+                'vendors' => $vendors,
+                'supervisors' => $supervisors,
+                'items'   => $item,
                 'vehicle_mast'=>$vehicle_mast,
                 'vendors' => $vendors
             ]);            
-        }
     }
      public function ManualChallan(Request $request){
       $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';

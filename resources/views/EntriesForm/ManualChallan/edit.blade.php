@@ -149,7 +149,7 @@
     </div>
             <div class="col-md-3">
               <label> In Date  </label>
-              <input type="text" class="form-control datepicker" name="datetime" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->datetime)) : ''}}"  placeholder="Loading Date time">
+              <input type="text" class="form-control datepicker" name="datetime" value="{{!empty($entry->datetime) ? date('d-m-Y' , strtotime($entry->datetime)) : ''}}"  placeholder="Loading Date time">
             </div>
             <div class="col-md-3">
               <label> In Time </label>
@@ -167,7 +167,7 @@
     </div>
     <div class="col-md-3">
       <label>  Date And Time </label>
-      <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('Y-m-d' , strtotime($entry->datetime)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+      <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('d-m-Y' , strtotime($entry->datetime)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
     </div>     
    <div class="col-md-3">
       <label>  Out Time </label>

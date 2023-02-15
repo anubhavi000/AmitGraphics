@@ -145,33 +145,22 @@
                                                 </div>
                                             </fieldset>
                                         </div>  
-                                        <div class="col-md-2">              
+                                        <div class="col-md-2">
                                             <fieldset>
-                                                @php
-                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : 'today';
-                                                    
-                                                    $opt_arr = [
-                                                        'today' => 'Today',
-                                                        'last_seven_days' => 'Last 7 Days',
-                                                        'last_fifteen_days' => 'Last 15 Days',
-                                                        'last_thirty_days' => 'Last 30 Days' 
-                                                        ];  
-                                                @endphp
-                                                <div class="input-group client_margin mt-1">
-                                                    <label class="mb-0">Datetime</label>
-                                                    <select name="from_date" class="fstdropdown-select col-md-3">
-                                                        <option value="">Select</option>
-                                                        @foreach($opt_arr as $key => $value)
-                                                            @if($key == $val)
-                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
-                                                            @else
-                                                                <option value="{{$key}}">{{$value}}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+
+                                            <label>Vehicle</label>
+                                            <select name="vehicle" class="fstdropdown-select">
+                                                <option value="">Select</option>
+                                                @if(!empty($vehicle_mast))
+                                                    @foreach($vehicle_mast as $key => $value)
+                                                        <option {{(Request::get('vehicle') == $key)?'selected':''}} value="{{$key}}">{{$value}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                             </fieldset>                                            
-                                        </div>    
+
+                                        </div>   
+
                                         @php
                                             $statusval = !empty(Request::get('status')) ? Request::get('status') : ''; 
                                             $opt_arr = [
@@ -198,17 +187,15 @@
                                             </fieldset>
                                         </div>
                                         --}} 
+   
                                         <div class="col-md-2">
-                                            <label>Vehicle</label>
-                                            <select name="vehicle" class="fstdropdown-select">
-                                                <option value="">Select</option>
-                                                @if(!empty($vehicle_mast))
-                                                    @foreach($vehicle_mast as $key => $value)
-                                                        <option {{(Request::get('vehicle') == $key)?'selected':''}} value="{{$key}}">{{$value}}</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>                      
+                                            <label>From Date</label>
+                                            <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" placeholder="From Date" name="from_date" class="form-control datepicker">
+                                        </div>              
+                                        <div class="col-md-2">
+                                            <label>To Date</label>
+                                            <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" name="to_date" placeholder="To Date" class="form-control datepicker">
+                                        </div>                                                        
                                         <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
@@ -244,11 +231,21 @@
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
                                             <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
+                                            <th>Vehicle Pass Weight</th>
+                                            <th data-sortable="true">Vendor</th>
+
                                             <th data-field="dat2323e" data-sortable="true">Net Weight</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
+                                            <th data-sortable="true">Gross Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Plant</th>
+                                            <th data-sortable="true">Supervisor</th>
+
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Site</th>
-                                            <th>Date</th>
+                                            <th data-sortable="true">Loading Date</th>
+                                            <th data-sortable="true">Loading Time</th>
+                                            <th data-sortable="true">Dispatch Date</th>
+                                            <th  data-sortable="true">Dispatch Time</th>
+                                            <th>Item</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                             <th>Print Challan</th>
@@ -259,18 +256,36 @@
                                         @foreach ($entries as $key => $value)
                                             <?php
                                             $encrypt_id = enCrypt($value->slip_no);
+                                            if(!empty($value->items_included)){
+                                            $items_arr = json_decode($value->items_included);
+                                            $arr_item_real = [];
+                                            foreach ($items_arr as $key2 => $value2) {
+                                                $arr_item_real[] = !empty($items[$value2]) ? $items[$value2] : '';
+                                              }  
+                                            }
+                                            else{
+                                                $items_arr = [];
+                                            }
                                             ?>
                                             <tr>
                                                 <td></td>
                                                
-                                                <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
+                                                <td>{{ !empty($value->slip_no) ? $value->slip_no : '' }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
                                                 <td>{{ !empty($vehicle_mast[$value->vehicle]) ? $vehicle_mast[$value->vehicle] : ''}}</td>
+                                                <td>{{ !empty($value->vehicle_pass) ? $value->vehicle_pass.' KG' : '0 KG' }}</td>
+                                                <td>{{ !empty($vendors[$value->vendor_id]) ? $vendors[$value->vendor_id] : '' }}</td>
                                                 <td>{{ !empty($value->net_weight) ? $value->net_weight : '0'}} KG</td>
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
+                                                <td>{{ !empty($value->gross_weight) ? $value->gross_weight.' KG' :'0 KG' }}</td>
                                                 <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
+                                                <td>{{ !empty($supervisors[$value->supervisor]) ? $supervisors[$value->supervisor] : '' }}</td>
                                                 <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
-                                                <td>{{ !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''}}</td>
+                                                <td>{{ !empty($value->datetime) ? date('Y-m-d' , strtotime($value->datetime)) : '' }}</td>
+                                                <td>{{ !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : ''}}</td>
+                                                <td>{{ !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)) : ''}}</td>
+                                                <td>{{ !empty($value->generation_time) ? date('h:i:A' , strtotime($value->generation_time)) : ''}}</td>
+                                                <td>{{ !empty($arr_item_real) ? implode(',' , $arr_item_real) : '' }}</td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"

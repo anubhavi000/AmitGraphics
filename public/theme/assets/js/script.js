@@ -133,7 +133,7 @@ $(document).ready(function () {
             e.preventDefault();
             // console.log('1113457890');
             var self = $(this), form = self.parents('form:eq(0)'), focusable, next;
-            focusable = form.find('input:not([readonly]) , select').filter(':visible'); 
+            focusable = form.find('input:not([readonly]) , select , textarea').filter(':visible'); 
             next = focusable.eq(focusable.index(this) + 1);
             next.focus();
 

@@ -20,5 +20,10 @@ class SupervisorMast extends Model
     	else{
     		return true;
     	}
-	}     
+	} 
+    static function pluckactives(){
+        return Self::where('status' , 1)
+                    ->pluck('name' , 'id')
+                    ->toArray();
+    }    
 }
