@@ -575,6 +575,7 @@ class EntriesController extends Controller
         $auth = Auth::user();
             $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
             $to_date = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
+            // dd($from_date , $to_date);
             $vendors = VendorMast::where('status' , 1)
                                  ->pluck('v_name' , 'id')
                                  ->toArray();
@@ -590,7 +591,7 @@ class EntriesController extends Controller
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
-            $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
+            $entriesraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
