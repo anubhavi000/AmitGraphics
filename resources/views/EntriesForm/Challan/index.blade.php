@@ -119,7 +119,7 @@
                                         <div class="col-md-2">
                                             <label for="client_id">Slip No</label>
                                             <fieldset>
-                                                <div class="input-group client_margin">
+                                                <div class="input-group ">
                                                     <span class="input-group-addon bg-primary border-primary white"
                                                         id="basic-addon7"
                                                         style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
@@ -134,7 +134,7 @@
                                         <div class="col-md-2">
                                             <label for="client_id"> Weighbridge Slip No.</label>
                                             <fieldset>
-                                                <div class="input-group client_margin">
+                                                <div class="input-group">
                                                     <span class="input-group-addon bg-primary border-primary white"
                                                         id="basic-addon7"
                                                         style="width: 43px;display: flex;justify-content: center;align-items: center;font-size: 23px;color: white;background-color: darkslategray !important;border: darkslategray;"><i
