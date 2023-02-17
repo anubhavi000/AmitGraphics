@@ -55,42 +55,43 @@ class ReportController extends Controller
 		$plants   = PlantMast::pluckactives(); 
 
 		if(!empty($request->export_to_excel)){
-			$str = ",,,,,,,,Vehicle Wise Challans Generated";
-			$str .= "\n"; 
-			$str .= ",,,,,,,From Date , ";
-			$str .= $from_date.',';
-			$str .= "To Date ,";
-			$str .= $to_date;
-			if(!empty($request->vehicle)){
-				if(!empty($vehicles[$request->vehicle])){
-					$str .= ",".$vehicles[$request->vehicle];
-				}
-			}
-			$str .= "\n";
-			$str .= "\n";
+			EntryMast::ExportManual($data);
+			// $str = ",,,,,,,,Vehicle Wise Challans Generated";
+			// $str .= "\n"; 
+			// $str .= ",,,,,,,From Date , ";
+			// $str .= $from_date.',';
+			// $str .= "To Date ,";
+			// $str .= $to_date;
+			// if(!empty($request->vehicle)){
+			// 	if(!empty($vehicles[$request->vehicle])){
+			// 		$str .= ",".$vehicles[$request->vehicle];
+			// 	}
+			// }
+			// $str .= "\n";
+			// $str .= "\n";
 
-			$str .= 'S.no , Slip No , Weighbridge Slip No , Vehicle Number , Tare Weight , Loading Site , Unloading Site , Loading Plant , Dispatch Date ';
-			$str .= "\n";
-			if(!empty($data)){
-				foreach ($data as $key => $value) {
-					$str .= $key + 1; $str.= ",";
-					$str .= !empty( $value->slip_no ) ? $value->slip_no : ''; $str.= ",";
-					$str .= !empty( $value->kanta_slip_no ) ? $value->kanta_slip_no : ''; $str.= ",";
-					$str .= !empty( $vehicles[ $value->vehicle ] ) ? $vehicles[ $value->vehicle ] : ''; $str.= ",";  
-					$str .= !empty( $value->entry_weight ) ? $value->entry_weight : ''; $str.= ",";
-					$str .= !empty( $sites[ $value->site ] ) ? $sites[ $value->site ] : ''; $str.= ",";					
-					$str .= !empty( $sites[ $value->owner_site ] ) ? $sites[ $value->owner_site ] : ''; $str.= ",";
-					$str .= !empty( $plants[ $value->plant ] ) ? $plants[ $value->plant ] : ''; $str.= ",";
-					$str .= !empty( $value->generation_time ) ? date('d-m-Y' , strtotime( $value->generation_time )) : '';$str.= ",";
-					$str .= "\n";
-				}
-			}
-			header("Content-type: text/csv");
-            header("Content-Disposition: attachment; filename=VehicleWiseChallans.csv");
-            header("Pragma: no-cache");
-            header("Expires: 0");
-            echo $str;
-            die();
+			// $str .= 'S.no , Slip No , Weighbridge Slip No , Vehicle Number , Tare Weight , Loading Site , Unloading Site , Loading Plant , Dispatch Date ';
+			// $str .= "\n";
+			// if(!empty($data)){
+			// 	foreach ($data as $key => $value) {
+			// 		$str .= $key + 1; $str.= ",";
+			// 		$str .= !empty( $value->slip_no ) ? $value->slip_no : ''; $str.= ",";
+			// 		$str .= !empty( $value->kanta_slip_no ) ? $value->kanta_slip_no : ''; $str.= ",";
+			// 		$str .= !empty( $vehicles[ $value->vehicle ] ) ? $vehicles[ $value->vehicle ] : ''; $str.= ",";  
+			// 		$str .= !empty( $value->entry_weight ) ? $value->entry_weight : ''; $str.= ",";
+			// 		$str .= !empty( $sites[ $value->site ] ) ? $sites[ $value->site ] : ''; $str.= ",";					
+			// 		$str .= !empty( $sites[ $value->owner_site ] ) ? $sites[ $value->owner_site ] : ''; $str.= ",";
+			// 		$str .= !empty( $plants[ $value->plant ] ) ? $plants[ $value->plant ] : ''; $str.= ",";
+			// 		$str .= !empty( $value->generation_time ) ? date('d-m-Y' , strtotime( $value->generation_time )) : '';$str.= ",";
+			// 		$str .= "\n";
+			// 	}
+			// }
+			// header("Content-type: text/csv");
+   //          header("Content-Disposition: attachment; filename=VehicleWiseChallans.csv");
+   //          header("Pragma: no-cache");
+   //          header("Expires: 0");
+   //          echo $str;
+   //          die();
 		}
 
 		return view('Reports.vehicle_wise_challans' , [
@@ -115,6 +116,6 @@ class ReportController extends Controller
 			'from_date' => $from_date,
 			'to_date'   => $to_date,
 			'data'      => $data
-		])			
+		]);			
 	}
 }

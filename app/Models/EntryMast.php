@@ -316,6 +316,9 @@ class EntryMast extends Model
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
+            $items = ItemMast::where('status' , 1) 
+                             ->pluck('name' , 'id')
+                             ->toArray(); 
             $vendors  = VendorMast::pluckactives();
             foreach ($data as $key => $value) {
                 $str .= $key.',';
@@ -323,7 +326,7 @@ class EntryMast extends Model
                 $str .= $value->kanta_slip_no.',';
                 $str .= !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)).',' : ',';
                 $str .= !empty($vehicles[$value->vehicle]) ? $vehicles[$value->vehicle].',' : ',';
-                $str .= $value->vehicle_pass.',';
+                $str .= $value->vehicle_pass.' KG,';
                 $str .= !empty($vendors[$value->vendor_id]) ? $vendors[$value->vendor_id] : '';$str.= ','; 
                 $str .= $value->entry_weight.' KG ,';
                 $str .= $value->gross_weight.'KG ,';
@@ -338,6 +341,8 @@ class EntryMast extends Model
                 $str .= !empty($sites[$value->site]) ? $sites[$value->site].',' : ',';
                 $str .= !empty($sites[$value->owner_site]) ? $sites[$value->owner_site].',' : ',';
                 $str .=  !empty($plants[$value->plant]) ? $plants[$value->plant].',' : ',';
+                $str .= !empty($items[$value->items]) ?  $items[$value->items] : ''; $str .= ",";
+                $str .= !empty($value->remarks) ? $value->remarks : ''; $str.= ",";
                 $str .= "\n";
             }
             header("Content-type: text/csv");
