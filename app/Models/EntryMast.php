@@ -305,7 +305,7 @@ class EntryMast extends Model
         }
     }
     public static function  ExportManual($data){
-            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , Loading Date , Loading Time  , Dispatch Date , Dispatch Time ,  Unloading Site , Loading Site , Loading Plant , Item , Remarks';
+            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , In Date , In Time  , Out Date , Out Time ,  Unloading Site , Loading Site , Loading Plant , Item , Remarks';
             $str .= "\n";
             $vehicles = VehicleMast::where('status' , 1)
                                    ->pluck('vehicle_no' , 'id')
@@ -336,12 +336,12 @@ class EntryMast extends Model
                 $str .= $value->kanta_slip_no.',';
                 $str .= !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)).',' : ',';
                 $str .= !empty($vehicles[$value->vehicle]) ? $vehicles[$value->vehicle].',' : ',';
-                $str .= $value->vehicle_pass.' KG,';
+                $str .= $value->vehicle_pass.',';
                 $str .= !empty($vendors[$value->vendor_id]) ? $vendors[$value->vendor_id] : '';$str.= ','; 
-                $str .= $value->entry_weight.' KG ,';
-                $str .= $value->gross_weight.'KG ,';
-                $str .= !empty($value->net_weight) ? $value->net_weight.' KG ,' : '0 KG,';
-                $str .= !empty($value->excess_weight) ? $value->excess_weight.' KG,' : '0 KG,';
+                $str .= $value->entry_weight.',';
+                $str .= $value->gross_weight.',';
+                $str .= !empty($value->net_weight) ? $value->net_weight : '';$str .= ",";
+                $str .= !empty($value->excess_weight) ? $value->excess_weight :''; $str .= ",";
                 $str .= !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''; $str .= ',';
                 $str .= !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : '';
                 $str .= ",";

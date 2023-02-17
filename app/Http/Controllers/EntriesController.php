@@ -621,6 +621,9 @@ class EntriesController extends Controller
                     return redirect('EntryForm_action/'.$encrypted_id);
                 }
             }
+            if(!empty($request->export_to_excel)){
+                EntryMast::ExportManual($entries);
+            }
 
             $vehicle_mast = VehicleMast::where('status' , 1)
                                  ->pluck('vehicle_no' , 'id')
