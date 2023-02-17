@@ -643,13 +643,9 @@ class EntriesController extends Controller
             ]);            
     }
      public function ManualChallan(Request $request){
-      $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
+            $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
+            $to_date   = !empty($request->to_date) ? date('Y-m-d'  , strtotime($request->to_date)) : date('Y-m-d');
         $auth = Auth::user();
-
-        if(!empty($request->slip_no)){
-            $check = EntryMast::where('slip_no' , $request->slip_no)
-                              ->first();
-            if(empty($check)){
                 $transporters    =   VendorMast::where('status' , 1)
                                                ->pluck('v_name' , 'id')
                                                ->toArray();
@@ -669,6 +665,10 @@ class EntriesController extends Controller
                 $plants          =  PlantMast::where('status' , 1)
                                              ->pluck('name' , 'id')
                                              ->toArray();
+        if(!empty($request->slip_no)){
+            $check = EntryMast::where('slip_no' , $request->slip_no)
+                              ->first();
+            if(empty($check)){
                 Session::put('error' , 'Entry With Slip No. Does Not Exist please Create One');
             return view($this->module_folder.'.ManualChallan.create' , [
             'data' => $request->all(),
@@ -684,13 +684,11 @@ class EntriesController extends Controller
                 return redirect('ManualChallan/edit/'.$check->id);
             }
         }
-        if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date) && empty($request->vendor)){
-            return view($this->module_folder.'/index');                       
-        }   
         else{
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
-            $from_date = !empty($request->from_date) ? $request->from_date : NULL;
+            $from_date = !empty($request->from_date) ? date('Y-m-d' , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
+            $to_date   = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
             // dd($auth->site);
             $entriesraw = EntryMast::whereNotNull('slip_no')
                                    ->where('owner_site' , $auth->site)
@@ -706,25 +704,8 @@ class EntriesController extends Controller
             $vendors = VendorMast::where('status' , 1)
                                  ->pluck('v_name' , 'id')
                                  ->toArray();
-            if($from_date){
-                $current_date = date('Y-m-d');
-                if($from_date == 'today'){
-                    $filter = $current_date;  
-                }
-                elseif($from_date == 'last_seven_days'){
-                    $filter = date('Y-m-d' , strtotime('-7 days'));
-                }
-                elseif($from_date ==  'last_fifteen_days'){
-                    $filter = date('Y-m-d' , strtotime('-15 days'));
-                } 
-                elseif($from_date ==  'last_thirty_days'){
-                    $filter = date('Y-m-d' , strtotime('-30 days'));
-                }
-                if(!empty($filter)){
-                    // dd($filter);
-                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.created_at,'%Y-%m-%d')>='$filter'");
-                }
-            }
+
+                    $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
@@ -749,10 +730,13 @@ class EntriesController extends Controller
             }
                                   // dd($entries);
             return view($this->module_folder.'.ManualChallan.index' , [
-                'entries' => $entries,
-                'sites'   => $sites,
-                'plants'  => $plants,
-                'vendors' => $vendors
+                'entries'      => $entries,
+                'sites'        => $sites,
+                'plants'       => $plants,
+                'vendors'      => $vendors,
+                'vehciles'     => $vehicles,
+                'supervisors'  => $supervisors,
+                'items'        => $items
             ]);            
         }        
     }

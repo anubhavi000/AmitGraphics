@@ -305,7 +305,7 @@ class EntryMast extends Model
         }
     }
     public static function  ExportManual($data){
-            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , Loading Date , Loading Time  , Dispatch Date , Dispatch Time ,  Unloading Site , Loading Site , Loading Plant';
+            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , Loading Date , Loading Time  , Dispatch Date , Dispatch Time ,  Unloading Site , Loading Site , Loading Plant , Item , Remarks';
             $str .= "\n";
             $vehicles = VehicleMast::where('status' , 1)
                                    ->pluck('vehicle_no' , 'id')
@@ -321,6 +321,16 @@ class EntryMast extends Model
                              ->toArray(); 
             $vendors  = VendorMast::pluckactives();
             foreach ($data as $key => $value) {
+                $main_items_arr = [];
+                if(!empty($value->items_included)){
+                    $itemraw = json_decode($value->items_included);
+                    foreach($itemraw as $i => $tem){
+                        $main_items_arr[] = $items[$tem];
+                    }
+                }
+                else{
+                    $main_items_arr = [];
+                }
                 $str .= $key.',';
                 $str .= $value->slip_no.',';
                 $str .= $value->kanta_slip_no.',';
@@ -341,7 +351,7 @@ class EntryMast extends Model
                 $str .= !empty($sites[$value->site]) ? $sites[$value->site].',' : ',';
                 $str .= !empty($sites[$value->owner_site]) ? $sites[$value->owner_site].',' : ',';
                 $str .=  !empty($plants[$value->plant]) ? $plants[$value->plant].',' : ',';
-                $str .= !empty($items[$value->items]) ?  $items[$value->items] : ''; $str .= ",";
+                $str .= !empty($main_items_arr) ?  implode(',' , $main_items_arr) : ''; $str .= ",";
                 $str .= !empty($value->remarks) ? $value->remarks : ''; $str.= ",";
                 $str .= "\n";
             }

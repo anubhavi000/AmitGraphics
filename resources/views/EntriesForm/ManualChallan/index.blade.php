@@ -145,32 +145,13 @@
                                                 </div>
                                             </fieldset>
                                         </div>  
-                                        <div class="col-md-2">              
-                                            <fieldset>
-                                                @php
-                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : 'today';
-                                                    
-                                                    $opt_arr = [
-                                                        'today' => 'Today',
-                                                        'last_seven_days' => 'Last 7 Days',
-                                                        'last_fifteen_days' => 'Last 15 Days',
-                                                        'last_thirty_days' => 'Last 30 Days' 
-                                                        ];  
-                                                @endphp
-                                                <div class="input-group client_margin mt-1">
-                                                    <label class="mb-0">Creation Time</label>
-                                                    <select name="from_date" class="fstdropdown-select col-md-3">
-                                                        <option value="">Select</option>
-                                                        @foreach($opt_arr as $key => $value)
-                                                            @if($key == $val)
-                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
-                                                            @else
-                                                                <option value="{{$key}}">{{$value}}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </fieldset>                                            
+                                        <div class="col-md-2">
+                                            <label>From Date</label>
+                                            <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" placeholder="From Date" name="from_date" class="form-control datepicker">
+                                        </div>              
+                                        <div class="col-md-2">
+                                            <label>To Date</label>
+                                            <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" name="to_date" placeholder="To Date" class="form-control datepicker">
                                         </div>    
                                         @php
                                             $statusval = !empty(Request::get('status')) ? Request::get('status') : ''; 
@@ -218,8 +199,6 @@
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
                                             <input style="margin-top:23px" type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
-<!--                                             <button style="margin-top:23px" type="button" onclick="fnExcelReport('details_of_goods_table')" href="javascript:void(0)" name="export_to_excel" value="Export To Csv" class=""></a>                               -->                                                              
-  <!--                                           <input style="margin-top:23px" type="submit" name="export_to_pdf" value="Export To PDF" class="btn btn-info"> -->
                                         </div>
 
                                     </div>
@@ -261,11 +240,22 @@
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
+                                            <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
+                                            <th>Vehicle Pass Weight</th>
+                                            <th data-sortable="true">Vendor</th>
+
                                             <th data-field="dat2323e" data-sortable="true">Net Weight</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
+                                            <th data-sortable="true">Gross Weight</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Plant</th>
+                                            <th data-sortable="true">Supervisor</th>
+
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Site</th>
-                                            <th>Date</th>
+                                            <th data-sortable="true">Loading Date</th>
+                                            <th data-sortable="true">Loading Time</th>
+                                            <th data-sortable="true">Dispatch Date</th>
+                                            <th  data-sortable="true">Dispatch Time</th>
+                                            <th>Item</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                             <th>Print Challan</th>
@@ -276,17 +266,36 @@
                                         @foreach ($entries as $key => $value)
                                             <?php
                                             $encrypt_id = enCrypt($value->slip_no);
+                                            $item  = !empty($value->items_included) ? json_decode($value->items_included) : [];
+                                            $main_item_arr = [];
+                                            if(!empty($item)){
+                                                foreach($item as $i => $tem){
+                                                    $main_item_arr[] = $items[$tem]; 
+                                                }
+                                            }
+                                            else{
+                                                $main_item_arr = [];
+                                            }
                                             ?>
                                             <tr>
                                                 <td></td>
                                                
                                                 <td>{{ !empty($value->series) ? $value->series.$value->slip_no: $value->slip_no }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
+                                                <td>{{ !empty($vehciles[$value->vehicle]) ? $vehciles[$value->vehicle] : ''}}</td>
+                                                <td>{{ !empty($value->vehicle_pass) ? $value->vehicle_pass : ''}} KG</td>
+                                                <td>{{ !empty($vendors[$value->vendor_id]) ? $vendors[$value->vendor_id ] : ''}}</td>
                                                 <td>{{ !empty($value->net_weight) ? $value->net_weight : '0'}} KG</td>
                                                 <td>{{!empty($value->entry_weight) ? $value->entry_weight : '' }} KG</td>
+                                                <td>{{ !empty($value->gross_weight) ? $value->gross_weight.' KG ' : '0 KG' }}</td>
                                                 <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
+                                                <td>{{ !empty($supervisors[$value->supervisor]) ? $supervisors[$value->supervisor] : '' }}</td>
                                                 <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
                                                 <td>{{ !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''}}</td>
+                                                <td>{{!empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : '' }}</td>
+                                                <td>{{ !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)) : '' }}</td>
+                                                <td>{{ !empty($value->generation_minutehours) ? date('h:i:A' , strtotime($value->generation_minutehours)) : '' }}</td>
+                                                <td>{{ !empty($main_item_arr) ? implode(',' , $main_item_arr) : '' }}</td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"
