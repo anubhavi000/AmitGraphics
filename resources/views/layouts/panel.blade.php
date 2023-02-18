@@ -78,6 +78,15 @@
 
 
     <style>
+        a[rel="prev"] {
+            display: none;
+        }
+        a[rel="next"] {
+            display: none;
+        }
+        .w-5{
+            display: none;
+        }
         li[data-type^="json"],
         li[data-type^="txt"],
         li[data-type^="sql"] {

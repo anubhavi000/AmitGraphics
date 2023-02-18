@@ -9,7 +9,7 @@
                 <div class="page-header-title">
                     <i class="fas fa-map-signs mr-2"></i>
                     <div class="d-inline">
-                        <h5 class="mt-2">Generated Slips</h5>
+                        <h5 class="mt-2">Payment Checking</h5>
                         <!-- <p class="heading_Bottom"> Client Bill Payment Ledger</p> -->
                     </div>
                 </div>
@@ -129,18 +129,14 @@
                     <div id="hide_2" class="table-responsive">
                         <table id="table1" class=" table table-bordered"  >
                         </table>
-                        <div class="row " style="margin-bottom:16px">
-                            <div class="col-md-6">
-                                <h2 class="form-control-sm yash_heading form_style"><i
-                                        class="fas fa-database mr-2"></i><b>Slip Details </b></h2>
-                            </div>
-                        </div>
+                                <form id="mainform" method="POST" action="{{route('PaymentChecking.store')}}">
+                                    @csrf
                         <table id="table" data-toggle="table" data-search="true" data-filter-control="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
-                                    data-pagination="true" data-toolbar="#toolbar">
+                                     data-toolbar="#toolbar">
                             <thead>
                                 <tr style="background-color:darkslategray; color: white;">
-                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th>Check</th>
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
                                             <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
@@ -159,8 +155,6 @@
                                             <th data-sortable="true">Dispatch Date</th>
                                             <th  data-sortable="true">Dispatch Time</th>
                                             <th>Item</th>
-                                            <th>Print Slip</th>
-                                            <th>Print Challan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -179,8 +173,14 @@
                                             }
                                             ?>
                                     <tr>
-                                                 <td></td>
-                                               
+
+                                                <td>
+                                                @if($value->is_checked == 0)
+                                                    <input type="checkbox" style="width: 2vw;height: 2vw;" name="id[]" value="{{$value->id}}">
+                                                @else
+                                                    Checked
+                                                @endif
+                                                </td>
                                                 <td>{{ !empty($value->slip_no) ? $value->slip_no : '' }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
                                                 <td>{{ !empty($vehicles[$value->vehicle]) ? $vehicles[$value->vehicle] : ''}}</td>
@@ -196,38 +196,14 @@
                                                 <td>{{ !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : ''}}</td>
                                                 <td>{{ !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)) : ''}}</td>
                                                 <td>{{ !empty($value->generation_time) ? date('h:i:A' , strtotime($value->generation_time)) : ''}}</td>
-                                                <td>{{ !empty($arr_item_real) ? implode(',' , $arr_item_real) : '' }}</td>
-                                                <td>
-                                            <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip'.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
-                                                aria-haspopup="true" aria-expanded="true"
-                                                class="btn btn-primary btn-sm ">
-                                                Print Slip : {{$value->slip_no}}
-                                            </a>                                                    
-                                                </td>
-                                        <td>
-                                            @if($value->is_generated == 1)
-                                            @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                            <a style="width: 100%;" target="_blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
-                                                aria-haspopup="true" aria-expanded="true"
-                                                class="btn btn-primary btn-sm ">
-                                                Print Challan : {{$value->slip_no}}
-                                            </a>             
-                                            @else
-                                                <span class="text-danger mt-2">Excess</span>
-                                            @endif            
-                                            @else
-                                                <span class="mt-2"> Not generated </span>
-                                            @endif                   
-                                        </td> 
+                                                <td>{{ !empty($arr_item_real) ? implode(',' , $arr_item_real) : '' }}</td> 
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                                <div class="d-felx justify-content-center">
-                                     {{ $data->links() }}
-                                </div>                         
-
+                        <button class="btn btn-primary mt-2" style="margin-left: 2%;height: 6vh;">Submit</button>
                     </div>
+                </form>
             </div>
         </div>
     </div>

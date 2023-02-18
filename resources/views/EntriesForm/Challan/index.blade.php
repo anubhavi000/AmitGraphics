@@ -49,6 +49,7 @@
             border: 1px solid #ddd;
         }
 
+
         .pagination>.active>a,
         .pagination>.active>a:focus,
         .pagination>.active>a:hover,
@@ -242,7 +243,7 @@
 
                                 <table id="table" data-toggle="table" data-search="true" data-filter-control="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
-                                    data-pagination="true" data-toolbar="#toolbar">
+                                 data-toolbar="#toolbar">
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
@@ -271,6 +272,9 @@
                                     </thead>
                                   
                                     <tbody>
+                                        @php
+                                            $i=($entries->currentpage()-1)*50;
+                                        @endphp
                                         @foreach ($entries as $key => $value)
                                             <?php
                                             $encrypt_id = enCrypt($value->slip_no);
@@ -412,6 +416,27 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                
+{{--
+                              @php
+                                    $pages  = round($entries->total()/$entries->perpage());
+                                @endphp
+                                    <div class="col-xs-6 mt-3" style="text-align: right;">
+                                    <div class="dataTables_paginate paging_simple_numbers">
+                                        @for($i = 1; $i<=$pages; $i++)
+                                    <span aria-current="page">
+<a href="https://localhost/atwask/child_synergy/public/ChalanGeneration?page={{$i}}" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-500 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="Go to page 2">{{$i}}
+                                    </a>
+                                    </span>
+                                    @endfor
+
+                                    </div>
+                                    </div>
+                                    --}}
+                                <div class="d-felx justify-content-center">
+                                     {{ $entries->links() }}
+                                </div>                  >                                                              
                             </div>
                         </div>
                     @endif

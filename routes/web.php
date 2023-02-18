@@ -188,6 +188,9 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::get('Reports/{slug}' , 'ReportController@retunrnhnadler');
     //ends
 
+    //payement routes by ved
+    Route::resource('PaymentChecking' , 'PaymentCheckingController');
+    //ends
     // always add routes on above this line 
 
     // Route::resource('Form', 'FormController');

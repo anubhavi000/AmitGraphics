@@ -407,7 +407,7 @@ class EntriesController extends Controller
 
             $recordsraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
         }
-            $records = $recordsraw->get();
+            $records = $recordsraw->paginate(10);
         if(!empty($request->export_to_excel)){
             $res  =  EntryMast::ExportManual($records);
         }
@@ -423,7 +423,7 @@ class EntriesController extends Controller
             'plants'    => $plants,
             'supervisors' => $supervisors
         ]);
-    }
+    } 
     public function PrintInvoice(Request $request , $plant , $slip_no){
         if( !empty($slip_no)){
             $data = EntryMast::join('plant_mast' , 'plant_mast.id' , '=' ,'entry_mast.plant')
@@ -613,7 +613,7 @@ class EntriesController extends Controller
                 }
             }
             $entries = $entriesraw->orderBy('id' , 'DESC')
-                                  ->get();
+                                  ->paginate(10);
 
             if(!empty($entries)){
                 if(count($entries)  == 1){
@@ -822,6 +822,7 @@ class EntriesController extends Controller
                 $exploded_to   = explode(':', $to_time);
 
                 if($exploded_from[0] > $exploded_to[0]){
+                    dd('here');
                     $validation = 0;
                 }
                 else if($exploded_from[0] < $exploded_to[0]){
