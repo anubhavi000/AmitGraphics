@@ -65,6 +65,10 @@
      <label for="item_Name" class="yash_star"> Series </label>
      <input type="text" name="series" value="{{!empty($data->series) ? $data->series : ''}}" id="series" class="form-control client_margin" placeholder="Enter Series" >
    </div>
+     <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star">  Rate / Ton </label>
+     <input type="text" value="{{!empty($data->rate_ton) ? $data->rate_ton : ''}}" name="rate_ton" id="rate_ton" placeholder="Enter Rate / Ton" onkeypress='return restrictAlphabets(event)' class="form-control client_margin" >
+   </div>
 
     <div class="col-md-3 mb-3 px-3">
      <label for="item_Name" class="yash_star">  Owner </label>

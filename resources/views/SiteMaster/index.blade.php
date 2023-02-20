@@ -214,6 +214,8 @@
 
                                                     <th data-field="note322" data-sortable="true">Longitude</th>
 
+                                                    <th data-sortable = "true">Rate / Ton</th>
+
                                                     <th data-field="note32" data-sortable="true">Action</th>
                                                 </tr>
 
@@ -239,7 +241,7 @@
                                                         <td>{{ !empty($value->latitude) ? $value->latitude : '' }}</td>
                                                 
                                                         <td>{{ !empty($value->longitude) ? $value->longitude : '' }}</td>
-
+                                                        <td>{{ !empty($value->rate_ton) ? $value->rate_ton : '' }}</td>
                                                         <?php $encrypt_id = enCrypt($value->id); ?>
                                                         <td>
                                                 <span class="dropdown open">

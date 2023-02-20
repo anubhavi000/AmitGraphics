@@ -102,7 +102,7 @@
 
                 <div class="container-fluid bg-white mt-2 mb-5 border_radius box">
                     <div class="row">
-                        <div class="col-md-12 mt-3 mb-3">
+                        <div class="col-md-12 mt-3 mb-0">
 
                             <div class="container-fluid mt-3">
                                 <form action="" method="GET" id="user-search">
@@ -111,7 +111,9 @@
                                         @php
                                             $slip_no_requested = !empty(Request::get('slip_no')) ? Request::get('slip_no') : '';
                                             $kanta_reqquested  = !empty(Request::get('kanta_slip_no')) ? Request::get('kanta_slip_no') : '';
-                                            $vehicle_requested = !empty(Request::get('vehicle')) ? Request::get('vehilce') : ''; 
+                                            $vehicle_requested = !empty(Request::get('vehicle')) ? Request::get('vehilce') : '';
+
+                                            $vendor_requested = !empty(Request::get('vendor')) ? Request::get('vendor') : '';
                                         @endphp
                                         <div class="col-md-2">
                                             <label for="client_id">Slip No</label>
@@ -152,8 +154,8 @@
                                         </div>                                            
                                         <div class="col-md-2 client_margin">
                                             <label for="client_id">Vehicle</label>
-                                            <select name="vehicle" class="fstdropdown-select">
-                                                        <option value="">Please Select</option>
+                                            <select name="vehicle" class="fstdropdown-select mb-0">
+                                                        <option value=""> Select</option>
                                                 @if(!empty($vehicles))
                                                     @foreach($vehicles as $key => $value)
                                                         @if($key == $vehicle_requested)
@@ -164,8 +166,21 @@
                                                     @endforeach
                                                 @endif
                                             </select>
-                                        </div>           
-                                        <div class="col-md-2 mb-3 px-3">
+                                        </div>  
+                                        <div class="col-md-2">
+                                            <label class="mb-0">Vendor</label>
+                                            <select name="vendor" class="fstdropdown-select">
+                                                <option value="">Select</option>
+                                                @foreach($vendors as $key => $value)
+                                                    @if($key == $vendor_requested)
+                                                    <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                    @else
+                                                    <option value="{{$key}}">{{$value}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>         
+                                        <div class="col-md-2  px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
                                             <input style="margin-top:23px" type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
@@ -178,23 +193,24 @@
 
 
                             </div>
-                            <div id="hide_2" class="table-responsive">
-
-                            </div>
                         </div>
 
                     </div>
-                        <div class="col-md-12 mt-3 mb-3">
+                        <div class="col-md-12 mt-1 mb-3">
 
                             <div class="container-fluid mt-3">
                             </div>
                             <div id="hide_2" class="table-responsive">
-
                                 <table id="table" data-toggle="table" data-search="true" 
-                                    data-pagination="true" data-toolbar="#toolbar">
+                                     data-toolbar="#toolbar">
+                                <div class="row " style="margin-bottom:16px">
+                                    <div class="col-md-6">
+                                        <h2 class="form-control-sm yash_heading form_style"><i
+                                                class="fas fa-database mr-2"></i><b>No. Of Trips : {{$data->total()}}</b></h2>
+                                    </div>
+                                </div>                                    
                                     <thead>
                                         <tr>
-                                            <th data-field="dssazze3te" data-sortable="true">S.NO</th>
                                             <th data-field="dazze3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat3zz2e" data-sortable="true">Weighbridge Slip No</th>
                                             <th data-field="da1t32zze" data-sortable="true">Vehicle Number</th>
@@ -209,8 +225,6 @@
                                             <th>Loading Time</th>
                                             <th data-field="dww33at2323ew" data-sortable="true">Dispatch Date</th>
                                             <th data-sortable="true">Dispatch Time</th>
-                                            <th data-field="note13" data-sortable="true">Print Slip</th>
-                                            <th data-field="d3ede3at2323ew" data-sortable="true">Print Challan</th>
                                         </tr>
                                     </thead>
                                   
@@ -218,7 +232,6 @@
                                         @if(!empty($data))
                                             @foreach($data as $key => $value)
                                                 <tr>
-                                                    <td> {{ $key + 1 }} </td>
                                                     <td> {{ !empty( $value->slip_no ) ? $value->slip_no : '' }} </td>
                                                     <td> {{ !empty( $value->kanta_slip_no ) ? $value->kanta_slip_no : '' }} </td>
                                                     <td> {{ !empty( $vehicles[$value->vehicle] ) ? $vehicles[$value->vehicle] : ''}} </td>
@@ -234,28 +247,6 @@
                                                     <td> {{ !empty( $value->generation_time ) ? date('d-m-Y' , strtotime($value->generation_time)) : '' }} </td>
                                                     <td>{{ !empty($value->generation_minutehours) ? 
                                                         date('h:i:A' , strtotime($value->generation_minutehours)) : ''}}</td>
-                                                    <td> 
-                                                        @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                                            <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip'.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
-                                                                aria-haspopup="true" aria-expanded="true"
-                                                                class="btn btn-primary btn-sm ">
-                                                                 slip : {{$value->slip_no}}
-                                                            </a>                                            
-                                                        @else
-                                                            <span class="text-danger mt-2">Excess</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                                        <a style="width: 100%;" target="_blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
-                                                            aria-haspopup="true" aria-expanded="true"
-                                                            class="btn btn-primary btn-sm ">
-                                                            Challan : {{$value->slip_no}}
-                                                        </a>             
-                                                        @else
-                                                            <span class="text-danger mt-2">Excess</span>
-                                                        @endif                                                        
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif

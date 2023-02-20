@@ -20,11 +20,20 @@ class sites extends Model
     	'created_by',
     	'updated_at',
     	'updated_by',
+      'rate_ton',
     	'status'
     ];
     static function activesitespluck(){
         return self::where('status' , 1)
+                   ->orderBy('name' , 'asc')
                    ->pluck('name' , 'id')
                    ->toArray();
     }
+    static function dealersitespluck(){
+        return self::where('status' , 1)
+                   ->where('is_owner' , 0)
+                   ->orderBy('name' , 'asc')
+                   ->pluck('name' , 'id')
+                   ->toArray();
+    }    
 }

@@ -11,8 +11,12 @@ class VehicleMast extends Model
     protected $table = 'vehicle_mast';
 
     static function pluckactives(){
-    	return Self::where('status' , 1)
+    	$data =  Self::where('status' , 1)
+    			   ->orderBy('vehicle_no' , 'asc')
     			   ->pluck('vehicle_no' , 'id')
     			   ->toArray();
+    	$data2 = natsort($data);
+    	// dd($data);
+    	return $data;
     }
 }

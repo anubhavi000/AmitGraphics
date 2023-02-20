@@ -65,10 +65,17 @@
      <input type="text" name="series" id="series" class="form-control client_margin" placeholder="Enter Series" >
    </div>
 
+  <div class="col-md-3 mb-3 px-3">
+     <label for="item_Name" class="yash_star">  Rate / Ton </label>
+     <input type="text" name="rate_ton" id="rate_ton" placeholder="Enter Rate / Ton" onkeypress='return restrictAlphabets(event)' class="form-control client_margin" >
+   </div>
+
     <div class="col-md-3 mb-3 px-3">
      <label for="item_Name" class="yash_star">  Owner </label>
      <input type="checkbox" name="is_owner" value="1" style="height: 1.5vw;width: 1.5vw;" id="series" class="form-check client_margin" >
    </div>
+
+  
 
    <div class="col-md-3 mb-3 px-3">
    </div> 

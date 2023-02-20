@@ -48,9 +48,7 @@ class EntriesController extends Controller
                                ->pluck('name' , 'id')
                                ->toArray();
 
-            $vehicle_mast = VehicleMast::where('status' , 1)
-                                 ->pluck('vehicle_no' , 'id')
-                                 ->toArray();
+            $vehicle_mast = VehicleMast::pluckactives();
             if($from_date){
                 $current_date = date('Y-m-d');
                 if($from_date == 'today'){
@@ -121,22 +119,11 @@ class EntriesController extends Controller
         $transporters    =   VendorMast::where('status' , 1)
                                        ->pluck('v_name' , 'id')
                                        ->toArray();
-        $vehicles        =  VehicleMast::where('status' , 1)
-                                       ->pluck('vehicle_no' , 'id')
-                                       ->toArray();
-        $sites           =  Sites::where('status' , 1)
-                                 ->where('is_owner' , 0)
-                                 ->pluck('name' , 'id')
-                                 ->toArray();
-        $supervisors     = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
-        $items           = ItemMast::where('status' , 1)
-                                   ->pluck('name' , 'id')
-                                   ->toArray();
-        $plants          =  PlantMast::where('status' , 1)
-                                     ->pluck('name' , 'id')
-                                     ->toArray();
+        $vehicles        =  VehicleMast::pluckactives();
+        $sites           =  Sites::dealersitespluck();
+        $supervisors     = SupervisorMast::pluckactives();
+        $items           = ItemMast::pluckactives();
+        $plants          =  PlantMast::pluckactives();
         $last_kanta_slip = EntryMast::where('delete_status' , 0)
                                     ->orderBy('created_at' , 'DESC')
                                     ->first();
@@ -195,30 +182,17 @@ class EntriesController extends Controller
                                 
         $chosenvehicle = 
 
-        $vehicles        =  VehicleMast::where('status' , 1)
-                               ->pluck('vehicle_no' , 'id')
-                               ->toArray();
+        $vehicles        =  VehicleMast::pluckactives();
 
-        $plants  = PlantMast::where('status' , 1)
-                            ->pluck('name' , 'id')
-                            ->toArray();
+        $plants  = PlantMast::pluckactives();
 
-        $items = ItemMast::where('status' , 1)
-                         ->pluck('name' , 'id')
-                         ->toArray();
+        $items = ItemMast::pluckactives();
 
-        $transporters =     VendorMast::where('status' , 1)
-                                       ->pluck('v_name' , 'id')
-                                       ->toArray();
+        $transporters =     VendorMast::pluckactives();
 
-        $sites           =  Sites::where('status' , 1)
-                                 ->where('is_owner' , 0)
-                                 ->pluck('name' , 'id')
-                                 ->toArray();
+        $sites           =  Sites::dealersitespluck();
 
-        $supervisors     = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
+        $supervisors     = SupervisorMast::pluckactives();
 
         if(!empty($entry->vendor_id)){
             $selected_vendor = VendorMast::where('id' , $entry->vendor_id)->first();
@@ -264,22 +238,11 @@ class EntriesController extends Controller
         $transporters    =   VendorMast::where('status' , 1)
                                        ->pluck('v_name' , 'id')
                                        ->toArray();
-        $vehicles        =  VehicleMast::where('status' , 1)
-                                       ->pluck('vehicle_no' , 'id')
-                                       ->toArray();
-        $sites           =  Sites::where('status' , 1)
-                                 ->where('is_owner' , 0)
-                                 ->pluck('name' , 'id')
-                                 ->toArray();
-        $supervisors     = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
-        $items           = ItemMast::where('status' , 1)
-                                   ->pluck('name' , 'id')
-                                   ->toArray();
-        $plants          =  PlantMast::where('status' , 1)
-                                     ->pluck('name' , 'id')
-                                     ->toArray();
+        $vehicles        =  VehicleMast::pluckactives();
+        $sites           =  Sites::dealersitespluck();
+        $supervisors     = SupervisorMast::pluckactives();
+        $items           = ItemMast::pluckactives();
+        $plants          =  PlantMast::pluckactives();
 
         if(empty($entry)){
             return redirect()->back();
@@ -400,25 +363,37 @@ class EntriesController extends Controller
         if(isset($request->vendor)){
             $recordsraw->where('vendor_id' , $request->vendor);
         }
+        if(isset($request->site)){
+            $recordsraw->where('site' , $request->site);
+        }
+        if(isset($request->plant)){
+            $recordsraw->where('plant' , $request->plant);
+        }
+        if(isset($request->item)){
+            $arr = [$request->item];
+            $json = json_encode($arr);
+            $recordsraw->where('items_included' , $json);
+        }
         if(!empty($request->from_date) && !empty($request->to_date)){
         
         $from_date = date('Y-m-d' , strtotime($request->from_date));
         $to_date   = date('Y-m-d' , strtotime($request->to_date));
-
-            $recordsraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
+            $recordsraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
         }
         if(!empty($request->export_to_excel)){
             $res  =  EntryMast::ExportManual($recordsraw->get());
         }
-            $records = $recordsraw->paginate(10);
+        $records = $recordsraw->paginate(10);
         $vendors = VendorMast::pluckactives();
         $items = ItemMast::pluckactives();
         $supervisors = SupervisorMast::pluckactives();
+        $sites = Sites::dealersitespluck();
         return view($this->module_folder.'.show' , [
             'data'        => $records,
             'sites'       => $sites,
             'vehicles'    => $vehicles,
             'items'       => $items,
+            'sites'       => $sites,
             'vendors'     => $vendors,
             'plants'      => $plants,
             'supervisors' => $supervisors
@@ -576,9 +551,7 @@ class EntriesController extends Controller
             $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
             $to_date = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
             // dd($from_date , $to_date);
-            $vendors = VendorMast::where('status' , 1)
-                                 ->pluck('v_name' , 'id')
-                                 ->toArray();
+            $vendors = VendorMast::pluckactives();
 
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
@@ -588,10 +561,8 @@ class EntriesController extends Controller
                                    ->where('delete_status' , 0);
 
             $sites = Sites::activesitespluck();
-            $plants = PlantMast::where('status' , 1)
-                               ->pluck('name' , 'id')
-                               ->toArray();
-            $entriesraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
+            $plants = PlantMast::pluckactives();
+            $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
@@ -603,7 +574,18 @@ class EntriesController extends Controller
             }   
             if(isset($request->vendor)){
                 $entriesraw->where('vendor_id' , $request->vendor);
+            }
+            if(isset($request->item)){
+                $arr = [$request->item];
+                $josn = json_encode($arr);
+                $entriesraw->where('items_included' , $josn);
             }         
+            if(isset($request->site)){
+                $entriesraw->where('site' ,$request->site);
+            }
+            if(isset($request->plant)){
+                $entriesraw->where('plant' , $request->plant);
+            }
             if(isset($request->status)){
                 if($request->status == 1){
                     $entriesraw->where('is_generated' , 1);
@@ -625,12 +607,8 @@ class EntriesController extends Controller
                 }
             }
 
-            $vehicle_mast = VehicleMast::where('status' , 1)
-                                 ->pluck('vehicle_no' , 'id')
-                                 ->toArray();
-            $vendors = VendorMast::where('status' , 1)
-                                 ->pluck('v_name' , 'id')
-                                 ->toArray();
+            $vehicle_mast = VehicleMast::pluckactives();
+            $vendors = VendorMast::pluckactives();
 
             $item = ItemMast::pluckactives();
             $supervisors = SupervisorMast::pluckactives();
@@ -652,22 +630,11 @@ class EntriesController extends Controller
                 $transporters    =   VendorMast::where('status' , 1)
                                                ->pluck('v_name' , 'id')
                                                ->toArray();
-                $vehicles        =  VehicleMast::where('status' , 1)
-                                               ->pluck('vehicle_no' , 'id')
-                                               ->toArray();
-                $sites           =  Sites::where('status' , 1)
-                                         ->where('is_owner' , 0)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
-                $supervisors     = SupervisorMast::where('status' , 1)
-                                                 ->pluck('name' , 'id')
-                                                 ->toArray();
-                $items           = ItemMast::where('status' , 1)
-                                           ->pluck('name' , 'id')
-                                           ->toArray();
-                $plants          =  PlantMast::where('status' , 1)
-                                             ->pluck('name' , 'id')
-                                             ->toArray();
+                $vehicles        =  VehicleMast::pluckactives();
+                $sites           =  Sites::dealersitespluck();
+                $supervisors     = SupervisorMast::pluckactives();
+                $items           = ItemMast::pluckactives();
+                $plants          =  PlantMast::pluckactives();
         if(!empty($request->slip_no)){
             $check = EntryMast::where('slip_no' , $request->slip_no)
                               ->first();
@@ -699,14 +666,10 @@ class EntriesController extends Controller
                                    ->where('manual' , 1)
                                    ->where('delete_status' , 0);
 
-            $sites = Sites::activesitespluck();
-            $plants = PlantMast::where('status' , 1)
-                               ->pluck('name' , 'id')
-                               ->toArray();
+            $sites = Sites::dealersitespluck();
+            $plants = PlantMast::pluckactives();
 
-            $vendors = VendorMast::where('status' , 1)
-                                 ->pluck('v_name' , 'id')
-                                 ->toArray();
+            $vendors = VendorMast::pluckactives();
 
                     $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
             if(!empty($kanta_slip_no)){
@@ -717,6 +680,17 @@ class EntriesController extends Controller
             }            
             if(isset($request->vendor)){
                 $entriesraw->where('vendor_id' , $request->vendor);
+            }
+            if(isset($request->item)){
+                $arr = [$request->item];
+                $json = json_encode($arr);
+                $entriesraw->where('items_included' , $json);
+            }
+            if(isset($request->site)){
+                $entriesraw->where('site' , $request->site);
+            }
+            if(isset($request->plant)){
+                $entriesraw->where('plant' , $request->plant);
             }
             if(isset($request->status)){
                 if($request->status == 1){
@@ -731,7 +705,7 @@ class EntriesController extends Controller
             }
             $entries = $entriesraw->orderBy('slip_no' , 'DESC')
                                   ->paginate(10);
-                                  
+
             return view($this->module_folder.'.ManualChallan.index' , [
                 'entries'      => $entries,
                 'sites'        => $sites,

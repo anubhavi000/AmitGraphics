@@ -11,8 +11,11 @@ class PlantMast extends Model
     protected $table = 'plant_mast';
 
     static function pluckactives(){
-    	return self::where('status' , 1)
+    	$data =  self::where('status' , 1)
+    			   ->orderBy('name' , 'asc')
     			   ->pluck('name' , 'id')
     			   ->toArray();
+    	$data2 = natsort($data);
+    	return $data;
     }
 }

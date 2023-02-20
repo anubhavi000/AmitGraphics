@@ -110,7 +110,7 @@
 
                 <div class="container-fluid bg-white mt-2 mb-5 border_radius box">
                     <div class="row">
-                        <div class="col-md-12 mt-3 mb-3">
+                        <div class="col-md-12 mt-3 mb-0">
 
                             <div class="container-fluid mt-3">
                                 <form action="" method="GET" id="user-search">
@@ -194,7 +194,72 @@
                                                     @endforeach
                                                 @endif
                                             </select>
-                                        </div>           
+                                        </div>
+                                    @php
+                                        $requested_item = !empty(Request::get('item')) ? Request::get('item') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Item</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="item" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($items))
+                                                        @foreach($items as $key => $value)
+                                                            @if($key == $requested_item)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>        
+
+                                    @php
+                                        $requested_site = !empty(Request::get('site')) ? Request::get('site') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Unloading Site</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="site" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($sites))
+                                                        @foreach($sites as $key => $value)
+                                                            @if($key == $requested_site)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>   
+
+                                    @php
+                                        $requested_plant = !empty(Request::get('plant')) ? Request::get('plant') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Plant</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="plant" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($plants))
+                                                        @foreach($plants as $key => $value)
+                                                            @if($key == $requested_plant)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>                                                      
                                         <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
@@ -214,27 +279,22 @@
 
                     </div>
                     @if(!empty($entries))
-                        <div class="col-md-12 mt-3 mb-3">
+                        <div class="col-md-12 mt-3 mb-0">
 
                             <div class="container-fluid mt-3">
                             </div>
                             <div id="hide_2" class="table-responsive">
-                            <div id="toolbar">
 
-                                <select class="form-control">
-
-                                    <option value="">Export Basic</option>
-
-                                    <option value="all">Export All</option>
-
-                                    <option value="selected">Export Selected</option>
-
-                                </select>
-
-                            </div>
+                        </div>
                                 <table id="table" data-toggle="table" data-search="true" export-all="true" data-filter-control="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
                                      data-toolbar="#toolbar">
+<div class="row " style="margin-bottom:16px">
+                                    <div class="col-md-6">
+                                        <h2 class="form-control-sm yash_heading form_style"><i
+                                                class="fas fa-database mr-2"></i><b>No. Of Trips : {{$entries->total()}}</b></h2>
+                                    </div>
+                                </div>                                                                     
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
@@ -247,10 +307,10 @@
                                             <th data-field="dat2323e" data-sortable="true">Net Weight</th>
                                             <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
                                             <th data-sortable="true">Gross Weight</th>
-                                            <th data-field="d33at2323e" data-sortable="true">Unloading Plant</th>
+                                            <th data-field="d33at2323e" data-sortable="true">Loading Plant</th>
                                             <th data-sortable="true">Supervisor</th>
 
-                                            <th data-field="d33at2323ew" data-sortable="true">Loading Site</th>
+                                            <th data-field="d33at2323ew" data-sortable="true">Unloading Site</th>
                                             <th data-sortable="true">Loading Date</th>
                                             <th data-sortable="true">Loading Time</th>
                                             <th data-sortable="true">Dispatch Date</th>

@@ -48,6 +48,9 @@ class ReportController extends Controller
 		if(!empty($request->vehicle)){
 			$dataraw->where('vehicle' , $request->vehicle);
 		}
+		if(!empty($request->vendor)){
+			$dataraw->where('vendor_id', $request->vendor);
+		}
 		if(!empty($request->export_to_excel)){
 			EntryMast::ExportManual($dataraw->get());
 		}
@@ -56,6 +59,7 @@ class ReportController extends Controller
 		$sites 	  = sites::activesitespluck(); 
 		$plants   = PlantMast::pluckactives(); 
 		$supervisors = SupervisorMast::pluckactives();
+		$vendors  = VendorMast::pluckactives();
 
 		return view('Reports.vehicle_wise_challans' , [
 			'data'	      => $data,
@@ -63,6 +67,7 @@ class ReportController extends Controller
 			'sites'	      => $sites,
 			'supervisors' => $supervisors,
 			'plants'      => $plants,
+			'vendors'     => $vendors,
 			'from_date'   => $from_date,
 			'to_date'     => $to_date
 		]);

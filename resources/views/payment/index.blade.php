@@ -1,6 +1,11 @@
- @extends('layouts.panel')
+     @extends('layouts.panel')
 
 @section('content')
+<style type="text/css">
+    th{
+        font-size: 15px !important;
+    }
+</style>
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
     <div class="page-header card" id="grv_margin">
@@ -131,29 +136,29 @@
                         </table>
                                 <form id="mainform" method="POST" action="{{route('PaymentChecking.store')}}">
                                     @csrf
-                        <table id="table" data-toggle="table" data-search="true" data-filter-control="true"
+                        <table id="table" data-toggle="table" data-search="true" data-filter-control="true" data-resizable="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
                                      data-toolbar="#toolbar">
                             <thead>
                                 <tr style="background-color:darkslategray; color: white;">
                                             <th>Check</th>
-                                            <th data-field="dae3te" data-sortable="true">Slip No</th>
-                                            <th data-field="dat32e" data-sortable="true">WeightBridge Slip No.</th>
-                                            <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
-                                            <th>Vehicle Pass Weight</th>
-                                            <th data-sortable="true">Vendor</th>
+                                            <th data-field="dae3te">Slip </th>
+                                            <th data-field="dat32e" >WeightBridge<br> Slip No.</th>
+                                            <th data-field="datq32e">Vehicle<br> No.</th>
+                                            <th>Vehicle<br> Pass Weight</th>
+                                            <th>Vendor</th>
 
-                                            <th data-field="dat2323e" data-sortable="true">Net Weight</th>
-                                            <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
-                                            <th data-sortable="true">Gross Weight</th>
-                                            <th data-field="d33at2323e" data-sortable="true">Unloading Plant</th>
-                                            <th data-sortable="true">Supervisor</th>
+                                            <th data-field="dat2323e">Net<br> Weight</th>
+                                            <th data-field="dat2323sse">Tare<br> Weight</th>
+                                            <th>Gross<br> Weight</th>
+                                            <th data-field="d33at2323e">Unloading<br> Plant</th>
+                                            <th>Supervisor</th>
 
-                                            <th data-field="d33at2323ew" data-sortable="true">Loading Site</th>
-                                            <th data-sortable="true">Loading Date</th>
-                                            <th data-sortable="true">Loading Time</th>
-                                            <th data-sortable="true">Dispatch Date</th>
-                                            <th  data-sortable="true">Dispatch Time</th>
+                                            <th data-field="d33at2323ew">Loading<br> Site</th>
+                                            <th>Loading<br> Date</th>
+                                            <th>Loading <br>Time</th>
+                                            <th>Dispatch<br> Date</th>
+                                            <th >Dispatch <br> Time</th>
                                             <th>Item</th>
                                 </tr>
                             </thead>
@@ -210,3 +215,8 @@
 </div>
 
         @endsection
+@section('js')
+{{--
+<script src="{{asset('js/resizable.js')}}"></script>
+--}}
+@endsection

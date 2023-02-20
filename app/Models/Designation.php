@@ -11,6 +11,7 @@ class Designation extends Model
     protected $table= "designation";
     public static function pluckactives(){
     	return self::where('status' , 1)
+    			   ->orderBy('name' , 'asc')
     			   ->pluck('name' , 'id')
     			   ->toArray();
     }

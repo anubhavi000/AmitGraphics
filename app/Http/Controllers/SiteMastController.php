@@ -57,7 +57,8 @@ class SiteMastController extends Controller
                 'created_by'=> Auth::user()->id,
                 'series'    => !empty( $request->series ) ? $request->series : NULL,
                 'status'    => 1,
-                'is_owner'  => !empty($request->is_owner) ? $request->is_owner : 0
+                'rate_ton'  => !empty($request->rate_ton) ? $request->rate_ton : NULL,
+                'is_owner'  => !empty($request->is_owner) ? $request->is_owner : 0,
             ];
 
             $insert = sites::create($arr);
@@ -126,7 +127,8 @@ class SiteMastController extends Controller
                 'created_by'=> Auth::user()->id,
                 'series'    => !empty($request->series) ? $request->series : NULL,
                 'is_owner'  => !empty($request->is_owner) ? $request->is_owner : 0,
-                'status'   => 1
+                'status'    => 1,
+                'rate_ton'  => !empty($request->rate_ton) ? $request->rate_ton : NULL
             ];
             $update = sites::where('id' , $now_id)
                             ->update($arr);

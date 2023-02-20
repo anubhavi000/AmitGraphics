@@ -157,7 +157,7 @@
                                                         'last_thirty_days' => 'Last 30 Days' 
                                                         ];  
                                                 @endphp
-                                                <div class="input-group client_margin mt-1">
+                                                <div class="input-group ">
                                                     <label class="mb-0">Datetime</label>
                                                     <select name="from_date" class="fstdropdown-select col-md-3">
                                                         <option value="">Select</option>
@@ -199,7 +199,7 @@
                                         </div>
                                         --}} 
                                         <div class="col-md-2">
-                                            <label>Vehicle</label>
+                                            <label class="mb-0">Vehicle</label>
                                             <select name="vehicle" class="fstdropdown-select">
                                                         <option value="">Please Select</option>
                                                 @if(!empty($vehicle_mast))

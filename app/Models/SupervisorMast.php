@@ -23,6 +23,7 @@ class SupervisorMast extends Model
 	} 
     static function pluckactives(){
         return Self::where('status' , 1)
+                    ->orderBy('name' , 'asc')
                     ->pluck('name' , 'id')
                     ->toArray();
     }    

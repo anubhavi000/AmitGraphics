@@ -28,6 +28,7 @@ class VendorMast extends Model
 	}   
     public static function pluckactives(){
         return Self::where('status' , 1)
+                   ->orderBy('v_name' , 'asc')
                    ->pluck('v_name' , 'id')
                    ->toArray();
     } 

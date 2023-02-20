@@ -28,9 +28,7 @@ class UserController extends Controller
         $entries =  User::where('status' , 1)
                         ->get();
 
-        $sites = Sites::where('status' , 1)
-                      ->pluck('name' , 'id')
-                      ->toArray(); 
+        $sites = Sites::activesitespluck();
 
         $designations = role::pluckactives();
 
@@ -49,10 +47,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $sites        = Sites::where('status' , 1)
-                              ->where('is_owner' , 1)
-                              ->pluck('name' , 'id')
-                              ->toArray();
+        $sites        = Sites::activesitespluck();
 
         $designations = role::pluckactives();
 

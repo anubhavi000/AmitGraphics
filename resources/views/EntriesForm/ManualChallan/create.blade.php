@@ -388,7 +388,7 @@ function calculateexcessweight(){
       var main_slip_no = $("#main_slip_no").val();
       var slip      = $("#slip_no").val();
       var sliplenth = slip.length;
-      var tare      = $("#tare_weight").val();
+      var tare      = $("#TareWeight").val();
       var vehicle   = $("#vehicle").val();
       var plant     = $("#plant").val();
       var site      = $("#site").val();  
@@ -409,7 +409,7 @@ function calculateexcessweight(){
       //   alert('Filling Slip Number Is Neccessary');
       //   return;
       // } 
-      if(tare = 0 || tare == ''){
+      if(tare == ''){
         alert('Filling Tare Weight Is Neccessary');
         return false;
       }

@@ -9,6 +9,7 @@ use App\Models\VehicleMast;
 use App\Models\sites;
 use App\Models\PlantMast;
 use App\Models\ItemMast;
+use App\Models\User;
 use App\Models\VendorMast;
 use Auth;
 use DB;
@@ -306,7 +307,7 @@ class EntryMast extends Model
         }
     }
     public static function  ExportManual($data){
-            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , In Date , In Time  , Out Date , Out Time ,  Unloading Site , Loading Site , Loading Plant , Item , Remarks';
+            $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , In Date , In Time  , Out Date , Out Time ,  Unloading Site , Loading Site , Loading Plant , Item , Remarks , Created By';
             $str .= "\n";
             $vehicles = VehicleMast::where('status' , 1)
                                    ->pluck('vehicle_no' , 'id')
@@ -314,6 +315,7 @@ class EntryMast extends Model
             $sites = sites::where('status' , 1)
                           ->pluck('name' , 'id')
                           ->toArray();
+
             $plants = PlantMast::where('status' , 1)
                                ->pluck('name' , 'id')
                                ->toArray();
@@ -321,6 +323,7 @@ class EntryMast extends Model
                              ->pluck('name' , 'id')
                              ->toArray(); 
             $vendors  = VendorMast::pluckactives();
+            $users    = User::pluck('name' , 'id')->toArray();
 
             foreach ($data as $key => $value) {
                 $main_items_arr = [];
@@ -343,7 +346,7 @@ class EntryMast extends Model
                 $str .= $value->entry_weight.',';
                 $str .= $value->gross_weight.',';
                 $str .= !empty($value->net_weight) ? $value->net_weight : '';$str .= ",";
-                $str .= !empty($value->excess_weight) ? $value->excess_weight :''; $str .= ",";
+                $str .= !empty($value->excess_weight) ? $value->excess_weight :'0'; $str .= ",";
                 $str .= !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''; $str .= ',';
                 $str .= !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : '';
                 $str .= ",";
@@ -355,6 +358,8 @@ class EntryMast extends Model
                 $str .=  !empty($plants[$value->plant]) ? $plants[$value->plant].',' : ',';
                 $str .= !empty($main_items_arr) ?  implode(',' , $main_items_arr) : ''; $str .= ",";
                 $str .= !empty($value->remarks) ? $value->remarks : ''; $str.= ",";
+                $str .= !empty($users[$value->created_by]) ? $users[$value->created_by] : '';
+                $str .= ","; 
                 $str .= "\n";
             }
             header("Content-type: text/csv");
