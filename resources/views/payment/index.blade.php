@@ -115,7 +115,7 @@
                                             </div>
                                         </fieldset>
                                     </div>                                                                                                            
-                                    <div class="col-md-2 mt-3">
+                                 <div class="col-md-2 mt-3">
                                         <input type="submit" name="find" value="find" class="btn btn-success">
                                         <input type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
                                         <!-- <input type="submit" class="btn btn-primary" name="export_pdf" value="Export Pdf"> -->
@@ -201,7 +201,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <button class="btn btn-primary mt-2" style="margin-left: 2%;height: 6vh;">Submit</button>
+                        <button class="btn btn-primary mt-2" style="margin-left: 2%;height: 6vh;">Mark As Checked</button>
                     </div>
                 </form>
             </div>
