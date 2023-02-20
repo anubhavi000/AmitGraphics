@@ -138,7 +138,7 @@
                                 <tr style="background-color:darkslategray; color: white;">
                                             <th>Check</th>
                                             <th data-field="dae3te" data-sortable="true">Slip No</th>
-                                            <th data-field="dat32e" data-sortable="true">Kanta Slip No</th>
+                                            <th data-field="dat32e" data-sortable="true">WeightBridge Slip No.</th>
                                             <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
                                             <th>Vehicle Pass Weight</th>
                                             <th data-sortable="true">Vendor</th>
