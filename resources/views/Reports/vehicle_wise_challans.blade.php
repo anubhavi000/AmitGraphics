@@ -247,7 +247,10 @@
                                             @endforeach
                                         @endif
                                     </tbody>
-                                </table>
+                                </table><br>
+                                <div class="d-felx justify-content-center">
+                                     {{ $data->links() }}
+                                </div>                                
                             </div>
                         </div>
 
