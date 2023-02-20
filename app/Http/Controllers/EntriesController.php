@@ -823,7 +823,6 @@ class EntriesController extends Controller
                 $exploded_to   = explode(':', $to_time);
 
                 if($exploded_from[0] > $exploded_to[0]){
-                    dd('here');
                     $validation = 0;
                 }
                 else if($exploded_from[0] < $exploded_to[0]){

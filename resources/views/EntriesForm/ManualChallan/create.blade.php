@@ -478,7 +478,7 @@ function calculateexcessweight(){
                   $("#storeform").submit();
                   }
                   else{
-                    alert('Out Date Must be Greated Than To Date');
+                    alert('Out Date and Out Time Must be Greated Than In Date and In Time');
                     return false;
                   }
               }
