@@ -331,7 +331,7 @@ class EntryMast extends Model
                 else{
                     $main_items_arr = [];
                 }
-                $str .= $key.',';
+                $str .= ($key + 1).',';
                 $str .= $value->slip_no.',';
                 $str .= $value->kanta_slip_no.',';
                 $str .= !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)).',' : ',';

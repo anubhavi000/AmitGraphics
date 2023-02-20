@@ -407,10 +407,10 @@ class EntriesController extends Controller
 
             $recordsraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
         }
-            $records = $recordsraw->paginate(10);
         if(!empty($request->export_to_excel)){
-            $res  =  EntryMast::ExportManual($records);
+            $res  =  EntryMast::ExportManual($recordsraw->get());
         }
+            $records = $recordsraw->paginate(10);
         $vendors = VendorMast::pluckactives();
         $items = ItemMast::pluckactives();
         $supervisors = SupervisorMast::pluckactives();
@@ -612,6 +612,9 @@ class EntriesController extends Controller
                     $entriesraw->where('is_generated' , 0);
                 }
             }
+            if(!empty($request->export_to_excel)){
+                EntryMast::ExportManual($entries->get());
+            }            
             $entries = $entriesraw->orderBy('id' , 'DESC')
                                   ->paginate(10);
 
@@ -620,9 +623,6 @@ class EntriesController extends Controller
                     $encrypted_id = enCrypt($entries[0]->slip_no);
                     return redirect('EntryForm_action/'.$encrypted_id);
                 }
-            }
-            if(!empty($request->export_to_excel)){
-                EntryMast::ExportManual($entries);
             }
 
             $vehicle_mast = VehicleMast::where('status' , 1)
@@ -726,11 +726,12 @@ class EntriesController extends Controller
                     $entriesraw->where('is_generated' , 0);
                 }
             }
+            if(!empty($request->export_to_excel)){
+                EntryMast::ExportManual($entriesraw->orderBy('slip_no' , 'desc')->get());
+            }
             $entries = $entriesraw->orderBy('slip_no' , 'DESC')
                                   ->get();
-            if(!empty($request->export_to_excel)){
-                EntryMast::ExportManual($entries);
-            }
+
                                   // dd($entries);
             return view($this->module_folder.'.ManualChallan.index' , [
                 'entries'      => $entries,
