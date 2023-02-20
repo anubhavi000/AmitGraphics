@@ -55,14 +55,16 @@ class ReportController extends Controller
 		$vehicles = VehicleMast::pluckactives();
 		$sites 	  = sites::activesitespluck(); 
 		$plants   = PlantMast::pluckactives(); 
+		$supervisors = SupervisorMast::pluckactives();
 
 		return view('Reports.vehicle_wise_challans' , [
-			'data'	    => $data,
-			'vehicles'  => $vehicles,
-			'sites'	    => $sites,
-			'plants'    => $plants,
-			'from_date' => $from_date,
-			'to_date'   => $to_date
+			'data'	      => $data,
+			'vehicles'    => $vehicles,
+			'sites'	      => $sites,
+			'supervisors' => $supervisors,
+			'plants'      => $plants,
+			'from_date'   => $from_date,
+			'to_date'     => $to_date
 		]);
 	}
 	static function unloadingWiseChallans($request){

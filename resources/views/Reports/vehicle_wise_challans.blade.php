@@ -198,11 +198,17 @@
                                             <th data-field="dazze3te" data-sortable="true">Slip No</th>
                                             <th data-field="dat3zz2e" data-sortable="true">Weighbridge Slip No</th>
                                             <th data-field="da1t32zze" data-sortable="true">Vehicle Number</th>
+                                            <th data-sortable="true">Vehicle Pass Weight</th>
                                             <th data-field="dat2zz323sse" data-sortable="true">Tare Weight</th>
+                                            <th data-sortable = "true">Gross Weight</th>
                                             <th data-field="sszzd33at2323e" data-sortable="true">Loading Site</th>
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
+                                            <th data-sortable ="true">Supervisor</th>
+                                            <th>Loading Date</th>
+                                            <th>Loading Time</th>
                                             <th data-field="dww33at2323ew" data-sortable="true">Dispatch Date</th>
+                                            <th data-sortable="true">Dispatch Time</th>
                                             <th data-field="note13" data-sortable="true">Print Slip</th>
                                             <th data-field="d3ede3at2323ew" data-sortable="true">Print Challan</th>
                                         </tr>
@@ -216,11 +222,18 @@
                                                     <td> {{ !empty( $value->slip_no ) ? $value->slip_no : '' }} </td>
                                                     <td> {{ !empty( $value->kanta_slip_no ) ? $value->kanta_slip_no : '' }} </td>
                                                     <td> {{ !empty( $vehicles[$value->vehicle] ) ? $vehicles[$value->vehicle] : ''}} </td>
-                                                    <td> {{ !empty( $value->entry_weight ) ? $value->entry_weight : '' }} </td>
+                                                    <td>{{ !empty($value->vehicle_pass) ? $value->vehicle_pass.' KG' : '0 KG' }}</td>
+                                                    <td> {{ !empty( $value->entry_weight ) ? $value->entry_weight.' KG' : '0 KG' }} </td>
+                                                    <td>{{ !empty($value->gross_weight) ? $value->gross_weight.' KG' : '0 KG' }}</td>
                                                     <td> {{ !empty( $sites[$value->owner_site] ) ? $sites[$value->owner_site] : '' }} </td>
                                                     <td> {{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }} </td>
                                                     <td> {{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : '' }} </td>
+                                                    <td>{{ !empty($supervisors[$value->supervisor]) ? $supervisors[$value->supervisor] : '' }}</td>
+                                                    <td>{{ !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : '' }}</td>
+                                                    <td>{{ !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : '' }}</td>
                                                     <td> {{ !empty( $value->generation_time ) ? date('d-m-Y' , strtotime($value->generation_time)) : '' }} </td>
+                                                    <td>{{ !empty($value->generation_minutehours) ? 
+                                                        date('h:i:A' , strtotime($value->generation_minutehours)) : ''}}</td>
                                                     <td> 
                                                         @if(empty($value->excess_weight) || $value->excess_weight <= 0)
                                                             <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip'.'/'.$value->slip_no) }}" id="btnGroup" type="button" 

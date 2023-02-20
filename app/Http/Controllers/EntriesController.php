@@ -415,12 +415,12 @@ class EntriesController extends Controller
         $items = ItemMast::pluckactives();
         $supervisors = SupervisorMast::pluckactives();
         return view($this->module_folder.'.show' , [
-            'data'      => $records,
-            'sites'     => $sites,
-            'vehicles'  => $vehicles,
-            'items'     => $items,
-            'vendors'   => $vendors,
-            'plants'    => $plants,
+            'data'        => $records,
+            'sites'       => $sites,
+            'vehicles'    => $vehicles,
+            'items'       => $items,
+            'vendors'     => $vendors,
+            'plants'      => $plants,
             'supervisors' => $supervisors
         ]);
     } 
@@ -553,7 +553,7 @@ class EntriesController extends Controller
             $pdf = PDF::loadView($this->module_folder.'.pdf', array(
                 'data'          => $data,
                 'items'         => $items,
-                'vendor'         => $vendor,
+                'vendor'        => $vendor,
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
                 'sites'         => $sites,
@@ -635,14 +635,14 @@ class EntriesController extends Controller
             $item = ItemMast::pluckactives();
             $supervisors = SupervisorMast::pluckactives();
             return view($this->module_folder.'.Challan.index' , [
-                'entries' => $entries,
-                'sites'   => $sites,
-                'plants'  => $plants,
-                'vendors' => $vendors,
+                'entries'     => $entries,
+                'sites'       => $sites,
+                'plants'      => $plants,
+                'vendors'     => $vendors,
                 'supervisors' => $supervisors,
-                'items'   => $item,
+                'items'       => $item,
                 'vehicle_mast'=>$vehicle_mast,
-                'vendors' => $vendors
+                'vendors'     => $vendors
             ]);            
     }
      public function ManualChallan(Request $request){
@@ -730,9 +730,8 @@ class EntriesController extends Controller
                 EntryMast::ExportManual($entriesraw->orderBy('slip_no' , 'desc')->get());
             }
             $entries = $entriesraw->orderBy('slip_no' , 'DESC')
-                                  ->get();
-
-                                  // dd($entries);
+                                  ->paginate(10);
+                                  
             return view($this->module_folder.'.ManualChallan.index' , [
                 'entries'      => $entries,
                 'sites'        => $sites,
@@ -897,7 +896,7 @@ class EntriesController extends Controller
                                      ->pluck('name' , 'id')
                                      ->toArray();            
             return view($this->module_folder.'.ManualChallan.edit' , [
-                'entry' => $entry,
+            'entry'        => $entry,
             'transporters' => $transporters ,
             'vehicles'     => $vehicles,
             'sites'        => $sites,

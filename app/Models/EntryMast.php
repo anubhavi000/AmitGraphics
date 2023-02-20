@@ -96,17 +96,17 @@ class EntryMast extends Model
     }
     static function editslip($req  , $slip_no){
         $auth = Auth::user();
-        $req['updated_at'] = date('Y-m-d h:i:s');
-        $req['updated_by'] =  Auth::user()->id;
-        $req['datetime']   =  date('Y-m-d');
-        $req['owner_site'] = $auth->site;
+        $req['updated_at']          = date('Y-m-d h:i:s');
+        $req['updated_by']          =  Auth::user()->id;
+        $req['datetime']            =  date('Y-m-d');
+        $req['owner_site']          = $auth->site;
         $req['loading_minutehours'] = date('h:i');
 
 
         if(!empty($req['vehicle'])){
             $vehicle = VehicleMast::where('id' , $req['vehicle'])
                                    ->first();
-            $req['vendor_id'] = !empty($vehicle->vendor) ? $vehicle->vendor : NULL;
+            $req['vendor_id']       = !empty($vehicle->vendor) ? $vehicle->vendor : NULL;
         }
         if(!empty($req['items_included'])){
             $req['items_included']  = json_encode($req['items_included']);
@@ -217,22 +217,23 @@ class EntryMast extends Model
     }
     static function storeManualChallan($res){
         // $res['datetime']         = !empty($res['datetime']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d');
-        $res['created_by']       = Auth::user()->id;
-        $res['manual']           = 1;
-        $res['print_status']     = 1;
-        $res['created_at']       = date('Y-m-d h:i:s');
-        $res['datetime']         = date('Y-m-d' , strtotime($res['datetime']));
-        $res['generation_time']  = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
-        $res['loading_minutehours'] = $res['loading_minutehours'];
-        $res['generation_minutehours'] = $res['generation_minutehours'];    
+        $res['created_by']               = Auth::user()->id;
+        $res['manual']                   = 1;
+        $res['print_status']             = 1;
+        $res['created_at']               = date('Y-m-d h:i:s');
+        $res['datetime']                 = date('Y-m-d' , strtotime($res['datetime']));
+        $res['generation_time']          = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
+        $res['loading_minutehours']      = $res['loading_minutehours'];
+        $res['generation_minutehours']   = $res['generation_minutehours'];    
 
-        $res['is_generated']     = 1;
-        $res['items_included']   = json_encode($res['items_included'] , true);
+        $res['is_generated']             = 1;
+        $res['items_included']           = json_encode($res['items_included'] , true);
         
+
         if(!empty($res['vehicle'])){
-            $vehicle_selected = VehicleMast::where('id' , $res['vehicle'])
+            $vehicle_selected  = VehicleMast::where('id' , $res['vehicle'])
                                             ->first();
-            $res['vendor_id'] = !empty($vehicle_selected->vendor) ? $vehicle_selected->vendor : '';
+            $res['vendor_id']           = !empty($vehicle_selected->vendor) ? $vehicle_selected->vendor : '';
             $res['excess_wt_allowance'] = !empty($vehicle_selected->excess_wt_allowance) ? $vehicle_selected->excess_wt_allowance : NULL; 
         }
         $res['print_status']  = 1;
@@ -254,36 +255,36 @@ class EntryMast extends Model
         }
         $update_arr = [
             // 'datetime' => !empty($res['datetime']) ? date('Y-m-d' ,  strtotime($res['datetime'])) : date('Y-m-d'),
-            'updated_by' => Auth::user()->id,
-            'manual'   => 1,
-            'updated_at' => date('Y-m-d h:i:s'),
-            'print_status' => 1,
-            'is_generated' => 1,        
+            'updated_by'          => Auth::user()->id,
+            'manual'              => 1,
+            'updated_at'          => date('Y-m-d h:i:s'),
+            'print_status'        => 1,
+            'is_generated'        => 1,        
             // 'generation_time' => !empty($res['generation_time']) ? date('Y-m-d' , strtotime($res['datetime'])) : date('Y-m-d h:i:s'),
-            'items_included' => json_encode($res['items_included'] , true),
-            'vehicle'    => $res['vehicle'],
-            'vendor_id' => $vendor_id,
+            'items_included'      => json_encode($res['items_included'] , true),
+            'vehicle'             => $res['vehicle'],
+            'vendor_id'           => $vendor_id,
             'excess_wt_allowance' => $excess_wt_allowance,
-            'owner_site' => Auth::user()->owner_site,
-            'slip_no' => $res['slip_no'],
-            'remarks' => !empty($res['remarks']) ? $res['remarks'] : NULL,
-            'entry_weight' => $res['entry_weight'],
-            'gross_weight' => $res['gross_weight'],
-            'net_weight' => $res['net_weight'],
-            'excess_weight' => $res['excess_weight'],
-            'plant' => $res['plant'],
-            'site' => $res['site'],
-            'kanta_slip_no' => $res['kanta_slip_no'],
-            'supervisor' => $res['supervisor'],
-            'owner_site'  => !empty(Auth::user()->site) ? Auth::user()->site : NULL,
-            'vehicle_pass' => $res['vehicle_pass'],
-            'driver' => $res['driver'],
-            'items_included' => json_encode($res['items_included'])
+            'owner_site'          => Auth::user()->owner_site,
+            'slip_no'             => $res['slip_no'],
+            'remarks'             => !empty($res['remarks']) ? $res['remarks'] : NULL,
+            'entry_weight'        => $res['entry_weight'],
+            'gross_weight'        => $res['gross_weight'],
+            'net_weight'          => $res['net_weight'],
+            'excess_weight'       => $res['excess_weight'],
+            'plant'               => $res['plant'],
+            'site'                => $res['site'],
+            'kanta_slip_no'       => $res['kanta_slip_no'],
+            'supervisor'          => $res['supervisor'],
+            'owner_site'          => !empty(Auth::user()->site) ? Auth::user()->site : NULL,
+            'vehicle_pass'        => $res['vehicle_pass'],
+            'driver'              => $res['driver'],
+            'items_included'      => json_encode($res['items_included'])
         ];
-            $update_arr['generation_time'] = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
-            $update_arr['datetime']        = date('Y-m-d' , strtotime($res['datetime']));
+            $update_arr['generation_time']        = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
+            $update_arr['datetime']               = date('Y-m-d' , strtotime($res['datetime']));
             $update_arr['generation_minutehours'] = !empty($res['generation_minutehours']) ? $res['generation_minutehours'] : date('h:i');
-            $update_arr['loading_minutehours'] = !empty($res['loading_minutehours']) ? $res['loading_minutehours'] : date('h:i');
+            $update_arr['loading_minutehours']    = !empty($res['loading_minutehours']) ? $res['loading_minutehours'] : date('h:i');
         $store = EntryMast::where('id' , $id)->update($update_arr);
         if(!empty($store)){
             return $store;
@@ -320,6 +321,7 @@ class EntryMast extends Model
                              ->pluck('name' , 'id')
                              ->toArray(); 
             $vendors  = VendorMast::pluckactives();
+
             foreach ($data as $key => $value) {
                 $main_items_arr = [];
                 if(!empty($value->items_included)){

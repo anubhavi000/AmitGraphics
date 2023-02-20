@@ -396,6 +396,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="d-felx justify-content-center">
+                                     {{ $entries->links() }}
+                                </div>                                 
                             </div>
                         </div>
                     @endif
