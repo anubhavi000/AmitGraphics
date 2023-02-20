@@ -234,7 +234,7 @@
                             </div>
                                 <table id="table" data-toggle="table" data-search="true" export-all="true" data-filter-control="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
-                                    data-pagination="true" data-toolbar="#toolbar">
+                                     data-toolbar="#toolbar">
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>

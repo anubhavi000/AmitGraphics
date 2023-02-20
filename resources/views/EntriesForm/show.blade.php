@@ -137,7 +137,7 @@
                         </div>
                         <table id="table" data-toggle="table" data-search="true" data-filter-control="true"
                                     data-show-export="true" data-show-refresh="true" data-show-toggle="true"
-                                    data-pagination="true" data-toolbar="#toolbar">
+                                     data-toolbar="#toolbar">
                             <thead>
                                 <tr style="background-color:darkslategray; color: white;">
                                             <th data-field="state" data-checkbox="true"></th>
