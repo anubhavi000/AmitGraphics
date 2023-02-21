@@ -45,7 +45,28 @@ class PaymentCheckingController extends Controller
         if(isset($request->vendor)){
             $recordsraw->where('vendor_id' , $request->vendor);
         }
-        
+        if(isset($request->item)){
+            $arr = [$request->item];
+            $json = json_encode($arr);
+            $recordsraw->where('items_included' , $json);
+        }
+        if(isset($request->site)){
+            $recordsraw->where('site' , $request->site);
+        }
+        if(isset($request->plant)){
+            $recordsraw->where('plant' , $request->plant);
+        }
+        if(isset($request->item)){
+            $arr = [$request->item];
+            $json = json_encode($arr);
+            $recordsraw->where('item' , $json);
+        }
+        if(isset($request->site)){
+            $recordsraw->where('site' , $request->site);
+        }
+        if(isset($request->plant)){
+            $recordsraw->where('plant' , $request->plant);
+        }
         $from_date = !empty($request->from_date) ? date('Y-m-d' , strtotime($request->from_date)) : date('Y-m-d');
         $to_date   = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
 

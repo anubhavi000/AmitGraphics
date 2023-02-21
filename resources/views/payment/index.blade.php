@@ -1,5 +1,4 @@
-     @extends('layouts.panel')
-
+@extends('layouts.panel')
 @section('content')
 <style type="text/css">
     th{
@@ -119,7 +118,72 @@
                                                 </select>
                                             </div>
                                         </fieldset>
-                                    </div>                                                                                                            
+                                    </div>
+                                    @php
+                                        $requested_item = !empty(Request::get('item')) ? Request::get('item') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Item</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="item" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($items))
+                                                        @foreach($items as $key => $value)
+                                                            @if($key == $requested_item)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>        
+
+                                    @php
+                                        $requested_site = !empty(Request::get('site')) ? Request::get('site') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Unloading Site</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="site" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($sites))
+                                                        @foreach($sites as $key => $value)
+                                                            @if($key == $requested_site)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>   
+
+                                    @php
+                                        $requested_plant = !empty(Request::get('plant')) ? Request::get('plant') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Plant</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="plant" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($plants))
+                                                        @foreach($plants as $key => $value)
+                                                            @if($key == $requested_plant)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>                                                                                                                                                
                                  <div class="col-md-2 mt-3">
                                         <input type="submit" name="find" value="find" class="btn btn-success">
                                         <input type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
@@ -154,7 +218,7 @@
                                             <th data-field="d33at2323e">Unloading<br> Plant</th>
                                             <th>Supervisor</th>
 
-                                            <th data-field="d33at2323ew">Loading<br> Site</th>
+                                            <th data-field="d33at2323ew">Unloading<br> Site</th>
                                             <th>Loading<br> Date</th>
                                             <th>Loading <br>Time</th>
                                             <th>Dispatch<br> Date</th>

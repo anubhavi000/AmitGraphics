@@ -150,21 +150,89 @@
                                             <label>To Date</label>
                                             <input type="text" value="{{ !empty($to_date) ? date('Y-m-d' , strtotime($to_date)) : '' }}"  class="form-control datepicker client_margin" name="to_date">
                                         </div>                                            
-                                        <div class="col-md-2 client_margin">
-                                            <label for="client_id">Vehicle</label>
-                                            <select name="vehicle" class="fstdropdown-select">
-                                                        <option value="">Please Select</option>
-                                                @if(!empty($vehicles))
-                                                    @foreach($vehicles as $key => $value)
-                                                        @if($key == $vehicle_requested)
-                                                            <option {{(Request::get('vehicle') == $key)?'selected':''}}  value="{{$key}}" selected="true">{{$value}}</option>
-                                                        @else
-                                                            <option {{(Request::get('vehicle') == $key)?'selected':''}} value="{{$key}}">{{$value}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
+                                        @php
+                                            $site_requested  = !empty(Request::get('site')) ? Request::get('site') : '';
+                                        @endphp
+                                        <div class="col-md-2">
+                                            <label for="client_id" class="mb-0">Unloading Site</label>
+                                            <select name="site" class="fstdropdown-select">
+                                                        <option value="">Select</option>
+                                                            @if(!empty($dealer_sites))
+                                                                @foreach($dealer_sites as $key => $value)
+                                                                    @if($key == $site_requested)
+                                                                        <option selected="true"  value="{{$key}}" selected="true">{{$value}}</option>
+                                                                    @else
+                                                                        <option  value="{{$key}}">{{$value}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
                                             </select>
-                                        </div>           
+                                        </div>
+                                    @php
+                                        $requested_item = !empty(Request::get('item')) ? Request::get('item') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Item</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="item" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($items))
+                                                        @foreach($items as $key => $value)
+                                                            @if($key == $requested_item)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>        
+
+                                    @php
+                                        $requested_site = !empty(Request::get('site')) ? Request::get('site') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Unloading Site</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="site" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($dealer_sites))
+                                                        @foreach($dealer_sites as $key => $value)
+                                                            @if($key == $requested_site)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>   
+
+                                    @php
+                                        $requested_plant = !empty(Request::get('plant')) ? Request::get('plant') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Plant</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="plant" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($plants))
+                                                        @foreach($plants as $key => $value)
+                                                            @if($key == $requested_plant)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>                                                   
                                         <div class="col-md-2 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
@@ -194,55 +262,61 @@
                                     data-pagination="true" data-toolbar="#toolbar">
                                     <thead>
                                         <tr>
-                                            <th data-field="dssawqzze3te" data-sortable="true">S.NO</th>
-                                            <th data-field="dazze3te" data-sortable="true">Slip No</th>
-                                            <th data-field="dat3zz2e" data-sortable="true">Weighbridge Slip No</th>
-                                            <th data-field="da1t32zze" data-sortable="true">Vehicle Number</th>
-                                            <th data-field="dat2zz323sse" data-sortable="true">Tare Weight</th>
-                                            <th data-field="sszzd33at2323e" data-sortable="true">Loading Site</th>
-                                            <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
-                                            <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
-                                            <th data-field="dww33at2323ew" data-sortable="true">Dispatch Date</th>
-                                            <th data-field="note13" data-sortable="true">Print Slip</th>
-                                            <th data-field="d3ede3at2323ew" data-sortable="true">Print Challan</th>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="dae3te" data-sortable="true">Slip No</th>
+                                            <th data-field="dat32e" data-sortable="true">WeightBridge<br> Slip No</th>
+                                            <th data-sortable = "true">Unloading Site</th>
+                                            <th data-field="d33at2323ew" data-sortable="true">loading Site</th>
+                                            <th data-field="datq32e" data-sortable="true">Vehicle No.</th>
+                                            <th>Vehicle Pass<br> Weight</th>
+                                            <th  data-sortable="true">Vendor</th>
+                                            <th data-field="dat2323e" data-sortable="true">Net Weight</th>
+                                            <th data-field="dat2323sse" data-sortable="true">Tare Weight</th>
+                                            <th data-sortable="true">Gross Weight</th>
+                                            <th data-field="d33at2323e" data-sortable="true">loading Plant</th>
+                                            <th data-sortable="true">Supervisor</th>
+                                            <th data-sortable="true">Loading Date</th>
+                                            <th data-sortable="true">Loading Time</th>
+                                            <th data-sortable="true">Dispatch Date</th>
+                                            <th  data-sortable="true">Dispatch Time</th>
+                                            <th>Item</th>
                                         </tr>
                                     </thead>
                                   
                                     <tbody>
                                         @if(!empty($data))
                                             @foreach($data as $key => $value)
+                                                @php
+                                                    if(!empty($value->items_included)){
+                                                        $real_item_arr = [];
+                                                        $json_array  = json_decode($value->items_included);
+                                                        foreach($json_array as $key2 => $value2){
+                                                            $real_item_arr[] = !empty($items[$value2]) ? $items[$value2] : ''; 
+                                                        }
+                                                    }
+                                                    else{
+                                                            $real_item_arr = [];
+                                                    }
+                                                @endphp
                                                 <tr>
                                                     <td> {{ $key + 1 }} </td>
                                                     <td> {{ !empty( $value->slip_no ) ? $value->slip_no : '' }} </td>
                                                     <td> {{ !empty( $value->kanta_slip_no ) ? $value->kanta_slip_no : '' }} </td>
-                                                    <td> {{ !empty( $vehicles[$value->vehicle] ) ? $vehicles[$value->vehicle] : ''}} </td>
-                                                    <td> {{ !empty( $value->entry_weight ) ? $value->entry_weight : '' }} </td>
-                                                    <td> {{ !empty( $sites[$value->owner_site] ) ? $sites[$value->owner_site] : '' }} </td>
                                                     <td> {{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }} </td>
-                                                    <td> {{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : '' }} </td>
+                                                    <td> {{ !empty( $sites[$value->owner_site] ) ? $sites[$value->owner_site] : '' }} </td>
+                                                    <td> {{ !empty( $vehicles[$value->vehicle] ) ? $vehicles[$value->vehicle] : ''}} </td>
+                                                    <td> {{ !empty( $value->vehicle_pass ) ? $value->vehicle_pass.' KG' : '0 KG' }}</td>
+                                                    <td> {{ !empty( $vendors[$value->vendor_id] ) ? $vendors[$value->vendor_id] : '' }}</td>
+                                                    <td> {{ !empty( $value->net_weight) ? $value->net_weight.' KG' : '0 KG' }} </td>
+                                                    <td> {{ !empty( $value->entry_weight ) ? $value->entry_weight.' KG' : '0 KG' }} </td>
+                                                    <td> {{ !empty( $value->gross_weight) ? $value->gross_weight.' KG' : '0 KG' }}</td>
+                                                    <td> {{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : ''}} </td>
+                                                    <td> {{ !empty( $supervisors[$value->supervisor]) ? $supervisors[$value->supervisor] : '' }} </td>
+                                                    <td> {{ !empty( $value->datetime ) ? date('d-m-Y' , strtotime($value->datetime)) : '' }}</td>
+                                                    <td> {{ !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : '' }} </td>
                                                     <td> {{ !empty( $value->generation_time ) ? date('d-m-Y' , strtotime($value->generation_time)) : '' }} </td>
-                                                    <td> 
-                                                        @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                                            <a style="width: 100%;" target="_blank" href="{{ url('PrintEntrySlip'.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
-                                                                aria-haspopup="true" aria-expanded="true"
-                                                                class="btn btn-primary btn-sm ">
-                                                                 slip : {{$value->slip_no}}
-                                                            </a>                                            
-                                                        @else
-                                                            <span class="text-danger mt-2">Excess</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if(empty($value->excess_weight) || $value->excess_weight <= 0)
-                                                        <a style="width: 100%;" target="_blank" href="{{ url('print_invoice/'.$value->plant.'/'.$value->slip_no) }}" id="btnGroup" type="button" 
-                                                            aria-haspopup="true" aria-expanded="true"
-                                                            class="btn btn-primary btn-sm ">
-                                                            Challan : {{$value->slip_no}}
-                                                        </a>             
-                                                        @else
-                                                            <span class="text-danger mt-2">Excess</span>
-                                                        @endif                                                        
-                                                    </td>
+                                                    <td> {{ !empty( $value->generation_minutehours ) ? date('h:i:A' , strtotime($value->generation_minutehours)) : '' }} </td>
+                                                    <td>{{ !empty($real_item_arr) ? implode(',' , $real_item_arr) : '' }}</td>
                                                 </tr>
                                             @endforeach
                                         @endif

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\EntryMast;
 use App\Models\VendorMast;
 use App\Models\PlantMast;
+use App\Models\Utility;
 use App\Models\SupervisorMast;
 use App\Models\VehicleMast;
 use App\Models\ItemMast;
@@ -44,9 +45,7 @@ class EntriesController extends Controller
                                    ->where('delete_status' , 0);
 
             $sites = Sites::activesitespluck();
-            $plants = PlantMast::where('status' , 1)
-                               ->pluck('name' , 'id')
-                               ->toArray();
+            $plants = PlantMast::pluckactives();
 
             $vehicle_mast = VehicleMast::pluckactives();
             if($from_date){
@@ -116,9 +115,7 @@ class EntriesController extends Controller
      */
     public function create()
     {
-        $transporters    =   VendorMast::where('status' , 1)
-                                       ->pluck('v_name' , 'id')
-                                       ->toArray();
+        $transporters    =   VendorMast::pluckactives();
         $vehicles        =  VehicleMast::pluckactives();
         $sites           =  Sites::dealersitespluck();
         $supervisors     = SupervisorMast::pluckactives();
@@ -235,9 +232,7 @@ class EntriesController extends Controller
         $now_id = decrypt($id);
         $entry =  EntryMast::where('slip_no' , $now_id)
                            ->first();
-        $transporters    =   VendorMast::where('status' , 1)
-                                       ->pluck('v_name' , 'id')
-                                       ->toArray();
+        $transporters    =   VendorMast::pluckactives();
         $vehicles        =  VehicleMast::pluckactives();
         $sites           =  Sites::dealersitespluck();
         $supervisors     = SupervisorMast::pluckactives();
@@ -338,6 +333,7 @@ class EntriesController extends Controller
             }
             else{
                 $slip_no = decrypt($id);
+                Utility::Excesswhatsappnotify($slip_no);                
                 Session::put('error' , 'Slip Generated With Excess Weight And Slip No : '.$slip_no);
                 return redirect($this->route);
             }
@@ -353,7 +349,7 @@ class EntriesController extends Controller
                                   ->where('owner_site' , $auth->site);
         $sites = Sites::activesitespluck();
         $plants = PlantMast::pluckactives();
-        $vehicles = VehicleMast::where('status' , 1)->pluck('vehicle_no' , 'id');
+        $vehicles = VehicleMast::pluckactives();
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
         }
@@ -411,27 +407,18 @@ class EntriesController extends Controller
                 return redirect()->back();
             }
             else{
-            $items = ItemMast::where('status' , 1)
-                             ->pluck('name' , 'id')
-                             ->toArray();
+            $items = ItemMast::pluckactives();
 
-            $vehicles = VehicleMast::where('status' , 1)
-                                   ->pluck('id' , 'vehicle_no')
-                                   ->toArray();
+            $vehicles = VehicleMast::pluckactives();
 
-            $supervisors = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
+            $supervisors = SupervisorMast::pluckactives();
 
-            $sites  = Sites::where('status' , 1)
-                           ->pluck('name' , 'id')
-                           ->toArray();
-            $siteaddresses = Sites::where('status' , 1)
+            $sites  = sites::dealersitespluck();
+            $dealer_sites = sites::dealersitespluck();
+            $siteaddresses = sites::where('status' , 1)
                                   ->pluck('address' , 'id')
                                   ->toArray();
-            $vehicles = VehicleMast::where('status' , 1)
-                                   ->pluck('vehicle_no' , 'id')
-                                   ->toArray();                                  
+            $vehicles = VehicleMast::pluckactives();                                 
 
             // $filepath  = asset('images/logo-light.png');
 
@@ -455,6 +442,7 @@ class EntriesController extends Controller
                 'items'         => $items,
                 'vehicles'      => $vehicles,
                 'supervisors'   => $supervisors,
+                'dealer_sites'  => $dealer_sites,
                 // 'logo'          => $image,
                 'vehicles'      => $vehicles,
                 'sites'         => $sites,
@@ -495,27 +483,17 @@ class EntriesController extends Controller
                 $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
                 $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img ); 
 
-            $items = ItemMast::where('status' , 1)
-                             ->pluck('name' , 'id')
-                             ->toArray();
+            $items = ItemMast::pluckactives();
 
-            $vehicles = VehicleMast::where('status' , 1)
-                                   ->pluck('vehicle_no' , 'id')
-                                   ->toArray();
+            $vehicles = VehicleMast::pluckactives();
 
-            $supervisors = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
+            $supervisors = SupervisorMast::pluckactives();
 
-            $sites  = Sites::where('status' , 1)
-                           ->pluck('name' , 'id')
-                           ->toArray();
+            $sites  = Sites::activesitespluck();
             $siteaddresses = Sites::where('status' , 1)
                                   ->pluck('address' , 'id')
                                   ->toArray();
-            $plants  = PlantMast::where('status' , 1)
-                                ->pluck('name' , 'id')
-                                ->toArray();
+            $plants  = PlantMast::pluckactives();
 
             if(isset($data->vendor_id)){
             $vendor = VendorMast::where('id' , $data->vendor_id)
@@ -627,9 +605,7 @@ class EntriesController extends Controller
             $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
             $to_date   = !empty($request->to_date) ? date('Y-m-d'  , strtotime($request->to_date)) : date('Y-m-d');
         $auth = Auth::user();
-                $transporters    =   VendorMast::where('status' , 1)
-                                               ->pluck('v_name' , 'id')
-                                               ->toArray();
+                $transporters    =   VendorMast::pluckactives();
                 $vehicles        =  VehicleMast::pluckactives();
                 $sites           =  Sites::dealersitespluck();
                 $supervisors     = SupervisorMast::pluckactives();
@@ -718,25 +694,12 @@ class EntriesController extends Controller
         }        
     }
     public function ManualChallanCreation(Request $request){
-        $transporters    =   VendorMast::where('status' , 1)
-                                       ->pluck('v_name' , 'id')
-                                       ->toArray();
-        $vehicles        =  VehicleMast::where('status' , 1)
-                                       ->pluck('vehicle_no' , 'id')
-                                       ->toArray();
-        $sites           =  Sites::where('status' , 1)
-                                 ->where('is_owner' , 0)
-                                 ->pluck('name' , 'id')
-                                 ->toArray();
-        $supervisors     = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
-        $items           = ItemMast::where('status' , 1)
-                                   ->pluck('name' , 'id')
-                                   ->toArray();
-        $plants          =  PlantMast::where('status' , 1)
-                                     ->pluck('name' , 'id')
-                                     ->toArray();
+        $transporters    =   VendorMast::pluckactives();
+        $vehicles        =  VehicleMast::pluckactives();
+        $sites           =  Sites::dealersitespluck();
+        $supervisors     = SupervisorMast::pluckactives();
+        $items           = ItemMast::pluckactives();
+        $plants          =  PlantMast::pluckactives();
 
         return view($this->module_folder.'.ManualChallan.create' , [
             'transporters' => $transporters ,
@@ -850,25 +813,13 @@ class EntriesController extends Controller
     public function ManualChallanEdition(Request $request , $id){
         $entry =  EntryMast::where('id' , $id)->first();
         if(!empty($entry)){
-        $transporters    =   VendorMast::where('status' , 1)
-                                       ->pluck('v_name' , 'id')
-                                       ->toArray();
-        $vehicles        =  VehicleMast::where('status' , 1)
-                                       ->pluck('vehicle_no' , 'id')
-                                       ->toArray();
-        $sites           =  Sites::where('status' , 1)
-                                 ->where('is_owner' , 0)
-                                 ->pluck('name' , 'id')
-                                 ->toArray();
-        $supervisors     = SupervisorMast::where('status' , 1)
-                                         ->pluck('name' , 'id')
-                                         ->toArray();
-        $items           = ItemMast::where('status' , 1)
-                                   ->pluck('name' , 'id')
-                                   ->toArray();
-        $plants          =  PlantMast::where('status' , 1)
-                                     ->pluck('name' , 'id')
-                                     ->toArray();            
+        $transporters    =   VendorMast::pluckactives();
+        $vehicles        =  VehicleMast::pluckactives();
+        $sites           =  Sites::dealersitespluck();
+        $supervisors     = SupervisorMast::pluckactives();
+        $items           = ItemMast::pluckactives();
+        $plants          =  PlantMast::pluckactives();
+
             return view($this->module_folder.'.ManualChallan.edit' , [
             'entry'        => $entry,
             'transporters' => $transporters ,
@@ -898,6 +849,7 @@ class EntriesController extends Controller
     public function checkslipduplicatemanual(Request $request){
         if(!empty($request->slip_no)){
             $check = EntryMast::where('slip_no' , $request->slip_no)
+                              ->where('delete_status'  ,  0)
                               ->first();
             if(!empty($check)){
                 return response()->json(false);

@@ -180,6 +180,71 @@
                                                 @endforeach
                                             </select>
                                         </div>         
+                                    @php
+                                        $requested_item = !empty(Request::get('item')) ? Request::get('item') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Item</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="item" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($items))
+                                                        @foreach($items as $key => $value)
+                                                            @if($key == $requested_item)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>        
+
+                                    @php
+                                        $requested_site = !empty(Request::get('site')) ? Request::get('site') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Unloading Site</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="site" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($dealer_sites))
+                                                        @foreach($dealer_sites as $key => $value)
+                                                            @if($key == $requested_site)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>   
+
+                                    @php
+                                        $requested_plant = !empty(Request::get('plant')) ? Request::get('plant') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Plant</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="plant" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($plants))
+                                                        @foreach($plants as $key => $value)
+                                                            @if($key == $requested_plant)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>                                            
                                         <div class="col-md-2  px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
@@ -225,6 +290,7 @@
                                             <th>Loading Time</th>
                                             <th data-field="dww33at2323ew" data-sortable="true">Dispatch Date</th>
                                             <th data-sortable="true">Dispatch Time</th>
+                                            <th data-sortable="true">Item</th>
                                         </tr>
                                     </thead>
                                   
@@ -247,6 +313,19 @@
                                                     <td> {{ !empty( $value->generation_time ) ? date('d-m-Y' , strtotime($value->generation_time)) : '' }} </td>
                                                     <td>{{ !empty($value->generation_minutehours) ? 
                                                         date('h:i:A' , strtotime($value->generation_minutehours)) : ''}}</td>
+                                                                         <?php
+                                            if(!empty($value->items_included)){
+                                            $items_arr = json_decode($value->items_included);
+                                            $arr_item_real = [];
+                                            foreach ($items_arr as $key2 => $value2) {
+                                                $arr_item_real[] = !empty($items[$value2]) ? $items[$value2] : '';
+                                              }  
+                                            }
+                                            else{
+                                                $items_arr = [];
+                                            }
+                                            ?>
+                                                    <td>{{implode(',' , $arr_item_real)}}</td>
                                                 </tr>
                                             @endforeach
                                         @endif

@@ -191,6 +191,10 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     //payement routes by ved
     Route::resource('PaymentChecking' , 'PaymentCheckingController');
     //ends
+
+
+    //Average Report Routes Added By Ved
+    Route::get('AverageReports/{slug}' , 'AverageReportsController@index');
     // always add routes on above this line 
 
     // Route::resource('Form', 'FormController');

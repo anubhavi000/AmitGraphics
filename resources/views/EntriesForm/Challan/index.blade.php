@@ -246,8 +246,8 @@
                                             <div class="input-group client_margin">
                                                 <select name="site" class="fstdropdown-select">
                                                     <option value="">Select</option>
-                                                    @if(!empty($sites))
-                                                        @foreach($sites as $key => $value)
+                                                    @if(!empty($dealer_sites))
+                                                        @foreach($dealer_sites as $key => $value)
                                                             @if($key == $requested_site)
                                                             <option selected="true" value="{{$key}}">{{$value}}</option>
                                                             @else

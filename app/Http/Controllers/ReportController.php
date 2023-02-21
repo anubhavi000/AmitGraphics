@@ -51,21 +51,36 @@ class ReportController extends Controller
 		if(!empty($request->vendor)){
 			$dataraw->where('vendor_id', $request->vendor);
 		}
+		if(isset($request->item)){
+			$arr = [$request->item];
+			$json = json_encode($arr);
+			$dataraw->where('items_included' , $json);
+		}
+		if(isset($request->site)){
+			$dataraw->where('site'  , $request->site);
+		}
+		if(isset($request->plant)){
+			$dataraw->where('plant' , $request->plant);
+		}
 		if(!empty($request->export_to_excel)){
 			EntryMast::ExportManual($dataraw->get());
 		}
 		$data  	  = $dataraw->paginate(10);
 		$vehicles = VehicleMast::pluckactives();
 		$sites 	  = sites::activesitespluck(); 
+		$items    = ItemMast::pluckactives();
 		$plants   = PlantMast::pluckactives(); 
 		$supervisors = SupervisorMast::pluckactives();
+		$dealerssites = sites::dealersitespluck();
 		$vendors  = VendorMast::pluckactives();
 
 		return view('Reports.vehicle_wise_challans' , [
 			'data'	      => $data,
 			'vehicles'    => $vehicles,
 			'sites'	      => $sites,
+			'items'		  => $items,
 			'supervisors' => $supervisors,
+			'dealer_sites'=> $dealerssites,
 			'plants'      => $plants,
 			'vendors'     => $vendors,
 			'from_date'   => $from_date,
@@ -76,15 +91,50 @@ class ReportController extends Controller
 		$dataraw = EntryMast::where('delete_status' , 0);
 		$from_date = !empty($request->from_date) ? $request->from_date : date('Y-m-d' ,strtotime('-7 days'));
 		$to_date = !empty($request->to_date) ? $request->to_date : date('Y-m-d');
-
+		if(isset($request->slip_no)){
+			$dataraw->where('slip_no' , $request->slip_no);
+		}
+		if(isset($request->kanta_slip_no)){
+			$dataraw->where('kanta_slip_no' , $request->kanta_slip_no);
+		}
+		if(isset($request->vehicle)){
+			$dataraw->where('vehicle' , $request->vehicle);
+		}
+		if(isset($request->item)){
+			$arr = [$request->item];
+			$json = json_encode($arr);
+			$dataraw->where('items_included' , $json);
+		}
+		if(isset($request->site)){
+			$dataraw->where('site' , $request->site);
+		}
+		if(isset($request->plant)){
+			$dataraw->where('plant' , $request->plant);
+		}
 		$dataraw->whereRaw("date_format(entry_mast.datetime,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.datetime,'%Y-%m-%d')<='$to_date'");
+		if(!empty($request->export_to_excel)){
+			EntryMast::ExportManual($dataraw->get());
+		}
+		$data = $dataraw->paginate(10);
+		$vehicles = VehicleMast::pluckactives();
+		$sites = sites::activesitespluck();
+		$dealer_sites = sites::dealersitespluck();
+		$plants = PlantMast::pluckactives();
+ 		$items = ItemMast::pluckactives();
+ 		$vendors = VendorMast::pluckactives();
+ 		$supervisors = SupervisorMast::pluckactives();
 
-		$data = $dataraw->get();
-
-		return view( $this->view.'.UnloadingPlaceWise' , [
-			'from_date' => $from_date,
-			'to_date'   => $to_date,
-			'data'      => $data
+		return view('Reports.UnloadingPlaceWise' , [
+			'from_date' 	=> $from_date,
+			'to_date'   	=> $to_date,
+			'data'      	=> $data,
+			'items'			=> $items,
+			'vehicles'  	=> $vehicles,
+			'sites'     	=> $sites,
+			'dealer_sites'  => $dealer_sites,
+			'supervisors'	=> $supervisors,
+			'plants'        => $plants,
+			'vendors'		=> $vendors
 		]);			
 	}
 }
