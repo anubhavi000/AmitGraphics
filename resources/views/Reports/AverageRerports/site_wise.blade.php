@@ -143,7 +143,7 @@
                             <div id="hide_2" class="table-responsive">
 
                                 <table id="table" data-toggle="table" data-search="true" 
-                                    data-pagination="true" data-toolbar="#toolbar">
+                                     data-toolbar="#toolbar">
                                     <thead>
                                         <tr>
                                             <th colspan="4" class="text-center">Site Wise Average Report</th>

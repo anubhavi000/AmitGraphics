@@ -110,7 +110,8 @@ class ExportData extends Model
                     $str .= !empty($items[$key2]) ? $items[$key2] : '';$str .=',';
                     $str .= !empty($value2) ? $value2 : ''; $str .= ',';
                     if($total != 0){
-                        $str .= ($value2/$total)*100;$str .= ',';
+                        $val  = ($value2/$total)*100;
+                        $str .=  round($val , 2);$str .= ',';
                     }
                     else{
                         $str .= ',';

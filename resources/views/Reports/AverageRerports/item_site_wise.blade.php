@@ -116,13 +116,20 @@
                                             <label>To Date</label>
                                             <input type="text" value="{{ !empty($to_date) ? date('Y-m-d' , strtotime($to_date)) : '' }}"  class="form-control datepicker client_margin" placeholder="Enter To Date" name="to_date">
                                         </div>
+                                        @php
+                                            $item_selected = !empty(Request::get('item')) ? Request::get('item') : ''; 
+                                        @endphp
                                         <div class="col-md-2">              
                                             <label class="mb-0">Item</label>
                                             <select name="item" class="fstdropdown-select">
                                                 <option>Select</option>
                                                 @if(!empty($items))
                                                     @foreach($items as $key => $value)
+                                                        @if($key == $item_selected)
+                                                        <option selected="true" value="{{$key}}"> {{ $value }} </option>
+                                                        @else
                                                         <option value="{{$key}}"> {{ $value }} </option>
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -174,8 +181,8 @@
                                                     <td> {{ $row }} </td>
                                                     <td> {{ !empty( $sites[$key] ) ? $sites[$key] : '' }} </td>
                                                     <td> {{ !empty( $items[$key2] ) ? $items[$key2] : '' }} </td>
-                                                    <td> {{ !empty( $value2 ) ? str_replace('.00' , '' ,number_format($value2 , 2)) : '' }} KG</td>
-                                                    <td> 
+                                                    <td class="text-right"> {{ !empty( $value2 ) ? str_replace('.00' , '' ,number_format($value2 , 2)) : '' }} KG</td>
+                                                    <td class="text-right"> 
                                                         @if($total_weight != 0)
                                                             {{ round( $value2/$total_weight*100  , 2) }}%
                                                         @else

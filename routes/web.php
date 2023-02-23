@@ -123,7 +123,7 @@ Route::get('whatsapp_bill' , 'BillingController@whatsapp_bill');
 Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
 
-//added by krishnan
+//masters added by ved 
     //Item
     Route::resource('ItemMast', 'ItemController');
     Route::delete('Item_delete/{id}', 'ItemController@delete');
@@ -142,7 +142,9 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     //Supervisor
     Route::resource('SupervisorMast', 'SupervisorController');
     Route::delete('Supervisor_delete/{id}' , 'SupervisorController@delete');
-
+    //vendor rate 
+    Route::resource('VendorRateMaster' , 'vendorRateController');
+    route::delete('vendorrate_delete/{id}' ,  'vendorRateController@destroy');
 
     // Routes added By ved
     Route::resource('EntryForm'  , 'EntriesController');

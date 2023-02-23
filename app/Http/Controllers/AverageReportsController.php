@@ -100,11 +100,16 @@ class AverageReportsController extends Controller
     function ItemSitewise($request){
         $from_date = !empty($request->from_date) ? date('Y-m-d' , strtotime($request->from_date)) : date('Y-m-d'  , strtotime('-30 days'));
     	$to_date   = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
-    	$data = EntryMast::whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'")
+    	$dataraw = EntryMast::whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'")
     					 ->groupBy('site')
     					 ->groupBy('items_included')
-    					 ->selectRaw("entry_mast.site  , entry_mast.items_included ,  SUM(net_weight) AS total_Weight")
-    					 ->get();
+    					 ->selectRaw("entry_mast.site  , entry_mast.items_included ,  SUM(net_weight) AS total_Weight");
+        if(isset($request->item)){
+            $arr = [$request->item];
+            $json = json_encode($arr);
+            $dataraw->where('items_included' , $json);
+        }
+        $data = $dataraw->get();
     	$sites 	= sites::activesitespluck(); 
     	$items  = ItemMast::pluckactives();
  		$arr = [];
