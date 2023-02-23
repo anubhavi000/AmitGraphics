@@ -108,6 +108,12 @@
                         <div class="col-md-12 mt-3 mb-3">
 
                             <div class="container-fluid mt-3">
+                                <form action="" method="GET" id="user-search">
+                                    @csrf
+                                    <div class="row">
+                                        <input type="submit" value="Export CSV" name="export_to_excel" class="btn btn-primary">
+                                    </div>
+                                </form>
                             
 
 
@@ -140,7 +146,8 @@
                                             <th data-field="note" data-sortable="true">Description</th>
 
                                             <th data-field="link" data-sortable="true">Transporter ID</th>
-
+                                            <th data-sortable="true">Created At</th>
+                                            <th data-sortable="true">Created By</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             
                                         </tr>
@@ -167,6 +174,9 @@
                                                 <td>{{ !empty($value->descr) ? $value->descr : '' }}</td>
 
                                                 <td>{{ !empty($value->transporter) ? $value->transporter : '' }}</td>
+                                                <td> {{ !empty($value->created_at) ? date('d-m-Y' , strtotime($value->created_at)) : '' }} </td>
+                                                <td> {{ !empty($value->created_by) ? $users[$value->created_by] : '' }} </td>
+
 
                                                <td>
                                                 <span class="dropdown open">
@@ -196,7 +206,7 @@
                                                                 <button style="background:none;border: none;"
                                                                     type="button" onclick="confirMationAlert({{$value->id}})"><i
                                                                         class="fas fa-trash"
-                                                                         ></i> delete</button>
+                                                                         ></i> Deactivate</button>
                                                         </form> 
 
                                                        

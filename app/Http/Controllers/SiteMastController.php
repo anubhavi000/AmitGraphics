@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\sites;
+use App\Models\User;
 use Auth;
 
 class SiteMastController extends Controller
@@ -24,8 +25,12 @@ class SiteMastController extends Controller
         $data  = sites::where('status' , 1)
                       ->orderBy('id' , 'DESC')
                       ->get();
+
+        $users = User::pluckall();
+
         return view($this->view.'.index' , [
-            'data'  => $data
+            'data'  => $data,
+            'users' => $users
         ]);
     }
 

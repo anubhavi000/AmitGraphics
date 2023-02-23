@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PlantMast;
 use DB;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -26,9 +27,10 @@ class PlantController extends Controller
         $record = PlantMast::where('status', 1)
                            ->orderBy('id'  , 'desc')
                            ->get();
-
+        $users = User::pluckall();
         return view('PlantMaster.index', [
             'data' => $record,
+            'users'=> $users
         ]);
     }
 

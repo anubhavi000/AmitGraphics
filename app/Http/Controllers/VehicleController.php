@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\VendorMast;
 use App\Models\EntryMast;
 use DB;
+use App\Models\User;
+
 class VehicleController extends Controller
 {
     /**
@@ -15,15 +17,20 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $record = VehicleMast::leftjoin('vendor_mast' , 'vendor_mast.id' , '=' , 'vehicle_mast.vendor')
                              ->select('vehicle_mast.*' , 'vendor_mast.v_name as transporter')
                              ->orderBy('vehicle_mast.id' , 'desc')
                              ->where('vehicle_mast.status', 1)
                              ->get();
+        $users = User::pluckall();
+        if(!empty($request->export_to_excel)){
+            VehicleMast::export($record);
+        }
         return view('VehicleMaster.index', [
             'data' => $record,
+            'users'=> $users
         ]);
     }
 

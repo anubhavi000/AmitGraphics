@@ -216,6 +216,10 @@
 
                                                     <th data-sortable = "true">Rate / Ton</th>
 
+                                                    <th data-sortable="true">Created By</th>
+
+                                                    <th data-sortable="true">Created At</th>
+
                                                     <th data-field="note32" data-sortable="true">Action</th>
                                                 </tr>
 
@@ -243,6 +247,8 @@
                                                         <td>{{ !empty($value->longitude) ? $value->longitude : '' }}</td>
                                                         <td>{{ !empty($value->rate_ton) ? $value->rate_ton : '' }}</td>
                                                         <?php $encrypt_id = enCrypt($value->id); ?>
+                                                        <td> {{ !empty($users[$value->created_by]) ? $users[$value->created_by] : '' }} </td>
+                                                        <td> {{ !empty($value->created_at) ? date('d-m-Y' , strtotime($value->created_at)) : '' }} </td>
                                                         <td>
                                                 <span class="dropdown open">
                                                     <button id="btnGroup" type="button" data-toggle="dropdown"
@@ -271,7 +277,7 @@
                                                                     <button style="background:none;border: none; margin-left:-20px;"
                                                                         type="button" onclick="confirMationAlert({{$value->id}})"><i
                                                                            style="margin-left: 5px;" class="fas fa-trash"
-                                                                             ></i> delete</button>
+                                                                             ></i> Deactivate</button>
                                                                 </form>
 
 

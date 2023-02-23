@@ -118,4 +118,13 @@ class User extends Authenticatable
             return false;
         }
     }
+    public static function pluckactives(){
+        return Self::where('status' , 1)
+                   ->pluck('name' , 'id')
+                   ->toArray();
+    }
+    public static function pluckall(){
+        return Self::pluck('name' , 'id')
+                   ->toArray();
+    }
 }

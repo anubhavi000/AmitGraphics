@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ItemMast;
 use DB;
 use Session;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
@@ -24,9 +25,12 @@ class ItemController extends Controller
         $record = ItemMast::where('status', 1)
                           ->orderBy('id' , 'desc')
                           ->get();
+
+        $users = User::pluckall();                          
         
         return view('ItemMaster.index', [
             'data' => $record,
+            'users'=> $users
         ]);
     }
 

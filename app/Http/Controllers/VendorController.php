@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VendorMast;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use App\Models\User;
 use Session;
 class VendorController extends Controller
 {
@@ -25,8 +26,11 @@ class VendorController extends Controller
                             ->orderBy('id'  , 'desc')
                             ->get();
 
+        $users = User::pluckall();
+        
         return view('VendorMaster.index', [
-            'data' => $record,
+            'data'  => $record,
+            'users' => $users
         ]);
     }
 
