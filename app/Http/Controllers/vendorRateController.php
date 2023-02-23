@@ -185,7 +185,15 @@ class vendorRateController extends Controller
      */
     public function destroy($id)
     {
-        VendorRate::where('id' , $id)
-                  ->delete();
+        $delete = VendorRate::where('id' , $id)
+                            ->delete();
+
+        if($delete){
+            return redirect('VendorRateMaster')->with('success' , 'Deleted SuccessFully');
+        }
+        else{
+            Session::put('error' , 'Could Not Delete');
+            return redirect()->back();
+        }
     }
 }
