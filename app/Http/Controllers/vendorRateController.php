@@ -48,7 +48,7 @@ class vendorRateController extends Controller
             if(($from_date < $to_date)  || ($from_date == $to_date)){
                 $check = VendorRate::where('vendor' , $request->vendor)
                                    ->where('site'  , $request->site)
-                                   ->whereRaw("date_format(vendor_rate_master.to_date,'%Y-%m-%d') >='$to_date' OR date_format(vendor_rate_master.to_date , '%Y-%m-%d') >='$from_date'")
+                                   ->whereRaw("(date_format(vendor_rate_master.to_date,'%Y-%m-%d') >='$to_date' OR date_format(vendor_rate_master.to_date , '%Y-%m-%d') >='$from_date')")
                                    ->get();
                 $check = count($check);
                 if($check > 0){
