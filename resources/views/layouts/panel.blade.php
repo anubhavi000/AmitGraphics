@@ -1043,9 +1043,6 @@ $layout_status = Auth::user()->layout_status;
     @yield('js')
 
     <script type="text/javascript">
-// $(".fstdropdown-select").on('change' , function(){
-//     $("this").next().trigger('click');
-// });
 $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
   $(this).closest(".select2-container").siblings('select:enabled').select2('open');
 });
@@ -1082,38 +1079,10 @@ function nextOnTabIndex(element) {
             var self = parentobj, form = self.parents('form:eq(0)'), focusable, next;
             
             var  form_lenth = form[0].length;
-            var    form_elements  = form[0];
+            var  form_elements  = form[0];
             var cuurent_select_index = Array.from(form_elements.elements).indexOf(self[0]);
 
             form[0][cuurent_select_index+1].focus();
-            
-                        // console.log(form[0][2] == self[0]);
-            // focusable = form.find('input:not([readonly]) , select').filter(':visible'); 
-            // next = focusable.eq(focusable.index(parentobj) + 1);
-            // next.focus();
-
-
-    // console.log(container.parent()[0].lastChild.childNodes[0].id);
-    // $(this).next().find('input')[0].firstChild.childNodes;
-    // $.tabNext();
-    // console.log(element[0]);
-    // console.log('container');
-    // var container = element.parent('.select2-container');
-    // console.log(container);
-    // console.log('select');
-    // var select = container.closest('select');
-    // console.log(select);
-      // var $focused = $(':focus');
-      // var  focusindex = $(':focus').index();
-      // var select = $focused.parents('select');
-      // console.log(select);
-      // var form = $focused.parents('form:eq(0)');
-      //       // var self = $(this), form = self.parents('form:eq(0)'), focusable, next;
-      //       focusable = form.find('input:not([readonly]) , select').filter(':visible'); 
-      //       console.log(element.index());
-      //        next = focusable.eq(focusable.index(focusindex) +1);
-      //        console.log(next);
-      //        next.focus();
 }
 
 

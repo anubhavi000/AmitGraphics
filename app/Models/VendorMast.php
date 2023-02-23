@@ -31,5 +31,10 @@ class VendorMast extends Model
                    ->orderBy('v_name' , 'asc')
                    ->pluck('v_name' , 'id')
                    ->toArray();
+    }
+    static function pluckall(){
+        return Self::orderBy('v_name' , 'asc')
+                   ->pluck('v_name' , 'id')
+                   ->toArray();
     } 
 }

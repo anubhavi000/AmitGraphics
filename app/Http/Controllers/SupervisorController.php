@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SupervisorMast;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use DB;
 use Session;
 class SupervisorController extends Controller
@@ -19,8 +20,12 @@ class SupervisorController extends Controller
         $record = SupervisorMast::where('status', 1)
                                 ->orderBy('id' , 'desc')
                                 ->get();
+
+        $users = User::pluckall();
+
         return view('SupervisorMaster.index', [
-            'data' => $record,
+            'data'  => $record,
+            'users' => $users
         ]);
     }
 

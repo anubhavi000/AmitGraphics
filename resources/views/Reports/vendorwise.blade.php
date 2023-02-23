@@ -87,7 +87,7 @@
                     <div class="col-lg-4">
                         <div class="page-header-title">
                             <i class="fas fa-users"></i>
-                            <h5>Entry Form</h5>
+                            <h5>Vendor Wise Challans</h5>
                             <!-- <p class="heading_Bottom"> Complete list of designations</p> -->
                         </div>
                     </div>
@@ -102,7 +102,7 @@
 
                 <div class="container-fluid bg-white mt-2 mb-5 border_radius box">
                     <div class="row">
-                        <div class="col-md-12 mt-3 mb-3">
+                        <div class="col-md-12 mt-3 ">
 
                             <div class="container-fluid mt-3">
                                 <form action="" method="GET" id="user-search">
@@ -127,7 +127,6 @@
                                                 </div>
                                             </fieldset>
                                         </div>
-
                                         <div class="col-md-2">
                                             <label for="client_id"> Weighbridge Slip No.</label>
                                             <fieldset>
@@ -153,21 +152,6 @@
                                         @php
                                             $site_requested  = !empty(Request::get('site')) ? Request::get('site') : '';
                                         @endphp
-                                        <div class="col-md-2">
-                                            <label for="client_id" class="mb-0">Unloading Site</label>
-                                            <select name="site" class="fstdropdown-select">
-                                                        <option value="">Select</option>
-                                                            @if(!empty($dealer_sites))
-                                                                @foreach($dealer_sites as $key => $value)
-                                                                    @if($key == $site_requested)
-                                                                        <option selected="true"  value="{{$key}}" selected="true">{{$value}}</option>
-                                                                    @else
-                                                                        <option  value="{{$key}}">{{$value}}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                            </select>
-                                        </div>
                                     @php
                                         $requested_item = !empty(Request::get('item')) ? Request::get('item') : '';
                                     @endphp
@@ -211,7 +195,29 @@
                                                 </select>
                                             </div>
                                         </fieldset>
-                                    </div>                                                   
+                                    </div>
+
+                                    @php
+                                        $requested_vendor = !empty(Request::get('vendor')) ? Request::get('vendor') : '';
+                                    @endphp
+                                    <div class="col-md-2"><label for="vehicle">Vendor</label>
+                                        <fieldset>
+                                            <div class="input-group client_margin">
+                                                <select name="vendor" class="fstdropdown-select">
+                                                    <option value="">Select</option>
+                                                    @if(!empty($vendors))
+                                                        @foreach($vendors as $key => $value)
+                                                            @if($key == $requested_vendor)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                            @else
+                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>                                                                                       
                                         <div class="col-md-2 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
@@ -231,7 +237,7 @@
                         </div>
 
                     </div>
-                        <div class="col-md-12 mt-3 mb-3">
+                        <div class="col-md-12  mb-3">
 
                             <div class="container-fluid mt-3">
                             </div>
@@ -239,6 +245,8 @@
 
                                 <table id="table" data-toggle="table" data-search="true" 
                                      data-toolbar="#toolbar">
+                                        <h2 class="form-control-sm yash_heading form_style"><i
+                                                class="fas fa-database mr-2"></i><b>No. Of Trips : {{$data->total()}}</b></h2>
                                     <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>

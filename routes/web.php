@@ -197,6 +197,9 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
 
     //Average Report Routes Added By Ved
     Route::get('AverageReports/{slug}' , 'AverageReportsController@index');
+    Route::get('test' , function(){
+        return view('test');
+    });
     // always add routes on above this line 
 
     // Route::resource('Form', 'FormController');

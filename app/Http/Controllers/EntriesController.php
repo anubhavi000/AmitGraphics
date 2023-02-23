@@ -12,6 +12,7 @@ use App\Models\VehicleMast;
 use App\Models\ItemMast;
 use App\Models\sites;
 use App\Models\ExportData as CSV;
+use App\Models\User;
 use Session;
 use PDF;
 use Auth;
@@ -29,7 +30,8 @@ class EntriesController extends Controller
     }
     public function index(Request $request)
     {
-        $request->from_date = !empty($request->from_date) ? $request->from_date : 'today';
+        $from_date = !empty($request->from_date) ? date('Y-m-d' , strtotime($request->from_date)): date('Y-m-d');
+        $to_date = !empty($request->to_date) ? date('Y-m-d' ,strtotime($request->to_date)) : date('Y-m-d');
         $auth = Auth::user();
         if(empty($request->slip_no) && empty($request->kanta_slip_no) && empty($request->from_date)){
             return view($this->module_folder.'/index');                       
@@ -37,35 +39,19 @@ class EntriesController extends Controller
         else{
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;
-            $from_date = !empty($request->from_date) ? $request->from_date : NULL;
             
             $entriesraw = EntryMast::whereNotNull('slip_no')
                                    ->where('owner_site' , $auth->site)
                                    ->where('is_generated' , 0)
-                                   ->where('delete_status' , 0);
+                                   ->where('delete_status' , 0)
+                                   ->whereRaw("date_format(entry_mast.created_at,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.created_at,'%Y-%m-%d')<='$to_date'");
 
             $sites = Sites::activesitespluck();
             $plants = PlantMast::pluckactives();
+            $users = User::pluckall();
 
             $vehicle_mast = VehicleMast::pluckactives();
-            if($from_date){
-                $current_date = date('Y-m-d');
-                if($from_date == 'today'){
-                    $filter = $current_date;  
-                }
-                elseif($from_date == 'last_seven_days'){
-                    $filter = date('Y-m-d' , strtotime('-7 days'));
-                }
-                elseif($from_date ==  'last_fifteen_days'){
-                    $filter = date('Y-m-d' , strtotime('-15 days'));
-                } 
-                elseif($from_date ==  'last_thirty_days'){
-                    $filter = date('Y-m-d' , strtotime('-30 days'));
-                }
-                if(!empty($filter)){
-                    $entriesraw->whereRaw("DATE_FORMAT(`entry_mast`.datetime,'%Y-%m-%d')>='$filter'");
-                }
-            }
+
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
@@ -103,6 +89,7 @@ class EntriesController extends Controller
                 'entries' => $entries,
                 'sites'   => $sites,
                 'plants'  => $plants,
+                'users'   => $users,  
                 'vehicle_mast' => $vehicle_mast
             ]);            
         }
@@ -350,6 +337,7 @@ class EntriesController extends Controller
         $sites = Sites::activesitespluck();
         $plants = PlantMast::pluckactives();
         $vehicles = VehicleMast::pluckactives();
+        $users = User::pluckall();
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
         }
@@ -388,6 +376,7 @@ class EntriesController extends Controller
             'data'        => $records,
             'sites'       => $sites,
             'vehicles'    => $vehicles,
+            'users'       => $users,
             'items'       => $items,
             'sites'       => $sites,
             'vendors'     => $vendors,
@@ -526,9 +515,6 @@ class EntriesController extends Controller
 
     public function chalanindex(Request  $request){
         $auth = Auth::user();
-            $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
-            $to_date = !empty($request->to_date) ? date('Y-m-d' , strtotime($request->to_date)) : date('Y-m-d');
-            // dd($from_date , $to_date);
             $vendors = VendorMast::pluckactives();
 
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
@@ -540,7 +526,13 @@ class EntriesController extends Controller
 
             $sites = Sites::activesitespluck();
             $plants = PlantMast::pluckactives();
+            $users = User::pluckall();
+            if(!empty($request->from_date) && !empty($request->to_date)){
+            $from_date = date('Y-m-d' , strtotime($request->from_date));
+            $to_date   = date('Y-m-d' , strtotime($request->to_date));
+            
             $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
+            }
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
             }
@@ -595,6 +587,7 @@ class EntriesController extends Controller
                 'sites'       => $sites,
                 'plants'      => $plants,
                 'vendors'     => $vendors,
+                'users'       => $users,
                 'supervisors' => $supervisors,
                 'items'       => $item,
                 'vehicle_mast'=>$vehicle_mast,
@@ -644,7 +637,7 @@ class EntriesController extends Controller
 
             $sites = Sites::dealersitespluck();
             $plants = PlantMast::pluckactives();
-
+            $users = User::pluckall();
             $vendors = VendorMast::pluckactives();
 
                     $entriesraw->whereRaw("date_format(entry_mast.generation_time,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.generation_time,'%Y-%m-%d')<='$to_date'");
@@ -689,7 +682,8 @@ class EntriesController extends Controller
                 'vendors'      => $vendors,
                 'vehciles'     => $vehicles,
                 'supervisors'  => $supervisors,
-                'items'        => $items
+                'items'        => $items,
+                'users'        => $users
             ]);            
         }        
     }

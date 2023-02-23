@@ -279,7 +279,7 @@
 
                     </div>
                     @if(!empty($entries))
-                        <div class="col-md-12 mt-3 mb-0">
+                        <div class="col-md-12 mt-3 mb-4">
 
                             <div class="container-fluid mt-3">
                             </div>
@@ -316,6 +316,8 @@
                                             <th data-sortable="true">Dispatch Date</th>
                                             <th  data-sortable="true">Dispatch Time</th>
                                             <th>Item</th>
+                                            <th data-sortable="true">Created By</th>
+                                            <th data-sortable="true">Created At</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                             <th>Print Challan</th>
@@ -356,6 +358,8 @@
                                                 <td>{{ !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)) : '' }}</td>
                                                 <td>{{ !empty($value->generation_minutehours) ? date('h:i:A' , strtotime($value->generation_minutehours)) : '' }}</td>
                                                 <td>{{ !empty($main_item_arr) ? implode(',' , $main_item_arr) : '' }}</td>
+                                                <td> {{ !empty($users[$value->created_by]) ? $users[$value->created_by] : '' }} </td>
+                                                <td> {{ !empty($value->created_at) ? date('d-m-Y' , strtotime($value->created_at)) : '' }} </td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"

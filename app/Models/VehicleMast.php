@@ -22,6 +22,13 @@ class VehicleMast extends Model
     	// dd($data);
     	return $data;
     }
+    static function pluckall(){
+        $data = Self::orderBy('vehicle_no' , 'asc')
+                    ->pluck('vehicle_no' , 'id')
+                    ->toArray();
+        $data2 = natsort($data);
+        return $data;
+   }
     static function export($data){
         $vendors = VendorMast::pluckactives();
         $users = User::pluckall();

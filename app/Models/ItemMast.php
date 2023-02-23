@@ -27,4 +27,9 @@ class ItemMast extends Model
                        ->pluck('name' , 'id')
                        ->toArray();
         }
+        static function pluckall(){
+            return Self::orderBy('name' , 'asc')
+                       ->pluck('name' , 'id')
+                       ->toArray();
+        }
     }    

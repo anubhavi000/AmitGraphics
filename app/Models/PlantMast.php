@@ -18,4 +18,9 @@ class PlantMast extends Model
     	$data2 = natsort($data);
     	return $data;
     }
+    static function pluckall(){
+        $data = self::orderBy('name' , 'asc')
+                    ->pluck('name' , 'asc')
+                    ->toArray();
+    }
 }

@@ -119,7 +119,8 @@ class ExportData extends Model
                     $str .= "\n";
                     $row++;
                 }
-            }
+            }   
+        }    
             $str .= "Grand Total ,";
             $str .= ",,".$total; 
             header("Content-type: text/csv");
@@ -127,7 +128,6 @@ class ExportData extends Model
             header("Pragma: no-cache");
             header("Expires: 0");
             echo $str;
-            die();      
-        }            
+            die();                   
     }
 }

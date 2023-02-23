@@ -338,6 +338,8 @@
                                             <th data-sortable="true">Dispatch Date</th>
                                             <th  data-sortable="true">Dispatch Time</th>
                                             <th>Item</th>
+                                            <th data-sortable="true">Created By</th>
+                                            <th data-sortable="true">Created At</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                             <th>Print Challan</th>
@@ -381,6 +383,9 @@
                                                 <td>{{ !empty($value->generation_time) ? date('d-m-Y' , strtotime($value->generation_time)) : ''}}</td>
                                                 <td>{{ !empty($value->generation_time) ? date('h:i:A' , strtotime($value->generation_time)) : ''}}</td>
                                                 <td>{{ !empty($arr_item_real) ? implode(',' , $arr_item_real) : '' }}</td>
+                                                <td> {{ !empty($users[$value->created_by]) ? $users[$value->created_by] : '' }} </td>
+                                                <td> {{ !empty($value->created_at) ? date('d-m-y' , strtotime($value->created_at)) : 
+                                                '' }} </td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"

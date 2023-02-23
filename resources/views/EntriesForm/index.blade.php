@@ -145,32 +145,13 @@
                                                 </div>
                                             </fieldset>
                                         </div>  
-                                        <div class="col-md-2">              
-                                            <fieldset>
-                                                @php
-                                                    $val = !empty(Request::get('from_date')) ?Request::get('from_date') : '';
-                                                    
-                                                    $opt_arr = [
-                                                        'today' => 'Today',
-                                                        'last_seven_days' => 'Last 7 Days',
-                                                        'last_fifteen_days' => 'Last 15 Days',
-                                                        'last_thirty_days' => 'Last 30 Days' 
-                                                        ];  
-                                                @endphp
-                                                <div class="input-group ">
-                                                    <label class="mb-0">Datetime</label>
-                                                    <select name="from_date" class="fstdropdown-select col-md-3">
-                                                        <option value="">Select</option>
-                                                        @foreach($opt_arr as $key => $value)
-                                                            @if($key == $val)
-                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
-                                                            @else
-                                                                <option value="{{$key}}">{{$value}}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </fieldset>                                            
+                                        <div class="col-md-2">
+                                            <label class="mb-0">From Date</label>
+                                            <input type="text" class="datepicker form-control" value="{{ !empty( Request::get('from_date')) ? Request::get('from_date') : date('d-m-Y') }}" placeholder="From Date" class="datepicker form-control" name="from_date">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="mb-0">To Date</label>
+                                            <input type="text" class="datepicker form-control" placeholder="To Date" value="{{ !empty(Request::get('to_date')) ? Request::get('to_date') : date('d-m-Y') }}" name="to_date">
                                         </div>    
                                         @php
                                             $statusval = !empty(Request::get('status')) ? Request::get('status') : ''; 
@@ -248,6 +229,8 @@
                                             <th data-field="d33at2323e" data-sortable="true">Unloading Site</th>
                                             <th data-field="d33at2323ew" data-sortable="true">Loading Plant</th>
                                             <th>Date</th>
+                                            <th data-sortable="true">Crated By</th>
+                                            <th data-sortable= "true">Created At</th>
                                             <th data-field="note13" data-sortable="true">Action</th>
                                             <th>Print Slip</th>
                                         </tr>
@@ -268,6 +251,8 @@
                                                 <td>{{ !empty($sites[$value->site]) ? $sites[$value->site] : '' }}</td>
                                                 <td>{{ !empty( $plants[$value->plant] ) ? $plants[$value->plant] : '' }}</td>
                                                 <td>{{ !empty($value->datetime) ? date('d-m-Y' , strtotime($value->datetime)) : ''}}</td>
+                                                <td> {{ !empty($users[$value->created_by]) ? $users[$value->created_by] : ''}} </td>
+                                                <td> {{ !empty($value->created_at) ? date('d-m-Y' , strtotime($value->created_at)) : ''}} </td>
                                                <td> 
                                                 <span class="dropdown open">
                                                     <button style="width: 100%;" id="btnGroup" type="button" data-toggle="dropdown"

@@ -122,7 +122,7 @@
                                         <div class="col-md-2">              
                                             <label class="mb-0">Item</label>
                                             <select name="item" class="fstdropdown-select">
-                                                <option>Select</option>
+                                                <option value="">Select</option>
                                                 @if(!empty($items))
                                                     @foreach($items as $key => $value)
                                                         @if($key == $item_selected)
