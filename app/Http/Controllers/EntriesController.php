@@ -565,7 +565,7 @@ class EntriesController extends Controller
                 }
             }
             if(!empty($request->export_to_excel)){
-                EntryMast::ExportManual($entries->get());
+                EntryMast::ExportManual($entriesraw->get());
             }            
             $entries = $entriesraw->orderBy('id' , 'DESC')
                                   ->paginate(10);
