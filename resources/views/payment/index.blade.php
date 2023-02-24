@@ -215,9 +215,9 @@
                                             <th data-field="dat2323e">Net<br> Weight</th>
                                             <th data-field="dat2323sse">Tare<br> Weight</th>
                                             <th>Gross<br> Weight</th>
-                                            <th data-field="d33at2323e">Unloading<br> Plant</th>
+                                            <th data-field="d33at2323e">loading<br> Plant</th>
                                             <th>Supervisor</th>
-
+                                            <th>Loading Site</th>
                                             <th data-field="d33at2323ew">Unloading<br> Site</th>
                                             <th>Loading<br> Date</th>
                                             <th>Loading <br>Time</th>
@@ -260,6 +260,7 @@
                                                 <td>{{ !empty($value->gross_weight) ? $value->gross_weight.' KG' :'0 KG' }}</td>
                                                 <td>{{ !empty($plants[$value->plant]) ? $plants[$value->plant] : '' }}</td>
                                                 <td>{{ !empty($supervisors[$value->supervisor]) ? $supervisors[$value->supervisor] : '' }}</td>
+                                                <td> {{ !empty($sites[$value->owner_site]) ? $sites[$value->owner_site] : '' }} </td>
                                                 <td>{{ !empty( $sites[$value->site] ) ? $sites[$value->site] : '' }}</td>
                                                 <td>{{ !empty($value->datetime) ? date('Y-m-d' , strtotime($value->datetime)) : '' }}</td>
                                                 <td>{{ !empty($value->loading_minutehours) ? date('h:i:A' , strtotime($value->loading_minutehours)) : ''}}</td>
