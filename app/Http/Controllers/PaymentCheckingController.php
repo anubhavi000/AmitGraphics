@@ -33,8 +33,8 @@ class PaymentCheckingController extends Controller
         $recordsraw   = EntryMast::where('is_generated' , 1)
                                   ->where('delete_status' , 0)
                                   ->where('owner_site' , $auth->site);
-        $sites = Sites::activesitespluck();
-        $plants = PlantMast::pluckactives();
+        $sites = Sites::pluckall();
+        $plants = PlantMast::pluckall();
         $vehicles = VehicleMast::where('status' , 1)->pluck('vehicle_no' , 'id');
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
@@ -76,9 +76,9 @@ class PaymentCheckingController extends Controller
         if(!empty($request->export_to_excel)){
             $res  =  EntryMast::ExportManual($records);
         }
-        $vendors = VendorMast::pluckactives();
-        $items = ItemMast::pluckactives();
-        $supervisors = SupervisorMast::pluckactives();
+        $vendors = VendorMast::pluckall();
+        $items = ItemMast::pluckall();
+        $supervisors = SupervisorMast::pluckall();
         return view($this->view.'.index' , [
             'data'      => $records,
             'sites'     => $sites,
