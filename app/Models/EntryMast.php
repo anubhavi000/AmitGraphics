@@ -283,7 +283,7 @@ class EntryMast extends Model
             'driver'              => $res['driver'],
             'items_included'      => json_encode($res['items_included'])
         ];
-            $update_arr['generation_time']        = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
+            // $update_arr['generation_time']        = date('Y-m-d h:i:s' , strtotime($res['generation_time']));
             $update_arr['datetime']               = date('Y-m-d' , strtotime($res['datetime']));
             $update_arr['generation_minutehours'] = !empty($res['generation_minutehours']) ? $res['generation_minutehours'] : date('h:i');
             $update_arr['loading_minutehours']    = !empty($res['loading_minutehours']) ? $res['loading_minutehours'] : date('h:i');
