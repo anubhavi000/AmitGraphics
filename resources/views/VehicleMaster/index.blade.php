@@ -111,7 +111,48 @@
                                 <form action="" method="GET" id="user-search">
                                     @csrf
                                     <div class="row">
-                                        <input type="submit" value="Export CSV" name="export_to_excel" class="btn btn-primary">
+                                            @php
+                                                $vehicle_requested = !empty(Request::get('vehicle')) ? Request::get('vehicle') : '';
+                                            @endphp
+                                        <div class="col-md-2">
+                                            <label class="mb-0">Vehicle No.</label>
+                                                <select  name="vehicle" class="fstdropdown-select col-md-3">
+                                                    <option value="">Select</option>
+                                                    @foreach($vehicles as $key => $value)
+                                                        @if($vehicle_requested == $key)
+                                                            <option selected="true" value="{{$key}}">{{$value}}</option>
+                                                        @else
+                                                            <option  value="{{$key}}">{{$value}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>                                            
+                                        </div>
+                                        @php
+                                            $statusval = !empty(Request::get('status')) ? Request::get('status') : '';
+                                            $status_arr = [
+                                                1 => 'Active',
+                                                0 => 'Deactivated'
+                                            ];
+                                        @endphp
+                                        <div class="col-md-2">
+                                            <label class="mb-0">Status</label>
+                                                <select  name="status" class="fstdropdown-select col-md-3">
+                                                    <option value="">Select</option>
+                                                    @foreach($status_arr as $key => $value)
+                                                        @if($key == $statusval)
+                                                        <option selected="true" value="{{ $key }}">{{ $value }}</option>
+                                                        @else
+                                                        <option value="{{ $key }}">{{ $value }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                        <div class="col-md-1 mt-3">
+                                            <button type="submit" name="find" value="find" class="btn btn-primary">Find</button>
+                                        </div>
+                                        <div class="col-md-1 mt-3">
+                                            <input type="submit" value="Export CSV" name="export_to_excel" class="btn btn-primary">
+                                        </div>
                                     </div>
                                 </form>
                             

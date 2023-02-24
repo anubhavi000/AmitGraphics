@@ -19,18 +19,28 @@ class VehicleController extends Controller
      */
     public function index(Request $request)
     {
-        $record = VehicleMast::leftjoin('vendor_mast' , 'vendor_mast.id' , '=' , 'vehicle_mast.vendor')
+        $recordraw = VehicleMast::leftjoin('vendor_mast' , 'vendor_mast.id' , '=' , 'vehicle_mast.vendor')
                              ->select('vehicle_mast.*' , 'vendor_mast.v_name as transporter')
                              ->orderBy('vehicle_mast.id' , 'desc')
-                             ->where('vehicle_mast.status', 1)
-                             ->get();
+                             ->where('vehicle_mast.status', 1);
+
+        if(isset($request->vehicle)){
+            $recordraw->where('vehicle_mast.id' , $request->vehicle);
+        }
+        if(isset($request->status)){
+            $recordraw->where('vehicle_mast.status' , $request->status);
+        }
+        $record = $recordraw->get();
+
         $users = User::pluckall();
+        $vehicles = VehicleMast::pluckall();
         if(!empty($request->export_to_excel)){
             VehicleMast::export($record);
         }
         return view('VehicleMaster.index', [
-            'data' => $record,
-            'users'=> $users
+            'data'      => $record,
+            'users'     => $users,
+            'vehicles'  => $vehicles
         ]);
     }
 

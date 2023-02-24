@@ -108,7 +108,30 @@
                         <div class="col-md-12 mt-3 mb-3">
 
                             <div class="container-fluid mt-3">
-                            
+                                <form action="" method="GET" id="user-search">
+                                    @csrf
+                                    <div class="row">
+                                        @php
+                                            $requested_site = !empty(Request::get('site')) ? Request::get('site') : '';
+                                        @endphp
+                                        <div class="col-md-2">
+                                            <label for="client_id" class="mb-0">Site</label>
+                                            <select class="fstdropdown-select col-md-3" name="site">
+                                                <option value="select">Select</option>
+                                                @foreach($sites as $key => $value)
+                                                    @if($key == $requested_site)
+                                                    <option selected="true" value="{{ $key }}">{{ $value }}</option>
+                                                    @else
+                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1 mt-3">
+                                            <button type="submit" class="btn btn-primary">Find</button>
+                                        </div>
+                                    </div>
+                                </form>                            
 
 
                             </div>

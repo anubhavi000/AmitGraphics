@@ -56,7 +56,7 @@
    <div class="form-row mt-3 mb-3 collapse show" id="collapseExample">
    <div class="col-md-3">
      <label for="department_Name" class="yash_star">  Slip No. </label>
-     <input type="text" name="slip_no" value="{{!empty($entry->slip_no) ? $entry->slip_no : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
+     <input type="text" name="slip_no" onkeypress='return restrictAlphabets(event)' value="{{!empty($entry->slip_no) ? $entry->slip_no : ''}}" id="main_slip_no" class="form-control " placeholder="Enter Slip No. Here" >
    </div>
     <div class="col-md-3">
       <label class="form-label">Vehicle</label>
@@ -112,7 +112,7 @@
 
    <div class="col-md-3">
      <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
-     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " value="{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : 'vehicle_pass'}}" placeholder="Enter Kanta Slip Here" required>
+     <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " onkeypress='return restrictAlphabets(event)' value="{{!empty($entry->kanta_slip_no) ? $entry->kanta_slip_no : 'vehicle_pass'}}" placeholder="Enter Kanta Slip Here" required>
    </div>
 </div>
 <div class="form-row mt-3">
@@ -166,8 +166,8 @@
       <input type="text" class="form-control" name="driver" value="{{!empty($entry->driver) ? $entry->driver : ''}}" id="driver" placeholder="Enter Driver Name" >
     </div>
     <div class="col-md-3">
-      <label>  Date And Time </label>
-      <input type="text" id="generationdate" value="{{!empty($entry->datetime) ? date('d-m-Y' , strtotime($entry->datetime)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Loading Date time">
+      <label>  Out Date  </label>
+      <input type="text" id="generationdate" value="{{!empty($entry->generation_time) ? date('d-m-Y' , strtotime($entry->generation_time)) : ''}}" name="generation_time" class="form-control datepicker" required="true"  placeholder="Out Date ">
     </div>     
    <div class="col-md-3">
       <label>  Out Time </label>

@@ -23,11 +23,16 @@ class UserController extends Controller
         $this->url   =  'Users'; 
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $entries =  User::where('status' , 1)
-                        ->get();
+        $entriesraw =  User::where('status' , 1);
 
+        if(isset($request->site)){
+            $entriesraw->where('site' , $request->site);
+        }
+
+        $entries = $entriesraw->get();
+        
         $sites = Sites::activesitespluck();
 
         $designations = role::pluckactives();

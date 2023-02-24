@@ -59,7 +59,7 @@
         <div class="form-row mt-3 ">
             <div class="col-md-3">
                <label for="department_Name" class="yash_star">  Slip No. </label>
-               <input type="text" name="slip_no" onblur="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no"  class="form-control " placeholder="Enter Slip No. Here" >
+               <input type="text" name="slip_no" onkeypress='return restrictAlphabets(event)' onblur="checkslipduplicate(this.value)" value="{{!empty($data['slip_no']) ? $data['slip_no']  : ''}}" id="main_slip_no"  class="form-control " placeholder="Enter Slip No. Here" >
              </div>
             <div class="col-md-3">
               <label class="form-label">Vehicle</label>
@@ -107,7 +107,7 @@
 
             <div class="col-md-3">
                  <label for="department_Name" class="yash_star">  Weighbridge Slip No. </label>
-                 <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " placeholder="Enter Kanta Slip Here" required>
+                 <input type="text" name="kanta_slip_no" id="slip_no" class="form-control " onkeypress='return restrictAlphabets(event)' placeholder="Enter Kanta Slip Here" required>
             </div>
         </div>
         <div class="form-row mt-3 ">

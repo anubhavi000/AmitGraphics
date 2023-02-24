@@ -146,11 +146,11 @@
                                             </fieldset>
                                         </div>  
                                         <div class="col-md-2">
-                                            <label>From Date</label>
+                                            <label class="mb-0">From Date</label>
                                             <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" placeholder="From Date" name="from_date" class="form-control datepicker">
                                         </div>              
                                         <div class="col-md-2">
-                                            <label>To Date</label>
+                                            <label class="mb-0">To Date</label>
                                             <input type="text" value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" name="to_date" placeholder="To Date" class="form-control datepicker">
                                         </div>    
                                         @php
@@ -180,7 +180,7 @@
                                             </fieldset>
                                         </div>
                                         --}} 
-                                        <div class="col-md-2 client_margin mt-1">
+                                        <div class="col-md-2">
                                             <label class="mb-0">Vendor</label>
                                             <select name="vendor" class="fstdropdown-select">
                                                 <option value="">Select</option>

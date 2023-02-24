@@ -20,7 +20,7 @@
             $from_date = !empty(Request::get('from_date')) ? Request::get('from_date') : '';
             $to_date  = !empty(Request::get('to_date')) ? Request::get('to_date') : '';  
         @endphp
-        <div class="container-fluid bg-white mt-2 mb-3 border_radius box">
+        <div class="container-fluid bg-white  border_radius box">
             <div class="row">
                 <div class="col-md-12 mt-3 mb-3">
                     <form action="" id="user-search" method="get">
@@ -191,9 +191,8 @@
                     </form>
                 </div>
                 <!-- Close Row -->
-                    <div id="hide_2" class="table-responsive">
-                        <table id="table1" class=" table table-bordered"  >
-                        </table>
+                    <div id="hide_2" class="table-responsive mb-4">
+
                         <div class="row " style="margin-bottom:10px">
                             <div class="col-md-6">
                                 <h2 class="form-control-sm yash_heading form_style"><i
@@ -292,14 +291,13 @@
                                 @endforeach
                             </tbody>
                         </table>
-                                <div class="d-felx justify-content-center">
-                                     {{ $data->links() }}
-                                </div>                         
-
+                        <div class="d-felx justify-content-center">
+                             {{ $data->links() }}
+                        </div>                         
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
         @endsection
