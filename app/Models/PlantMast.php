@@ -20,7 +20,9 @@ class PlantMast extends Model
     }
     static function pluckall(){
         $data = self::orderBy('name' , 'asc')
-                    ->pluck('name' , 'asc')
+                    ->pluck('name' , 'id')
                     ->toArray();
+        $data2 = natsort($data);
+        return $data;
     }
 }

@@ -46,11 +46,11 @@ class EntriesController extends Controller
                                    ->where('delete_status' , 0)
                                    ->whereRaw("date_format(entry_mast.created_at,'%Y-%m-%d')>='$from_date' AND date_format(entry_mast.created_at,'%Y-%m-%d')<='$to_date'");
 
-            $sites = Sites::activesitespluck();
-            $plants = PlantMast::pluckactives();
+            $sites = Sites::pluckall();
+            $plants = PlantMast::pluckall();
             $users = User::pluckall();
 
-            $vehicle_mast = VehicleMast::pluckactives();
+            $vehicle_mast = VehicleMast::pluckall();
 
             if(!empty($kanta_slip_no)){
                 $entriesraw   = $entriesraw->where('kanta_slip_no' , 'LIKE' , $kanta_slip_no.'%');
@@ -368,9 +368,9 @@ class EntriesController extends Controller
             $res  =  EntryMast::ExportManual($recordsraw->get());
         }
         $records = $recordsraw->paginate(10);
-        $vendors = VendorMast::pluckactives();
-        $items = ItemMast::pluckactives();
-        $supervisors = SupervisorMast::pluckactives();
+        $vendors = VendorMast::pluckall();
+        $items = ItemMast::pluckall();
+        $supervisors = SupervisorMast::pluckall();
         $sites = Sites::dealersitespluck();
         return view($this->module_folder.'.show' , [
             'data'        => $records,
@@ -524,8 +524,8 @@ class EntriesController extends Controller
                                    ->where('owner_site' , $auth->site)
                                    ->where('delete_status' , 0);
 
-            $sites = Sites::activesitespluck();
-            $plants = PlantMast::pluckactives();
+            $sites = Sites::pluckall();
+            $plants = PlantMast::pluckall();
             $users = User::pluckall();
             if(!empty($request->from_date) && !empty($request->to_date)){
             $from_date = date('Y-m-d' , strtotime($request->from_date));
@@ -577,11 +577,11 @@ class EntriesController extends Controller
                 }
             }
 
-            $vehicle_mast = VehicleMast::pluckactives();
-            $vendors = VendorMast::pluckactives();
+            $vehicle_mast = VehicleMast::pluckall();
+            $vendors = VendorMast::pluckall();
 
-            $item = ItemMast::pluckactives();
-            $supervisors = SupervisorMast::pluckactives();
+            $item = ItemMast::pluckall();
+            $supervisors = SupervisorMast::pluckall();
             return view($this->module_folder.'.Challan.index' , [
                 'entries'     => $entries,
                 'sites'       => $sites,
@@ -598,12 +598,12 @@ class EntriesController extends Controller
             $from_date = !empty($request->from_date) ? date('Y-m-d'  , strtotime($request->from_date)) : date('Y-m-d' , strtotime('-30 days'));
             $to_date   = !empty($request->to_date) ? date('Y-m-d'  , strtotime($request->to_date)) : date('Y-m-d');
         $auth = Auth::user();
-                $transporters    =   VendorMast::pluckactives();
-                $vehicles        =  VehicleMast::pluckactives();
-                $sites           =  Sites::dealersitespluck();
-                $supervisors     = SupervisorMast::pluckactives();
-                $items           = ItemMast::pluckactives();
-                $plants          =  PlantMast::pluckactives();
+                $transporters    =   VendorMast::pluckall();
+                $vehicles        =  VehicleMast::pluckall();
+                $sites           =  Sites::pluckall();
+                $supervisors     = SupervisorMast::pluckall();
+                $items           = ItemMast::pluckall();
+                $plants          =  PlantMast::pluckall();
         if(!empty($request->slip_no)){
             $check = EntryMast::where('slip_no' , $request->slip_no)
                               ->first();

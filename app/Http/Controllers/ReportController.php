@@ -71,13 +71,13 @@ class ReportController extends Controller
 			EntryMast::ExportManual($dataraw->get());
 		}
 		$data  	  = $dataraw->paginate(10);
-		$vehicles = VehicleMast::pluckactives();
-		$sites 	  = sites::activesitespluck(); 
-		$items    = ItemMast::pluckactives();
-		$plants   = PlantMast::pluckactives(); 
-		$supervisors = SupervisorMast::pluckactives();
+		$vehicles = VehicleMast::pluckall();
+		$sites 	  = sites::pluckall(); 
+		$items    = ItemMast::pluckall();
+		$plants   = PlantMast::pluckall(); 
+		$supervisors = SupervisorMast::pluckall();
 		$dealerssites = sites::dealersitespluck();
-		$vendors  = VendorMast::pluckactives();
+		$vendors  = VendorMast::pluckall();
         $users = User::pluckall();
 
 		return view('Reports.vehicle_wise_challans' , [
@@ -123,13 +123,13 @@ class ReportController extends Controller
 			EntryMast::ExportManual($dataraw->get());
 		}
 		$data = $dataraw->paginate(10);
-		$vehicles = VehicleMast::pluckactives();
-		$sites = sites::activesitespluck();
+		$vehicles = VehicleMast::pluckall();
+		$sites = sites::pluckall();
 		$dealer_sites = sites::dealersitespluck();
-		$plants = PlantMast::pluckactives();
- 		$items = ItemMast::pluckactives();
- 		$vendors = VendorMast::pluckactives();
- 		$supervisors = SupervisorMast::pluckactives();
+		$plants = PlantMast::pluckall();
+ 		$items = ItemMast::pluckall();
+ 		$vendors = VendorMast::pluckall();
+ 		$supervisors = SupervisorMast::pluckall();
         $users = User::pluckall();
 
 		return view('Reports.UnloadingPlaceWise' , [
@@ -179,13 +179,13 @@ class ReportController extends Controller
 			EntryMast::ExportManual($dataraw->get());
 		}
 		$data = $dataraw->paginate(10);
-		$vehicles = VehicleMast::pluckactives();
-		$sites = sites::activesitespluck();
+		$vehicles = VehicleMast::pluckall();
+		$sites = sites::pluckall();
 		$dealer_sites = sites::dealersitespluck();
-		$plants = PlantMast::pluckactives();
- 		$items = ItemMast::pluckactives();
- 		$vendors = VendorMast::pluckactives();
- 		$supervisors = SupervisorMast::pluckactives();
+		$plants = PlantMast::pluckall();
+ 		$items = ItemMast::pluckall();
+ 		$vendors = VendorMast::pluckall();
+ 		$supervisors = SupervisorMast::pluckall();
         $users = User::pluckall();
 
 		return view('Reports.vendorwise' , [

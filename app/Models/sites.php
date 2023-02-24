@@ -29,6 +29,11 @@ class sites extends Model
                    ->pluck('name' , 'id')
                    ->toArray();
     }
+    static function pluckall(){
+      return self::orderBy('name' , 'asc')
+                 ->pluck('name' , 'id')
+                 ->toArray();
+    }
     static function dealersitespluck(){
         return self::where('status' , 1)
                    ->where('is_owner' , 0)
@@ -36,4 +41,10 @@ class sites extends Model
                    ->pluck('name' , 'id')
                    ->toArray();
     }    
+    static function alldelaertsite(){
+      return self::where('is_owner' , 0)
+                 ->orderBy('name' , 'asc')
+                 ->pluck('name' , 'id')
+                 ->toArray();
+    }
 }
