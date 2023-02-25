@@ -87,7 +87,7 @@
                     <div class="col-lg-4">
                         <div class="page-header-title">
                             <i class="fas fa-users"></i>
-                            <h5>Manual Challans</h5>
+                            <h5>Payment Entries</h5>
                             <!-- <p class="heading_Bottom"> Complete list of designations</p> -->
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Generated Slips</button>
                                 </a>
                                 --}}
-                                <a href="{{ url('ManualChallan/create') }}"><button type="button"
+                                <a href="{{ url('PaymentForm/create') }}"><button type="button"
                                         class="btn btn-success btn_new"><i class="fas fa-plus mr-2"></i>Add New</button>
                                 </a>
                             </div>
@@ -118,11 +118,11 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label class="mb-0">From Date</label>
-                                            <input type="text" value="" placeholder="From Date" name="from_date" class="form-control datepicker">
+                                            <input value="{{!empty(Request::get('from_date')) ? Request::get('from_date') : ''}}" type="text" value="" placeholder="From Date" name="from_date" class="form-control datepicker">
                                         </div>              
                                         <div class="col-md-2">
                                             <label class="mb-0">To Date</label>
-                                            <input type="text" value="" name="to_date" placeholder="To Date" class="form-control datepicker">
+                                            <input type="text" value="{{!empty(Request::get('to_date')) ? Request::get('to_date') : ''}}" name="to_date" placeholder="To Date" class="form-control datepicker">
                                         </div>
                                         @php
                                             $vendorval = !empty(Request::get('vendor')) ? Request::get('vendor') : '';
@@ -141,11 +141,13 @@
                                                     @endforeach
                                                 @endif
                                             </select>
-                                        </div>                                                      
+                                        </div>                                                    
                                         <div class="col-md-3 mb-3 px-3">
                                             <label></label>
                                             <input style="margin-top:23px" type="submit" name="find" value="find" class="btn btn-success">
+                                            {{--
                                             <input style="margin-top:23px" type="submit" name="export_to_excel" value="Export To Csv" class="btn btn-primary">
+                                            --}}
                                         </div>
 
                                     </div>
