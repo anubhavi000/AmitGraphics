@@ -38,7 +38,7 @@ class PaymentFormController extends Controller
 
         return view($this->view.'.index' , [
             'data'    => $entries,
-            'users'    => $users,
+            'users'   => $users,
             'vendors' => $vendors
         ]);
     }

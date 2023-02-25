@@ -275,7 +275,7 @@ class EntriesController extends Controller
                                 'delete_status' => 1
                            ]);
         if($delete){
-            return redirect()->back()->with('status' , 'Deleted SuccessFully');
+            return redirect()->back()->with('success' , 'Deleted SuccessFully');
         }
 
     }
