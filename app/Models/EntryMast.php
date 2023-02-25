@@ -299,8 +299,7 @@ class EntryMast extends Model
         if(!empty($data)){
             $str = 'Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Tare Weight , Gross Weight , Net Weight , Excess Weight , Unloading Site , Loading Site  Loading Plant , Supervisor ';
             $str .= '/n';
-            $vehicles = VehicleMast::where('status' , 1)
-                                   ->pluck('vehicle_no' , 'id')
+            $vehicles = VehicleMast::pluck('vehicle_no' , 'id')
                                    ->toArray(); 
             foreach ($data as $key => $value) {
                 $str .= '';
@@ -310,20 +309,13 @@ class EntryMast extends Model
     public static function  ExportManual($data){
             $str = 'S.No , Slip No. , WeightBridge Slip No. ,  Challan Date , Vehicle , Pass Weight , Vendor , Tare Weight , Gross Weight , Net Weight , Excess Weight , In Date , In Time  , Out Date , Out Time ,  Unloading Site , Loading Site , Loading Plant , Item , Remarks , Created By';
             $str .= "\n";
-            $vehicles = VehicleMast::where('status' , 1)
-                                   ->pluck('vehicle_no' , 'id')
+            $vehicles = VehicleMast::pluck('vehicle_no' , 'id')
                                    ->toArray(); 
-            $sites = sites::where('status' , 1)
-                          ->pluck('name' , 'id')
-                          ->toArray();
+            $sites = sites::pluckall();
 
-            $plants = PlantMast::where('status' , 1)
-                               ->pluck('name' , 'id')
-                               ->toArray();
-            $items = ItemMast::where('status' , 1) 
-                             ->pluck('name' , 'id')
-                             ->toArray(); 
-            $vendors  = VendorMast::pluckactives();
+            $plants = PlantMast::pluckall();
+            $items = ItemMast::pluckall(); 
+            $vendors  = VendorMast::pluckall();
             $users    = User::pluck('name' , 'id')->toArray();
 
             foreach ($data as $key => $value) {

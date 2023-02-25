@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\sites;
 
 class VendorRate extends Model
 {
@@ -22,4 +23,17 @@ class VendorRate extends Model
     	'rate_ton',
     	'site'
     ];
+    static function pluckvendorrate(){
+        $date = date('Y-m-d');
+        $raw = Self::where('status' , 1)->get();
+        $out = [];
+        foreach ($raw as $key => $value) {
+            $out[$value->site][$value->vendor] = $value->rate_ton;
+        }
+        return $out;
+    }
+    static function plucksiterate(){
+        return sites::pluck('rate_ton' , 'id')
+                    ->toArray();
+    }
 }

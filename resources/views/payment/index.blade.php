@@ -208,6 +208,7 @@
                                             <th>Check</th>
                                             <th data-field="dae3te">Slip </th>
                                             <th data-field="dat32e" >WeightBridge<br> Slip No.</th>
+                                            <th data-sortable="true">Amount</th>
                                             <th data-field="datq32e">Vehicle<br> No.</th>
                                             <th>Vehicle<br> Pass Weight</th>
                                             <th>Vendor</th>
@@ -252,6 +253,17 @@
                                                 </td>
                                                 <td>{{ !empty($value->slip_no) ? $value->slip_no : '' }}</td>
                                                 <td>{{ !empty($value->kanta_slip_no) ? $value->kanta_slip_no : ''}}</td>
+
+                                                @php
+                                                    $amount = 0;
+                                                    if(!empty($rate[$value->owner_site])){
+                                                        $amount = ($value->net_weight/1000) * $rate[$value->owner_site];
+                                                    }
+                                                    else{
+                                                        $amount = 0;
+                                                    }
+                                                @endphp
+                                                <td>{{ ($amount != '0') ? number_format($amount) : '' }}</td>
                                                 <td>{{ !empty($vehicles[$value->vehicle]) ? $vehicles[$value->vehicle] : ''}}</td>
                                                 <td>{{ !empty($value->vehicle_pass) ? $value->vehicle_pass.' KG' : '0 KG' }}</td>
                                                 <td>{{ !empty($vendors[$value->vendor_id]) ? $vendors[$value->vendor_id] : '' }}</td>

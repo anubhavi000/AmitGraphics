@@ -88,7 +88,7 @@
                     <div class="col-lg-4">
                         <div class="page-header-title">
                             <i class="fas fa-users"></i>
-                            <h5>Entry Form</h5>
+                            <h5>Challan Generation</h5>
                             <!-- <p class="heading_Bottom"> Complete list of designations</p> -->
                         </div>
                     </div>

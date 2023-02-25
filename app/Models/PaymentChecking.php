@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use DB;
 use Auth;
+use App\Models\VendorRate;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,9 +23,18 @@ class PaymentChecking extends Model
         $update = EntryMast::whereIn('id' , $id)
         				   ->update(['is_checked' => 1]);
 
+        $rate = VendorRate::plucksiterate(); 
 
     	$insert = array();
+        $rate = VendorRate::plucksiterate();
     	foreach ($data as $key => $value) {
+            $amount = 0;
+            if(!empty($rate[$value->owner_site])){
+                $amount = ($value->net_weight/1000) * $rate[$value->owner_site];
+            }
+            else{
+                $amount = 0;
+            }
     		$insert[] = [
     			'slip_no' 				  => $value->slip_no,
     			'kanta_slip_no' 		  => $value->kanta_slip_no,
@@ -33,6 +43,7 @@ class PaymentChecking extends Model
     			'vendor_id'				  => $value->vendor_id , 
     			'entry_weight'			  => $value->entry_weight,	
     			'acess_weight_quantity'	  => !empty($value->acess_weight_quantity) ? $value->acess_weight_quantity : NULL,
+                'amount'                  => !empty($amount) ? $amount : 0,
     			'items_included'		  => !empty($value->items_included) ? $value->items_included : NULL,
     			'supervisor'			  => !empty($value->supervisor) ? $value->supervisor : NULL,
     			'vehicle'				  => !empty($value->vehicle) ? $value->vehicle : NULL,

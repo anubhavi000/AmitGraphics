@@ -200,6 +200,11 @@ Route::resource('Clientmailerlist' , 'ClientMailerListController');
     Route::get('test' , function(){
         return view('test');
     });
+
+    //paymentform routes by veds
+    Route::resource('PaymentForm' , 'PaymentFormController');
+    Route::delete('PaymentForm_delete/{id}' , 'PaymentFormController@destroy');
+    Route::post('PaymentForm_update/{id}' , 'PaymentFormController@update');
     // always add routes on above this line 
 
     // Route::resource('Form', 'FormController');

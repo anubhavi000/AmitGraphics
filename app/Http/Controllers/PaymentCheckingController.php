@@ -9,6 +9,7 @@ use App\Models\PlantMast;
 use App\Models\SupervisorMast;
 use App\Models\VehicleMast;
 use App\Models\ItemMast;
+use App\Models\VendorRate;
 use App\Models\sites;
 use App\Models\PaymentChecking;
 use App\Models\ExportData as CSV;
@@ -31,8 +32,8 @@ class PaymentCheckingController extends Controller
     {
         $auth = Auth::user();
         $recordsraw   = EntryMast::where('is_generated' , 1)
-                                  ->where('delete_status' , 0)
-                                  ->where('owner_site' , $auth->site);
+                                  ->where('delete_status' , 0);
+                                  // ->where('owner_site' , $auth->site);
         $sites = Sites::pluckall();
         $plants = PlantMast::pluckall();
         $vehicles = VehicleMast::where('status' , 1)->pluck('vehicle_no' , 'id');
@@ -79,6 +80,7 @@ class PaymentCheckingController extends Controller
         $vendors = VendorMast::pluckall();
         $items = ItemMast::pluckall();
         $supervisors = SupervisorMast::pluckall();
+        $rate_data = VendorRate::plucksiterate(); 
         return view($this->view.'.index' , [
             'data'      => $records,
             'sites'     => $sites,
@@ -86,6 +88,7 @@ class PaymentCheckingController extends Controller
             'items'     => $items,
             'vendors'   => $vendors,
             'plants'    => $plants,
+            'rate'      => $rate_data,
             'supervisors' => $supervisors
         ]);
     }

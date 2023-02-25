@@ -334,9 +334,9 @@ class EntriesController extends Controller
         $recordsraw   = EntryMast::where('is_generated' , 1)
                                   ->where('delete_status' , 0)
                                   ->where('owner_site' , $auth->site);
-        $sites = Sites::activesitespluck();
-        $plants = PlantMast::pluckactives();
-        $vehicles = VehicleMast::pluckactives();
+        $sites = Sites::pluckall();
+        $plants = PlantMast::pluckall();
+        $vehicles = VehicleMast::pluckall();
         $users = User::pluckall();
         if(!empty($request->slip_no)){
             $recordsraw->where('slip_no' , $request->slip_no);
@@ -371,7 +371,7 @@ class EntriesController extends Controller
         $vendors = VendorMast::pluckall();
         $items = ItemMast::pluckall();
         $supervisors = SupervisorMast::pluckall();
-        $sites = Sites::dealersitespluck();
+        $sites = Sites::pluckall();
         return view($this->module_folder.'.show' , [
             'data'        => $records,
             'sites'       => $sites,
@@ -396,18 +396,17 @@ class EntriesController extends Controller
                 return redirect()->back();
             }
             else{
-            $items = ItemMast::pluckactives();
+            $items = ItemMast::pluckall();
 
-            $vehicles = VehicleMast::pluckactives();
+            $vehicles = VehicleMast::pluckall();
 
-            $supervisors = SupervisorMast::pluckactives();
+            $supervisors = SupervisorMast::pluckall();
 
-            $sites  = sites::dealersitespluck();
-            $dealer_sites = sites::dealersitespluck();
-            $siteaddresses = sites::where('status' , 1)
-                                  ->pluck('address' , 'id')
+            $sites  = sites::pluckall();
+            $dealer_sites = sites::pluckall();
+            $siteaddresses = sites::pluck('address' , 'id')
                                   ->toArray();
-            $vehicles = VehicleMast::pluckactives();                                 
+            $vehicles = VehicleMast::pluckall();                                 
 
             // $filepath  = asset('images/logo-light.png');
 
@@ -472,17 +471,16 @@ class EntriesController extends Controller
                 $get_img = file_get_contents($filepath, false, stream_context_create($arrContextOptions));
                 $image = 'data:image/' . $filetype . ';base64,' . base64_encode($get_img ); 
 
-            $items = ItemMast::pluckactives();
+            $items = ItemMast::pluckall();
 
-            $vehicles = VehicleMast::pluckactives();
+            $vehicles = VehicleMast::pluckall();
 
-            $supervisors = SupervisorMast::pluckactives();
+            $supervisors = SupervisorMast::pluckall();
 
             $sites  = Sites::activesitespluck();
-            $siteaddresses = Sites::where('status' , 1)
-                                  ->pluck('address' , 'id')
+            $siteaddresses = Sites::pluck('address' , 'id')
                                   ->toArray();
-            $plants  = PlantMast::pluckactives();
+            $plants  = PlantMast::pluckall();
 
             if(isset($data->vendor_id)){
             $vendor = VendorMast::where('id' , $data->vendor_id)
@@ -515,7 +513,7 @@ class EntriesController extends Controller
 
     public function chalanindex(Request  $request){
         $auth = Auth::user();
-            $vendors = VendorMast::pluckactives();
+            $vendors = VendorMast::pluckall();
 
             $slip_no = !empty($request->slip_no) ? $request->slip_no : NULL;
             $kanta_slip_no = !empty($request->kanta_slip_no) ? $request->kanta_slip_no : NULL;

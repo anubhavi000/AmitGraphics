@@ -186,7 +186,9 @@ class vendorRateController extends Controller
     public function destroy($id)
     {
         $delete = VendorRate::where('id' , $id)
-                            ->delete();
+                            ->update([
+                                'status' => 0
+                            ]);
 
         if($delete){
             return redirect('VendorRateMaster')->with('success' , 'Deleted SuccessFully');
